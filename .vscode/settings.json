@@ -1,0 +1,12 @@
+{
+    "cSpell.words": [
+        "getblock",
+        "getblockcount",
+        "getblockhash",
+        "getdifficulty",
+        "getinfo",
+        "getrawtransaction",
+        "sendrawtransaction",
+        "tslang"
+    ]
+}
