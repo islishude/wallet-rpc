@@ -5,11 +5,10 @@ export interface Auth {
 export interface RPC {
     jsonrpc: string;
     result: any;
-    error: null | hasError;
-}
-export interface hasError {
-    code: number;
-    message: string;
+    error: null | {
+        code: number;
+        message: string;
+    };
 }
 export interface getInfoRes extends RPC {
     result: {
@@ -95,4 +94,16 @@ export interface getBlockInfo extends RPC {
         tx: string[];
         signature: string;
     };
+}
+export interface Client {
+    user: string;
+    pass: string;
+    rpcIp: string;
+    rpcPort: number;
+    getInfo(): Promise<RPC>;
+    getBlockHash(height: number): Promise<getBlockInfo>;
+    getTxInfo(txId: string): Promise<getTxInfoRes>;
+    getBlock(blockId: string): Promise<getBlockInfo>;
+    getBlockCount(): Promise<string>;
+    sendRawTx(tx: string, id: string): Promise<string>;
 }

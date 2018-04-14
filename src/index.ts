@@ -2,8 +2,8 @@ import axios from "axios";
 import * as MyIfc from "./interface";
 import methods from "./methods";
 
-export default class Client {
-  auth: MyIfc.Auth = {
+export default class Client implements MyIfc.Client {
+  protected auth: MyIfc.Auth = {
     username: this.user,
     password: this.pass
   };
@@ -15,7 +15,7 @@ export default class Client {
     public rpcPort: number
   ) {}
 
-  async rpc<T, D>(method: string, param?: T[], id?: string): Promise<D> {
+  protected async rpc<T, D>(method: string, param?: T[], id?: string): Promise<D> {
     const uri: string = this.rpcIp + this.rpcPort.toString();
 
     const res = await axios.post(
@@ -58,7 +58,7 @@ export default class Client {
     return <Promise<MyIfc.getTxInfoRes>>this.rpc(method, <string[]>param);
   }
 
-  async sendRawTx(tx: string, id) {
+  async sendRawTx(tx: string, id: string) {
     const method: string = methods.sendRawTransaction;
     const param: string[] = [tx];
     return <Promise<string>>this.rpc(method, <string[]>param);
