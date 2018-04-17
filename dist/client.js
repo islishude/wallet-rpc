@@ -15,19 +15,20 @@ class Client {
         this.pass = pass;
         this.ip = ip;
         this.port = port;
-        this.auth = {
-            username: this.user,
-            password: this.pass
-        };
     }
     rpc(method, param, id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const uri = this.ip + this.port;
+            const uri = `http://${this.ip}:${this.port}`;
             const res = yield axios_1.default.post(uri, {
                 method,
                 id: id || Date.now().toString(),
-                param: param || []
-            }, { auth: this.auth });
+                params: param || []
+            }, {
+                auth: {
+                    username: this.user,
+                    password: this.pass
+                }
+            });
             return res.data;
         });
     }

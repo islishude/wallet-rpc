@@ -3,7 +3,6 @@ export default abstract class Client {
     pass: string;
     ip: string;
     port: number;
-    protected auth: Auth;
     constructor(user: string, pass: string, ip: string, port: number);
     protected rpc<T, D>(method: string, param?: T[], id?: string): Promise<D>;
     abstract getInfo(): Promise<RPC>;
@@ -20,8 +19,4 @@ export interface RPC {
         code: number;
         message: string;
     };
-}
-export interface Auth {
-    username: string;
-    password: string;
 }

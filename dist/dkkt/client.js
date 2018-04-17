@@ -16,8 +16,7 @@ class DKKTClient extends client_1.default {
     }
     getInfo() {
         return __awaiter(this, void 0, void 0, function* () {
-            const method = methods_1.default.getInfo;
-            return this.rpc(method);
+            return this.rpc(methods_1.default.getInfo);
         });
     }
     getBlockCount() {

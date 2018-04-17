@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist type && tsc",
+    "hello": "npm run build && node dist/test/dkkt/index.js",
     "test": "ava"
   },
   "keywords": [],
