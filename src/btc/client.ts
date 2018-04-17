@@ -21,7 +21,7 @@ export default class BitcoinClient extends Client {
   async getBlockHash(height: number) {
     const method: string = methods.getBlockCount;
     const param: number[] = [height];
-    return <Promise<RPC>>this.rpc(method, param);
+    return <Promise<string>>this.rpc(method, param);
   }
 
   async getBlock(blockId: string) {

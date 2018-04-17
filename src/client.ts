@@ -33,7 +33,7 @@ export default abstract class Client {
   }
 
   abstract getInfo(): Promise<RPC>;
-  abstract getBlockHash(height: number): Promise<RPC>;
+  abstract getBlockHash(height: number): Promise<string>;
   abstract getTxInfo(txId: string): Promise<RPC>;
   abstract getBlock(blockId: string): Promise<RPC>;
   abstract getBlockCount(): Promise<string>;
