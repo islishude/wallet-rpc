@@ -32,15 +32,23 @@ export default abstract class Client {
   }
 
   abstract async getInfo(): Promise<RPC>;
-  abstract async getBlockHash(height: number): Promise<string>;
+  abstract async getBlockHash(height: number): Promise<RPC>;
   abstract async getTxInfo(txId: string): Promise<RPC>;
-  abstract async getBlock(blockId: string): Promise<RPC>;
+  abstract async getBlockInfo(blockId: string): Promise<RPC>;
   abstract async getBlockCount(): Promise<RPC>;
   abstract async sendRawTx(tx: string, id: string): Promise<string>;
 }
 
 export interface RPC {
   jsonrpc: string;
-  result: {} | string;
+  result: {} | string | number;
   error: null | { code: number; message: string };
+}
+
+export interface isStringOfResult extends RPC {
+  result: string
+}
+
+export interface isNumberOfResult extends RPC {
+  result: number
 }

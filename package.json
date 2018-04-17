@@ -1,12 +1,11 @@
 {
-  "name": "wallet-rpc",
+  "name": "multi-wallet-rpc",
   "version": "1.0.0",
-  "description": "wallet RPC ",
+  "description": "multi-wallet RPC by TypeScript",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist type && tsc",
-    "hello": "npm run build && node dist/test/dkkt/index.js",
-    "test": "ava"
+    "test": "npm run build && node dist/test/dkkt/index.js"
   },
   "keywords": [],
   "author": {
@@ -20,7 +19,6 @@
   "types": "types/index.d.ts",
   "devDependencies": {
     "@types/node": "^9.6.2",
-    "ava": "1.0.0-beta.4",
     "typescript": "^2.8.1"
   }
 }

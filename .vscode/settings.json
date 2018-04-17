@@ -9,6 +9,7 @@
         "client",
         "coinbase",
         "dkkt",
+        "dkktrpc",
         "entropybit",
         "foxmail",
         "getblock",

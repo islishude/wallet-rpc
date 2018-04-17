@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as DKKTIfc from "./interface";
 import methods from "../methods";
-import Client, { RPC } from "../client";
+import Client, { RPC, isStringOfResult, isNumberOfResult } from "../client";
 
 export default class DKKTClient extends Client {
   constructor(user: string, pass: string, ip: string, port: number) {
@@ -13,26 +13,26 @@ export default class DKKTClient extends Client {
   }
 
   async getBlockCount() {
-    return <Promise<RPC>>this.rpc(methods.getBlockCount);
+    return <Promise<isNumberOfResult>>this.rpc(methods.getBlockCount);
   }
 
   async getBlockHash(height: number) {
-    const param: number[] = [height];
-    return <Promise<string>>this.rpc(methods.getBlockCount, param);
+    return <Promise<isStringOfResult>>this.rpc(methods.getBlockHash, [height]);
   }
 
-  async getBlock(blockId: string) {
-    const param: string[] = [blockId];
-    return <Promise<DKKTIfc.getBlockInfo>>this.rpc(methods.getBlock, param);
+  async getBlockInfo(blockId: string) {
+    return <Promise<DKKTIfc.getBlockInfo>>this.rpc(methods.getBlock, [blockId]);
   }
 
   async getTxInfo(txId: string) {
     const param: [string, number] = [txId, 1];
-    return <Promise<DKKTIfc.getTxInfoRes>>this.rpc(methods.getTransaction, param);
+    return <Promise<DKKTIfc.getTxInfoRes>>this.rpc(
+      methods.getTransaction,
+      param
+    );
   }
 
   async sendRawTx(tx: string, id: string) {
-    const param: string[] = [tx];
-    return <Promise<string>>this.rpc(methods.sendRawTransaction, param);
+    return <Promise<string>>this.rpc(methods.sendRawTransaction, [tx]);
   }
 }

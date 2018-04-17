@@ -16,42 +16,33 @@ class BitcoinClient extends client_1.default {
     }
     getInfo() {
         return __awaiter(this, void 0, void 0, function* () {
-            const method = methods_1.default.getInfo;
-            return this.rpc(method);
+            return this.rpc(methods_1.default.getInfo);
         });
     }
     getBlockCount() {
         return __awaiter(this, void 0, void 0, function* () {
-            const method = methods_1.default.getBlockCount;
-            return this.rpc(method);
+            return this.rpc(methods_1.default.getBlockCount);
         });
     }
     getBlockHash(height) {
         return __awaiter(this, void 0, void 0, function* () {
-            const method = methods_1.default.getBlockCount;
-            const param = [height];
-            return this.rpc(method, param);
+            return this.rpc(methods_1.default.getBlockHash, [height]);
         });
     }
-    getBlock(blockId) {
+    getBlockInfo(blockId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const method = methods_1.default.getBlock;
-            const param = [blockId];
-            return this.rpc(method, param);
+            return this.rpc(methods_1.default.getBlock, [blockId]);
         });
     }
     getTxInfo(txId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const method = methods_1.default.getTransaction;
             const param = [txId, 1];
-            return this.rpc(method, param);
+            return this.rpc(methods_1.default.getTransaction, param);
         });
     }
     sendRawTx(tx, id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const method = methods_1.default.sendRawTransaction;
-            const param = [tx];
-            return this.rpc(method, param);
+            return this.rpc(methods_1.default.sendRawTransaction, [tx]);
         });
     }
 }
