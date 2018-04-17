@@ -45,7 +45,7 @@ export interface getTxInfoRes extends RPC {
     blockhash: string;
     confirmations: number;
     vin: txVins[];
-    vout: txVouts;
+    vout: txVouts[];
   };
 }
 

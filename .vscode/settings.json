@@ -3,9 +3,12 @@
         "Sigs",
         "Vouts",
         "blockhash",
+        "blocktime",
         "blocktruct",
         "chaintrust",
+        "client",
         "coinbase",
+        "dkkt",
         "entropybit",
         "foxmail",
         "getblock",
@@ -28,12 +31,15 @@
         "previousblockhash",
         "proofhash",
         "protocolversion",
+        "realyfee",
         "sendrawtransaction",
         "sequnence",
         "testnet",
         "timeoffset",
         "txid",
+        "txinwitness",
         "vout",
+        "vsize",
         "walletversion"
     ]
 }
