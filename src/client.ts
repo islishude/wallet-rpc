@@ -32,12 +32,12 @@ export default abstract class Client {
     return res.data;
   }
 
-  abstract getInfo(): Promise<RPC>;
-  abstract getBlockHash(height: number): Promise<string>;
-  abstract getTxInfo(txId: string): Promise<RPC>;
-  abstract getBlock(blockId: string): Promise<RPC>;
-  abstract getBlockCount(): Promise<string>;
-  abstract sendRawTx(tx: string, id: string): Promise<string>;
+  abstract async getInfo(): Promise<RPC>;
+  abstract async getBlockHash(height: number): Promise<string>;
+  abstract async getTxInfo(txId: string): Promise<RPC>;
+  abstract async getBlock(blockId: string): Promise<RPC>;
+  abstract async getBlockCount(): Promise<string>;
+  abstract async sendRawTx(tx: string, id: string): Promise<string>;
 }
 
 export interface RPC {
