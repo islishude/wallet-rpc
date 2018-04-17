@@ -8,29 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const axios_1 = require("axios");
 const methods_1 = require("../methods");
-class DKKTClient {
-    constructor(user, pass, rpcIp, rpcPort) {
-        this.user = user;
-        this.pass = pass;
-        this.rpcIp = rpcIp;
-        this.rpcPort = rpcPort;
-        this.auth = {
-            username: this.user,
-            password: this.pass
-        };
-    }
-    rpc(method, param, id) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const uri = this.rpcIp + this.rpcPort.toString();
-            const res = yield axios_1.default.post(uri, {
-                method,
-                id: id || Date.now().toString(),
-                param: param || []
-            }, { auth: this.auth });
-            return res.data;
-        });
+const client_1 = require("../client");
+class DKKTClient extends client_1.default {
+    constructor(user, pass, ip, port) {
+        super(user, pass, ip, port);
     }
     getInfo() {
         return __awaiter(this, void 0, void 0, function* () {
@@ -61,7 +43,7 @@ class DKKTClient {
     getTxInfo(txId) {
         return __awaiter(this, void 0, void 0, function* () {
             const method = methods_1.default.getTransaction;
-            const param = [txId];
+            const param = [txId, 1];
             return this.rpc(method, param);
         });
     }

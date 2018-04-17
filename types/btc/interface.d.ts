@@ -1,51 +1,36 @@
-export interface Auth {
-    username: string;
-    password: string;
-}
-export interface RPC {
-    jsonrpc: string;
-    result: any;
-    error: null | {
-        code: number;
-        message: string;
-    };
-}
+import { RPC } from "../client";
 export interface getInfoRes extends RPC {
     result: {
         version: string;
         protocolversion: number;
         walletversion: number;
         balance: number;
-        newmint: number;
-        stake: number;
         blocks: number;
         timeoffset: number;
-        moneysupply: number;
         connections: number;
         proxy: string;
-        ip: string;
-        difficulty: {
-            "proof-of-work": string;
-            "proof-of-stake": number;
-        };
+        difficulty: number;
         testnet: false;
-        keypoololdest: number;
-        keypoolsize: number;
         paytxfee: number;
-        mininput: number;
+        realyfee: number;
         errors: null;
     };
 }
 export interface getTxInfoRes extends RPC {
     result: {
         txid: string;
+        hash: string;
+        size: number;
+        vsize: number;
         version: number;
         time: number;
         locktime: number;
         blockhash: string;
         confirmations: number;
         vin: txVins[];
-        vout: txVouts;
+        vout: txVouts[];
+        hex: string;
+        blocktime: number;
     };
 }
 export interface txVins {
@@ -57,6 +42,7 @@ export interface txVins {
     };
     sequnence: number;
     coinbase?: string;
+    txinwitness: string[];
 }
 export interface txVouts {
     value: number;
@@ -94,16 +80,4 @@ export interface getBlockInfo extends RPC {
         tx: string[];
         signature: string;
     };
-}
-export interface Client {
-    user: string;
-    pass: string;
-    rpcIp: string;
-    rpcPort: number;
-    getInfo(): Promise<RPC>;
-    getBlockHash(height: number): Promise<getBlockInfo>;
-    getTxInfo(txId: string): Promise<getTxInfoRes>;
-    getBlock(blockId: string): Promise<getBlockInfo>;
-    getBlockCount(): Promise<string>;
-    sendRawTx(tx: string, id: string): Promise<string>;
 }

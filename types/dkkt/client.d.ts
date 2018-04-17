@@ -1,16 +1,11 @@
-import * as MyIfc from "./interface";
-export default class DKKTClient implements MyIfc.Client {
-    user: string;
-    pass: string;
-    rpcIp: string;
-    rpcPort: number;
-    protected auth: MyIfc.Auth;
-    constructor(user: string, pass: string, rpcIp: string, rpcPort: number);
-    protected rpc<T, D>(method: string, param?: T[], id?: string): Promise<D>;
-    getInfo(): Promise<MyIfc.RPC>;
+import * as DKKTIfc from "./interface";
+import Client, { RPC } from "../client";
+export default class DKKTClient extends Client {
+    constructor(user: string, pass: string, ip: string, port: number);
+    getInfo(): Promise<RPC>;
     getBlockCount(): Promise<string>;
-    getBlockHash(height: number): Promise<MyIfc.RPC>;
-    getBlock(blockId: string): Promise<MyIfc.getBlockInfo>;
-    getTxInfo(txId: string): Promise<MyIfc.getTxInfoRes>;
+    getBlockHash(height: number): Promise<RPC>;
+    getBlock(blockId: string): Promise<DKKTIfc.getBlockInfo>;
+    getTxInfo(txId: string): Promise<DKKTIfc.getTxInfoRes>;
     sendRawTx(tx: string, id: string): Promise<string>;
 }

@@ -1,42 +1,17 @@
 import axios from "axios";
-import * as MyIfc from "./interface";
+import * as DKKTIfc from "./interface";
 import methods from "../methods";
+import Client, { RPC } from "../client";
 
-export default class DKKTClient implements MyIfc.Client {
-  protected auth: MyIfc.Auth = {
-    username: this.user,
-    password: this.pass
-  };
+export default class DKKTClient extends Client {
 
-  constructor(
-    public user: string,
-    public pass: string,
-    public rpcIp: string,
-    public rpcPort: number
-  ) {}
-
-  protected async rpc<T, D>(
-    method: string,
-    param?: T[],
-    id?: string
-  ): Promise<D> {
-    const uri: string = this.rpcIp + this.rpcPort.toString();
-
-    const res = await axios.post(
-      uri,
-      {
-        method,
-        id: id || Date.now().toString(),
-        param: param || []
-      },
-      { auth: this.auth }
-    );
-    return res.data;
+  constructor(user: string, pass: string, ip: string, port: number) {
+    super(user, pass, ip, port);
   }
 
   async getInfo() {
     const method: string = methods.getInfo;
-    return <Promise<MyIfc.RPC>>this.rpc(method);
+    return <Promise<RPC>>this.rpc(method);
   }
 
   async getBlockCount() {
@@ -47,19 +22,19 @@ export default class DKKTClient implements MyIfc.Client {
   async getBlockHash(height: number) {
     const method: string = methods.getBlockCount;
     const param: number[] = [height];
-    return <Promise<MyIfc.RPC>>this.rpc(method, param);
+    return <Promise<RPC>>this.rpc(method, param);
   }
 
   async getBlock(blockId: string) {
     const method: string = methods.getBlock;
     const param: string[] = [blockId];
-    return <Promise<MyIfc.getBlockInfo>>this.rpc(method, param);
+    return <Promise<DKKTIfc.getBlockInfo>>this.rpc(method, param);
   }
 
   async getTxInfo(txId: string) {
     const method: string = methods.getTransaction;
     const param: [string, number] = [txId, 1];
-    return <Promise<MyIfc.getTxInfoRes>>this.rpc(method, param);
+    return <Promise<DKKTIfc.getTxInfoRes>>this.rpc(method, param);
   }
 
   async sendRawTx(tx: string, id: string) {
