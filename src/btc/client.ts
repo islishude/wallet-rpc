@@ -15,7 +15,11 @@ export default class BitcoinClient implements MyIfc.Client {
     public rpcPort: number
   ) {}
 
-  protected async rpc<T, D>(method: string, param?: T[], id?: string): Promise<D> {
+  protected async rpc<T, D>(
+    method: string,
+    param?: T[],
+    id?: string
+  ): Promise<D> {
     const uri: string = this.rpcIp + this.rpcPort.toString();
 
     const res = await axios.post(
@@ -43,24 +47,24 @@ export default class BitcoinClient implements MyIfc.Client {
   async getBlockHash(height: number) {
     const method: string = methods.getBlockCount;
     const param: number[] = [height];
-    return <Promise<MyIfc.RPC>>this.rpc(method, <number[]>param);
+    return <Promise<MyIfc.RPC>>this.rpc(method, param);
   }
 
   async getBlock(blockId: string) {
     const method: string = methods.getBlock;
     const param: string[] = [blockId];
-    return <Promise<MyIfc.getBlockInfo>>this.rpc(method, <string[]>param);
+    return <Promise<MyIfc.getBlockInfo>>this.rpc(method, param);
   }
 
   async getTxInfo(txId: string) {
     const method: string = methods.getTransaction;
-    const param: string[] = [txId];
-    return <Promise<MyIfc.getTxInfoRes>>this.rpc(method, <string[]>param);
+    const param: [string, number] = [txId, 1];
+    return <Promise<MyIfc.getTxInfoRes>>this.rpc(method, param);
   }
 
   async sendRawTx(tx: string, id: string) {
     const method: string = methods.sendRawTransaction;
     const param: string[] = [tx];
-    return <Promise<string>>this.rpc(method, <string[]>param);
+    return <Promise<string>>this.rpc(method, param);
   }
 }
