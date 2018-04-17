@@ -4,7 +4,7 @@ export default class DKKTClient extends Client {
     constructor(user: string, pass: string, ip: string, port: number);
     getInfo(): Promise<RPC>;
     getBlockCount(): Promise<string>;
-    getBlockHash(height: number): Promise<RPC>;
+    getBlockHash(height: number): Promise<string>;
     getBlock(blockId: string): Promise<DKKTIfc.getBlockInfo>;
     getTxInfo(txId: string): Promise<DKKTIfc.getTxInfoRes>;
     sendRawTx(tx: string, id: string): Promise<string>;

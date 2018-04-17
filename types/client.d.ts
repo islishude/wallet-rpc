@@ -7,7 +7,7 @@ export default abstract class Client {
     constructor(user: string, pass: string, ip: string, port: number);
     protected rpc<T, D>(method: string, param?: T[], id?: string): Promise<D>;
     abstract getInfo(): Promise<RPC>;
-    abstract getBlockHash(height: number): Promise<RPC>;
+    abstract getBlockHash(height: number): Promise<string>;
     abstract getTxInfo(txId: string): Promise<RPC>;
     abstract getBlock(blockId: string): Promise<RPC>;
     abstract getBlockCount(): Promise<string>;

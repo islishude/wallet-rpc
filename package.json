@@ -4,7 +4,7 @@
   "description": "wallet RPC ",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf dist && rm -rf type && tsc",
+    "build": "rm -rf dist type && tsc",
     "test": "ava"
   },
   "keywords": [],
