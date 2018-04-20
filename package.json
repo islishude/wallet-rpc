@@ -6,7 +6,6 @@
   "scripts": {
     "build": "rm -rf dist types && tsc",
     "test": "npm run build && node dist/test/dkkt/index.js",
-    "prepublish": "npm run build",
     "publish": "git push --all && git push --tags && npm publish"
   },
   "keywords": [
