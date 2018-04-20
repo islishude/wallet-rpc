@@ -1,6 +1,6 @@
 {
   "name": "multi-wallet-rpc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "multi-wallet RPC by TypeScript",
   "main": "dist/index.js",
   "scripts": {
