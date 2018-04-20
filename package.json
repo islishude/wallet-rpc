@@ -1,6 +1,6 @@
 {
   "name": "multi-wallet-rpc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "multi-wallet RPC by TypeScript",
   "main": "dist/index.js",
   "scripts": {
@@ -9,7 +9,10 @@
     "prepublish": "npm run build",
     "publish": "git push --all && git push --tags && npm publish"
   },
-  "keywords": ["bitcoin", "dkkt"],
+  "keywords": [
+    "bitcoin",
+    "dkkt"
+  ],
   "author": {
     "email": "lishude@foxmail.com",
     "name": "lishude"
