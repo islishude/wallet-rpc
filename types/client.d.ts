@@ -10,7 +10,7 @@ export default abstract class Client {
     abstract getTxInfo(txId: string): Promise<RPC>;
     abstract getBlockInfo(blockId: string): Promise<RPC>;
     abstract getBlockCount(): Promise<RPC>;
-    abstract sendRawTx(tx: string, id: string): Promise<string>;
+    abstract sendRawTx(tx: string): Promise<string>;
 }
 export interface RPC {
     jsonrpc: string;
@@ -20,9 +20,9 @@ export interface RPC {
         message: string;
     };
 }
-export interface isStringOfResult extends RPC {
+export interface StrRes extends RPC {
     result: string;
 }
-export interface isNumberOfResult extends RPC {
+export interface NumRes extends RPC {
     result: number;
 }

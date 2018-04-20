@@ -29,20 +29,20 @@ class DKKTClient extends client_1.default {
             return this.rpc(methods_1.default.getBlockHash, [height]);
         });
     }
-    getBlockInfo(blockId) {
+    getBlockInfo(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.rpc(methods_1.default.getBlock, [blockId]);
+            return this.rpc(methods_1.default.getBlock, [id]);
         });
     }
-    getTxInfo(txId) {
+    getTxInfo(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const param = [txId, 1];
+            const param = [id, 1];
             return this.rpc(methods_1.default.getTransaction, param);
         });
     }
-    sendRawTx(tx, id) {
+    sendRawTx(raw) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.rpc(methods_1.default.sendRawTransaction, [tx]);
+            return this.rpc(methods_1.default.sendRawTransaction, [raw]);
         });
     }
 }

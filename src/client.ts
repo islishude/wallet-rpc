@@ -36,7 +36,7 @@ export default abstract class Client {
   abstract async getTxInfo(txId: string): Promise<RPC>;
   abstract async getBlockInfo(blockId: string): Promise<RPC>;
   abstract async getBlockCount(): Promise<RPC>;
-  abstract async sendRawTx(tx: string, id: string): Promise<string>;
+  abstract async sendRawTx(tx: string): Promise<string>;
 }
 
 export interface RPC {
@@ -45,10 +45,10 @@ export interface RPC {
   error: null | { code: number; message: string };
 }
 
-export interface isStringOfResult extends RPC {
+export interface StrRes extends RPC {
   result: string
 }
 
-export interface isNumberOfResult extends RPC {
+export interface NumRes extends RPC {
   result: number
 }
