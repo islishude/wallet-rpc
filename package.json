@@ -1,7 +1,7 @@
 {
-  "name": "multi-wallet-rpc",
-  "version": "1.0.3",
-  "description": "multi-wallet RPC by TypeScript",
+  "name": "wallet-rpc",
+  "version": "0.0.0",
+  "description": "multi-wallet RPC for crypto coins by TypeScript",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist types && tsc",
@@ -10,7 +10,8 @@
   },
   "keywords": [
     "bitcoin",
-    "dkkt"
+    "dkkt",
+    "ethereum"
   ],
   "author": {
     "email": "lishude@foxmail.com",
