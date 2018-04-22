@@ -9,9 +9,9 @@
     "pub": "git push --all && git push --tags && npm publish"
   },
   "keywords": [
-    "bitcoin",
-    "dkkt",
-    "ethereum"
+    "Bitcoin",
+    "DKKToken",
+    "Ethereum"
   ],
   "author": {
     "email": "lishude@foxmail.com",
