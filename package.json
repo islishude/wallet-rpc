@@ -1,7 +1,7 @@
 {
   "name": "wallet-rpc",
   "version": "1.0.1",
-  "description": "multi-wallet RPC for crypto coins by TypeScript",
+  "description": "multi-wallet RPC client for crypto coins by TypeScript",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist types && tsc",
