@@ -1,9 +1,9 @@
 import Client from "./client";
 import { DKKT } from "../defined/dkkt";
-import { RPC, NumRPC, StrRPC } from "../defined/rpc";
+import { NumRPC, StrRPC } from "../defined/rpc";
 export default class DKKTClient extends Client {
     constructor(user: string, pass: string, ip: string, port: number);
-    getInfo(): Promise<RPC>;
+    getInfo(): Promise<DKKT.getInfoRes>;
     getBlockCount(): Promise<NumRPC>;
     getBlockHash(height: number): Promise<StrRPC>;
     getBlockInfo(id: string): Promise<DKKT.getBlockInfo>;
