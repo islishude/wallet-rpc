@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rm -rf dist types && tsc",
     "test": "npm run build && node dist/test/dkkt/index.js",
-    "publish": "git push --all && git push --tags && npm publish"
+    "pub": "git push --all && git push --tags && npm publish"
   },
   "keywords": [
     "bitcoin",
