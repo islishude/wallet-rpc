@@ -10,7 +10,7 @@ export default class DKKTClient extends Client {
   }
 
   async getInfo() {
-    return <Promise<RPC>>this.rpc(Mtd.getInfo);
+    return <Promise<DKKT.getInfoRes>>this.rpc(Mtd.getInfo);
   }
 
   async getBlockCount() {

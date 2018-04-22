@@ -10,7 +10,7 @@ export default class BitcoinClient extends Client {
   }
 
   async getInfo() {
-    return <Promise<RPC>>this.rpc(Mtd.getInfo);
+    return <Promise<BITCOIN.getInfoRes>>this.rpc(Mtd.getInfo);
   }
 
   async getBlockCount() {
