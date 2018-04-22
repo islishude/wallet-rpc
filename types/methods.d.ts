@@ -1,4 +1,4 @@
-declare const _default: {
+export declare const Mtd: {
     getBlock: string;
     getBlockCount: string;
     getBlockHash: string;
@@ -7,4 +7,3 @@ declare const _default: {
     getTransaction: string;
     sendRawTransaction: string;
 };
-export default _default;

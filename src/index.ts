@@ -1,4 +1,4 @@
-import DKKTClient from "./dkkt/client";
-import BitcoinClient from "./btc/client";
+import DKKTClient from "./dkkt";
+import BitcoinClient from "./btc";
 
 export { DKKTClient, BitcoinClient };

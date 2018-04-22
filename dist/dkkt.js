@@ -8,42 +8,42 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const methods_1 = require("../methods");
-const client_1 = require("../client");
-class BitcoinClient extends client_1.default {
+const client_1 = require("./client");
+const methods_1 = require("./methods");
+class DKKTClient extends client_1.default {
     constructor(user, pass, ip, port) {
         super(user, pass, ip, port);
     }
     getInfo() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.rpc(methods_1.default.getInfo);
+            return this.rpc(methods_1.Mtd.getInfo);
         });
     }
     getBlockCount() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.rpc(methods_1.default.getBlockCount);
+            return this.rpc(methods_1.Mtd.getBlockCount);
         });
     }
     getBlockHash(height) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.rpc(methods_1.default.getBlockHash, [height]);
+            return this.rpc(methods_1.Mtd.getBlockHash, [height]);
         });
     }
     getBlockInfo(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.rpc(methods_1.default.getBlock, [id]);
+            return this.rpc(methods_1.Mtd.getBlock, [id]);
         });
     }
     getTxInfo(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const param = [id, 1];
-            return this.rpc(methods_1.default.getTransaction, param);
+            return this.rpc(methods_1.Mtd.getTransaction, param);
         });
     }
     sendRawTx(raw) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.rpc(methods_1.default.sendRawTransaction, [raw]);
+            return this.rpc(methods_1.Mtd.sendRawTransaction, [raw]);
         });
     }
 }
-exports.default = BitcoinClient;
+exports.default = DKKTClient;

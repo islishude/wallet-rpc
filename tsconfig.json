@@ -9,7 +9,8 @@
         "alwaysStrict": true
     },
     "include": [
-        "src/**/*"
+        "src/**/*",
+        "defined/*.d.ts"
     ],
     "exclude": [
         "node_modules"

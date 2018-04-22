@@ -1,4 +1,4 @@
-import { DKKTClient } from "../..";
+import DKKTClient from "../dkkt";
 
 const user: string = "dkktrpc";
 const pass: string = "EHtzSmhj6Yq6xzJPTJgRwZPLBVXxZtHiMgXLFDYLfxGwD";

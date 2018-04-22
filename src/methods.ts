@@ -1,4 +1,4 @@
-export default {
+export const Mtd  = {
   getBlock: "getblock",
   getBlockCount: "getblockcount",
   getBlockHash: "getblockhash",

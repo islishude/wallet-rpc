@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
+exports.Mtd = {
     getBlock: "getblock",
     getBlockCount: "getblockcount",
     getBlockHash: "getblockhash",

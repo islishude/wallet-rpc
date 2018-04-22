@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const __1 = require("../..");
+const dkkt_1 = require("../dkkt");
 const user = "dkktrpc";
 const pass = "EHtzSmhj6Yq6xzJPTJgRwZPLBVXxZtHiMgXLFDYLfxGwD";
 const ip = "192.168.0.137";
 const port = 28880;
-const dkkt = new __1.DKKTClient(user, pass, ip, port);
+const dkkt = new dkkt_1.default(user, pass, ip, port);
 dkkt
     .getInfo()
     .then(info => {

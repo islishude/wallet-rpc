@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { RPC } from "../defined/rpc";
 
 export default abstract class Client {
   constructor(
@@ -37,18 +38,4 @@ export default abstract class Client {
   abstract async getBlockInfo(blockId: string): Promise<RPC>;
   abstract async getBlockCount(): Promise<RPC>;
   abstract async sendRawTx(tx: string): Promise<string>;
-}
-
-export interface RPC {
-  jsonrpc: string;
-  result: {} | string | number;
-  error: null | { code: number; message: string };
-}
-
-export interface StrRes extends RPC {
-  result: string
-}
-
-export interface NumRes extends RPC {
-  result: number
 }

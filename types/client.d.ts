@@ -1,3 +1,4 @@
+import { RPC } from "../defined/rpc";
 export default abstract class Client {
     user: string;
     pass: string;
@@ -11,18 +12,4 @@ export default abstract class Client {
     abstract getBlockInfo(blockId: string): Promise<RPC>;
     abstract getBlockCount(): Promise<RPC>;
     abstract sendRawTx(tx: string): Promise<string>;
-}
-export interface RPC {
-    jsonrpc: string;
-    result: {} | string | number;
-    error: null | {
-        code: number;
-        message: string;
-    };
-}
-export interface StrRes extends RPC {
-    result: string;
-}
-export interface NumRes extends RPC {
-    result: number;
 }
