@@ -1,7 +1,7 @@
 import { RPC } from "./rpc";
 
 declare namespace BITCOIN {
-  export interface getInfoRes extends RPC {
+  export interface WalletInfo extends RPC {
     result: {
       version: string;
       protocolversion: number;
@@ -19,7 +19,7 @@ declare namespace BITCOIN {
     };
   }
 
-  export interface getTxInfoRes extends RPC {
+  export interface TxInfo extends RPC {
     result: {
       txid: string;
       hash: string;
@@ -37,7 +37,7 @@ declare namespace BITCOIN {
     };
   }
 
-  export interface txVins {
+  interface txVins {
     txid: string;
     vout: number;
     scriptSig: {
@@ -49,7 +49,7 @@ declare namespace BITCOIN {
     txinwitness: string[];
   }
 
-  export interface txVouts {
+  interface txVouts {
     value: number;
     n: number;
     scriptPubKey: {
@@ -61,7 +61,7 @@ declare namespace BITCOIN {
     };
   }
 
-  export interface getBlockInfo extends RPC {
+  export interface BlockInfo extends RPC {
     result: {
       hash: string;
       confirmations: number;

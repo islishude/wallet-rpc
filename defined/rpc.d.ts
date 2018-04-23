@@ -1,13 +1,13 @@
 export interface RPC {
   jsonrpc: string;
-  result: {} | string | number;
+  result: any;
   error: null | { code: number; message: string };
 }
 
-export interface StrRPC extends RPC {
+export interface StringResult extends RPC {
   result: string;
 }
 
-export interface NumRPC extends RPC {
+export interface NumberResult extends RPC {
   result: number;
 }

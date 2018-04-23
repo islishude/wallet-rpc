@@ -1,7 +1,7 @@
 import { RPC } from "./rpc";
 
 declare namespace DKKT {
-  export interface getInfoRes extends RPC {
+  export interface WalletInfo extends RPC {
     result: {
       version: string;
       protocolversion: number;
@@ -28,7 +28,7 @@ declare namespace DKKT {
     };
   }
 
-  export interface getTxInfoRes extends RPC {
+  export interface TxInfo extends RPC {
     result: {
       txid: string;
       version: number;
@@ -41,7 +41,7 @@ declare namespace DKKT {
     };
   }
 
-  export interface txVins {
+  interface txVins {
     txid: string;
     vout: number;
     scriptSig: {
@@ -52,7 +52,7 @@ declare namespace DKKT {
     coinbase?: string;
   }
 
-  export interface txVouts {
+  interface txVouts {
     value: number;
     n: number;
     scriptPubKey: {
@@ -64,7 +64,7 @@ declare namespace DKKT {
     };
   }
 
-  export interface getBlockInfo extends RPC {
+  export interface BlockInfo extends RPC {
     result: {
       hash: string;
       confirmations: number;
