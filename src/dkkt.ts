@@ -8,28 +8,28 @@ export default class DKKTClient extends Client {
     super(user, pass, ip, port);
   }
 
-  public async getInfo() {
+  public getInfo() {
     return this.rpc(Mtd.getInfo) as Promise<DKKToken.WalletInfo>;
   }
 
-  public async getBlockCount() {
+  public getBlockCount() {
     return this.rpc(Mtd.getBlockCount) as Promise<NumberResult>;
   }
 
-  public async getBlockHash(height: number) {
+  public getBlockHash(height: number) {
     return this.rpc(Mtd.getBlockHash, [height]) as Promise<StringResult>;
   }
 
-  public async getBlockInfo(id: string) {
+  public getBlockInfo(id: string) {
     return this.rpc(Mtd.getBlock, [id]) as Promise<DKKToken.BlockInfo>;
   }
 
-  public async getTxInfo(id: string) {
+  public getTxInfo(id: string) {
     const param: [string, number] = [id, 1];
     return this.rpc(Mtd.getTransaction, param) as Promise<DKKToken.TxInfo>;
   }
 
-  public async sendRawTx(raw: string) {
+  public sendRawTx(raw: string) {
     return this.rpc(Mtd.sendRawTransaction, [raw]) as Promise<string>;
   }
 }
