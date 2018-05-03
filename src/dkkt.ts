@@ -1,36 +1,35 @@
-import axios from "axios";
+import { DKKToken } from "../defined/dkkt";
+import { NumberResult, RPC, StringResult } from "../defined/rpc";
 import Client from "./client";
-import { DKKT } from "../defined/dkkt";
 import { Mtd } from "./methods";
-import { RPC, NumberResult, StringResult } from "../defined/rpc";
 
 export default class DKKTClient extends Client {
-  constructor(user: string, pass: string, ip: string, port: number) {
+  constructor(user: string, pass: string, ip: string, port: number = 28332) {
     super(user, pass, ip, port);
   }
 
-  async getInfo() {
-    return <Promise<DKKT.WalletInfo>>this.rpc(Mtd.getInfo);
+  public async getInfo() {
+    return this.rpc(Mtd.getInfo) as Promise<DKKToken.WalletInfo>;
   }
 
-  async getBlockCount() {
-    return <Promise<NumberResult>>this.rpc(Mtd.getBlockCount);
+  public async getBlockCount() {
+    return this.rpc(Mtd.getBlockCount) as Promise<NumberResult>;
   }
 
-  async getBlockHash(height: number) {
-    return <Promise<StringResult>>this.rpc(Mtd.getBlockHash, [height]);
+  public async getBlockHash(height: number) {
+    return this.rpc(Mtd.getBlockHash, [height]) as Promise<StringResult>;
   }
 
-  async getBlockInfo(id: string) {
-    return <Promise<DKKT.BlockInfo>>this.rpc(Mtd.getBlock, [id]);
+  public async getBlockInfo(id: string) {
+    return this.rpc(Mtd.getBlock, [id]) as Promise<DKKToken.BlockInfo>;
   }
 
-  async getTxInfo(id: string) {
+  public async getTxInfo(id: string) {
     const param: [string, number] = [id, 1];
-    return <Promise<DKKT.TxInfo>>this.rpc(Mtd.getTransaction, param);
+    return this.rpc(Mtd.getTransaction, param) as Promise<DKKToken.TxInfo>;
   }
 
-  async sendRawTx(raw: string) {
-    return <Promise<string>>this.rpc(Mtd.sendRawTransaction, [raw]);
+  public async sendRawTx(raw: string) {
+    return this.rpc(Mtd.sendRawTransaction, [raw]) as Promise<string>;
   }
 }

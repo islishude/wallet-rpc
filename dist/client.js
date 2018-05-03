@@ -20,13 +20,14 @@ class Client {
         return __awaiter(this, void 0, void 0, function* () {
             const uri = `http://${this.ip}:${this.port}`;
             const res = yield axios_1.default.post(uri, {
-                method,
                 id: id || Date.now().toString(),
-                params: param || []
+                jsonrpc: "2.0",
+                method,
+                params: param || [],
             }, {
                 auth: {
-                    username: this.user,
-                    password: this.pass
+                    password: this.pass,
+                    username: this.user
                 }
             });
             return res.data;

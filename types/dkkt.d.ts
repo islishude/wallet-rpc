@@ -1,12 +1,12 @@
-import Client from "./client";
-import { DKKT } from "../defined/dkkt";
+import { DKKToken } from "../defined/dkkt";
 import { NumberResult, StringResult } from "../defined/rpc";
+import Client from "./client";
 export default class DKKTClient extends Client {
-    constructor(user: string, pass: string, ip: string, port: number);
-    getInfo(): Promise<DKKT.WalletInfo>;
+    constructor(user: string, pass: string, ip: string, port?: number);
+    getInfo(): Promise<DKKToken.WalletInfo>;
     getBlockCount(): Promise<NumberResult>;
     getBlockHash(height: number): Promise<StringResult>;
-    getBlockInfo(id: string): Promise<DKKT.BlockInfo>;
-    getTxInfo(id: string): Promise<DKKT.TxInfo>;
+    getBlockInfo(id: string): Promise<DKKToken.BlockInfo>;
+    getTxInfo(id: string): Promise<DKKToken.TxInfo>;
     sendRawTx(raw: string): Promise<string>;
 }

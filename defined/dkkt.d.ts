@@ -1,6 +1,6 @@
 import { RPC } from "./rpc";
 
-declare namespace DKKT {
+declare namespace DKKToken {
   export interface WalletInfo extends RPC {
     result: {
       version: string;

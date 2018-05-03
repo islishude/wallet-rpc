@@ -1,39 +1,38 @@
-import axios from "axios";
-import { BITCOIN } from "../defined/btc";
+import { Bitcoin } from "../defined/btc";
+import { NumberResult, RPC, StringResult } from "../defined/rpc";
 import Client from "./client";
 import { Mtd } from "./methods";
-import { RPC, NumberResult, StringResult } from "../defined/rpc";
 
 export default class BitcoinClient extends Client {
-  constructor(user: string, pass: string, ip: string, port: number) {
+  constructor(user: string, pass: string, ip: string, port: number = 8332) {
     super(user, pass, ip, port);
   }
 
-  async getInfo() {
-    return <Promise<BITCOIN.WalletInfo>>this.rpc(Mtd.getInfo);
+  public async getInfo() {
+    return this.rpc(Mtd.getInfo) as Promise<Bitcoin.WalletInfo>;
   }
 
-  async getBlockCount() {
-    return <Promise<NumberResult>>this.rpc(Mtd.getBlockCount);
+  public async getBlockCount() {
+    return this.rpc(Mtd.getBlockCount) as Promise<NumberResult>;
   }
 
-  async getBlockHash(height: number) {
-    return <Promise<StringResult>>this.rpc(Mtd.getBlockHash, [height]);
+  public async getBlockHash(height: number) {
+    return this.rpc(Mtd.getBlockHash, [height]) as Promise<StringResult>;
   }
 
-  async getBlockInfo(id: string) {
-    return <Promise<BITCOIN.BlockInfo>>this.rpc(Mtd.getBlock, [id]);
+  public async getBlockInfo(id: string) {
+    return this.rpc(Mtd.getBlock, [id]) as Promise<Bitcoin.BlockInfo>;
   }
 
-  async getTxInfo(id: string) {
+  public async getTxInfo(id: string) {
     const param: [string, number] = [id, 1];
-    return <Promise<BITCOIN.TxInfo>>this.rpc(
+    return this.rpc(
       Mtd.getTransaction,
       param
-    );
+    ) as Promise<Bitcoin.TxInfo>;
   }
 
-  async sendRawTx(raw: string) {
-    return <Promise<string>>this.rpc(Mtd.sendRawTransaction, [raw]);
+  public async sendRawTx(raw: string) {
+    return this.rpc(Mtd.sendRawTransaction, [raw]) as Promise<string>;
   }
 }

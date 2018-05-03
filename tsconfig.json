@@ -1,18 +1,13 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
-        "outDir": "dist",
-        "declaration": true,
-        "declarationDir": "types",
-        "removeComments": true,
-        "alwaysStrict": true
-    },
-    "include": [
-        "src/**/*",
-        "defined/*.d.ts"
-    ],
-    "exclude": [
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "types",
+    "removeComments": true,
+    "alwaysStrict": true
+  },
+  "include": ["src/**/*", "defined/*.d.ts"],
+  "exclude": ["node_modules"]
 }

@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("./client");
 const methods_1 = require("./methods");
 class DKKTClient extends client_1.default {
-    constructor(user, pass, ip, port) {
+    constructor(user, pass, ip, port = 28332) {
         super(user, pass, ip, port);
     }
     getInfo() {

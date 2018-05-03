@@ -1,6 +1,6 @@
 import { RPC } from "./rpc";
 
-declare namespace BITCOIN {
+declare namespace Bitcoin {
   export interface WalletInfo extends RPC {
     result: {
       version: string;

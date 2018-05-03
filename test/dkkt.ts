@@ -1,9 +1,10 @@
-import DKKTClient from "../dkkt";
+import DKKTClient from "../src/dkkt";
 
 const user: string = "dkktrpc";
 const pass: string = "EHtzSmhj6Yq6xzJPTJgRwZPLBVXxZtHiMgXLFDYLfxGwD";
 const ip: string = "192.168.0.137";
 const port: number = 28880;
+import { assert, log } from "console";
 
 const dkkt = new DKKTClient(user, pass, ip, port);
 
@@ -13,16 +14,16 @@ dkkt
     // const t1 = info.result.version
   })
   .catch(err => {
-    console.log("getInfo failed");
+    log("getInfo failed");
   });
 
 dkkt
   .getBlockCount()
   .then(info => {
-    // console.log(info.result);
+    // log(info.result);
   })
   .catch(err => {
-    console.log("getBlockCount failed");
+    log("getBlockCount failed");
   });
 
 dkkt
@@ -31,32 +32,34 @@ dkkt
     // info.result.vin[0].vout
   })
   .catch(err => {
-    console.log("getBlockCount failed");
+    log("getBlockCount failed");
   });
 
 dkkt
   .getBlockHash(400)
   .then(info => {
-    console.assert(typeof info.result === "string");
+    assert(typeof info.result === "string");
   })
   .catch(err => {
-    console.log("getBlockHash failed");
+    log("getBlockHash failed");
   });
 
 dkkt
   .getBlockCount()
   .then(info => {
-    console.assert(typeof info.result === "number");
+    assert(typeof info.result === "number");
   })
   .catch(err => {
-    console.log("getBlockCount failed");
+    log("getBlockCount failed");
   });
 
 dkkt
-  .getBlockInfo("f928c887ce1efc876c1c653a910d11861f1af0f2dbe42aadf8f5acbb829449cf")
+  .getBlockInfo(
+    "f928c887ce1efc876c1c653a910d11861f1af0f2dbe42aadf8f5acbb829449cf"
+  )
   .then(info => {
     // info.result
   })
   .catch(err => {
-    console.log("getBlock failed");
+    log("getBlock failed");
   });

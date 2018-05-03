@@ -18,24 +18,18 @@ export default abstract class Client {
     const res = await Axios.post(
       uri,
       {
-        method,
         id: id || Date.now().toString(),
-        params: param || []
+        jsonrpc: "2.0",
+        method,
+        params: param || [],
       },
       {
         auth: {
-          username: this.user,
-          password: this.pass
+          password: this.pass,
+          username: this.user
         }
       }
     );
     return res.data;
   }
-
-  abstract async getInfo(): Promise<RPC>;
-  abstract async getBlockHash(height: number): Promise<RPC>;
-  abstract async getTxInfo(txId: string): Promise<RPC>;
-  abstract async getBlockInfo(blockId: string): Promise<RPC>;
-  abstract async getBlockCount(): Promise<RPC>;
-  abstract async sendRawTx(tx: string): Promise<string>;
 }
