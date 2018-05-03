@@ -4,3 +4,5 @@ const btc_1 = require("./btc");
 exports.BitcoinClient = btc_1.default;
 const dkkt_1 = require("./dkkt");
 exports.DKKTClient = dkkt_1.default;
+const eth_1 = require("./eth");
+exports.EthereumClient = eth_1.default;
