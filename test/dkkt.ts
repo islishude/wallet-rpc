@@ -1,5 +1,5 @@
 import { assert, log } from "console";
-import DKKTClient from "../src/dkkt";
+import { DKKTClient } from "../src";
 
 const user: string = "dkktrpc";
 const pass: string = "EHtzSmhj6Yq6xzJPTJgRwZPLBVXxZtHiMgXLFDYLfxGwD";
