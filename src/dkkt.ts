@@ -4,7 +4,7 @@ import Client from "./client";
 import { Mtd } from "./methods";
 
 export default class DKKTClient extends Client {
-  constructor(user: string, pass: string, ip: string, port: number = 28332) {
+  constructor(user: string, pass: string, ip: string, port: number = 28880) {
     super(user, pass, ip, port);
   }
 

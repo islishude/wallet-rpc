@@ -1,10 +1,10 @@
+import { assert, log } from "console";
 import DKKTClient from "../src/dkkt";
 
 const user: string = "dkktrpc";
 const pass: string = "EHtzSmhj6Yq6xzJPTJgRwZPLBVXxZtHiMgXLFDYLfxGwD";
 const ip: string = "192.168.0.137";
 const port: number = 28880;
-import { assert, log } from "console";
 
 const dkkt = new DKKTClient(user, pass, ip, port);
 
