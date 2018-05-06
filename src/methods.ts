@@ -1,4 +1,4 @@
-export const BtcMtd  = {
+export const BtcMtd = {
   getBlock: "getblock",
   getBlockCount: "getblockcount",
   getBlockHash: "getblockhash",
@@ -20,11 +20,10 @@ export const EthMtd = {
   getUncleByBlockHashAndIndex: "eth_getUncleByBlockHashAndIndex",
   getUncleByBlockNumberAndIndex: "eth_getUncleByBlockHashAndIndex",
   sendRawTransaction: "eth_sendRawTransaction",
-  sendTransaction: "eth_sendTransaction",
+  sendTransaction: "eth_sendTransaction"
 };
-
 
 export const BtcMtd16 = {
   getBlockInfo: "getblockinfo",
-  getWalletInfo: "getwalletinfo",
-}
+  getWalletInfo: "getwalletinfo"
+};

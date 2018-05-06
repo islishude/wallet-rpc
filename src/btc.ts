@@ -1,7 +1,7 @@
 import { Bitcoin } from "../defined/btc";
 import { NumberResult, RPCResponse, StringResult } from "../defined/rpc";
 import Client from "./client";
-import { BtcMtd } from "./methods";
+import { BtcMtd, BtcMtd16 } from "./methods";
 
 export default class BitcoinClient extends Client {
   constructor(user: string, pass: string, ip: string, port: number = 8332) {
@@ -31,6 +31,12 @@ export default class BitcoinClient extends Client {
   }
 
   public sendRawTx(raw: string) {
-    return this.RpcCall(BtcMtd.sendRawTransaction, [raw]) as Promise<string>;
+    const method: string = BtcMtd.sendRawTransaction;
+    return this.RpcCall(method, [raw]) as Promise<string>;
+  }
+
+  public getBlockchainInfo() {
+    const method: string = BtcMtd16.getBlockInfo;
+    return this.RpcCall(method) as Promise<Bitcoin.BlockchainInfo>;
   }
 }

@@ -24,7 +24,12 @@ class BitcoinClient extends client_1.default {
         return this.RpcCall(method, param);
     }
     sendRawTx(raw) {
-        return this.RpcCall(methods_1.BtcMtd.sendRawTransaction, [raw]);
+        const method = methods_1.BtcMtd.sendRawTransaction;
+        return this.RpcCall(method, [raw]);
+    }
+    getBlockchainInfo() {
+        const method = methods_1.BtcMtd16.getBlockInfo;
+        return this.RpcCall(method);
     }
 }
 exports.default = BitcoinClient;
