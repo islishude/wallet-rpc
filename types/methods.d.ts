@@ -1,4 +1,4 @@
-export declare const Mtd: {
+export declare const BtcMtd: {
     getBlock: string;
     getBlockCount: string;
     getBlockHash: string;
@@ -20,4 +20,8 @@ export declare const EthMtd: {
     getUncleByBlockNumberAndIndex: string;
     sendRawTransaction: string;
     sendTransaction: string;
+};
+export declare const BtcMtd16: {
+    getBlockInfo: string;
+    getWalletInfo: string;
 };

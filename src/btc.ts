@@ -1,7 +1,7 @@
 import { Bitcoin } from "../defined/btc";
-import { NumberResult, RPC, StringResult } from "../defined/rpc";
+import { NumberResult, RPCResponse, StringResult } from "../defined/rpc";
 import Client from "./client";
-import { Mtd } from "./methods";
+import { BtcMtd } from "./methods";
 
 export default class BitcoinClient extends Client {
   constructor(user: string, pass: string, ip: string, port: number = 8332) {
@@ -9,27 +9,28 @@ export default class BitcoinClient extends Client {
   }
 
   public getInfo() {
-    return this.rpc(Mtd.getInfo) as Promise<Bitcoin.WalletInfo>;
+    return this.RpcCall(BtcMtd.getInfo) as Promise<Bitcoin.WalletInfo>;
   }
 
   public getBlockCount() {
-    return this.rpc(Mtd.getBlockCount) as Promise<NumberResult>;
+    return this.RpcCall(BtcMtd.getBlockCount) as Promise<NumberResult>;
   }
 
   public getBlockHash(height: number) {
-    return this.rpc(Mtd.getBlockHash, [height]) as Promise<StringResult>;
+    return this.RpcCall(BtcMtd.getBlockHash, [height]) as Promise<StringResult>;
   }
 
   public getBlockInfo(id: string) {
-    return this.rpc(Mtd.getBlock, [id]) as Promise<Bitcoin.BlockInfo>;
+    return this.RpcCall(BtcMtd.getBlock, [id]) as Promise<Bitcoin.BlockInfo>;
   }
 
   public getTxInfo(id: string) {
     const param: [string, number] = [id, 1];
-    return this.rpc(Mtd.getTransaction, param) as Promise<Bitcoin.TxInfo>;
+    const method = BtcMtd.getTransaction;
+    return this.RpcCall(method, param) as Promise<Bitcoin.TxInfo>;
   }
 
   public sendRawTx(raw: string) {
-    return this.rpc(Mtd.sendRawTransaction, [raw]) as Promise<string>;
+    return this.RpcCall(BtcMtd.sendRawTransaction, [raw]) as Promise<string>;
   }
 }

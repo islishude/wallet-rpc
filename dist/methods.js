@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Mtd = {
+exports.BtcMtd = {
     getBlock: "getblock",
     getBlockCount: "getblockcount",
     getBlockHash: "getblockhash",
@@ -22,4 +22,8 @@ exports.EthMtd = {
     getUncleByBlockNumberAndIndex: "eth_getUncleByBlockHashAndIndex",
     sendRawTransaction: "eth_sendRawTransaction",
     sendTransaction: "eth_sendTransaction",
+};
+exports.BtcMtd16 = {
+    getBlockInfo: "getblockinfo",
+    getWalletInfo: "getwalletinfo",
 };

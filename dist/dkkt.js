@@ -7,23 +7,23 @@ class DKKTClient extends client_1.default {
         super(user, pass, ip, port);
     }
     getInfo() {
-        return this.rpc(methods_1.Mtd.getInfo);
+        return this.RpcCall(methods_1.BtcMtd.getInfo);
     }
     getBlockCount() {
-        return this.rpc(methods_1.Mtd.getBlockCount);
+        return this.RpcCall(methods_1.BtcMtd.getBlockCount);
     }
     getBlockHash(height) {
-        return this.rpc(methods_1.Mtd.getBlockHash, [height]);
+        return this.RpcCall(methods_1.BtcMtd.getBlockHash, [height]);
     }
     getBlockInfo(id) {
-        return this.rpc(methods_1.Mtd.getBlock, [id]);
+        return this.RpcCall(methods_1.BtcMtd.getBlock, [id]);
     }
     getTxInfo(id) {
         const param = [id, 1];
-        return this.rpc(methods_1.Mtd.getTransaction, param);
+        return this.RpcCall(methods_1.BtcMtd.getTransaction, param);
     }
     sendRawTx(raw) {
-        return this.rpc(methods_1.Mtd.sendRawTransaction, [raw]);
+        return this.RpcCall(methods_1.BtcMtd.sendRawTransaction, [raw]);
     }
 }
 exports.default = DKKTClient;

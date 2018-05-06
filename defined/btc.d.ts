@@ -1,7 +1,7 @@
-import { RPC } from "./rpc";
+import { _RPCResponse } from "./rpc";
 
 declare namespace Bitcoin {
-  export interface WalletInfo extends RPC {
+  export interface WalletInfo extends _RPCResponse {
     result: {
       version: string;
       protocolversion: number;
@@ -19,7 +19,7 @@ declare namespace Bitcoin {
     };
   }
 
-  export interface TxInfo extends RPC {
+  export interface TxInfo extends _RPCResponse {
     result: {
       txid: string;
       hash: string;
@@ -61,7 +61,7 @@ declare namespace Bitcoin {
     };
   }
 
-  export interface BlockInfo extends RPC {
+  export interface BlockInfo extends _RPCResponse {
     result: {
       hash: string;
       confirmations: number;
@@ -85,6 +85,21 @@ declare namespace Bitcoin {
       modifierv2: string;
       tx: string[];
       signature: string;
+    };
+  }
+
+  export interface BlockchainInfo extends _RPCResponse {
+    result: {
+      chain: string;
+      blocks: number;
+      headers: number;
+      blockhash: string;
+      difficulty: number;
+      mediantime: number;
+      verificationprogress: number;
+      initialblockdownload: boolean;
+      chainwork: string;
+      warnings: string;
     };
   }
 }
