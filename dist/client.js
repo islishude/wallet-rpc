@@ -16,7 +16,9 @@ class Client {
         this.ip = ip;
         this.port = port;
         this.https = https;
-        this.uri = this.https ? "https" : "http" + this.ip + this.port;
+        this.uri = this.https
+            ? "https"
+            : "http" + "://" + this.ip + ":" + this.port;
         this.bulkData = [];
         this.reqConfig = {
             auth: {
@@ -48,16 +50,11 @@ class Client {
     }
     BulkRpcCall() {
         return __awaiter(this, void 0, void 0, function* () {
-            const res = yield axios_1.default.post(this.uri, this.bulkData, this.reqConfig);
-            this.bulkData.splice(0, this.bulkData.length);
+            const data = this.bulkData;
+            this.bulkData = [];
+            const res = yield axios_1.default.post(this.uri, data, this.reqConfig);
             return res.data;
         });
     }
 }
-Client.rpcData = {
-    id: Date.now(),
-    jsonrpc: "2.0",
-    method: "",
-    params: []
-};
 exports.default = Client;
