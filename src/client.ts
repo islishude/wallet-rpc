@@ -53,6 +53,8 @@ export default abstract class Client {
 
   protected async BulkRpcCall(): Promise<RPCResponse[]> {
     const res = await Axios.post(this.uri, this.bulkData, this.reqConfig);
+    // clear data
+    this.bulkData.splice(0, this.bulkData.length);
     return res.data;
   }
 }

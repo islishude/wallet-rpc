@@ -49,6 +49,7 @@ class Client {
     BulkRpcCall() {
         return __awaiter(this, void 0, void 0, function* () {
             const res = yield axios_1.default.post(this.uri, this.bulkData, this.reqConfig);
+            this.bulkData.splice(0, this.bulkData.length);
             return res.data;
         });
     }
