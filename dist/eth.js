@@ -11,25 +11,30 @@ class EthereumClient extends client_1.default {
     }
     getBlockByHash(hash, isFullTransaction = true) {
         const param = [hash, isFullTransaction];
-        return this.RpcCall(methods_1.EthMtd.getBlockByHash, param);
+        const method = methods_1.EthMtd.getBlockByHash;
+        return this.RpcCall(method, param);
     }
     getUncleByBlockHashAndIndex(hash, index) {
         const param = [hash, index];
-        return this.RpcCall(methods_1.EthMtd.getUncleByBlockHashAndIndex, param);
+        const method = methods_1.EthMtd.getUncleByBlockHashAndIndex;
+        return this.RpcCall(method, param);
     }
     getUncleByBlockNumberAndIndex(height, index) {
         const param = [height, index];
-        return this.RpcCall(methods_1.EthMtd.getUncleByBlockNumberAndIndex, param);
+        const method = methods_1.EthMtd.getUncleByBlockNumberAndIndex;
+        return this.RpcCall(method, param);
     }
     sendRawTx(raw) {
-        return this.RpcCall(methods_1.EthMtd.sendRawTransaction, [raw]);
+        const method = methods_1.EthMtd.sendRawTransaction;
+        return this.RpcCall(method, [raw]);
     }
     sendTransaction(tx) {
         return this.RpcCall(methods_1.EthMtd.sendTransaction, [tx]);
     }
     getTransactionCount(address, status = "latest") {
         const param = [address, status];
-        return this.RpcCall(methods_1.EthMtd.getTransactionCount, param);
+        const method = methods_1.EthMtd.getTransactionCount;
+        return this.RpcCall(method, param);
     }
 }
 exports.default = EthereumClient;

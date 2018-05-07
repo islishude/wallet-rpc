@@ -14,25 +14,25 @@ export default class EthereumClient extends Client {
 
   public getBlockByHash(hash: string, isFullTransaction: boolean = true) {
     const param: [string, boolean] = [hash, isFullTransaction];
-    return this.RpcCall(EthMtd.getBlockByHash, param) as Promise<Ethereum.IBlock>;
+    const method = EthMtd.getBlockByHash;
+    return this.RpcCall(method, param) as Promise<Ethereum.IBlock>;
   }
 
   public getUncleByBlockHashAndIndex(hash: string, index: string) {
     const param: string[] = [hash, index];
-    return this.RpcCall(EthMtd.getUncleByBlockHashAndIndex, param) as Promise<
-      Ethereum.IBlock
-    >;
+    const method: string = EthMtd.getUncleByBlockHashAndIndex;
+    return this.RpcCall(method, param) as Promise<Ethereum.IBlock>;
   }
 
   public getUncleByBlockNumberAndIndex(height: string, index: string) {
     const param: string[] = [height, index];
-    return this.RpcCall(EthMtd.getUncleByBlockNumberAndIndex, param) as Promise<
-      Ethereum.IBlock
-    >;
+    const method: string = EthMtd.getUncleByBlockNumberAndIndex;
+    return this.RpcCall(method, param) as Promise<Ethereum.IBlock>;
   }
 
   public sendRawTx(raw: string) {
-    return this.RpcCall(EthMtd.sendRawTransaction, [raw]) as Promise<StringResult>;
+    const method: string = EthMtd.sendRawTransaction;
+    return this.RpcCall(method, [raw]) as Promise<StringResult>;
   }
 
   public sendTransaction(tx: Ethereum.ITxStruct) {
@@ -45,6 +45,7 @@ export default class EthereumClient extends Client {
     status: Ethereum.Status = "latest"
   ) {
     const param: string[] = [address, status];
-    return this.RpcCall(EthMtd.getTransactionCount, param) as Promise<StringResult>;
+    const method: string = EthMtd.getTransactionCount;
+    return this.RpcCall(method, param) as Promise<StringResult>;
   }
 }
