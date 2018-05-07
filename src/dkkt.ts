@@ -26,12 +26,11 @@ export default class DKKTClient extends Client {
 
   public getTxInfo(id: string) {
     const param: [string, number] = [id, 1];
-    return this.RpcCall(BtcMtd.getTransaction, param) as Promise<DKKToken.TxInfo>;
+    const method: string = BtcMtd.getTransaction;
+    return this.RpcCall(method, param) as Promise<DKKToken.TxInfo>;
   }
 
   public sendRawTx(raw: string) {
     return this.RpcCall(BtcMtd.sendRawTransaction, [raw]) as Promise<string>;
   }
-
-  
 }
