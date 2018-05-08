@@ -5,7 +5,15 @@ export interface _RPCResponse {
   error: null | { code: number; message: string };
 }
 
-export type RPCResponse = _RPCResponse | _RPCResponse[] | string;
+export type RPCResponse =
+  | _RPCResponse
+  | _RPCResponse[]
+  | string
+  | string[]
+  | StringResult
+  | StringResult[]
+  | NumberResult
+  | NumberResult[];
 
 export interface StringResult extends _RPCResponse {
   result: string;

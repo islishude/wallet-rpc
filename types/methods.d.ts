@@ -8,11 +8,13 @@ export declare const BtcMtd: {
     sendRawTransaction: string;
 };
 export declare const EthMtd: {
+    call: string;
     getBalance: string;
     getBlockByHash: string;
     getBlockNumber: string;
     getBlockTransactionCountByHash: string;
     getBlockTransactionCountByNumber: string;
+    getCurrentGasPrice: string;
     getTransactionByBlockHashAndIndex: string;
     getTransactionCount: string;
     getTransactionReceipt: string;

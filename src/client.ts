@@ -46,6 +46,10 @@ export default abstract class Client {
     this.bulkData.push(data);
   }
 
+  /**
+   * Bulk RPC Call func
+   * recommendation using it from same request bulk
+   */
   public async BulkRpcCall(): Promise<RPCResponse[]> {
     const data: RPCRequest[] = this.bulkData;
     // clear data

@@ -16,20 +16,22 @@ declare namespace DKKToken {
       proxy: string;
       ip: string;
       difficulty: {
-        "proof-of-work": string;
+        "proof-of-work": number;
         "proof-of-stake": number;
       };
-      testnet: false;
+      testnet: boolean;
       keypoololdest: number;
       keypoolsize: number;
       paytxfee: number;
       mininput: number;
-      errors: null;
+      errors: string;
     };
   }
 
   export interface TxInfo extends _RPCResponse {
     result: {
+      additionalproof?: string;
+      additionalamount?: number;
       txid: string;
       version: number;
       time: number;
@@ -38,13 +40,14 @@ declare namespace DKKToken {
       confirmations: number;
       vin: txVins[];
       vout: txVouts[];
+      hex: string;
     };
   }
 
   interface txVins {
-    txid: string;
-    vout: number;
-    scriptSig: {
+    txid?: string;
+    vout?: number;
+    scriptSig?: {
       asm: string;
       hex: string;
     };

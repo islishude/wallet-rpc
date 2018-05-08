@@ -39,7 +39,12 @@ export default class EthereumClient extends Client {
     return this.RpcCall(EthMtd.sendTransaction, [tx]) as Promise<StringResult>;
   }
 
-  // get address nonce
+  /**
+   * Returns the number of transactions sent from an address.
+   * in other word it's `nonce`
+   * @param address
+   * @param status
+   */
   public getTransactionCount(
     address: string,
     status: Ethereum.Status = "latest"
@@ -47,5 +52,25 @@ export default class EthereumClient extends Client {
     const param: string[] = [address, status];
     const method: string = EthMtd.getTransactionCount;
     return this.RpcCall(method, param) as Promise<StringResult>;
+  }
+
+  /**
+   * Returns the current price per gas in wei.
+   * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gasprice
+   */
+  public getCurrentGasPrice() {
+    const method: string = EthMtd.getCurrentGasPrice;
+    return this.RpcCall(method, []) as Promise<StringResult>;
+  }
+
+  /**
+   * Executes a new message call immediately without creating a transaction on the block chain.
+   * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_call
+   */
+  public callFunc(
+    param: Ethereum.ICallFuncParam,
+    status: Ethereum.Status = "latest"
+  ) {
+    return this.RpcCall(EthMtd.call, [param]) as Promise<StringResult>;
   }
 }

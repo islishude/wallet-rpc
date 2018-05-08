@@ -10,4 +10,6 @@ export default class EthereumClient extends Client {
     sendRawTx(raw: string): Promise<StringResult>;
     sendTransaction(tx: Ethereum.ITxStruct): Promise<StringResult>;
     getTransactionCount(address: string, status?: Ethereum.Status): Promise<StringResult>;
+    getCurrentGasPrice(): Promise<StringResult>;
+    callFunc(param: Ethereum.ICallFuncParam, status?: Ethereum.Status): Promise<StringResult>;
 }

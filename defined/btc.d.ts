@@ -3,7 +3,7 @@ import { _RPCResponse } from "./rpc";
 declare namespace Bitcoin {
   export interface WalletInfo extends _RPCResponse {
     result: {
-      version: string;
+      version: number;
       protocolversion: number;
       walletversion: number;
       balance: number;
@@ -12,7 +12,7 @@ declare namespace Bitcoin {
       connections: number;
       proxy: string;
       difficulty: number;
-      testnet: false;
+      testnet: boolean;
       paytxfee: number;
       realyfee: number;
       errors: null;
@@ -38,15 +38,15 @@ declare namespace Bitcoin {
   }
 
   interface txVins {
-    txid: string;
-    vout: number;
+    txid?: string;
+    vout?: number;
     scriptSig: {
       asm: string;
       hex: string;
     };
     sequnence: number;
     coinbase?: string;
-    txinwitness: string[];
+    txinwitness?: string[];
   }
 
   interface txVouts {
@@ -100,6 +100,41 @@ declare namespace Bitcoin {
       initialblockdownload: boolean;
       chainwork: string;
       warnings: string;
+      pruned: boolean;
+      size_on_disk: number;
+      softforks: BlockchainInfoSoftFork[];
     };
+  }
+
+  export interface BlockchainInfoSoftFork {
+    id: string;
+    version: number;
+    reject: {
+      status: boolean;
+    };
+  }
+
+  export interface NetworkInfo {
+    version: number;
+    subversion: string;
+    protocolversion: number;
+    localservices: string;
+    localrelay: boolean;
+    timeoffset: number;
+    networkactive: boolean;
+    connections: number;
+    relayfee: number;
+    incrementalfee: number;
+    warnings: string;
+    localaddresses: string[];
+    networks: networksInfoArray[];
+  }
+
+  export interface networksInfoArray {
+    name: string;
+    limited: boolean;
+    reachable: boolean;
+    proxy: string;
+    proxy_randomize_credentials: boolean;
   }
 }

@@ -36,5 +36,12 @@ class EthereumClient extends client_1.default {
         const method = methods_1.EthMtd.getTransactionCount;
         return this.RpcCall(method, param);
     }
+    getCurrentGasPrice() {
+        const method = methods_1.EthMtd.getCurrentGasPrice;
+        return this.RpcCall(method, []);
+    }
+    callFunc(param, status = "latest") {
+        return this.RpcCall(methods_1.EthMtd.call, [param]);
+    }
 }
 exports.default = EthereumClient;
