@@ -58,7 +58,7 @@ class Client {
     }
     getErrorResponse(error) {
         if (error.response) {
-            return error.response.data;
+            return error.response.data.error;
         }
     }
 }
