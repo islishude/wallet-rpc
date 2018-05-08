@@ -1,19 +1,11 @@
 export interface _RPCResponse {
   jsonrpc: string;
   id?: number | string;
-  result: any;
+  result: any | string | number;
   error: null | { code: number; message: string };
 }
 
-export type RPCResponse =
-  | _RPCResponse
-  | _RPCResponse[]
-  | string
-  | string[]
-  | StringResult
-  | StringResult[]
-  | NumberResult
-  | NumberResult[];
+export type RPCResponse = _RPCResponse | _RPCResponse[];
 
 export interface StringResult extends _RPCResponse {
   result: string;

@@ -7,7 +7,7 @@ export default class BitcoinClient extends Client {
     getBlockCount(): Promise<NumberResult>;
     getBlockHash(height: number): Promise<StringResult>;
     getBlockInfo(id: string): Promise<Bitcoin.BlockInfo>;
-    getTxInfo(id: string): Promise<Bitcoin.TxInfo>;
-    sendRawTx(raw: string): Promise<string>;
+    getTxInfo(id: string, decode?: boolean): Promise<Bitcoin.TxInfo>;
+    sendRawTx(raw: string, highFee?: boolean): Promise<StringResult>;
     getBlockchainInfo(): Promise<Bitcoin.BlockchainInfo>;
 }

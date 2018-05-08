@@ -24,15 +24,15 @@ export default class BitcoinClient extends Client {
     return this.RpcCall(BtcMtd.getBlock, [id]) as Promise<Bitcoin.BlockInfo>;
   }
 
-  public getTxInfo(id: string) {
-    const param: [string, number] = [id, 1];
+  public getTxInfo(id: string, decode: boolean = true) {
+    const param: [string, boolean] = [id, decode];
     const method = BtcMtd.getTransaction;
     return this.RpcCall(method, param) as Promise<Bitcoin.TxInfo>;
   }
 
-  public sendRawTx(raw: string) {
+  public sendRawTx(raw: string, highFee: boolean = false) {
     const method: string = BtcMtd.sendRawTransaction;
-    return this.RpcCall(method, [raw]) as Promise<string>;
+    return this.RpcCall(method, [raw, highFee]) as Promise<StringResult>;
   }
 
   public getBlockchainInfo() {

@@ -31,6 +31,6 @@ export default class DKKTClient extends Client {
   }
 
   public sendRawTx(raw: string) {
-    return this.RpcCall(BtcMtd.sendRawTransaction, [raw]) as Promise<string>;
+    return this.RpcCall(BtcMtd.sendRawTransaction, [raw]) as Promise<StringResult>;
   }
 }

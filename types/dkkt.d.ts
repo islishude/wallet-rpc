@@ -8,5 +8,5 @@ export default class DKKTClient extends Client {
     getBlockHash(height: number): Promise<StringResult>;
     getBlockInfo(id: string): Promise<DKKToken.BlockInfo>;
     getTxInfo(id: string): Promise<DKKToken.TxInfo>;
-    sendRawTx(raw: string): Promise<string>;
+    sendRawTx(raw: string): Promise<StringResult>;
 }

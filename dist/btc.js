@@ -18,14 +18,14 @@ class BitcoinClient extends client_1.default {
     getBlockInfo(id) {
         return this.RpcCall(methods_1.BtcMtd.getBlock, [id]);
     }
-    getTxInfo(id) {
-        const param = [id, 1];
+    getTxInfo(id, decode = true) {
+        const param = [id, decode];
         const method = methods_1.BtcMtd.getTransaction;
         return this.RpcCall(method, param);
     }
-    sendRawTx(raw) {
+    sendRawTx(raw, highFee = false) {
         const method = methods_1.BtcMtd.sendRawTransaction;
-        return this.RpcCall(method, [raw]);
+        return this.RpcCall(method, [raw, highFee]);
     }
     getBlockchainInfo() {
         const method = methods_1.BtcMtd16.getBlockInfo;
