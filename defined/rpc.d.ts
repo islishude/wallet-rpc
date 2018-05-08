@@ -1,7 +1,7 @@
 export interface _RPCResponse {
-  jsonrpc: string;
+  jsonrpc?: string;
   id?: number | string;
-  result: any | string | number;
+  result: any | string | number | null;
   error: null | { code: number; message: string };
 }
 
@@ -16,7 +16,7 @@ export interface NumberResult extends _RPCResponse {
 }
 
 export interface _RPCReq {
-  jsonrpc: "2.0" | "1.0";
+  jsonrpc?: "2.0" | "1.0";
   id?: number | string;
   method: string;
   params: any[];
