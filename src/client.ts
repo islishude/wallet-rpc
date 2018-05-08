@@ -69,7 +69,7 @@ export default abstract class Client {
    */
   public getErrorResponse(error: AxiosError): RPCError {
     if (error.response) {
-      return error.response.data.error;
+      return error.response.data;
     }
   }
 }
