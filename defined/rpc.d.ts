@@ -1,8 +1,15 @@
 export interface _RPCResponse {
   jsonrpc?: string;
   id?: number | string;
-  result: any | string | number | null;
-  error: null | { code: number; message: string };
+  result: void | string | number | {};
+  error: void | { code: number; message: string };
+}
+
+export interface RPCError {
+  jsonrpc?: string;
+  id?: number | string;
+  result: void;
+  error: { code: number; message: string };
 }
 
 export type RPCResponse = _RPCResponse | _RPCResponse[];

@@ -56,5 +56,10 @@ class Client {
             return res.data;
         });
     }
+    getErrorResponse(error) {
+        if (error.response) {
+            return error.response.data;
+        }
+    }
 }
 exports.default = Client;

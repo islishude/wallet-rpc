@@ -1,5 +1,5 @@
-import { AxiosRequestConfig } from "axios";
-import { RPCRequest, RPCResponse } from "../defined/rpc";
+import { AxiosError, AxiosRequestConfig } from "axios";
+import { RPCError, RPCRequest, RPCResponse } from "../defined/rpc";
 export default abstract class Client {
     user: string;
     pass: string;
@@ -13,4 +13,5 @@ export default abstract class Client {
     RpcCall(method: string, param?: any[], id?: number): Promise<RPCResponse>;
     BulkAdd(method: string, param?: any[], id?: number): void;
     BulkRpcCall(): Promise<RPCResponse[]>;
+    getErrorResponse(error: AxiosError): RPCError;
 }

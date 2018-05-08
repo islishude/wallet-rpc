@@ -1,5 +1,5 @@
-import Axios, { AxiosRequestConfig } from "axios";
-import { RPCRequest, RPCResponse } from "../defined/rpc";
+import Axios, { AxiosError, AxiosRequestConfig } from "axios";
+import { RPCError, RPCRequest, RPCResponse } from "../defined/rpc";
 
 export default abstract class Client {
   protected uri: string = this.https
@@ -36,6 +36,12 @@ export default abstract class Client {
     return res.data;
   }
 
+  /**
+   * Bulk rpc call addition
+   * @param method 
+   * @param param 
+   * @param id 
+   */
   public BulkAdd(method: string, param?: any[], id?: number): void {
     const data: RPCRequest = {
       id: id || Date.now(),
@@ -56,5 +62,14 @@ export default abstract class Client {
     this.bulkData = [];
     const res = await Axios.post(this.uri, data, this.reqConfig);
     return res.data;
+  }
+
+  /**
+   * RPC Response error handler 
+   */
+  public getErrorResponse(error: AxiosError): RPCError {
+    if (error.response) {
+      return error.response.data;
+    }
   }
 }
