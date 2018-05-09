@@ -1,5 +1,5 @@
 import { DKKToken } from "../defined/dkkt";
-import { NumberResult, RPCResponse, StringResult } from "../defined/rpc";
+import { RPCResponse } from "../defined/rpc";
 import Client from "./client";
 import { BtcMtd } from "./methods";
 
@@ -9,28 +9,34 @@ export default class DKKTClient extends Client {
   }
 
   public getInfo() {
-    return this.RpcCall(BtcMtd.getInfo) as Promise<DKKToken.WalletInfo>;
+    return this.RpcCall<DKKToken.WalletInfo>(BtcMtd.getInfo);
   }
 
   public getBlockCount() {
-    return this.RpcCall(BtcMtd.getBlockCount) as Promise<NumberResult>;
+    return this.RpcCall<number>(BtcMtd.getBlockCount);
   }
 
   public getBlockHash(height: number) {
-    return this.RpcCall(BtcMtd.getBlockHash, [height]) as Promise<StringResult>;
+    return this.RpcCall(BtcMtd.getBlockHash, [height]);
   }
 
   public getBlockInfo(id: string) {
-    return this.RpcCall(BtcMtd.getBlock, [id]) as Promise<DKKToken.BlockInfo>;
+    return this.RpcCall<DKKToken.BlockInfo>(BtcMtd.getBlock, [id]);
   }
 
   public getTxInfo(id: string) {
     const param: [string, number] = [id, 1];
     const method: string = BtcMtd.getTransaction;
-    return this.RpcCall(method, param) as Promise<DKKToken.TxInfo>;
+    return this.RpcCall<DKKToken.TxInfo>(method, param);
   }
 
   public sendRawTx(raw: string) {
-    return this.RpcCall(BtcMtd.sendRawTransaction, [raw]) as Promise<StringResult>;
+    return this.RpcCall(BtcMtd.sendRawTransaction, [raw]);
+  }
+
+  public getRawMemPool(verbose: boolean = false) {
+    const method: string = BtcMtd.getRawMemPool;
+    const params = [verbose];
+    return this.RpcCall<string[]>(method, params);
   }
 }

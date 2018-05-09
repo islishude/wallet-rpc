@@ -1,7 +1,7 @@
-export interface _RPCResponse {
+export interface RPCResponse<T = any> {
   jsonrpc?: string;
   id?: number | string;
-  result: void | string | number | {};
+  result: T;
   error: void | { code: number; message: string };
 }
 
@@ -10,16 +10,6 @@ export interface RPCError {
   id?: number | string;
   result: void;
   error: { code: number; message: string };
-}
-
-export type RPCResponse = _RPCResponse | _RPCResponse[];
-
-export interface StringResult extends _RPCResponse {
-  result: string;
-}
-
-export interface NumberResult extends _RPCResponse {
-  result: number;
 }
 
 export interface _RPCReq {

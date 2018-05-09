@@ -1,7 +1,7 @@
-import { _RPCResponse } from "./rpc";
+import { RPCResponse } from "./rpc";
 
 declare namespace DKKToken {
-  export interface WalletInfo extends _RPCResponse {
+  export interface WalletInfo extends RPCResponse {
     result: {
       version: string;
       protocolversion: number;
@@ -28,7 +28,7 @@ declare namespace DKKToken {
     };
   }
 
-  export interface TxInfo extends _RPCResponse {
+  export interface TxInfo extends RPCResponse {
     result: {
       additionalproof?: string;
       additionalamount?: number;
@@ -67,7 +67,7 @@ declare namespace DKKToken {
     };
   }
 
-  export interface BlockInfo extends _RPCResponse {
+  export interface BlockInfo extends RPCResponse {
     result: {
       hash: string;
       confirmations: number;

@@ -1,7 +1,7 @@
-import { _RPCResponse } from "./rpc";
+import { RPCResponse } from "./rpc";
 
 declare namespace Bitcoin {
-  export interface WalletInfo extends _RPCResponse {
+  export interface WalletInfo extends RPCResponse {
     result: {
       version: number;
       protocolversion: number;
@@ -19,7 +19,7 @@ declare namespace Bitcoin {
     };
   }
 
-  export interface TxInfo extends _RPCResponse {
+  export interface TxInfo extends RPCResponse {
     result: {
       txid: string;
       hash: string;
@@ -61,7 +61,7 @@ declare namespace Bitcoin {
     };
   }
 
-  export interface BlockInfo extends _RPCResponse {
+  export interface BlockInfo extends RPCResponse {
     result: {
       hash: string;
       confirmations: number;
@@ -88,7 +88,7 @@ declare namespace Bitcoin {
     };
   }
 
-  export interface BlockchainInfo extends _RPCResponse {
+  export interface BlockchainInfo extends RPCResponse {
     result: {
       chain: string;
       blocks: number;
@@ -136,5 +136,25 @@ declare namespace Bitcoin {
     reachable: boolean;
     proxy: string;
     proxy_randomize_credentials: boolean;
+  }
+
+  export interface verboseMemPool extends RPCResponse {
+    result:{
+      [txid: string]: {
+        size: number,
+        fee: number,
+        modifiedfee: number,
+        time: number,
+        height: number,
+        descendantcount: number,
+        descendantsize: number,
+        descendantfees: number,
+        ancestorcount: number,
+        ancestorsize: number,
+        ancestorfees: number,
+        wtxid: string,
+        depends: string[]
+      }
+    }
   }
 }

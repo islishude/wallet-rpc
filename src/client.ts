@@ -20,11 +20,11 @@ export default abstract class Client {
     public https: boolean = false
   ) {}
 
-  public async RpcCall(
+  public async RpcCall<T = string>(
     method: string,
     param?: any[],
     id?: number
-  ): Promise<RPCResponse> {
+  ): Promise<RPCResponse<T>> {
     const data: RPCRequest = {
       id: id || Date.now(),
       jsonrpc: "2.0",

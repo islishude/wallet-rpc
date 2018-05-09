@@ -31,5 +31,10 @@ class BitcoinClient extends client_1.default {
         const method = methods_1.BtcMtd16.getBlockInfo;
         return this.RpcCall(method);
     }
+    getRawMemPool(verbose = false) {
+        const method = methods_1.BtcMtd.getRawMemPool;
+        const params = [verbose];
+        return this.RpcCall(method, params);
+    }
 }
 exports.default = BitcoinClient;

@@ -4,6 +4,7 @@ export const BtcMtd = {
   getBlockHash: "getblockhash",
   getDifficulty: "getdifficulty",
   getInfo: "getinfo",
+  getRawMemPool: "getrawmempool",
   getTransaction: "getrawtransaction",
   sendRawTransaction: "sendrawtransaction"
 };

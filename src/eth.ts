@@ -1,5 +1,5 @@
 import { Ethereum } from "../defined/eth";
-import { NumberResult, StringResult } from "../defined/rpc";
+import { RPCResponse } from "../defined/rpc";
 import Client from "./client";
 import { EthMtd } from "./methods";
 
@@ -9,34 +9,34 @@ export default class EthereumClient extends Client {
   }
 
   public getBlockCount() {
-    return this.RpcCall(EthMtd.getBlockNumber) as Promise<StringResult>;
+    return this.RpcCall(EthMtd.getBlockNumber);
   }
 
   public getBlockByHash(hash: string, isFullTransaction: boolean = true) {
     const param: [string, boolean] = [hash, isFullTransaction];
     const method = EthMtd.getBlockByHash;
-    return this.RpcCall(method, param) as Promise<Ethereum.IBlock>;
+    return this.RpcCall<Ethereum.IBlock>(method, param);
   }
 
   public getUncleByBlockHashAndIndex(hash: string, index: string) {
     const param: string[] = [hash, index];
     const method: string = EthMtd.getUncleByBlockHashAndIndex;
-    return this.RpcCall(method, param) as Promise<Ethereum.IBlock>;
+    return this.RpcCall<Ethereum.IBlock>(method, param);
   }
 
   public getUncleByBlockNumberAndIndex(height: string, index: string) {
     const param: string[] = [height, index];
     const method: string = EthMtd.getUncleByBlockNumberAndIndex;
-    return this.RpcCall(method, param) as Promise<Ethereum.IBlock>;
+    return this.RpcCall<Ethereum.IBlock>(method, param);
   }
 
   public sendRawTx(raw: string) {
     const method: string = EthMtd.sendRawTransaction;
-    return this.RpcCall(method, [raw]) as Promise<StringResult>;
+    return this.RpcCall(method, [raw]);
   }
 
   public sendTransaction(tx: Ethereum.ITxStruct) {
-    return this.RpcCall(EthMtd.sendTransaction, [tx]) as Promise<StringResult>;
+    return this.RpcCall(EthMtd.sendTransaction, [tx]);
   }
 
   /**
@@ -51,7 +51,7 @@ export default class EthereumClient extends Client {
   ) {
     const param: string[] = [address, status];
     const method: string = EthMtd.getTransactionCount;
-    return this.RpcCall(method, param) as Promise<StringResult>;
+    return this.RpcCall(method, param);
   }
 
   /**
@@ -60,7 +60,7 @@ export default class EthereumClient extends Client {
    */
   public getCurrentGasPrice() {
     const method: string = EthMtd.getCurrentGasPrice;
-    return this.RpcCall(method, []) as Promise<StringResult>;
+    return this.RpcCall(method, []);
   }
 
   /**
@@ -71,6 +71,6 @@ export default class EthereumClient extends Client {
     param: Ethereum.ICallFuncParam,
     status: Ethereum.Status = "latest"
   ) {
-    return this.RpcCall(EthMtd.call, [param]) as Promise<StringResult>;
+    return this.RpcCall(EthMtd.call, [param]);
   }
 }

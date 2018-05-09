@@ -1,5 +1,5 @@
 import { Bitcoin } from "../defined/btc";
-import { NumberResult, RPCResponse, StringResult } from "../defined/rpc";
+import { RPCResponse } from "../defined/rpc";
 import Client from "./client";
 import { BtcMtd, BtcMtd16 } from "./methods";
 
@@ -9,34 +9,48 @@ export default class BitcoinClient extends Client {
   }
 
   public getInfo() {
-    return this.RpcCall(BtcMtd.getInfo) as Promise<Bitcoin.WalletInfo>;
+    return this.RpcCall<Bitcoin.WalletInfo>(BtcMtd.getInfo);
   }
 
   public getBlockCount() {
-    return this.RpcCall(BtcMtd.getBlockCount) as Promise<NumberResult>;
+    return this.RpcCall<number>(BtcMtd.getBlockCount);
   }
 
   public getBlockHash(height: number) {
-    return this.RpcCall(BtcMtd.getBlockHash, [height]) as Promise<StringResult>;
+    return this.RpcCall(BtcMtd.getBlockHash, [height]);
   }
 
   public getBlockInfo(id: string) {
-    return this.RpcCall(BtcMtd.getBlock, [id]) as Promise<Bitcoin.BlockInfo>;
+    return this.RpcCall<Bitcoin.BlockInfo>(BtcMtd.getBlock, [id]);
   }
 
   public getTxInfo(id: string, decode: boolean = true) {
     const param: [string, boolean] = [id, decode];
     const method = BtcMtd.getTransaction;
-    return this.RpcCall(method, param) as Promise<Bitcoin.TxInfo>;
+    return this.RpcCall<Bitcoin.TxInfo>(method, param);
   }
 
+  /**
+   * send raw transaction
+   * return the txid
+   */
   public sendRawTx(raw: string, highFee: boolean = false) {
     const method: string = BtcMtd.sendRawTransaction;
-    return this.RpcCall(method, [raw, highFee]) as Promise<StringResult>;
+    return this.RpcCall(method, [raw, highFee]);
   }
 
   public getBlockchainInfo() {
     const method: string = BtcMtd16.getBlockInfo;
-    return this.RpcCall(method) as Promise<Bitcoin.BlockchainInfo>;
+    return this.RpcCall<Bitcoin.BlockchainInfo>(method);
+  }
+
+  /**
+   * get all transaction ids in memory pool
+   * as a json array of string transaction ids.
+   */
+  public getRawMemPool(verbose: boolean = false) {
+    const method: string = BtcMtd.getRawMemPool;
+    const params = [verbose];
+    return this.RpcCall<string[] | Bitcoin.verboseMemPool>(method, params);
   }
 }

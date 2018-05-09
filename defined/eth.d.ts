@@ -1,9 +1,9 @@
-import { _RPCResponse } from "./rpc";
+import { RPCResponse } from "./rpc";
 
 declare namespace Ethereum {
   export type Status = "earliest" | "latest" | "pending";
 
-  export interface IBlock extends _RPCResponse {
+  export interface IBlock extends RPCResponse {
     result: {
       number: string | null;
       hash: string | null;
@@ -61,6 +61,4 @@ declare namespace Ethereum {
     value?: string;
     data?: string;
   }
-
-  
 }

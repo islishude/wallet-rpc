@@ -1,13 +1,14 @@
 import { Bitcoin } from "../defined/btc";
-import { NumberResult, StringResult } from "../defined/rpc";
+import { RPCResponse } from "../defined/rpc";
 import Client from "./client";
 export default class BitcoinClient extends Client {
     constructor(user: string, pass: string, ip: string, port?: number);
-    getInfo(): Promise<Bitcoin.WalletInfo>;
-    getBlockCount(): Promise<NumberResult>;
-    getBlockHash(height: number): Promise<StringResult>;
-    getBlockInfo(id: string): Promise<Bitcoin.BlockInfo>;
-    getTxInfo(id: string, decode?: boolean): Promise<Bitcoin.TxInfo>;
-    sendRawTx(raw: string, highFee?: boolean): Promise<StringResult>;
-    getBlockchainInfo(): Promise<Bitcoin.BlockchainInfo>;
+    getInfo(): Promise<RPCResponse<Bitcoin.WalletInfo>>;
+    getBlockCount(): Promise<RPCResponse<number>>;
+    getBlockHash(height: number): Promise<RPCResponse<string>>;
+    getBlockInfo(id: string): Promise<RPCResponse<Bitcoin.BlockInfo>>;
+    getTxInfo(id: string, decode?: boolean): Promise<RPCResponse<Bitcoin.TxInfo>>;
+    sendRawTx(raw: string, highFee?: boolean): Promise<RPCResponse<string>>;
+    getBlockchainInfo(): Promise<RPCResponse<Bitcoin.BlockchainInfo>>;
+    getRawMemPool(verbose?: boolean): Promise<RPCResponse<string[] | Bitcoin.verboseMemPool>>;
 }

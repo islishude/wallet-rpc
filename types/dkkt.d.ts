@@ -1,12 +1,13 @@
 import { DKKToken } from "../defined/dkkt";
-import { NumberResult, StringResult } from "../defined/rpc";
+import { RPCResponse } from "../defined/rpc";
 import Client from "./client";
 export default class DKKTClient extends Client {
     constructor(user: string, pass: string, ip: string, port?: number);
-    getInfo(): Promise<DKKToken.WalletInfo>;
-    getBlockCount(): Promise<NumberResult>;
-    getBlockHash(height: number): Promise<StringResult>;
-    getBlockInfo(id: string): Promise<DKKToken.BlockInfo>;
-    getTxInfo(id: string): Promise<DKKToken.TxInfo>;
-    sendRawTx(raw: string): Promise<StringResult>;
+    getInfo(): Promise<RPCResponse<DKKToken.WalletInfo>>;
+    getBlockCount(): Promise<RPCResponse<number>>;
+    getBlockHash(height: number): Promise<RPCResponse<string>>;
+    getBlockInfo(id: string): Promise<RPCResponse<DKKToken.BlockInfo>>;
+    getTxInfo(id: string): Promise<RPCResponse<DKKToken.TxInfo>>;
+    sendRawTx(raw: string): Promise<RPCResponse<string>>;
+    getRawMemPool(verbose?: boolean): Promise<RPCResponse<string[]>>;
 }

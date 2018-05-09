@@ -4,6 +4,7 @@ export declare const BtcMtd: {
     getBlockHash: string;
     getDifficulty: string;
     getInfo: string;
+    getRawMemPool: string;
     getTransaction: string;
     sendRawTransaction: string;
 };

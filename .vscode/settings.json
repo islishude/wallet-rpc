@@ -4,6 +4,9 @@
         "Vouts",
         "additionalamount",
         "additionalproof",
+        "ancestorcount",
+        "ancestorfees",
+        "ancestorsize",
         "blockchain",
         "blockhash",
         "blocktime",
@@ -12,6 +15,9 @@
         "chainwork",
         "client",
         "coinbase",
+        "descendantcount",
+        "descendantfees",
+        "descendantsize",
         "dkkt",
         "dkktrpc",
         "entropybit",
@@ -23,6 +29,7 @@
         "getblockinfo",
         "getdifficulty",
         "getinfo",
+        "getrawmempool",
         "getrawtransaction",
         "getwalletinfo",
         "incrementalfee",
@@ -37,6 +44,7 @@
         "merkleroot",
         "mininput",
         "modiffier",
+        "modifiedfee",
         "modifierv",
         "moneysupply",
         "networkactive",
@@ -58,6 +66,7 @@
         "verificationprogress",
         "vout",
         "vsize",
-        "walletversion"
+        "walletversion",
+        "wtxid"
     ]
 }
