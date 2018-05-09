@@ -3,27 +3,25 @@ import { RPCResponse } from "./rpc";
 declare namespace Ethereum {
   export type Status = "earliest" | "latest" | "pending";
 
-  export interface IBlock extends RPCResponse {
-    result: {
-      number: string | null;
-      hash: string | null;
-      parentHash: string;
-      nonce: string;
-      sha3Uncles: string;
-      logsBloom: string;
-      transactionsRoot: string;
-      stateRoot: string;
-      miner: string;
-      difficulty: string;
-      totalDifficulty: string;
-      extraData: string;
-      size: string;
-      gasLimit: string;
-      gasUsed: string;
-      timestamp: string;
-      transactions: string[] | ITransaction[];
-      uncles: string[];
-    };
+  export interface IBlock {
+    number: string | null;
+    hash: string | null;
+    parentHash: string;
+    nonce: string;
+    sha3Uncles: string;
+    logsBloom: string;
+    transactionsRoot: string;
+    stateRoot: string;
+    miner: string;
+    difficulty: string;
+    totalDifficulty: string;
+    extraData: string;
+    size: string;
+    gasLimit: string;
+    gasUsed: string;
+    timestamp: string;
+    transactions: string[] | ITransaction[];
+    uncles: string[];
   }
 
   export interface ITransaction {

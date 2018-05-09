@@ -63,6 +63,7 @@
         "sendrawtransaction",
         "sequnence",
         "softforks",
+        "strippedsize",
         "testnet",
         "timeoffset",
         "txid",
