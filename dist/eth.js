@@ -25,19 +25,18 @@ class EthereumClient extends client_1.default {
         return this.RpcCall(method, param);
     }
     sendRawTx(raw) {
-        const method = methods_1.EthMtd.sendRawTransaction;
-        return this.RpcCall(method, [raw]);
+        return this.RpcCall(methods_1.EthMtd.sendRawTx, [raw]);
     }
-    sendTransaction(tx) {
-        return this.RpcCall(methods_1.EthMtd.sendTransaction, [tx]);
+    sendTx(tx) {
+        return this.RpcCall(methods_1.EthMtd.sendTx, [tx]);
     }
-    getTransactionCount(address, status = "latest") {
+    getTxCount(address, status = "latest") {
         const param = [address, status];
-        const method = methods_1.EthMtd.getTransactionCount;
+        const method = methods_1.EthMtd.getTxCount;
         return this.RpcCall(method, param);
     }
     getCurrentGasPrice() {
-        const method = methods_1.EthMtd.getCurrentGasPrice;
+        const method = methods_1.EthMtd.getGasPrice;
         return this.RpcCall(method, []);
     }
     callFunc(param, status = "latest") {

@@ -28,12 +28,12 @@ declare namespace Bitcoin {
       version: number;
       time: number;
       locktime: number;
-      blockhash: string;
-      confirmations: number;
+      blockhash?: string;
+      confirmations?: number;
       vin: txVins[];
       vout: txVouts[];
-      hex: string;
-      blocktime: number;
+      hex?: string;
+      blocktime?: number;
     };
   }
 
@@ -139,22 +139,42 @@ declare namespace Bitcoin {
   }
 
   export interface verboseMemPool extends RPCResponse {
-    result:{
+    result: {
       [txid: string]: {
-        size: number,
-        fee: number,
-        modifiedfee: number,
-        time: number,
-        height: number,
-        descendantcount: number,
-        descendantsize: number,
-        descendantfees: number,
-        ancestorcount: number,
-        ancestorsize: number,
-        ancestorfees: number,
-        wtxid: string,
-        depends: string[]
-      }
-    }
+        size: number;
+        fee: number;
+        modifiedfee: number;
+        time: number;
+        height: number;
+        descendantcount: number;
+        descendantsize: number;
+        descendantfees: number;
+        ancestorcount: number;
+        ancestorsize: number;
+        ancestorfees: number;
+        wtxid: string;
+        depends: string[];
+      };
+    };
+  }
+
+  export interface fee extends RPCResponse {
+    res: {
+      feerate: number;
+      blocks: number;
+    };
+  }
+
+  export interface memoryInfo extends RPCResponse {
+    res: {
+      locked: {
+        used: number;
+        free: number;
+        total: number;
+        locked: number;
+        chunks_used: number;
+        chunks_free: number;
+      };
+    };
   }
 }

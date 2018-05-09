@@ -8,8 +8,8 @@ export default class EthereumClient extends Client {
     getUncleByBlockHashAndIndex(hash: string, index: string): Promise<RPCResponse<Ethereum.IBlock>>;
     getUncleByBlockNumberAndIndex(height: string, index: string): Promise<RPCResponse<Ethereum.IBlock>>;
     sendRawTx(raw: string): Promise<RPCResponse<string>>;
-    sendTransaction(tx: Ethereum.ITxStruct): Promise<RPCResponse<string>>;
-    getTransactionCount(address: string, status?: Ethereum.Status): Promise<RPCResponse<string>>;
+    sendTx(tx: Ethereum.ITxStruct): Promise<RPCResponse<string>>;
+    getTxCount(address: string, status?: Ethereum.Status): Promise<RPCResponse<string>>;
     getCurrentGasPrice(): Promise<RPCResponse<string>>;
     callFunc(param: Ethereum.ICallFuncParam, status?: Ethereum.Status): Promise<RPCResponse<string>>;
 }

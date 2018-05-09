@@ -53,4 +53,38 @@ export default class BitcoinClient extends Client {
     const params = [verbose];
     return this.RpcCall<string[] | Bitcoin.verboseMemPool>(method, params);
   }
+
+  /**
+   * Estimates the approximate fee per kilobyte needed for a transaction to begin
+   * confirmation within conf_target blocks if possible and return the number of blocks
+   * for which the estimate is valid. Uses virtual transaction size as defined
+   * in BIP 141 (witness data is discounted).
+   * @param target  Confirmation target in blocks (1 - 1008)
+   * @param mode default=CONSERVATIVE The fee estimate mode.
+   * Whether to return a more conservative estimate which also satisfies
+   * a longer history. A conservative estimate potentially returns a
+   * higher feerate and is more likely to be sufficient for the desired
+   * target, but is not as responsive to short term drops in the
+   * prevailing fee market.
+   * @see https://bitcoin-rpc.github.io/estimatesmartfee.html
+   */
+  public getEstimateFee(
+    target: number = 6,
+    mode: "ECONOMICAL" | "CONSERVATIVE" = "CONSERVATIVE"
+  ) {
+    const method: string = BtcMtd16.getEstimateFee;
+    const params: [number, string] = [target, mode];
+    return this.RpcCall<Bitcoin.fee>(method, params);
+  }
+
+  public decodeRawTx(tx: string, isWitness: boolean = false) {
+    const method: string = BtcMtd.decodeRawTx;
+    return this.RpcCall<Bitcoin.TxInfo>(method, [tx, isWitness]);
+  }
+
+  // get information about memory usage.
+  public getMemoryInfo() {
+    const method = BtcMtd16.getMemoryInfo;
+    return this.RpcCall<Bitcoin.memoryInfo>(method);
+  }
 }

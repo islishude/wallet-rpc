@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BtcMtd = {
+    decodeRawTx: "decoderawtransaction",
     getBlock: "getblock",
     getBlockCount: "getblockcount",
     getBlockHash: "getblockhash",
@@ -8,25 +9,28 @@ exports.BtcMtd = {
     getInfo: "getinfo",
     getRawMemPool: "getrawmempool",
     getTransaction: "getrawtransaction",
-    sendRawTransaction: "sendrawtransaction"
+    sendRawTransaction: "sendrawtransaction",
+    validateAddress: "validateaddress",
 };
 exports.EthMtd = {
     call: "eth_call",
     getBalance: "eth_getBalance",
     getBlockByHash: "eth_getBlockByHash",
     getBlockNumber: "eth_blockNumber",
-    getBlockTransactionCountByHash: "eth_getBlockTransactionCountByHash",
-    getBlockTransactionCountByNumber: "eth_getBlockTransactionCountByNumber",
-    getCurrentGasPrice: "eth_gasPrice",
-    getTransactionByBlockHashAndIndex: "eth_getTransactionByBlockHashAndIndex",
-    getTransactionCount: "eth_getTransactionCount",
-    getTransactionReceipt: "eth_getTransactionReceipt",
+    getBlockTxCountByHash: "eth_getBlockTransactionCountByHash",
+    getBlockTxCountByNumber: "eth_getBlockTransactionCountByNumber",
+    getGasPrice: "eth_gasPrice",
+    getTxByBlockHashAndIndex: "eth_getTransactionByBlockHashAndIndex",
+    getTxCount: "eth_getTransactionCount",
+    getTxReceipt: "eth_getTransactionReceipt",
     getUncleByBlockHashAndIndex: "eth_getUncleByBlockHashAndIndex",
     getUncleByBlockNumberAndIndex: "eth_getUncleByBlockHashAndIndex",
-    sendRawTransaction: "eth_sendRawTransaction",
-    sendTransaction: "eth_sendTransaction"
+    sendRawTx: "eth_sendRawTransaction",
+    sendTx: "eth_sendTransaction"
 };
 exports.BtcMtd16 = {
     getBlockInfo: "getblockinfo",
-    getWalletInfo: "getwalletinfo"
+    getEstimateFee: "estimatesmartfee",
+    getMemoryInfo: "getmemoryinfo",
+    getWalletInfo: "getwalletinfo",
 };

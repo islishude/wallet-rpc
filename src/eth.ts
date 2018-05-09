@@ -8,6 +8,8 @@ export default class EthereumClient extends Client {
     super(user, pass, ip, port);
   }
 
+  // get block count 
+  // return hex number
   public getBlockCount() {
     return this.RpcCall(EthMtd.getBlockNumber);
   }
@@ -31,26 +33,20 @@ export default class EthereumClient extends Client {
   }
 
   public sendRawTx(raw: string) {
-    const method: string = EthMtd.sendRawTransaction;
-    return this.RpcCall(method, [raw]);
+    return this.RpcCall(EthMtd.sendRawTx, [raw]);
   }
 
-  public sendTransaction(tx: Ethereum.ITxStruct) {
-    return this.RpcCall(EthMtd.sendTransaction, [tx]);
+  public sendTx(tx: Ethereum.ITxStruct) {
+    return this.RpcCall(EthMtd.sendTx, [tx]);
   }
 
   /**
    * Returns the number of transactions sent from an address.
    * in other word it's `nonce`
-   * @param address
-   * @param status
    */
-  public getTransactionCount(
-    address: string,
-    status: Ethereum.Status = "latest"
-  ) {
+  public getTxCount(address: string, status: Ethereum.Status = "latest") {
     const param: string[] = [address, status];
-    const method: string = EthMtd.getTransactionCount;
+    const method: string = EthMtd.getTxCount;
     return this.RpcCall(method, param);
   }
 
@@ -59,7 +55,7 @@ export default class EthereumClient extends Client {
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gasprice
    */
   public getCurrentGasPrice() {
-    const method: string = EthMtd.getCurrentGasPrice;
+    const method: string = EthMtd.getGasPrice;
     return this.RpcCall(method, []);
   }
 
