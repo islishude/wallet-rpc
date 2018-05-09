@@ -12,11 +12,9 @@ export interface RPCError {
   error: { code: number; message: string };
 }
 
-export interface _RPCReq {
+export interface RPCRequest {
   jsonrpc?: "2.0" | "1.0";
   id?: number | string;
   method: string;
   params: any[];
 }
-
-export type RPCRequest = _RPCReq | _RPCReq[];
