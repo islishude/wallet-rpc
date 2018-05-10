@@ -20,7 +20,7 @@ class BitcoinClient extends client_1.default {
     }
     getTxInfo(id, decode = true) {
         const param = [id, decode];
-        const method = methods_1.BtcMtd.getTransaction;
+        const method = methods_1.BtcMtd.getRawTransaction;
         return this.RpcCall(method, param);
     }
     sendRawTx(raw, highFee = false) {

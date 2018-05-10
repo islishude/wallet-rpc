@@ -8,7 +8,8 @@ exports.BtcMtd = {
     getDifficulty: "getdifficulty",
     getInfo: "getinfo",
     getRawMemPool: "getrawmempool",
-    getTransaction: "getrawtransaction",
+    getRawTransaction: "getrawtransaction",
+    getTransaction: "gettransaction",
     sendRawTransaction: "sendrawtransaction",
     validateAddress: "validateaddress",
 };

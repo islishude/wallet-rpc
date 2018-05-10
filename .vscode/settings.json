@@ -35,6 +35,7 @@
         "getmemoryinfo",
         "getrawmempool",
         "getrawtransaction",
+        "gettransaction",
         "getwalletinfo",
         "incrementalfee",
         "initialblockdownload",

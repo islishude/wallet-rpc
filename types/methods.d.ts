@@ -6,6 +6,7 @@ export declare const BtcMtd: {
     getDifficulty: string;
     getInfo: string;
     getRawMemPool: string;
+    getRawTransaction: string;
     getTransaction: string;
     sendRawTransaction: string;
     validateAddress: string;

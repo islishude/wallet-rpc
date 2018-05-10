@@ -26,7 +26,7 @@ export default class BitcoinClient extends Client {
 
   public getTxInfo(id: string, decode: boolean = true) {
     const param: [string, boolean] = [id, decode];
-    const method = BtcMtd.getTransaction;
+    const method = BtcMtd.getRawTransaction;
     return this.RpcCall<Bitcoin.TxInfo>(method, param);
   }
 
