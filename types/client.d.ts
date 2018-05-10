@@ -14,4 +14,5 @@ export default abstract class Client {
     BulkAdd(method: string, param?: any[], id?: number): void;
     BulkRpcCall(): Promise<RPCResponse[]>;
     getErrorResponse(error: AxiosError): RPCError;
+    BulkRpcExec<D>(data: RPCRequest[]): Promise<RPCResponse<D>[]>;
 }

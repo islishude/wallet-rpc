@@ -38,9 +38,9 @@ export default abstract class Client {
 
   /**
    * Bulk rpc call addition
-   * @param method 
-   * @param param 
-   * @param id 
+   * @param method
+   * @param param
+   * @param id
    */
   public BulkAdd(method: string, param?: any[], id?: number): void {
     const data: RPCRequest = {
@@ -65,11 +65,20 @@ export default abstract class Client {
   }
 
   /**
-   * RPC Response error handler 
+   * RPC Response error handler
    */
   public getErrorResponse(error: AxiosError): RPCError {
     if (error.response) {
       return error.response.data;
     }
+  }
+
+  /**
+   * RPC Request by user defined bulk data
+   * here no using this.bulkData
+   */
+  public async BulkRpcExec<D>(data: RPCRequest[]) {
+    const res = await Axios.post(this.uri, data, this.reqConfig);
+    return res.data as Promise<Array<RPCResponse<D>>>;
   }
 }

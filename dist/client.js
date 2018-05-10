@@ -61,5 +61,11 @@ class Client {
             return error.response.data;
         }
     }
+    BulkRpcExec(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const res = yield axios_1.default.post(this.uri, data, this.reqConfig);
+            return res.data;
+        });
+    }
 }
 exports.default = Client;
