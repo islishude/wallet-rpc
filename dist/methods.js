@@ -11,12 +11,13 @@ exports.BtcMtd = {
     getRawTransaction: "getrawtransaction",
     getTransaction: "gettransaction",
     sendRawTransaction: "sendrawtransaction",
-    validateAddress: "validateaddress",
+    validateAddress: "validateaddress"
 };
 exports.EthMtd = {
     call: "eth_call",
     getBalance: "eth_getBalance",
     getBlockByHash: "eth_getBlockByHash",
+    getBlockByNumber: "eth_getBlockByNumber",
     getBlockNumber: "eth_blockNumber",
     getBlockTxCountByHash: "eth_getBlockTransactionCountByHash",
     getBlockTxCountByNumber: "eth_getBlockTransactionCountByNumber",
@@ -33,5 +34,5 @@ exports.BtcMtd16 = {
     getBlockInfo: "getblockinfo",
     getEstimateFee: "estimatesmartfee",
     getMemoryInfo: "getmemoryinfo",
-    getWalletInfo: "getwalletinfo",
+    getWalletInfo: "getwalletinfo"
 };

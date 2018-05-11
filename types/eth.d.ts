@@ -4,7 +4,8 @@ import Client from "./client";
 export default class EthereumClient extends Client {
     constructor(user: string, pass: string, ip: string, port?: number);
     getBlockCount(): Promise<RPCResponse<string>>;
-    getBlockByHash(hash: string, isFullTransaction?: boolean): Promise<RPCResponse<Ethereum.IBlock>>;
+    getBlockByHash(hash: string, getFullTx?: boolean): Promise<RPCResponse<Ethereum.IBlock>>;
+    getBlockByNumber(symbol: string, getFullTx?: boolean): Promise<RPCResponse<Ethereum.IBlock>>;
     getUncleByBlockHashAndIndex(hash: string, index: string): Promise<RPCResponse<Ethereum.IBlock>>;
     getUncleByBlockNumberAndIndex(height: string, index: string): Promise<RPCResponse<Ethereum.IBlock>>;
     sendRawTx(raw: string): Promise<RPCResponse<string>>;

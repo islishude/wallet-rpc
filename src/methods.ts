@@ -9,13 +9,14 @@ export const BtcMtd = {
   getRawTransaction: "getrawtransaction",
   getTransaction: "gettransaction",
   sendRawTransaction: "sendrawtransaction",
-  validateAddress: "validateaddress",
+  validateAddress: "validateaddress"
 };
 
 export const EthMtd = {
   call: "eth_call",
   getBalance: "eth_getBalance",
   getBlockByHash: "eth_getBlockByHash",
+  getBlockByNumber: "eth_getBlockByNumber",
   getBlockNumber: "eth_blockNumber",
   getBlockTxCountByHash: "eth_getBlockTransactionCountByHash",
   getBlockTxCountByNumber: "eth_getBlockTransactionCountByNumber",
@@ -33,5 +34,5 @@ export const BtcMtd16 = {
   getBlockInfo: "getblockinfo",
   getEstimateFee: "estimatesmartfee",
   getMemoryInfo: "getmemoryinfo",
-  getWalletInfo: "getwalletinfo",
+  getWalletInfo: "getwalletinfo"
 };

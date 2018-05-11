@@ -15,6 +15,7 @@ export declare const EthMtd: {
     call: string;
     getBalance: string;
     getBlockByHash: string;
+    getBlockByNumber: string;
     getBlockNumber: string;
     getBlockTxCountByHash: string;
     getBlockTxCountByNumber: string;
