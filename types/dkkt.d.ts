@@ -8,6 +8,7 @@ export default class DKKTClient extends Client {
     getBlockHash(height: number): Promise<RPCResponse<string>>;
     getBlockInfo(id: string): Promise<RPCResponse<DKKToken.BlockInfo>>;
     getTxInfo(id: string): Promise<RPCResponse<DKKToken.TxInfo>>;
+    getRawTxInfo(id: string): Promise<RPCResponse<string>>;
     sendRawTx(raw: string): Promise<RPCResponse<string>>;
     getRawMemPool(verbose?: boolean): Promise<RPCResponse<string[]>>;
 }

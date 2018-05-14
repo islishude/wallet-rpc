@@ -19,8 +19,13 @@ class DKKTClient extends client_1.default {
         return this.RpcCall(methods_1.BtcMtd.getBlock, [id]);
     }
     getTxInfo(id) {
-        const param = [id, 1];
+        const param = [id];
         const method = methods_1.BtcMtd.getTransaction;
+        return this.RpcCall(method, param);
+    }
+    getRawTxInfo(id) {
+        const param = [id];
+        const method = methods_1.BtcMtd.getRawTransaction;
         return this.RpcCall(method, param);
     }
     sendRawTx(raw) {

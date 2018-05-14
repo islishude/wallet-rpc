@@ -24,10 +24,18 @@ export default class BitcoinClient extends Client {
     return this.RpcCall<Bitcoin.BlockInfo>(BtcMtd.getBlock, [id]);
   }
 
-  public getTxInfo(id: string, decode: boolean = true) {
-    const param: [string, boolean] = [id, decode];
+  // get transaction for bitcoin core 0.16
+  // use getRawTransaction method and decode
+  public getTxInfo(id: string) {
+    const param: [string, boolean] = [id, true];
     const method = BtcMtd.getRawTransaction;
-    return this.RpcCall<Bitcoin.TxInfo | string>(method, param);
+    return this.RpcCall<Bitcoin.TxInfo>(method, param);
+  }
+
+  public getRawTxInfo(id: string) {
+    const param: [string, boolean] = [id, false];
+    const method = BtcMtd.getRawTransaction;
+    return this.RpcCall(method, param);
   }
 
   /**
