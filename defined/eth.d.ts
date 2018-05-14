@@ -38,6 +38,9 @@ declare namespace Ethereum {
     gas: string;
     gasPrice: string;
     input: string;
+    v: string;
+    r: string;
+    s: string;
   }
 
   export interface ITxStruct {
