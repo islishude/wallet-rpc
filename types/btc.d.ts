@@ -11,7 +11,8 @@ export default class BitcoinClient extends Client {
     getRawTxInfo(id: string): Promise<RPCResponse<string>>;
     sendRawTx(raw: string, highFee?: boolean): Promise<RPCResponse<string>>;
     getBlockchainInfo(): Promise<RPCResponse<Bitcoin.BlockchainInfo>>;
-    getRawMemPool(verbose?: boolean): Promise<RPCResponse<string[] | Bitcoin.verboseMemPool>>;
+    getRawMemPool(): Promise<RPCResponse<string[]>>;
+    getVerboseMemPool(): Promise<RPCResponse<Bitcoin.verboseMemPool[]>>;
     getEstimateFee(target?: number, mode?: "ECONOMICAL" | "CONSERVATIVE"): Promise<RPCResponse<Bitcoin.fee>>;
     decodeRawTx(tx: string, isWitness?: boolean): Promise<RPCResponse<Bitcoin.TxInfo>>;
     getMemoryInfo(): Promise<RPCResponse<Bitcoin.memoryInfo>>;

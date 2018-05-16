@@ -56,10 +56,14 @@ export default class BitcoinClient extends Client {
    * get all transaction ids in memory pool
    * as a json array of string transaction ids.
    */
-  public getRawMemPool(verbose: boolean = false) {
+  public getRawMemPool() {
     const method: string = BtcMtd.getRawMemPool;
-    const params = [verbose];
-    return this.RpcCall<string[] | Bitcoin.verboseMemPool>(method, params);
+    return this.RpcCall<string[]>(method, [false]);
+  }
+
+  public getVerboseMemPool() {
+    const method: string = BtcMtd.getRawMemPool;
+    return this.RpcCall<Bitcoin.verboseMemPool[]>(method, [true]);
   }
 
   /**

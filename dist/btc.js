@@ -36,10 +36,13 @@ class BitcoinClient extends client_1.default {
         const method = methods_1.BtcMtd16.getBlockInfo;
         return this.RpcCall(method);
     }
-    getRawMemPool(verbose = false) {
+    getRawMemPool() {
         const method = methods_1.BtcMtd.getRawMemPool;
-        const params = [verbose];
-        return this.RpcCall(method, params);
+        return this.RpcCall(method, [false]);
+    }
+    getVerboseMemPool() {
+        const method = methods_1.BtcMtd.getRawMemPool;
+        return this.RpcCall(method, [true]);
     }
     getEstimateFee(target = 6, mode = "CONSERVATIVE") {
         const method = methods_1.BtcMtd16.getEstimateFee;
