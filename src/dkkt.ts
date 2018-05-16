@@ -40,9 +40,8 @@ export default class DKKTClient extends Client {
     return this.RpcCall(BtcMtd.sendRawTransaction, [raw]);
   }
 
-  public getRawMemPool(verbose: boolean = false) {
+  public getRawMemPool() {
     const method: string = BtcMtd.getRawMemPool;
-    const params = [verbose];
-    return this.RpcCall<string[]>(method, params);
+    return this.RpcCall<string[]>(method);
   }
 }
