@@ -40,7 +40,7 @@ declare namespace Bitcoin {
       asm: string;
       hex: string;
     };
-    sequnence: number;
+    sequence: number;
     coinbase?: string;
     txinwitness?: string[];
   }

@@ -47,7 +47,7 @@ declare namespace DKKToken {
       asm: string;
       hex: string;
     };
-    sequnence: number;
+    sequence: number;
     coinbase?: string;
   }
 
