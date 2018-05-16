@@ -2,14 +2,19 @@ export interface RPCResponse<T = any> {
   jsonrpc?: string;
   id?: number | string;
   result: T;
-  error: void | { code: number; message: string };
+  error: RPCErrorStruct | void;
+}
+
+export interface RPCErrorStruct {
+  code: number;
+  message: string;
 }
 
 export interface RPCError {
   jsonrpc?: string;
   id?: number | string;
   result: void;
-  error: { code: number; message: string };
+  error: RPCErrorStruct;
 }
 
 export interface RPCRequest {
