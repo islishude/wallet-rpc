@@ -27,13 +27,13 @@ declare namespace Bitcoin {
     locktime: number;
     blockhash?: string;
     confirmations?: number;
-    vin: txVins[];
-    vout: txVouts[];
+    vin: txVin[];
+    vout: txVout[];
     hex?: string;
     blocktime?: number;
   }
 
-  interface txVins {
+  interface txVin {
     txid?: string;
     vout?: number;
     scriptSig: {
@@ -45,7 +45,7 @@ declare namespace Bitcoin {
     txinwitness?: string[];
   }
 
-  interface txVouts {
+  interface txVout {
     value: number;
     n: number;
     scriptPubKey: {

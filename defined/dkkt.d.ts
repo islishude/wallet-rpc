@@ -35,12 +35,12 @@ declare namespace DKKToken {
     locktime: number;
     blockhash: string;
     confirmations: number;
-    vin: txVins[];
-    vout: txVouts[];
+    vin: txVin[];
+    vout: txVout[];
     hex: string;
   }
 
-  interface txVins {
+  interface txVin {
     txid?: string;
     vout?: number;
     scriptSig?: {
@@ -51,7 +51,7 @@ declare namespace DKKToken {
     coinbase?: string;
   }
 
-  interface txVouts {
+  interface txVout {
     value: number;
     n: number;
     scriptPubKey: {
