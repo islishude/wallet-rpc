@@ -75,14 +75,14 @@ declare namespace DKKToken {
     nonce: number;
     bits: string;
     difficulty: number;
-    blocktruct: string;
+    blocktrust: string;
     chaintrust: string;
     previousblockhash: string;
     nextblockhash: string;
     flags: string;
     proofhash: string;
     entropybit: number;
-    modiffier: string;
+    modifier: string;
     modifierv2: string;
     tx: string[];
     signature: string;
