@@ -78,7 +78,7 @@ declare namespace DKKToken {
     blocktrust: string;
     chaintrust: string;
     previousblockhash: string;
-    nextblockhash: string;
+    nextblockhash?: string;
     flags: string;
     proofhash: string;
     entropybit: number;
