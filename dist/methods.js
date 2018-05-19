@@ -23,6 +23,7 @@ exports.EthMtd = {
     getBlockTxCountByNumber: "eth_getBlockTransactionCountByNumber",
     getGasPrice: "eth_gasPrice",
     getTxByBlockHashAndIndex: "eth_getTransactionByBlockHashAndIndex",
+    getTxByHash: "eth_getTransactionByHash",
     getTxCount: "eth_getTransactionCount",
     getTxReceipt: "eth_getTransactionReceipt",
     getUncleByBlockHashAndIndex: "eth_getUncleByBlockHashAndIndex",

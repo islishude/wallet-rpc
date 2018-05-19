@@ -29,6 +29,9 @@ class EthereumClient extends client_1.default {
         const method = methods_1.EthMtd.getUncleByBlockNumberAndIndex;
         return this.RpcCall(method, param);
     }
+    getTxByHash(hash) {
+        return this.RpcCall(methods_1.EthMtd.getTxByHash, [hash]);
+    }
     sendRawTx(raw) {
         return this.RpcCall(methods_1.EthMtd.sendRawTx, [raw]);
     }

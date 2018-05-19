@@ -4,12 +4,17 @@ import Client from "./client";
 import { EthMtd } from "./methods";
 
 export default class EthereumClient extends Client {
-  // go-ethereum client RPC settings has no user and password for rpc 
-  constructor(ip: string, port: number = 30303, user: string = "", pass: string = "",) {
+  // go-ethereum client RPC settings has no user and password for rpc
+  constructor(
+    ip: string,
+    port: number = 30303,
+    user: string = "",
+    pass: string = ""
+  ) {
     super(user, pass, ip, port);
   }
 
-  // get block count 
+  // get block count
   // return hex number
   public getBlockCount() {
     return this.RpcCall(EthMtd.getBlockNumber);
@@ -27,7 +32,7 @@ export default class EthereumClient extends Client {
    * @param getFullTx  If true it returns the full transaction objects, if false only the hashes of the transactions.
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getblockbynumber
    */
-  public getBlockByNumber(symbol: string, getFullTx: boolean = false){
+  public getBlockByNumber(symbol: string, getFullTx: boolean = false) {
     const param: [string, boolean] = [symbol, getFullTx];
     const method = EthMtd.getBlockByNumber;
     return this.RpcCall<Ethereum.IBlock>(method, param);
@@ -43,6 +48,10 @@ export default class EthereumClient extends Client {
     const param: string[] = [height, index];
     const method: string = EthMtd.getUncleByBlockNumberAndIndex;
     return this.RpcCall<Ethereum.IBlock>(method, param);
+  }
+
+  public getTxByHash(hash: string) {
+    return this.RpcCall<Ethereum.ITransaction>(EthMtd.getTxByHash, [hash]);
   }
 
   public sendRawTx(raw: string) {
@@ -61,7 +70,7 @@ export default class EthereumClient extends Client {
    * @see https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sendtransaction
    */
-  public sendTx(tx: Ethereum.ITxStruct) {
+  public sendTx(tx: Ethereum.ISentTxStruct) {
     return this.RpcCall(EthMtd.sendTx, [tx]);
   }
 

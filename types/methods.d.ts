@@ -21,6 +21,7 @@ export declare const EthMtd: {
     getBlockTxCountByNumber: string;
     getGasPrice: string;
     getTxByBlockHashAndIndex: string;
+    getTxByHash: string;
     getTxCount: string;
     getTxReceipt: string;
     getUncleByBlockHashAndIndex: string;

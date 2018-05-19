@@ -43,7 +43,7 @@ declare namespace Ethereum {
     s: string;
   }
 
-  export interface ITxStruct {
+  export interface ISentTxStruct {
     from: string;
     to: string;
     gas?: string;
