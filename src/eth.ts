@@ -101,6 +101,30 @@ export default class EthereumClient extends Client {
     param: Ethereum.ICallFuncParam,
     status: Ethereum.Status = "latest"
   ) {
-    return this.RpcCall(EthMtd.call, [param]);
+    return this.RpcCall(EthMtd.call, [param, status]);
+  }
+
+  /**
+   * Returns code at a given address.
+   * @param address DATA, 20 Bytes - address
+   * @param status integer block number, or the string "latest", "earliest" or "pending"
+   * @returns the code from the given address
+   */
+  public getCode(address: string, status: string) {
+    return this.RpcCall(EthMtd.getCode);
+  }
+
+  /**
+   * Generates and returns an estimate of how much gas is necessary to allow the transaction to complete.
+   * The transaction will not be added to the blockchain.
+   * Note that the estimate may be significantly more than the amount of gas actually used by the transaction,
+   * for a variety of reasons including EVM mechanics and node performance.
+   */
+
+  public getEstimateGas(
+    param: Ethereum.ICallFuncParam,
+    status: Ethereum.Status = "latest"
+  ) {
+    return this.RpcCall(EthMtd.getEstimateGas, [param, status]);
   }
 }

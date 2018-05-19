@@ -14,4 +14,6 @@ export default class EthereumClient extends Client {
     getTxCount(address: string, status?: Ethereum.Status): Promise<RPCResponse<string>>;
     getCurrentGasPrice(): Promise<RPCResponse<string>>;
     callFunc(param: Ethereum.ICallFuncParam, status?: Ethereum.Status): Promise<RPCResponse<string>>;
+    getCode(address: string, status: string): Promise<RPCResponse<string>>;
+    getEstimateGas(param: Ethereum.ICallFuncParam, status?: Ethereum.Status): Promise<RPCResponse<string>>;
 }

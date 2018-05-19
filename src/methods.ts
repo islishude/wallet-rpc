@@ -21,6 +21,8 @@ export const EthMtd = {
   getBlockNumber: "eth_blockNumber",
   getBlockTxCountByHash: "eth_getBlockTransactionCountByHash",
   getBlockTxCountByNumber: "eth_getBlockTransactionCountByNumber",
+  getCode: "eth_getCode",
+  getEstimateGas: "eth_estimateGas",
   getGasPrice: "eth_gasPrice",
   getTxByBlockHashAndIndex: "eth_getTransactionByBlockHashAndIndex",
   getTxByHash: "eth_getTransactionByHash",

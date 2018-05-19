@@ -56,7 +56,7 @@ declare namespace Ethereum {
   // eth_call param
   export interface ICallFuncParam {
     from?: string;
-    to: string;
+    to?: string;
     gas?: string;
     gasPrice?: string;
     value?: string;

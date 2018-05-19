@@ -19,6 +19,8 @@ export declare const EthMtd: {
     getBlockNumber: string;
     getBlockTxCountByHash: string;
     getBlockTxCountByNumber: string;
+    getCode: string;
+    getEstimateGas: string;
     getGasPrice: string;
     getTxByBlockHashAndIndex: string;
     getTxByHash: string;
