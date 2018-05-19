@@ -4,7 +4,8 @@ import Client from "./client";
 import { EthMtd } from "./methods";
 
 export default class EthereumClient extends Client {
-  constructor(user: string, pass: string, ip: string, port: number = 30303) {
+  // go-ethereum client RPC settings has no user and password for rpc 
+  constructor(ip: string, port: number = 30303, user: string = "", pass: string = "",) {
     super(user, pass, ip, port);
   }
 

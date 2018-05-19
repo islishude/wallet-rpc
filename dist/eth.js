@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("./client");
 const methods_1 = require("./methods");
 class EthereumClient extends client_1.default {
-    constructor(user, pass, ip, port = 30303) {
+    constructor(ip, port = 30303, user = "", pass = "") {
         super(user, pass, ip, port);
     }
     getBlockCount() {
