@@ -1,3 +1,4 @@
+/* spell-checker: disable */
 export const BtcMtd = {
   decodeRawTx: "decoderawtransaction",
   getBlock: "getblock",

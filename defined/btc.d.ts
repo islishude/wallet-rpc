@@ -1,5 +1,5 @@
 import { RPCResponse } from "./rpc";
-
+/* spell-checker: disable */
 declare namespace Bitcoin {
   export interface WalletInfo {
     version: number;

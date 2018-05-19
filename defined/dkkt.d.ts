@@ -1,5 +1,6 @@
 import { RPCResponse } from "./rpc";
 
+/* spell-checker: disable */
 declare namespace DKKToken {
   export interface WalletInfo {
     version: string;

@@ -75,7 +75,7 @@ export default class BitcoinClient extends Client {
    * @param mode default=CONSERVATIVE The fee estimate mode.
    * Whether to return a more conservative estimate which also satisfies
    * a longer history. A conservative estimate potentially returns a
-   * higher feerate and is more likely to be sufficient for the desired
+   * higher fee rate and is more likely to be sufficient for the desired
    * target, but is not as responsive to short term drops in the
    * prevailing fee market.
    * @see https://bitcoin-rpc.github.io/estimatesmartfee.html
