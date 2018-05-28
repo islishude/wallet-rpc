@@ -32,6 +32,9 @@ class EthereumClient extends client_1.default {
     getTxByHash(hash) {
         return this.RpcCall(methods_1.EthMtd.getTxByHash, [hash]);
     }
+    getTxReceipt(hash) {
+        return this.RpcCall(methods_1.EthMtd.getTxReceipt, [hash]);
+    }
     sendRawTx(raw) {
         return this.RpcCall(methods_1.EthMtd.sendRawTx, [raw]);
     }

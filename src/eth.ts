@@ -54,6 +54,17 @@ export default class EthereumClient extends Client {
     return this.RpcCall<Ethereum.ITransaction>(EthMtd.getTxByHash, [hash]);
   }
 
+  /**
+   * Returns the receipt of a transaction by transaction hash.
+   * Note That the receipt is not available for pending transactions.
+   * @param hash tx hash
+   * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gettransactionreceipt
+   * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getfilterchanges
+   */
+  public getTxReceipt(hash: string) {
+    return this.RpcCall<Ethereum.ITxReceipt>(EthMtd.getTxReceipt, [hash]);
+  }
+
   public sendRawTx(raw: string) {
     return this.RpcCall(EthMtd.sendRawTx, [raw]);
   }

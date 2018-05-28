@@ -43,6 +43,31 @@ declare namespace Ethereum {
     s: string;
   }
 
+  export interface ITxReceipt {
+    transactionHash: string;
+    transactionIndex: string;
+    blockHash: string;
+    blockNumber: string;
+    cumulativeGasUsed: string;
+    contractAddress?: string;
+    logs: Array<IReceiptLogs>;
+    logsBloom: string;
+    status?: string;
+    root?: string;
+  }
+
+  export interface IReceiptLogs {
+    address: string;
+    topics: string[];
+    data: string;
+    blockNumber?: string;
+    transactionHash?: string;
+    transactionIndex?: string;
+    blockHash?: string;
+    logIndex: string;
+    removed: boolean;
+  }
+
   export interface ISentTxStruct {
     from: string;
     to: string;
