@@ -14,8 +14,13 @@ class EthereumClient extends client_1.default {
         const method = methods_1.EthMtd.getBlockByHash;
         return this.RpcCall(method, param);
     }
-    getBlockByNumber(symbol, getFullTx = false) {
-        const param = [symbol, getFullTx];
+    getBlockByNumber(symbol) {
+        const param = [symbol, false];
+        const method = methods_1.EthMtd.getBlockByNumber;
+        return this.RpcCall(method, param);
+    }
+    getBlockByNumberVerbose(symbol) {
+        const param = [symbol, true];
         const method = methods_1.EthMtd.getBlockByNumber;
         return this.RpcCall(method, param);
     }

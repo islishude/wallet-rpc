@@ -29,13 +29,21 @@ export default class EthereumClient extends Client {
   /**
    * Get information about a block by block number.
    * @param symbol QUANTITY|TAG - integer of a block number, or the string "earliest", "latest" or "pending", as in the default block parameter.
-   * @param getFullTx  If true it returns the full transaction objects, if false only the hashes of the transactions.
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getblockbynumber
    */
-  public getBlockByNumber(symbol: string, getFullTx: boolean = false) {
-    const param: [string, boolean] = [symbol, getFullTx];
+  public getBlockByNumber(symbol: string) {
+    const param: [string, boolean] = [symbol, false];
     const method = EthMtd.getBlockByNumber;
-    return this.RpcCall<Ethereum.IBlock>(method, param);
+    return this.RpcCall<Ethereum.IBlockSimple>(method, param);
+  }
+
+  /**
+   * get block and included tx info 
+   */
+  public getBlockByNumberVerbose(symbol: string) {
+    const param: [string, boolean] = [symbol, true];
+    const method = EthMtd.getBlockByNumber;
+    return this.RpcCall<Ethereum.IBlockVerbose>(method, param);
   }
 
   public getUncleByBlockHashAndIndex(hash: string, index: string) {

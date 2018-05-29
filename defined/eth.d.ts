@@ -20,8 +20,15 @@ declare namespace Ethereum {
     gasLimit: string;
     gasUsed: string;
     timestamp: string;
-    transactions: string[] | ITransaction[];
     uncles: string[];
+  }
+
+  export interface IBlockSimple {
+    transactions: string[];
+  }
+
+  export interface IBlockVerbose extends IBlock {
+    transactions:  ITransaction[]
   }
 
   export interface ITransaction {

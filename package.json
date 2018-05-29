@@ -8,11 +8,6 @@
     "test": "ts-node test/*.ts",
     "pub": "git push --all && git push --tags && npm publish"
   },
-  "files": [
-    "dist/**/*.js",
-    "types/**/*.d.ts",
-    "defined/*.d.ts"
-  ],
   "keywords": [
     "Bitcoin",
     "DKKToken",
