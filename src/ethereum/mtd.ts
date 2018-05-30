@@ -1,4 +1,3 @@
-/** spell-checker: disable */
 export const EthereumMethods = {
   address: {
     balance: "eth_getBalance",
