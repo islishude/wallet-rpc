@@ -22,7 +22,7 @@
   "dependencies": {
     "axios": "^0.18.0"
   },
-  "types": "types/index.d.ts",
+  "types": "types/**/*.d.ts",
   "devDependencies": {
     "@types/node": "^9.6.2",
     "tslint": "^5.9.1",
