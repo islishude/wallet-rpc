@@ -23,7 +23,7 @@ declare namespace Ethereum {
     uncles: string[];
   }
 
-  export interface IBlockSimple {
+  export interface IBlockSimple extends IBlock {
     transactions: string[];
   }
 
