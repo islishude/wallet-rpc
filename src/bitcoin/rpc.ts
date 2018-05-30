@@ -1,41 +1,39 @@
-import { Bitcoin } from "../defined/btc";
-import { RPCResponse } from "../defined/rpc";
-import Client from "./client";
-import { BtcMtd, BtcMtd16 } from "./methods";
+import { Bitcoin } from "../../defined/btc";
+import { RPCResponse } from "../../defined/rpc";
+import Client from "../client";
+import { BitcoinMethods as mtd } from "./mtd";
 
-export default class BitcoinClient extends Client {
+export class BitcoinClient extends Client {
   constructor(user: string, pass: string, ip: string, port: number = 8332) {
     super(user, pass, ip, port);
   }
 
   public getInfo() {
-    return this.RpcCall<Bitcoin.WalletInfo>(BtcMtd.getInfo);
+    return this.RpcCall<Bitcoin.WalletInfo>(mtd.info.info);
   }
 
   public getBlockCount() {
-    return this.RpcCall<number>(BtcMtd.getBlockCount);
+    return this.RpcCall<number>(mtd.block.count);
   }
 
   public getBlockHash(height: number) {
-    return this.RpcCall(BtcMtd.getBlockHash, [height]);
+    return this.RpcCall(mtd.block.hash, [height]);
   }
 
   public getBlockInfo(id: string) {
-    return this.RpcCall<Bitcoin.BlockInfo>(BtcMtd.getBlock, [id]);
+    return this.RpcCall<Bitcoin.BlockInfo>(mtd.block.detail, [id]);
   }
 
   // get transaction for bitcoin core 0.16
   // use getRawTransaction method and decode
   public getTxInfo(id: string) {
     const param: [string, boolean] = [id, true];
-    const method = BtcMtd.getRawTransaction;
-    return this.RpcCall<Bitcoin.TxInfo>(method, param);
+    return this.RpcCall<Bitcoin.TxInfo>(mtd.tx.detail, param);
   }
 
   public getRawTxInfo(id: string) {
     const param: [string, boolean] = [id, false];
-    const method = BtcMtd.getRawTransaction;
-    return this.RpcCall(method, param);
+    return this.RpcCall(mtd.tx.raw, param);
   }
 
   /**
@@ -43,27 +41,23 @@ export default class BitcoinClient extends Client {
    * return the txid
    */
   public sendRawTx(raw: string, highFee: boolean = false) {
-    const method: string = BtcMtd.sendRawTransaction;
-    return this.RpcCall(method, [raw, highFee]);
+    return this.RpcCall(mtd.tx.sendRaw, [raw, highFee]);
   }
 
   public getBlockchainInfo() {
-    const method: string = BtcMtd16.getBlockInfo;
-    return this.RpcCall<Bitcoin.BlockchainInfo>(method);
+    return this.RpcCall<Bitcoin.BlockchainInfo>(mtd.info.chain);
   }
 
   /**
    * get all transaction ids in memory pool
    * as a json array of string transaction ids.
    */
-  public getRawMemPool() {
-    const method: string = BtcMtd.getRawMemPool;
-    return this.RpcCall<string[]>(method, [false]);
+  public getMemPool() {
+    return this.RpcCall<string[]>(mtd.mempool.detail, [false]);
   }
 
   public getVerboseMemPool() {
-    const method: string = BtcMtd.getRawMemPool;
-    return this.RpcCall<Bitcoin.verboseMemPool[]>(method, [true]);
+    return this.RpcCall<Bitcoin.verboseMemPool[]>(mtd.mempool.detail, [true]);
   }
 
   /**
@@ -84,19 +78,16 @@ export default class BitcoinClient extends Client {
     target: number = 6,
     mode: "ECONOMICAL" | "CONSERVATIVE" = "CONSERVATIVE"
   ) {
-    const method: string = BtcMtd16.getEstimateFee;
     const params: [number, string] = [target, mode];
-    return this.RpcCall<Bitcoin.fee>(method, params);
+    return this.RpcCall<Bitcoin.fee>(mtd.fee, params);
   }
 
   public decodeRawTx(tx: string, isWitness: boolean = false) {
-    const method: string = BtcMtd.decodeRawTx;
-    return this.RpcCall<Bitcoin.TxInfo>(method, [tx, isWitness]);
+    return this.RpcCall<Bitcoin.TxInfo>(mtd.tx.decode, [tx, isWitness]);
   }
 
   // get information about memory usage.
   public getMemoryInfo() {
-    const method = BtcMtd16.getMemoryInfo;
-    return this.RpcCall<Bitcoin.memoryInfo>(method);
+    return this.RpcCall<Bitcoin.memoryInfo>(mtd.info.memory);
   }
 }

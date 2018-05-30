@@ -1,6 +1,21 @@
-import BitcoinClient from "./btc";
-import DKKTClient from "./dkkt";
-import EthereumClient from "./eth";
-import * as RPCMethods from "./methods";
+import { BitcoinMethods } from "./bitcoin/mtd";
+import { BitcoinClient } from "./bitcoin/rpc";
+import { DKKTokenMethods } from "./dkktoken/mtd";
+import { DKKTClient } from "./dkktoken/rpc";
+import { EthereumMethods } from "./ethereum/mtd";
+import { EthereumClient } from "./ethereum/rpc";
 
-export { DKKTClient, BitcoinClient, EthereumClient, RPCMethods };
+export const CoinRpc = {
+  bitcoin: {
+    mtd: BitcoinMethods,
+    rpc: BitcoinClient
+  },
+  dkktoken: {
+    mtd: DKKTokenMethods,
+    rpc: DKKTClient
+  },
+  ethereum: {
+    mtd: EthereumMethods,
+    rpc: EthereumClient
+  }
+};

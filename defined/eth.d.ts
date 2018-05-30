@@ -28,7 +28,7 @@ declare namespace Ethereum {
   }
 
   export interface IBlockVerbose extends IBlock {
-    transactions:  ITransaction[]
+    transactions: ITransaction[];
   }
 
   export interface ITransaction {
@@ -93,5 +93,21 @@ declare namespace Ethereum {
     gasPrice?: string;
     value?: string;
     data?: string;
+  }
+
+  export interface ITraceTxReturn {
+    failed: boolean;
+    gas: number;
+    returnValue: string;
+    structLogs: Array<{
+      pc: number;
+      op: Object;
+      gas: number;
+      gasPrice: number;
+      memory: Object;
+      stack: Array<Object>;
+      account: string;
+      err: string;
+    }>;
   }
 }

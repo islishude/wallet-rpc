@@ -1,9 +1,9 @@
-import { Ethereum } from "../defined/eth";
-import { RPCResponse } from "../defined/rpc";
-import Client from "./client";
-import { EthMtd } from "./methods";
+import { Ethereum } from "../../defined/eth";
+import { RPCResponse } from "../../defined/rpc";
+import Client from "../client";
+import { EthereumMethods as mtd } from "./mtd";
 
-export default class EthereumClient extends Client {
+export class EthereumClient extends Client {
   // go-ethereum client RPC settings has no user and password for rpc
   constructor(
     ip: string,
@@ -17,13 +17,12 @@ export default class EthereumClient extends Client {
   // get block count
   // return hex number
   public getBlockCount() {
-    return this.RpcCall(EthMtd.getBlockNumber);
+    return this.RpcCall(mtd.block.count);
   }
 
   public getBlockByHash(hash: string, getFullTx: boolean = false) {
     const param: [string, boolean] = [hash, getFullTx];
-    const method = EthMtd.getBlockByHash;
-    return this.RpcCall<Ethereum.IBlock>(method, param);
+    return this.RpcCall<Ethereum.IBlock>(mtd.block.byHash, param);
   }
 
   /**
@@ -31,35 +30,22 @@ export default class EthereumClient extends Client {
    * @param symbol QUANTITY|TAG - integer of a block number, or the string "earliest", "latest" or "pending", as in the default block parameter.
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getblockbynumber
    */
-  public getBlockByNumber(symbol: string) {
+  public getBlock(symbol: string) {
     const param: [string, boolean] = [symbol, false];
-    const method = EthMtd.getBlockByNumber;
-    return this.RpcCall<Ethereum.IBlockSimple>(method, param);
+    return this.RpcCall<Ethereum.IBlockSimple>(mtd.block.byHeight, param);
   }
 
   /**
-   * get block and included tx info 
+   * alias getBlockByNumberVerbose
+   * see flower
    */
-  public getBlockByNumberVerbose(symbol: string) {
+  public getBlockVerbose(symbol: string) {
     const param: [string, boolean] = [symbol, true];
-    const method = EthMtd.getBlockByNumber;
-    return this.RpcCall<Ethereum.IBlockVerbose>(method, param);
-  }
-
-  public getUncleByBlockHashAndIndex(hash: string, index: string) {
-    const param: string[] = [hash, index];
-    const method: string = EthMtd.getUncleByBlockHashAndIndex;
-    return this.RpcCall<Ethereum.IBlock>(method, param);
-  }
-
-  public getUncleByBlockNumberAndIndex(height: string, index: string) {
-    const param: string[] = [height, index];
-    const method: string = EthMtd.getUncleByBlockNumberAndIndex;
-    return this.RpcCall<Ethereum.IBlock>(method, param);
+    return this.RpcCall<Ethereum.IBlockVerbose>(mtd.block.byHeight, param);
   }
 
   public getTxByHash(hash: string) {
-    return this.RpcCall<Ethereum.ITransaction>(EthMtd.getTxByHash, [hash]);
+    return this.RpcCall<Ethereum.ITransaction>(mtd.tx.byHash, [hash]);
   }
 
   /**
@@ -70,11 +56,11 @@ export default class EthereumClient extends Client {
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getfilterchanges
    */
   public getTxReceipt(hash: string) {
-    return this.RpcCall<Ethereum.ITxReceipt>(EthMtd.getTxReceipt, [hash]);
+    return this.RpcCall<Ethereum.ITxReceipt>(mtd.tx.receipt, [hash]);
   }
 
   public sendRawTx(raw: string) {
-    return this.RpcCall(EthMtd.sendRawTx, [raw]);
+    return this.RpcCall(mtd.tx.sendRaw, [raw]);
   }
 
   /**
@@ -90,17 +76,16 @@ export default class EthereumClient extends Client {
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sendtransaction
    */
   public sendTx(tx: Ethereum.ISentTxStruct) {
-    return this.RpcCall(EthMtd.sendTx, [tx]);
+    return this.RpcCall(mtd.tx.send, [tx]);
   }
 
   /**
    * Returns the number of transactions sent from an address.
-   * in other word it's `nonce`
+   * alias for getTxCount
    */
-  public getTxCount(address: string, status: Ethereum.Status = "latest") {
+  public getAddrNonce(address: string, status: Ethereum.Status = "latest") {
     const param: string[] = [address, status];
-    const method: string = EthMtd.getTxCount;
-    return this.RpcCall(method, param);
+    return this.RpcCall(mtd.address.nonce, param);
   }
 
   /**
@@ -108,8 +93,7 @@ export default class EthereumClient extends Client {
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gasprice
    */
   public getCurrentGasPrice() {
-    const method: string = EthMtd.getGasPrice;
-    return this.RpcCall(method, []);
+    return this.RpcCall(mtd.gas.price, []);
   }
 
   /**
@@ -120,7 +104,7 @@ export default class EthereumClient extends Client {
     param: Ethereum.ICallFuncParam,
     status: Ethereum.Status = "latest"
   ) {
-    return this.RpcCall(EthMtd.call, [param, status]);
+    return this.RpcCall(mtd.tx.call, [param, status]);
   }
 
   /**
@@ -130,7 +114,7 @@ export default class EthereumClient extends Client {
    * @returns the code from the given address
    */
   public getCode(address: string, status: string) {
-    return this.RpcCall(EthMtd.getCode);
+    return this.RpcCall(mtd.address.code);
   }
 
   /**
@@ -139,11 +123,27 @@ export default class EthereumClient extends Client {
    * Note that the estimate may be significantly more than the amount of gas actually used by the transaction,
    * for a variety of reasons including EVM mechanics and node performance.
    */
-
   public getEstimateGas(
     param: Ethereum.ICallFuncParam,
     status: Ethereum.Status = "latest"
   ) {
-    return this.RpcCall(EthMtd.getEstimateGas, [param, status]);
+    return this.RpcCall(mtd.gas.estimate, [param, status]);
+  }
+
+  /**
+   * debug trace transaction
+   * @see https://github.com/ethereum/go-ethereum/wiki/Management-APIs#debug_tracetransaction
+   */
+  public traceTx(
+    tx: string,
+    opt?: {
+      disableStorage?: boolean;
+      disableMemory?: boolean;
+      disableStack?: boolean;
+      trace?: string;
+      timeout?: string;
+    }
+  ) {
+    return this.RpcCall<Ethereum.ITraceTxReturn>(mtd.debug.traceTx, [tx, opt]);
   }
 }
