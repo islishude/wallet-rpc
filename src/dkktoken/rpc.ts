@@ -35,7 +35,7 @@ export class DKKTClient extends Client {
     return this.RpcCall(tx.sendRaw, [raw]);
   }
 
-  public getRawMemPool() {
+  public getMemPool() {
     return this.RpcCall<string[]>(mtd.mempool);
   }
 }

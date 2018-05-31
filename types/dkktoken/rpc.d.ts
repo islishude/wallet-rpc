@@ -9,5 +9,5 @@ export declare class DKKTClient extends Client {
     getBlockInfo(id: string): Promise<RPCResponse<DKKToken.BlockInfo>>;
     getTxInfo(id: string): Promise<RPCResponse<DKKToken.TxInfo>>;
     sendRawTx(raw: string): Promise<RPCResponse<string>>;
-    getRawMemPool(): Promise<RPCResponse<string[]>>;
+    getMemPool(): Promise<RPCResponse<string[]>>;
 }

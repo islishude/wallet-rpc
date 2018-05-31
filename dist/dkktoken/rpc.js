@@ -26,7 +26,7 @@ class DKKTClient extends client_1.default {
     sendRawTx(raw) {
         return this.RpcCall(tx.sendRaw, [raw]);
     }
-    getRawMemPool() {
+    getMemPool() {
         return this.RpcCall(mtd_1.DKKTokenMethods.mempool);
     }
 }
