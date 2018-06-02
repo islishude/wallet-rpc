@@ -58,7 +58,8 @@ btcClient
     method: btcMtd.block.hash
     params: [1]
   }])
-  .then(txInfo => console.log)
+  // return string[]
+  .then(console.log)
   .catch(console.log);
 // also Bulk call by this
 btcClient.BulkAdd(btcMtd.block.hash, [0], 0);
