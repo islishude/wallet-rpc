@@ -24,7 +24,7 @@ export const ERC20FuncSig = {
   transferFrom: "0x23b872dd"
 };
 
-export const isAddress = address => {
+export const isAddress = (address: string) => {
   if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
     // check if it has the basic requirements of an address
     return false;

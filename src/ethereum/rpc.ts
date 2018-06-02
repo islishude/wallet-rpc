@@ -2,9 +2,24 @@ import { Ethereum } from "../../defined/eth";
 import { RPCRequest, RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 import { EthereumMethods as mtd } from "./mtd";
-import { ERC20FuncSig, hexToNumber, padAddress, toUtf8 } from "./util";
+import {
+  ERC20FuncSig,
+  hexToNumber,
+  isAddress,
+  numberToHex,
+  padAddress,
+  sha3,
+  toUtf8
+} from "./util";
 
 export class EthereumClient extends Client {
+  public util = {
+    ERC20FuncSig,
+    hexToNumber,
+    isAddress,
+    numberToHex,
+    sha3
+  };
   // go-ethereum client RPC settings has no user and password for rpc
   constructor(
     ip: string,

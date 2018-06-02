@@ -14,6 +14,13 @@ const util_1 = require("./util");
 class EthereumClient extends client_1.default {
     constructor(ip, port = 30303, user = "", pass = "") {
         super(user, pass, ip, port);
+        this.util = {
+            ERC20FuncSig: util_1.ERC20FuncSig,
+            hexToNumber: util_1.hexToNumber,
+            isAddress: util_1.isAddress,
+            numberToHex: util_1.numberToHex,
+            sha3: util_1.sha3
+        };
     }
     getBlockCount() {
         return this.RpcCall(mtd_1.EthereumMethods.block.count);

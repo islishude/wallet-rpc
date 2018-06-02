@@ -22,7 +22,7 @@ exports.ERC20FuncSig = {
     transfer: "0xa9059cbb",
     transferFrom: "0x23b872dd"
 };
-exports.isAddress = address => {
+exports.isAddress = (address) => {
     if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
         return false;
     }
