@@ -2,8 +2,8 @@ MultiCryptoCoins RPC Lib by TypeScript for Node.js
 
 ## Supports
 
-* Bitcoin(0.16+)
-* Ethereum(1.8.0+) and ERC20
+* Bitcoin(core 0.16+)
+* Ethereum(geth 1.8.0+) and ERC20
 * DKKToken
 
 ## TODO Supports
@@ -25,10 +25,16 @@ npm install wallet-rpc --save
 
 ```js
 const { bitcoin, ethereum, dkktoken } = require("wallet-rpc");
-// get rpc and rpc methods by this
+// get rpc and rpc methods by this
 const { rpc: btcRpc, mtd: btcMtd } = bitcoin;
+// the default rpc port of bitcoin is 8332
+// so this param is optional
 const defaultPort = 8332;
 const btcClient = new btcRpc("username", "password", "ip", defaultPort);
+// the default rpc of geth has no username and no password
+// if you config the proxy you can pass them to constructor.
+// the param order is ip-port-username-password
+const ethClient = new ethereum.rpc("ip");
 btcClient
   .getTxInfo("txid")
   .then(txInfo => console.log)
@@ -47,6 +53,8 @@ const btcClient = new btcRpc("username", "password", "ip", defaultPort);
 
 // Bulk Call
 btcClient
+  // your can set generic
+  // and return `type[]`
   .bulkRpcExec<string>([{
     id: 0,
     jsonrpc: "2.0",
@@ -58,10 +66,10 @@ btcClient
     method: btcMtd.block.hash
     params: [1]
   }])
-  // return string[]
   .then(console.log)
   .catch(console.log);
-// also Bulk call by this
+
+// also can Bulk call by this
 btcClient.BulkAdd(btcMtd.block.hash, [0], 0);
 btcClient.BulkAdd(btcMtd.block.hash, [1], 1);
 btcClient.BulkCall();
