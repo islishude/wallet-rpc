@@ -132,6 +132,7 @@ export class EthereumClient extends Client {
 
   /**
    * debug trace transaction
+   * you should start geth with `--rpcapi="web3,trace"
    * @see https://github.com/ethereum/go-ethereum/wiki/Management-APIs#debug_tracetransaction
    */
   public traceTx(
