@@ -16,6 +16,7 @@ export const CoinRpc = {
   },
   ethereum: {
     mtd: EthereumMethods,
-    rpc: EthereumClient
+    rpc: EthereumClient,
+    util: EthereumClient.util
   }
 };

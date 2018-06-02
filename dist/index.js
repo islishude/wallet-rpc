@@ -17,6 +17,7 @@ exports.CoinRpc = {
     },
     ethereum: {
         mtd: mtd_3.EthereumMethods,
-        rpc: rpc_3.EthereumClient
+        rpc: rpc_3.EthereumClient,
+        util: rpc_3.EthereumClient.util
     }
 };

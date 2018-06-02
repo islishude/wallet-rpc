@@ -87,5 +87,22 @@ export declare const CoinRpc: {
             };
         };
         rpc: typeof EthereumClient;
+        util: {
+            ERC20FuncSig: {
+                allowance: string;
+                approve: string;
+                balanceOf: string;
+                decimals: string;
+                name: string;
+                symbol: string;
+                totalSupply: string;
+                transfer: string;
+                transferFrom: string;
+            };
+            hexToNumber: (hex: string) => number;
+            isAddress: (address: string) => boolean;
+            numberToHex: (int: number) => string;
+            sha3: (message: string) => string;
+        };
     };
 };
