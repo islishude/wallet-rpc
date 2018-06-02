@@ -55,6 +55,7 @@ const btcClient = new btcRpc("username", "password", "ip", defaultPort);
 btcClient
   // your can set generic
   // and return `type[]`
+  // the types can import from defined/*.d.ts
   .bulkRpcExec<string>([{
     id: 0,
     jsonrpc: "2.0",

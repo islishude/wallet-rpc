@@ -4,8 +4,8 @@ declare namespace Ethereum {
   export type Status = "earliest" | "latest" | "pending";
 
   export interface IBlock {
-    number: string | null;
-    hash: string | null;
+    number?: string;
+    hash?: string;
     parentHash: string;
     nonce: string;
     sha3Uncles: string;
@@ -35,12 +35,12 @@ declare namespace Ethereum {
     hash: string;
     nonce: string;
     // null when its pending
-    blockHash: string | null;
-    blockNumber: string | null;
-    transactionIndex: string | null;
+    blockHash?: string;
+    blockNumber?: string;
+    transactionIndex?: string;
     from: string;
     // null when its a contract creation transaction.
-    to: string | null;
+    to?: string;
     value: string;
     gas: string;
     gasPrice: string;
