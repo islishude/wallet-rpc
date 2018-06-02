@@ -6,10 +6,10 @@ MultiCryptoCoins RPC Lib by TypeScript for Node.js
 * Ethereum(1.8.0+)
 * DKKToken
 
-## TODO
-- [ ] ethereum util
-- [ ] ethereum ERC20 supports
-- [ ] liteCoin
+## TODO Supports
+
+- [ ] Bitcoin Cash
+- [ ] LiteCoin
 - [ ] EOS
 
 ## Install

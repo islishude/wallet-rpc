@@ -1,7 +1,8 @@
 import { Ethereum } from "../../defined/eth";
-import { RPCResponse } from "../../defined/rpc";
+import { RPCRequest, RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 import { EthereumMethods as mtd } from "./mtd";
+import { ERC20FuncSig, hexToNumber, padAddress, toUtf8 } from "./util";
 
 export class EthereumClient extends Client {
   // go-ethereum client RPC settings has no user and password for rpc
@@ -146,5 +147,55 @@ export class EthereumClient extends Client {
     }
   ) {
     return this.RpcCall<Ethereum.ITraceTxReturn>(mtd.debug.traceTx, [tx, opt]);
+  }
+
+  public async ERC20Balance(
+    token: string,
+    address: string,
+    isPending: boolean = true
+  ) {
+    const status = isPending ? "pending" : "latest";
+    const param: Ethereum.ICallFuncParam = {
+      data: ERC20FuncSig.balanceOf + padAddress(address),
+      to: token
+    };
+    const { result: balance } = await this.callFunc(param, status);
+    return balance;
+  }
+
+  public async ERC20Decimals(token: string) {
+    const param: Ethereum.ICallFuncParam = {
+      data: ERC20FuncSig.decimals,
+      to: token
+    };
+    const { result: decimals } = await this.callFunc(param);
+    return hexToNumber(decimals);
+  }
+
+  public async ERC20TotalSupply(token: string) {
+    const param: Ethereum.ICallFuncParam = {
+      data: ERC20FuncSig.totalSupply,
+      to: token
+    };
+    const { result: totalSupply } = await this.callFunc(param);
+    return hexToNumber(totalSupply);
+  }
+
+  public async ERC20Name(token: string) {
+    const param: Ethereum.ICallFuncParam = {
+      data: ERC20FuncSig.name,
+      to: token
+    };
+    const { result: name } = await this.callFunc(param);
+    return toUtf8(name);
+  }
+
+  public async ERC20Symbol(token: string) {
+    const param: Ethereum.ICallFuncParam = {
+      data: ERC20FuncSig.symbol,
+      to: token
+    };
+    const { result: symbol } = await this.callFunc(param);
+    return toUtf8(symbol);
   }
 }
