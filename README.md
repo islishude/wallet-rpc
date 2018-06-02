@@ -3,7 +3,7 @@ MultiCryptoCoins RPC Lib by TypeScript for Node.js
 ## Supports
 
 * Bitcoin(0.16+)
-* Ethereum(1.8.0+)
+* Ethereum(1.8.0+) and ERC20
 * DKKToken
 
 ## TODO Supports

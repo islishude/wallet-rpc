@@ -112,5 +112,21 @@ class EthereumClient extends client_1.default {
             return util_1.toUtf8(symbol);
         });
     }
+    ERC20TokenInfo(token) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const tmp = yield Promise.all([
+                this.ERC20Name(token),
+                this.ERC20Symbol(token),
+                this.ERC20Decimals(token),
+                this.ERC20TotalSupply(token)
+            ]);
+            return {
+                decimals: tmp[2],
+                name: tmp[0],
+                symbol: tmp[1],
+                totalSupply: tmp[3]
+            };
+        });
+    }
 }
 exports.EthereumClient = EthereumClient;

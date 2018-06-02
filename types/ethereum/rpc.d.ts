@@ -28,4 +28,10 @@ export declare class EthereumClient extends Client {
     ERC20TotalSupply(token: string): Promise<number>;
     ERC20Name(token: string): Promise<string>;
     ERC20Symbol(token: string): Promise<string>;
+    ERC20TokenInfo(token: string): Promise<{
+        decimals: number;
+        name: string;
+        symbol: string;
+        totalSupply: number;
+    }>;
 }

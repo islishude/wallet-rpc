@@ -36,10 +36,6 @@ export class EthereumClient extends Client {
     return this.RpcCall<Ethereum.IBlockSimple>(mtd.block.byHeight, param);
   }
 
-  /**
-   * alias getBlockByNumberVerbose
-   * see flower
-   */
   public getBlockVerbose(symbol: string) {
     const param: [string, boolean] = [symbol, true];
     return this.RpcCall<Ethereum.IBlockVerbose>(mtd.block.byHeight, param);
@@ -197,5 +193,21 @@ export class EthereumClient extends Client {
     };
     const { result: symbol } = await this.callFunc(param);
     return toUtf8(symbol);
+  }
+
+  public async ERC20TokenInfo(token: string) {
+    const tmp = await Promise.all([
+      this.ERC20Name(token),
+      this.ERC20Symbol(token),
+      this.ERC20Decimals(token),
+      this.ERC20TotalSupply(token)
+    ]);
+
+    return {
+      decimals: tmp[2],
+      name: tmp[0],
+      symbol: tmp[1],
+      totalSupply: tmp[3]
+    };
   }
 }
