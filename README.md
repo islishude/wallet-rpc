@@ -8,9 +8,9 @@ MultiCryptoCoins RPC Lib by TypeScript for Node.js
 
 ## TODO Supports
 
-- [ ] Bitcoin Cash
-- [ ] LiteCoin
-- [ ] EOS
+* [ ] Bitcoin Cash
+* [ ] LiteCoin
+* [ ] EOS
 
 ## Install
 
@@ -27,12 +27,14 @@ npm install wallet-rpc --save
 const { bitcoin, ethereum, dkktoken } = require("wallet-rpc");
 // get rpc and rpc methods by this
 const { rpc: btcRpc, mtd: btcMtd } = bitcoin;
-const btcClient = new btcRpc("username", "password", "ip");
+const defaultPort = 8332;
+const btcClient = new btcRpc("username", "password", "ip", defaultPort);
 btcClient
   .getTxInfo("txid")
   .then(txInfo => console.log)
   .catch(console.log);
 // ...
+// BulkCall see flow
 ```
 
 ### TypeScript
@@ -40,6 +42,28 @@ btcClient
 ```typescript
 import { bitcoin, ethereum, dkktoken } from "wallet-rpc";
 const { rpc: btcRpc, mtd: btcMtd } = bitcoin;
+const defaultPort = 8332;
+const btcClient = new btcRpc("username", "password", "ip", defaultPort);
+
+// Bulk Call
+btcClient
+  .bulkRpcExec<string>([{
+    id: 0,
+    jsonrpc: "2.0",
+    method: btcMtd.block.hash
+    params: [0]
+  },{
+    id: 1,
+    jsonrpc: "2.0",
+    method: btcMtd.block.hash
+    params: [1]
+  }])
+  .then(txInfo => console.log)
+  .catch(console.log);
+// also Bulk call by this
+btcClient.BulkAdd(btcMtd.block.hash, [0], 0);
+btcClient.BulkAdd(btcMtd.block.hash, [1], 1);
+btcClient.BulkCall();
 ```
 
 ### API
@@ -50,4 +74,4 @@ const { rpc: btcRpc, mtd: btcMtd } = bitcoin;
 
 ## Feedback
 
-- [issue](https://github.com/isLishude/wallet-rpc/issues)
+* [issue](https://github.com/isLishude/wallet-rpc/issues)
