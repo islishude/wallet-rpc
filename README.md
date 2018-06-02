@@ -70,8 +70,8 @@ btcClient.BulkCall();
 ### API
 
 * [Bitcoin API](./types/bitcoin/rpc.d.ts)
-* [Ethereum API](./types/bitcoin/rpc.d.ts)
-* [DKKToken API](./types/bitcoin/rpc.d.ts)
+* [Ethereum API](./types/ethereum/rpc.d.ts)
+* [DKKToken API](./types/dkktoken/rpc.d.ts)
 
 ## Feedback
 
