@@ -2,7 +2,7 @@ import { Ethereum } from "../../defined/eth";
 import { RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 export declare class EthereumClient extends Client {
-    util: {
+    static util: {
         ERC20FuncSig: {
             allowance: string;
             approve: string;

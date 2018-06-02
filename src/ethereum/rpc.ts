@@ -13,7 +13,7 @@ import {
 } from "./util";
 
 export class EthereumClient extends Client {
-  public util = {
+  public static util = {
     ERC20FuncSig,
     hexToNumber,
     isAddress,
