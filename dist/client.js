@@ -16,8 +16,8 @@ class Client {
         this.ip = ip;
         this.port = port;
         this.uri = /^http.+$/.test(this.ip)
-            ? `${this.ip}`
-            : `http://${this.ip}`;
+            ? `${this.ip}:${this.port}`
+            : `http://${this.ip}:${this.port}`;
         this.bulkData = [];
         this.reqConfig = {
             auth: {

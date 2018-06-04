@@ -3,8 +3,8 @@ import { RPCError, RPCRequest, RPCResponse } from "../defined/rpc";
 
 export default abstract class Client {
   protected uri: string = /^http.+$/.test(this.ip)
-    ? `${this.ip}`
-    : `http://${this.ip}`;
+    ? `${this.ip}:${this.port}`
+    : `http://${this.ip}:${this.port}`;
   protected bulkData: RPCRequest[] = [];
   protected reqConfig: AxiosRequestConfig = {
     auth: {
