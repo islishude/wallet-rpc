@@ -22,24 +22,18 @@ exports.ERC20FuncSig = {
     transferFrom: "0x23b872dd"
 };
 exports.isAddress = (address) => {
-    if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
-        return false;
-    }
-    else if (/^(0x)?[0-9a-f]{40}$/.test(address) ||
-        /^(0x)?[0-9A-F]{40}$/.test(address)) {
+    if (/^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase())) {
         return true;
     }
-    else {
-        return exports.isChecksumAddress(address);
-    }
+    return false;
 };
 exports.isChecksumAddress = (address) => {
     const addressHash = exports.sha3(address.replace("0x", "").toLowerCase());
     for (let i = 0; i < 40; i++) {
-        if ((parseInt(addressHash[i], 16) > 7 &&
-            address[i].toUpperCase() !== address[i]) ||
-            (parseInt(addressHash[i], 16) <= 7 &&
-                address[i].toLowerCase() !== address[i])) {
+        const toNumber = Number.parseInt(addressHash[i], 16);
+        const upper = address[i].toUpperCase();
+        if ((toNumber > 7 && upper !== address[i]) ||
+            (toNumber <= 7 && upper !== address[i])) {
             return false;
         }
     }

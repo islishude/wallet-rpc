@@ -24,30 +24,21 @@ export const ERC20FuncSig = {
 };
 
 export const isAddress = (address: string) => {
-  if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
-    // check if it has the basic requirements of an address
-    return false;
-  } else if (
-    /^(0x)?[0-9a-f]{40}$/.test(address) ||
-    /^(0x)?[0-9A-F]{40}$/.test(address)
-  ) {
-    // If it's all small caps or all all caps, return true
+  if (/^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase())) {
     return true;
-  } else {
-    // Otherwise check each case
-    return isChecksumAddress(address);
   }
+  return false;
 };
 
 // Checks if the given string is a checksummed address
 export const isChecksumAddress = (address: string) => {
   const addressHash = sha3(address.replace("0x", "").toLowerCase());
   for (let i = 0; i < 40; i++) {
+    const toNumber = Number.parseInt(addressHash[i], 16);
+    const upper = address[i].toUpperCase();
     if (
-      (parseInt(addressHash[i], 16) > 7 &&
-        address[i].toUpperCase() !== address[i]) ||
-      (parseInt(addressHash[i], 16) <= 7 &&
-        address[i].toLowerCase() !== address[i])
+      (toNumber > 7 && upper !== address[i]) ||
+      (toNumber <= 7 && upper !== address[i])
     ) {
       return false;
     }
