@@ -10,15 +10,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 class Client {
-    constructor(user, pass, ip, port, https = false) {
+    constructor(user, pass, ip, port) {
         this.user = user;
         this.pass = pass;
         this.ip = ip;
         this.port = port;
-        this.https = https;
-        this.uri = this.https
-            ? "https"
-            : "http" + "://" + this.ip + ":" + this.port;
+        this.uri = /^http.+$/.test(this.ip)
+            ? `${this.ip}`
+            : `http://${this.ip}`;
         this.bulkData = [];
         this.reqConfig = {
             auth: {

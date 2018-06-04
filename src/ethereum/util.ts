@@ -1,5 +1,4 @@
 import { SHA3 } from "crypto-js";
-import { decode } from "utf8";
 
 export const hexToNumber = (hex: string) => {
   if (hex === "0x") {
@@ -42,8 +41,7 @@ export const isAddress = (address: string) => {
 
 // Checks if the given string is a checksummed address
 export const isChecksumAddress = (address: string) => {
-  address = address.replace("0x", "");
-  const addressHash = sha3(address.toLowerCase());
+  const addressHash = sha3(address.replace("0x", "").toLowerCase());
   for (let i = 0; i < 40; i++) {
     if (
       (parseInt(addressHash[i], 16) > 7 &&
@@ -68,18 +66,7 @@ export const padAddress = (address: string) => {
 };
 
 export let toUtf8 = (hex: string) => {
-  let str = "";
-  let i = 0;
-  const l = hex.length;
-  if (hex.substring(0, 2) === "0x") {
-    i = 2;
-  }
-  for (; i < l; i += 2) {
-    const code = parseInt(hex.substr(i, 2), 16);
-    if (code === 0) {
-      break;
-    }
-    str += String.fromCharCode(code);
-  }
-  return decode(str);
+  return Buffer.from(hex.replace("0x", ""), "hex")
+    .toString()
+    .replace(/[\u0000-\u0040]/g, "");
 };

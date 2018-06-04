@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const crypto_js_1 = require("crypto-js");
-const utf8_1 = require("utf8");
 exports.hexToNumber = (hex) => {
     if (hex === "0x") {
         return 0;
@@ -35,8 +34,7 @@ exports.isAddress = (address) => {
     }
 };
 exports.isChecksumAddress = (address) => {
-    address = address.replace("0x", "");
-    const addressHash = exports.sha3(address.toLowerCase());
+    const addressHash = exports.sha3(address.replace("0x", "").toLowerCase());
     for (let i = 0; i < 40; i++) {
         if ((parseInt(addressHash[i], 16) > 7 &&
             address[i].toUpperCase() !== address[i]) ||
@@ -56,18 +54,7 @@ exports.padAddress = (address) => {
     return res;
 };
 exports.toUtf8 = (hex) => {
-    let str = "";
-    let i = 0;
-    const l = hex.length;
-    if (hex.substring(0, 2) === "0x") {
-        i = 2;
-    }
-    for (; i < l; i += 2) {
-        const code = parseInt(hex.substr(i, 2), 16);
-        if (code === 0) {
-            break;
-        }
-        str += String.fromCharCode(code);
-    }
-    return utf8_1.decode(str);
+    return Buffer.from(hex.replace("0x", ""), "hex")
+        .toString()
+        .replace(/[\u0000-\u0040]/g, "");
 };

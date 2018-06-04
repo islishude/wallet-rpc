@@ -1,6 +1,6 @@
 {
   "name": "wallet-rpc",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "description": "multi-wallet RPC client for crypto coins by TypeScript",
   "main": "dist/index.js",
   "scripts": {
@@ -21,14 +21,12 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
-    "crypto-js": "^3.1.9-1",
-    "utf8": "^3.0.0"
+    "crypto-js": "^3.1.9-1"
   },
   "types": "types/index.d.ts",
   "devDependencies": {
     "@types/crypto-js": "^3.1.40",
     "@types/node": "^9.6.2",
-    "@types/utf8": "^2.1.6",
     "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.12.0",
     "typescript": "^2.8.1"

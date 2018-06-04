@@ -182,6 +182,9 @@ export class EthereumClient extends Client {
       to: token
     };
     const { result: decimals } = await this.callFunc(param);
+    if (decimals === "0x") {
+      return 0;
+    }
     return hexToNumber(decimals);
   }
 
@@ -191,6 +194,9 @@ export class EthereumClient extends Client {
       to: token
     };
     const { result: totalSupply } = await this.callFunc(param);
+    if (totalSupply === "0x") {
+      return 0;
+    }
     return hexToNumber(totalSupply);
   }
 
@@ -200,6 +206,9 @@ export class EthereumClient extends Client {
       to: token
     };
     const { result: name } = await this.callFunc(param);
+    if (name === "0x") {
+      return "";
+    }
     return toUtf8(name);
   }
 
@@ -209,6 +218,9 @@ export class EthereumClient extends Client {
       to: token
     };
     const { result: symbol } = await this.callFunc(param);
+    if (symbol === "0x") {
+      return "";
+    }
     return toUtf8(symbol);
   }
 

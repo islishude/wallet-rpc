@@ -2,9 +2,9 @@ import Axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { RPCError, RPCRequest, RPCResponse } from "../defined/rpc";
 
 export default abstract class Client {
-  protected uri: string = this.https
-    ? "https"
-    : "http" + "://" + this.ip + ":" + this.port;
+  protected uri: string = /^http.+$/.test(this.ip)
+    ? `${this.ip}`
+    : `http://${this.ip}`;
   protected bulkData: RPCRequest[] = [];
   protected reqConfig: AxiosRequestConfig = {
     auth: {
@@ -16,8 +16,7 @@ export default abstract class Client {
     public user: string,
     public pass: string,
     public ip: string,
-    public port: number,
-    public https: boolean = false
+    public port: number
   ) {}
 
   public async RpcCall<T = string>(

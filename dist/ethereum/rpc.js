@@ -79,6 +79,9 @@ class EthereumClient extends client_1.default {
                 to: token
             };
             const { result: decimals } = yield this.callFunc(param);
+            if (decimals === "0x") {
+                return 0;
+            }
             return util_1.hexToNumber(decimals);
         });
     }
@@ -89,6 +92,9 @@ class EthereumClient extends client_1.default {
                 to: token
             };
             const { result: totalSupply } = yield this.callFunc(param);
+            if (totalSupply === "0x") {
+                return 0;
+            }
             return util_1.hexToNumber(totalSupply);
         });
     }
@@ -99,6 +105,9 @@ class EthereumClient extends client_1.default {
                 to: token
             };
             const { result: name } = yield this.callFunc(param);
+            if (name === "0x") {
+                return "";
+            }
             return util_1.toUtf8(name);
         });
     }
@@ -109,6 +118,9 @@ class EthereumClient extends client_1.default {
                 to: token
             };
             const { result: symbol } = yield this.callFunc(param);
+            if (symbol === "0x") {
+                return "";
+            }
             return util_1.toUtf8(symbol);
         });
     }
