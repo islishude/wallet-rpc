@@ -8,7 +8,7 @@ MultiCryptoCoins RPC Lib by TypeScript for Node.js
 
 ## TODO Supports
 
-* [ ] Bitcoin Cash
+* [ ] BitcoinCash
 * [ ] LiteCoin
 * [ ] EOS
 
