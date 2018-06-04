@@ -6,6 +6,7 @@ import {
   ERC20FuncSig,
   hexToNumber,
   isAddress,
+  isChecksumAddress,
   numberToHex,
   padAddress,
   sha3,
@@ -17,6 +18,7 @@ export class EthereumClient extends Client {
     ERC20FuncSig,
     hexToNumber,
     isAddress,
+    isChecksumAddress,
     numberToHex,
     sha3
   };

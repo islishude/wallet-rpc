@@ -101,6 +101,7 @@ export declare const CoinRpc: {
             };
             hexToNumber: (hex: string) => number;
             isAddress: (address: string) => boolean;
+            isChecksumAddress: (address: string) => boolean;
             numberToHex: (int: number) => string;
             sha3: (message: string) => string;
         };

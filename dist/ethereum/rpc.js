@@ -133,6 +133,7 @@ EthereumClient.util = {
     ERC20FuncSig: util_1.ERC20FuncSig,
     hexToNumber: util_1.hexToNumber,
     isAddress: util_1.isAddress,
+    isChecksumAddress: util_1.isChecksumAddress,
     numberToHex: util_1.numberToHex,
     sha3: util_1.sha3
 };
