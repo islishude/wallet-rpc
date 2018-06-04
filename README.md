@@ -79,8 +79,47 @@ btcClient.BulkCall();
 ### API
 
 * [Bitcoin](./types/bitcoin/rpc.d.ts)
-* [Ethereum && Util](./types/ethereum/rpc.d.ts)
+* [Ethereum](./types/ethereum/rpc.d.ts)
 * [DKKToken](./types/dkktoken/rpc.d.ts)
+
+#### EthereumUtil
+
+```typescript
+// ethereum.util....
+ERC20FuncSig: {
+    allowance: string;
+    approve: string;
+    balanceOf: string;
+    decimals: string;
+    name: string;
+    symbol: string;
+    totalSupply: string;
+    transfer: string;
+    transferFrom: string;
+};
+hexToNumber: (hex: string) => number;
+isAddress: (address: string) => boolean;
+isChecksumAddress: (address: string) => boolean;
+numberToHex: (int: number) => string;
+sha3: (message: string) => string;
+```
+
+#### ERC20
+
+```typescript
+// new Client().ERC20...
+ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
+ERC20Decimals(token: string): Promise<number>;
+ERC20TotalSupply(token: string): Promise<number>;
+ERC20Name(token: string): Promise<string>;
+ERC20Symbol(token: string): Promise<string>;
+ERC20TokenInfo(token: string): Promise<{
+    decimals: number;
+    name: string;
+    symbol: string;
+    totalSupply: number;
+}>;
+```
 
 ### RPC Methods List
 
