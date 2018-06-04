@@ -108,6 +108,7 @@ sha3: (message: string) => string;
 
 ```typescript
 // new Client().ERC20...
+// pass the token address
 ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
 ERC20Decimals(token: string): Promise<number>;
 ERC20TotalSupply(token: string): Promise<number>;

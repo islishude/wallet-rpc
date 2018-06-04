@@ -134,7 +134,7 @@ class EthereumClient extends client_1.default {
             ]);
             return {
                 decimals: tmp[2],
-                name: tmp[0],
+                name: tmp[0] || tmp[1],
                 symbol: tmp[1],
                 totalSupply: tmp[3]
             };

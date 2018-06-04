@@ -234,7 +234,9 @@ export class EthereumClient extends Client {
 
     return {
       decimals: tmp[2],
-      name: tmp[0],
+      // if name === "" set it equal with symbol
+      // eg. EOS token has no name
+      name: tmp[0] || tmp[1],
       symbol: tmp[1],
       totalSupply: tmp[3]
     };
