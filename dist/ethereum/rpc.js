@@ -106,7 +106,7 @@ class EthereumClient extends client_1.default {
             };
             const { result: name } = yield this.callFunc(param);
             if (name === "0x") {
-                return "";
+                return "unknown";
             }
             return util_1.toUtf8(name);
         });

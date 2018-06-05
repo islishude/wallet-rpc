@@ -209,7 +209,7 @@ export class EthereumClient extends Client {
     };
     const { result: name } = await this.callFunc(param);
     if (name === "0x") {
-      return "";
+      return "unknown";
     }
     return toUtf8(name);
   }
