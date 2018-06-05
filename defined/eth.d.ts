@@ -56,6 +56,7 @@ declare namespace Ethereum {
     blockHash: string;
     blockNumber: string;
     cumulativeGasUsed: string;
+    gasUsed: string;
     contractAddress?: string;
     logs: Array<IReceiptLogs>;
     logsBloom: string;
