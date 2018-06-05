@@ -15,4 +15,5 @@ export declare const isAddress: (address: string) => boolean;
 export declare const isChecksumAddress: (address: string) => boolean;
 export declare const sha3: (message: string) => string;
 export declare const padAddress: (address: string) => string;
-export declare let toUtf8: (hex: string) => string;
+export declare const toUtf8: (hex: string) => string;
+export declare const addressNull = "0x0000000000000000000000000000000000000000";

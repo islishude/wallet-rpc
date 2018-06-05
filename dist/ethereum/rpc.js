@@ -143,6 +143,7 @@ class EthereumClient extends client_1.default {
 }
 EthereumClient.util = {
     ERC20FuncSig: util_1.ERC20FuncSig,
+    addressNull: util_1.addressNull,
     hexToNumber: util_1.hexToNumber,
     isAddress: util_1.isAddress,
     isChecksumAddress: util_1.isChecksumAddress,

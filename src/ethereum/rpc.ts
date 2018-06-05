@@ -3,6 +3,7 @@ import { RPCRequest, RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 import { EthereumMethods as mtd } from "./mtd";
 import {
+  addressNull,
   ERC20FuncSig,
   hexToNumber,
   isAddress,
@@ -16,6 +17,7 @@ import {
 export class EthereumClient extends Client {
   public static util = {
     ERC20FuncSig,
+    addressNull,
     hexToNumber,
     isAddress,
     isChecksumAddress,

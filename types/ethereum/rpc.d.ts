@@ -14,6 +14,7 @@ export declare class EthereumClient extends Client {
             transfer: string;
             transferFrom: string;
         };
+        addressNull: string;
         hexToNumber: (hex: string) => number;
         isAddress: (address: string) => boolean;
         isChecksumAddress: (address: string) => boolean;

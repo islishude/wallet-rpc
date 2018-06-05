@@ -24,17 +24,17 @@ export const ERC20FuncSig = {
 };
 
 export const isAddress = (address: string) => {
-  if (/^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase())) {
-    return true;
-  }
-  return false;
+  return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
 };
 
 // Checks if the given string is a checksummed address
 export const isChecksumAddress = (address: string) => {
-  const addressHash = sha3(address.replace("0x", "").toLowerCase());
+  if (!isAddress(address)) {
+    return false;
+  }
+  const aHash = sha3(address.replace("0x", "").toLowerCase());
   for (let i = 0; i < 40; i++) {
-    const toNumber = Number.parseInt(addressHash[i], 16);
+    const toNumber = Number.parseInt(aHash[i], 16);
     const upper = address[i].toUpperCase();
     if (
       (toNumber > 7 && upper !== address[i]) ||
@@ -51,13 +51,16 @@ export const sha3 = (message: string) => {
 };
 
 export const padAddress = (address: string) => {
-  address = address.replace("0x", "");
-  const res = "0".repeat(24) + address;
-  return res;
+  if (!isAddress(address)) {
+    throw new Error("Not a valid address");
+  }
+  return "0".repeat(24) + address.replace("0x", "");
 };
 
-export let toUtf8 = (hex: string) => {
+export const toUtf8 = (hex: string) => {
   return Buffer.from(hex.replace("0x", ""), "hex")
     .toString()
     .replace(/[\u0000-\u0040]/g, "");
 };
+
+export const addressNull = "0x0000000000000000000000000000000000000000";

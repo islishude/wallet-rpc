@@ -22,15 +22,15 @@ exports.ERC20FuncSig = {
     transferFrom: "0x23b872dd"
 };
 exports.isAddress = (address) => {
-    if (/^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase())) {
-        return true;
-    }
-    return false;
+    return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
 };
 exports.isChecksumAddress = (address) => {
-    const addressHash = exports.sha3(address.replace("0x", "").toLowerCase());
+    if (!exports.isAddress(address)) {
+        return false;
+    }
+    const aHash = exports.sha3(address.replace("0x", "").toLowerCase());
     for (let i = 0; i < 40; i++) {
-        const toNumber = Number.parseInt(addressHash[i], 16);
+        const toNumber = Number.parseInt(aHash[i], 16);
         const upper = address[i].toUpperCase();
         if ((toNumber > 7 && upper !== address[i]) ||
             (toNumber <= 7 && upper !== address[i])) {
@@ -43,12 +43,14 @@ exports.sha3 = (message) => {
     return crypto_js_1.SHA3(message, { outputLength: 256 }).toString();
 };
 exports.padAddress = (address) => {
-    address = address.replace("0x", "");
-    const res = "0".repeat(24) + address;
-    return res;
+    if (!exports.isAddress(address)) {
+        throw new Error("Not a valid address");
+    }
+    return "0".repeat(24) + address.replace("0x", "");
 };
 exports.toUtf8 = (hex) => {
     return Buffer.from(hex.replace("0x", ""), "hex")
         .toString()
         .replace(/[\u0000-\u0040]/g, "");
 };
+exports.addressNull = "0x0000000000000000000000000000000000000000";

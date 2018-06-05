@@ -4,6 +4,7 @@ import { DKKTokenMethods } from "./dkktoken/mtd";
 import { DKKTClient } from "./dkktoken/rpc";
 import { EthereumMethods } from "./ethereum/mtd";
 import { EthereumClient } from "./ethereum/rpc";
+import * as EthereumUtil from "./ethereum/util"
 
 export const CoinRpc = {
   bitcoin: {
@@ -17,6 +18,6 @@ export const CoinRpc = {
   ethereum: {
     mtd: EthereumMethods,
     rpc: EthereumClient,
-    util: EthereumClient.util
+    util: EthereumUtil
   }
 };
