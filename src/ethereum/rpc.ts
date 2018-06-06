@@ -2,28 +2,9 @@ import { Ethereum } from "../../defined/eth";
 import { RPCRequest, RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 import { EthereumMethods as mtd } from "./mtd";
-import {
-  addressNull,
-  ERC20FuncSig,
-  hexToNumber,
-  isAddress,
-  isChecksumAddress,
-  numberToHex,
-  padAddress,
-  sha3,
-  toUtf8
-} from "./util";
+import { ERC20FuncSig, hexToNumber, padAddress, toUtf8 } from "./util";
 
 export class EthereumClient extends Client {
-  public static util = {
-    ERC20FuncSig,
-    addressNull,
-    hexToNumber,
-    isAddress,
-    isChecksumAddress,
-    numberToHex,
-    sha3
-  };
   // go-ethereum client RPC settings has no user and password for rpc
   constructor(
     ip: string,
@@ -32,6 +13,10 @@ export class EthereumClient extends Client {
     pass: string = ""
   ) {
     super(user, pass, ip, port);
+  }
+
+  public getBalance(address: string, status: Ethereum.Status = "latest") {
+    return this.RpcCall<string>(mtd.address.balance, [address, status]);
   }
 
   // get block count

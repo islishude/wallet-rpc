@@ -15,6 +15,9 @@ class EthereumClient extends client_1.default {
     constructor(ip, port = 30303, user = "", pass = "") {
         super(user, pass, ip, port);
     }
+    getBalance(address, status = "latest") {
+        return this.RpcCall(mtd_1.EthereumMethods.address.balance, [address, status]);
+    }
     getBlockCount() {
         return this.RpcCall(mtd_1.EthereumMethods.block.count);
     }
@@ -141,13 +144,4 @@ class EthereumClient extends client_1.default {
         });
     }
 }
-EthereumClient.util = {
-    ERC20FuncSig: util_1.ERC20FuncSig,
-    addressNull: util_1.addressNull,
-    hexToNumber: util_1.hexToNumber,
-    isAddress: util_1.isAddress,
-    isChecksumAddress: util_1.isChecksumAddress,
-    numberToHex: util_1.numberToHex,
-    sha3: util_1.sha3
-};
 exports.EthereumClient = EthereumClient;

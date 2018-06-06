@@ -18,32 +18,6 @@ Client.ERC20TokenInfo("0xf230b790e05390fc8295f4d3f60332c93bed42e2")
   })
   .catch(err => log(err.message));
 
-Client.getTxByHash(
-  "0xca40770425e92c10b7717cdf6881d0309ee496f3f51e240abc7e8624c005c14c"
-)
-  .then(({ result }) => {
-    const {
-      blockHash,
-      blockNumber,
-      from,
-      gas,
-      gasPrice,
-      hash,
-      input,
-      nonce,
-      to,
-      transactionIndex,
-      value
-    } = result;
-    assert(
-      blockHash ===
-        "0x00040a5668b65cfae9a7432d08ac44d22f2065469df85360887cc0888203753d"
-    );
-  })
+Client.ERC20Balance("0xdd974d5c2e2928dea5f71b9825b8b646686bd200", "0xa17688349750954506ed2429b7e09cc83fa79a9a", false)
+  .then(log)
   .catch(err => log(err.message));
-
-Client.getTxReceipt(
-  "0xca40770425e92c10b7717cdf6881d0309ee496f3f51e240abc7e8624c005c14c"
-).then(({ result }) => {
-  log("%o", result)
-});

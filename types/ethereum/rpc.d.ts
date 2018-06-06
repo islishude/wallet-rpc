@@ -2,26 +2,8 @@ import { Ethereum } from "../../defined/eth";
 import { RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 export declare class EthereumClient extends Client {
-    static util: {
-        ERC20FuncSig: {
-            allowance: string;
-            approve: string;
-            balanceOf: string;
-            decimals: string;
-            name: string;
-            symbol: string;
-            totalSupply: string;
-            transfer: string;
-            transferFrom: string;
-        };
-        addressNull: string;
-        hexToNumber: (hex: string) => number;
-        isAddress: (address: string) => boolean;
-        isChecksumAddress: (address: string) => boolean;
-        numberToHex: (int: number) => string;
-        sha3: (message: string) => string;
-    };
     constructor(ip: string, port?: number, user?: string, pass?: string);
+    getBalance(address: string, status?: Ethereum.Status): Promise<RPCResponse<string>>;
     getBlockCount(): Promise<RPCResponse<string>>;
     getBlockByHash(hash: string, getFullTx?: boolean): Promise<RPCResponse<Ethereum.IBlock>>;
     getBlock(symbol: string): Promise<RPCResponse<Ethereum.IBlockSimple>>;
