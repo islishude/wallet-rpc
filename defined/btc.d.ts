@@ -147,6 +147,7 @@ declare namespace Bitcoin {
   export interface fee {
     feerate: number;
     blocks: number;
+    errors?: string[];
   }
 
   export interface memoryInfo {
