@@ -2,15 +2,15 @@ MultiCryptoCoins RPC Lib by TypeScript for Node.js
 
 ## Supports
 
-* Bitcoin(core 0.16+)
-* Ethereum(geth 1.8.0+) and ERC20
-* DKKToken
+- Bitcoin(core 0.16+)
+- Ethereum(geth 1.8.0+) and ERC20
+- DKKToken
 
 ## TODO Supports
 
-* [ ] BitcoinCash
-* [ ] LiteCoin
-* [ ] EOS
+- [ ] BitcoinCash
+- [ ] LiteCoin
+- [ ] EOS
 
 ## Install
 
@@ -24,17 +24,13 @@ npm install wallet-rpc --save
 ### CommonJS
 
 ```js
-const { bitcoin, ethereum, dkktoken } = require("wallet-rpc");
-// get rpc and rpc methods by this
-const { rpc: btcRpc, mtd: btcMtd } = bitcoin;
+import { Bitcoin, Ethereum, DKKToken } from "wallet-rpc";
 // the default rpc port of bitcoin is 8332
-// so this param is optional
-const defaultPort = 8332;
-const btcClient = new btcRpc("username", "password", "ip", defaultPort);
+const btcClient = new Bitcoin.RPC("username", "password", "ip", 8832);
 // the default rpc of geth has no username and no password
 // if you config the proxy you can pass them to constructor.
 // the param order is ip-port-username-password
-const ethClient = new ethereum.rpc("ip");
+const ethClient = new Ethereum.RPC("ip");
 btcClient
   .getTxInfo("txid")
   .then(txInfo => console.log)
@@ -46,11 +42,6 @@ btcClient
 ### TypeScript
 
 ```typescript
-import { bitcoin, ethereum, dkktoken } from "wallet-rpc";
-const { rpc: btcRpc, mtd: btcMtd } = bitcoin;
-const defaultPort = 8332;
-const btcClient = new btcRpc("username", "password", "ip", defaultPort);
-
 // Bulk Call
 btcClient
   // your can set generic
@@ -70,33 +61,33 @@ btcClient
   .then(console.log)
   .catch(console.log);
 
-// also can Bulk call by this
-btcClient.BulkAdd(btcMtd.block.hash, [0], 0);
-btcClient.BulkAdd(btcMtd.block.hash, [1], 1);
+// Also can
+btcClient.BulkAdd(Bitcoin.mtd.block.hash, [0], 0);
+btcClient.BulkAdd(Bitcoin.mtd.block.hash, [1], 1);
 btcClient.BulkCall();
 ```
 
 ### API
 
-* [Bitcoin](./types/bitcoin/rpc.d.ts)
-* [Ethereum](./types/ethereum/rpc.d.ts)
-* [DKKToken](./types/dkktoken/rpc.d.ts)
+- [Bitcoin](./types/bitcoin/rpc.d.ts)
+- [Ethereum](./types/ethereum/rpc.d.ts)
+- [DKKToken](./types/dkktoken/rpc.d.ts)
 
 #### EthereumUtil
 
 ```typescript
 // ethereum.util....
 ERC20FuncSig: {
-    allowance: string;
-    approve: string;
-    balanceOf: string;
-    decimals: string;
-    name: string;
-    symbol: string;
-    totalSupply: string;
-    transfer: string;
-    transferFrom: string;
-};
+  allowance: string;
+  approve: string;
+  balanceOf: string;
+  decimals: string;
+  name: string;
+  symbol: string;
+  totalSupply: string;
+  transfer: string;
+  transferFrom: string;
+}
 hexToNumber: (hex: string) => number;
 isAddress: (address: string) => boolean;
 isChecksumAddress: (address: string) => boolean;
@@ -107,8 +98,7 @@ sha3: (message: string) => string;
 #### ERC20
 
 ```typescript
-// new Client().ERC20...
-// pass the token address
+// eg.new Ethereum.RPC().ERC20Balance("TokenAddress", "Address")
 ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
 ERC20Decimals(token: string): Promise<number>;
 ERC20TotalSupply(token: string): Promise<number>;
@@ -124,10 +114,10 @@ ERC20TokenInfo(token: string): Promise<{
 
 ### RPC Methods List
 
-* [Bitcoin](./src/bitcoin/mtd.ts)
-* [Ethereum](./src/ethereum/mtd.ts)
-* [DKKToken](./src/dkktoken/mtd.ts)
+- [Bitcoin](./src/bitcoin/mtd.ts)
+- [Ethereum](./src/ethereum/mtd.ts)
+- [DKKToken](./src/dkktoken/mtd.ts)
 
 ## Feedback
 
-* [issue](https://github.com/isLishude/wallet-rpc/issues)
+- [issue](https://github.com/isLishude/wallet-rpc/issues)

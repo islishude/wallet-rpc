@@ -7,18 +7,10 @@ const rpc_2 = require("./dkktoken/rpc");
 const mtd_3 = require("./ethereum/mtd");
 const rpc_3 = require("./ethereum/rpc");
 const EthereumUtil = require("./ethereum/util");
-exports.CoinRpc = {
-    bitcoin: {
-        mtd: mtd_1.BitcoinMethods,
-        rpc: rpc_1.BitcoinClient
-    },
-    dkktoken: {
-        mtd: mtd_2.DKKTokenMethods,
-        rpc: rpc_2.DKKTClient
-    },
-    ethereum: {
-        mtd: mtd_3.EthereumMethods,
-        rpc: rpc_3.EthereumClient,
-        util: EthereumUtil
-    }
+exports.Bitcoin = { mtd: mtd_1.BitcoinMethods, RPC: rpc_1.BitcoinClient };
+exports.Ethereum = {
+    RPC: rpc_3.EthereumClient,
+    mtd: mtd_3.EthereumMethods,
+    util: EthereumUtil
 };
+exports.DKKToken = { mtd: mtd_2.DKKTokenMethods, RPC: rpc_2.DKKTClient };
