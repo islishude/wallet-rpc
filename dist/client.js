@@ -9,6 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
+const http_1 = require("http");
+const https_1 = require("https");
 class Client {
     constructor(user, pass, ip, port) {
         this.user = user;
@@ -23,7 +25,9 @@ class Client {
             auth: {
                 password: this.pass,
                 username: this.user
-            }
+            },
+            httpAgent: new http_1.Agent({ keepAlive: true }),
+            httpsAgent: new https_1.Agent({ keepAlive: true })
         };
     }
     RpcCall(method, param, id) {

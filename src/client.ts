@@ -1,4 +1,6 @@
 import Axios, { AxiosError, AxiosRequestConfig } from "axios";
+import { Agent as httpAgent } from "http";
+import { Agent as httpsAgent } from "https";
 import { RPCError, RPCRequest, RPCResponse } from "../defined/rpc";
 
 export default abstract class Client {
@@ -10,7 +12,9 @@ export default abstract class Client {
     auth: {
       password: this.pass,
       username: this.user
-    }
+    },
+    httpAgent: new httpAgent({ keepAlive: true }),
+    httpsAgent: new httpsAgent({ keepAlive: true })
   };
   constructor(
     public user: string,
