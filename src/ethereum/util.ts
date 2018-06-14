@@ -57,10 +57,11 @@ export const padAddress = (address: string) => {
   return "0".repeat(24) + address.replace("0x", "");
 };
 
-export const toUtf8 = (hex: string) => {
+export const toUtf8 = (hex: string): string => {
   return Buffer.from(hex.replace("0x", ""), "hex")
     .toString()
-    .replace(/[\u0000-\u0040]/g, "");
+    .match(/\w+/g)
+    .pop();
 };
 
 export const addressNull = "0x0000000000000000000000000000000000000000";

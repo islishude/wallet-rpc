@@ -51,6 +51,7 @@ exports.padAddress = (address) => {
 exports.toUtf8 = (hex) => {
     return Buffer.from(hex.replace("0x", ""), "hex")
         .toString()
-        .replace(/[\u0000-\u0040]/g, "");
+        .match(/\w+/g)
+        .pop();
 };
 exports.addressNull = "0x0000000000000000000000000000000000000000";
