@@ -58,10 +58,10 @@ export const padAddress = (address: string): string => {
 };
 
 export const toUtf8 = (hex: string): string => {
-  return Buffer.from(hex.replace("0x", ""), "hex")
+  const result = Buffer.from(hex.replace("0x", ""), "hex")
     .toString()
-    .match(/\w+/g)
-    .pop();
+    .match(/\w+/g);
+  return result ? result.pop() : "";
 };
 
 export const addressNull = "0x0000000000000000000000000000000000000000";

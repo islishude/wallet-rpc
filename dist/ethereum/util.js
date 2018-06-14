@@ -49,9 +49,9 @@ exports.padAddress = (address) => {
     return "0".repeat(24) + address.replace("0x", "");
 };
 exports.toUtf8 = (hex) => {
-    return Buffer.from(hex.replace("0x", ""), "hex")
+    const result = Buffer.from(hex.replace("0x", ""), "hex")
         .toString()
-        .match(/\w+/g)
-        .pop();
+        .match(/\w+/g);
+    return result ? result.pop() : "";
 };
 exports.addressNull = "0x0000000000000000000000000000000000000000";
