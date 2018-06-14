@@ -81,11 +81,18 @@ class EthereumClient extends client_1.default {
                 data: util_1.ERC20FuncSig.decimals,
                 to: token
             };
-            const { result: decimals } = yield this.callFunc(param);
-            if (decimals === "0x") {
-                return 0;
+            const PARAM = {
+                data: util_1.ERC20FuncSigUpper.DECIMALS,
+                to: token
+            };
+            const [{ result: decimals }, { result: DECIMALS }] = yield Promise.all([
+                this.callFunc(param),
+                this.callFunc(PARAM)
+            ]);
+            if (decimals === "0x" && DECIMALS === "0x") {
+                return 18;
             }
-            return util_1.hexToNumber(decimals);
+            return util_1.hexToNumber(decimals === "0x" ? DECIMALS : decimals);
         });
     }
     ERC20TotalSupply(token) {
@@ -107,11 +114,18 @@ class EthereumClient extends client_1.default {
                 data: util_1.ERC20FuncSig.name,
                 to: token
             };
-            const { result: name } = yield this.callFunc(param);
-            if (name === "0x") {
+            const PARAM = {
+                data: util_1.ERC20FuncSigUpper.NAME,
+                to: token
+            };
+            const [{ result: name }, { result: NAME }] = yield Promise.all([
+                this.callFunc(param),
+                this.callFunc(PARAM)
+            ]);
+            if (name === "0x" && NAME === "0X") {
                 return "unknown";
             }
-            return util_1.toUtf8(name);
+            return util_1.toUtf8(name === "0x" ? NAME : name);
         });
     }
     ERC20Symbol(token) {
@@ -120,11 +134,18 @@ class EthereumClient extends client_1.default {
                 data: util_1.ERC20FuncSig.symbol,
                 to: token
             };
-            const { result: symbol } = yield this.callFunc(param);
-            if (symbol === "0x") {
+            const PARAM = {
+                data: util_1.ERC20FuncSigUpper.SYMBOL,
+                to: token
+            };
+            const [{ result: symbol }, { result: SYMBOL }] = yield Promise.all([
+                this.callFunc(param),
+                this.callFunc(PARAM)
+            ]);
+            if (symbol === "0x" && SYMBOL === "0x") {
                 return "";
             }
-            return util_1.toUtf8(symbol);
+            return util_1.toUtf8(symbol === "0x" ? SYMBOL : symbol);
         });
     }
     ERC20TokenInfo(token) {

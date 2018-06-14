@@ -2,7 +2,13 @@ import { Ethereum } from "../../defined/eth";
 import { RPCRequest, RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 import { EthereumMethods as mtd } from "./mtd";
-import { ERC20FuncSig, hexToNumber, padAddress, toUtf8 } from "./util";
+import {
+  ERC20FuncSig,
+  ERC20FuncSigUpper,
+  hexToNumber,
+  padAddress,
+  toUtf8
+} from "./util";
 
 export class EthereumClient extends Client {
   // go-ethereum client RPC settings has no user and password for rpc
@@ -168,11 +174,19 @@ export class EthereumClient extends Client {
       data: ERC20FuncSig.decimals,
       to: token
     };
-    const { result: decimals } = await this.callFunc(param);
-    if (decimals === "0x") {
-      return 0;
+
+    const PARAM: Ethereum.ICallFuncParam = {
+      data: ERC20FuncSigUpper.DECIMALS,
+      to: token
+    };
+    const [{ result: decimals }, { result: DECIMALS }] = await Promise.all([
+      this.callFunc(param),
+      this.callFunc(PARAM)
+    ]);
+    if (decimals === "0x" && DECIMALS === "0x") {
+      return 18;
     }
-    return hexToNumber(decimals);
+    return hexToNumber(decimals === "0x" ? DECIMALS : decimals);
   }
 
   public async ERC20TotalSupply(token: string) {
@@ -192,11 +206,18 @@ export class EthereumClient extends Client {
       data: ERC20FuncSig.name,
       to: token
     };
-    const { result: name } = await this.callFunc(param);
-    if (name === "0x") {
+    const PARAM: Ethereum.ICallFuncParam = {
+      data: ERC20FuncSigUpper.NAME,
+      to: token
+    };
+    const [{ result: name }, { result: NAME }] = await Promise.all([
+      this.callFunc(param),
+      this.callFunc(PARAM)
+    ]);
+    if (name === "0x" && NAME === "0X") {
       return "unknown";
     }
-    return toUtf8(name);
+    return toUtf8(name === "0x" ? NAME : name);
   }
 
   public async ERC20Symbol(token: string) {
@@ -204,11 +225,18 @@ export class EthereumClient extends Client {
       data: ERC20FuncSig.symbol,
       to: token
     };
-    const { result: symbol } = await this.callFunc(param);
-    if (symbol === "0x") {
+    const PARAM: Ethereum.ICallFuncParam = {
+      data: ERC20FuncSigUpper.SYMBOL,
+      to: token
+    };
+    const [{ result: symbol }, { result: SYMBOL }] = await Promise.all([
+      this.callFunc(param),
+      this.callFunc(PARAM)
+    ]);
+    if (symbol === "0x" && SYMBOL === "0x") {
       return "";
     }
-    return toUtf8(symbol);
+    return toUtf8(symbol === "0x" ? SYMBOL : symbol);
   }
 
   public async ERC20TokenInfo(token: string) {

@@ -21,6 +21,11 @@ exports.ERC20FuncSig = {
     transfer: "0xa9059cbb",
     transferFrom: "0x23b872dd"
 };
+exports.ERC20FuncSigUpper = {
+    DECIMALS: "0x2e0f2625",
+    NAME: "0xa3f4df7e",
+    SYMBOL: "0xf76f8d78"
+};
 exports.isAddress = (address) => {
     return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
 };

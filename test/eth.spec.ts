@@ -6,7 +6,8 @@ const Client = new Ethereum.RPC(
   443
 );
 
-Client.ERC20TokenInfo("0xf230b790e05390fc8295f4d3f60332c93bed42e2")
+const TRX = "0xf230b790e05390fc8295f4d3f60332c93bed42e2";
+Client.ERC20TokenInfo(TRX)
   .then(({ decimals, name, totalSupply, symbol }) => {
     // log(decimals, name, symbol, totalSupply);
     assert(decimals === 6);
@@ -18,10 +19,12 @@ Client.ERC20TokenInfo("0xf230b790e05390fc8295f4d3f60332c93bed42e2")
   })
   .catch(err => log(err.message));
 
-Client.ERC20Balance(
-  "0xdd974d5c2e2928dea5f71b9825b8b646686bd200",
-  "0xa17688349750954506ed2429b7e09cc83fa79a9a",
-  false
-)
-  .then(log)
+const HPB = "0x38c6a68304cdefb9bec48bbfaaba5c5b47818bb2";
+Client.ERC20TokenInfo(HPB)
+  .then(({ decimals, name, totalSupply, symbol }) => {
+    assert(decimals === 6);
+    assert(name === "HPBCoin");
+    assert(symbol === "HPB");
+    assert(totalSupply === 1e+26);
+  })
   .catch(err => log(err.message));
