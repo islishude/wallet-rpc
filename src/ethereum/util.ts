@@ -1,13 +1,13 @@
 import { SHA3 } from "crypto-js";
 
-export const hexToNumber = (hex: string) => {
+export const hexToNumber = (hex: string): number => {
   if (hex === "0x") {
     return 0;
   }
   return Number.parseInt(hex);
 };
 
-export const numberToHex = (int: number) => {
+export const numberToHex = (int: number): string => {
   return "0x" + int.toString(16);
 };
 
@@ -23,7 +23,7 @@ export const ERC20FuncSig = {
   transferFrom: "0x23b872dd"
 };
 
-export const isAddress = (address: string) => {
+export const isAddress = (address: string): boolean => {
   return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
 };
 
@@ -46,11 +46,11 @@ export const isChecksumAddress = (address: string) => {
   return true;
 };
 
-export const sha3 = (message: string) => {
+export const sha3 = (message: string): string => {
   return SHA3(message, { outputLength: 256 }).toString();
 };
 
-export const padAddress = (address: string) => {
+export const padAddress = (address: string): string => {
   if (!isAddress(address)) {
     throw new Error("Not a valid address");
   }
