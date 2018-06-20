@@ -6,6 +6,7 @@ import { EthereumMethods as mtd } from "./mtd";
 import {
   ERC20FuncSig,
   ERC20FuncSigUpper,
+  hexToDecimalString,
   hexToNumber,
   padAddress,
   toUtf8
@@ -190,16 +191,13 @@ export class EthereumClient extends Client {
     return hexToNumber(decimals === "0x" ? DECIMALS : decimals);
   }
 
-  public async ERC20TotalSupply(token: string, hex: boolean = false) {
+  public async ERC20TotalSupply(token: string) {
     const param: Ethereum.ICallFuncParam = {
       data: ERC20FuncSig.totalSupply,
       to: token
     };
     const { result: totalSupply } = await this.callFunc(param);
-    if (totalSupply === "0x") {
-      return 0;
-    }
-    return hex ? totalSupply : hexToNumber(totalSupply);
+    return hexToDecimalString(totalSupply);
   }
 
   public async ERC20Name(token: string) {
@@ -215,8 +213,8 @@ export class EthereumClient extends Client {
       this.callFunc(param),
       this.callFunc(PARAM)
     ]);
-    if (name === "0x" && NAME === "0X") {
-      return "unknown";
+    if (name === "0x" && NAME === "0x") {
+      return "UNNAMED_TOKEN";
     }
     return toUtf8(name === "0x" ? NAME : name);
   }

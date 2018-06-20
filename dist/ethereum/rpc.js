@@ -95,17 +95,14 @@ class EthereumClient extends client_1.default {
             return util_1.hexToNumber(decimals === "0x" ? DECIMALS : decimals);
         });
     }
-    ERC20TotalSupply(token, hex = false) {
+    ERC20TotalSupply(token) {
         return __awaiter(this, void 0, void 0, function* () {
             const param = {
                 data: util_1.ERC20FuncSig.totalSupply,
                 to: token
             };
             const { result: totalSupply } = yield this.callFunc(param);
-            if (totalSupply === "0x") {
-                return 0;
-            }
-            return hex ? totalSupply : util_1.hexToNumber(totalSupply);
+            return util_1.hexToDecimalString(totalSupply);
         });
     }
     ERC20Name(token) {
@@ -122,8 +119,8 @@ class EthereumClient extends client_1.default {
                 this.callFunc(param),
                 this.callFunc(PARAM)
             ]);
-            if (name === "0x" && NAME === "0X") {
-                return "unknown";
+            if (name === "0x" && NAME === "0x") {
+                return "UNNAMED_TOKEN";
             }
             return util_1.toUtf8(name === "0x" ? NAME : name);
         });

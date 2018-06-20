@@ -1,4 +1,5 @@
 export declare const hexToNumber: (hex: string) => number;
+export declare const hexToDecimalString: (hex: string) => string;
 export declare const numberToHex: (int: number) => string;
 export declare const ERC20FuncSig: {
     allowance: string;

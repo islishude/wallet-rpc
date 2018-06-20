@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const bignumber_js_1 = require("bignumber.js");
 const crypto_js_1 = require("crypto-js");
 exports.hexToNumber = (hex) => {
     if (hex === "0x") {
@@ -7,8 +8,14 @@ exports.hexToNumber = (hex) => {
     }
     return Number.parseInt(hex);
 };
+exports.hexToDecimalString = (hex) => {
+    if (hex === "0x") {
+        return "0";
+    }
+    return new bignumber_js_1.default(hex).toString(10);
+};
 exports.numberToHex = (int) => {
-    return "0x" + int.toString(16);
+    return "0x" + new bignumber_js_1.default(int).toString(16);
 };
 exports.ERC20FuncSig = {
     allowance: "0xdd62ed3e",
@@ -57,6 +64,6 @@ exports.toUtf8 = (hex) => {
     const result = Buffer.from(hex.replace("0x", ""), "hex")
         .toString()
         .match(/\w+/g);
-    return result ? result.pop() : "";
+    return result ? result.join("") : "";
 };
 exports.addressNull = "0x0000000000000000000000000000000000000000";

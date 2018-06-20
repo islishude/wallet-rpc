@@ -1,3 +1,4 @@
+import BigNumber from "bignumber.js";
 import { SHA3 } from "crypto-js";
 
 export const hexToNumber = (hex: string): number => {
@@ -7,8 +8,15 @@ export const hexToNumber = (hex: string): number => {
   return Number.parseInt(hex);
 };
 
+export const hexToDecimalString = (hex: string): string => {
+  if (hex === "0x") {
+    return "0";
+  }
+  return new BigNumber(hex).toString(10);
+};
+
 export const numberToHex = (int: number): string => {
-  return "0x" + int.toString(16);
+  return "0x" + new BigNumber(int).toString(16);
 };
 
 export const ERC20FuncSig = {
@@ -67,7 +75,7 @@ export const toUtf8 = (hex: string): string => {
   const result = Buffer.from(hex.replace("0x", ""), "hex")
     .toString()
     .match(/\w+/g);
-  return result ? result.pop() : "";
+  return result ? result.join("") : "";
 };
 
 export const addressNull = "0x0000000000000000000000000000000000000000";
