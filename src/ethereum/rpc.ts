@@ -214,7 +214,7 @@ export class EthereumClient extends Client {
       this.callFunc(PARAM)
     ]);
     if (name === "0x" && NAME === "0x") {
-      return "UNNAMED_TOKEN";
+      return "";
     }
     return toUtf8(name === "0x" ? NAME : name);
   }
@@ -233,7 +233,7 @@ export class EthereumClient extends Client {
       this.callFunc(PARAM)
     ]);
     if (symbol === "0x" && SYMBOL === "0x") {
-      return "";
+      return "UNNAMED_TOKEN";
     }
     return toUtf8(symbol === "0x" ? SYMBOL : symbol);
   }
