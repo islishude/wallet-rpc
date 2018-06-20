@@ -26,7 +26,7 @@ export declare class EthereumClient extends Client {
     }): Promise<RPCResponse<Ethereum.ITraceTxReturn>>;
     ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
     ERC20Decimals(token: string): Promise<number>;
-    ERC20TotalSupply(token: string): Promise<number>;
+    ERC20TotalSupply(token: string, hex?: boolean): Promise<string | number>;
     ERC20Name(token: string): Promise<string>;
     ERC20Symbol(token: string): Promise<string>;
     ERC20TokenInfo(token: string): Promise<{
@@ -34,6 +34,6 @@ export declare class EthereumClient extends Client {
         decimals: number;
         name: string;
         symbol: string;
-        totalSupply: number;
+        totalSupply: string | number;
     }>;
 }

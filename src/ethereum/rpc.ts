@@ -190,7 +190,7 @@ export class EthereumClient extends Client {
     return hexToNumber(decimals === "0x" ? DECIMALS : decimals);
   }
 
-  public async ERC20TotalSupply(token: string) {
+  public async ERC20TotalSupply(token: string, hex: boolean = false) {
     const param: Ethereum.ICallFuncParam = {
       data: ERC20FuncSig.totalSupply,
       to: token
@@ -199,7 +199,7 @@ export class EthereumClient extends Client {
     if (totalSupply === "0x") {
       return 0;
     }
-    return hexToNumber(totalSupply);
+    return hex ? totalSupply : hexToNumber(totalSupply);
   }
 
   public async ERC20Name(token: string) {
