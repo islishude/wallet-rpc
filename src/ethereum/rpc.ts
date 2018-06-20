@@ -1,4 +1,5 @@
 import { Ethereum } from "../../defined/eth";
+// Don't remove flow line!!
 import { RPCRequest, RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 import { EthereumMethods as mtd } from "./mtd";
@@ -121,7 +122,7 @@ export class EthereumClient extends Client {
    * @returns the code from the given address
    */
   public getCode(address: string, status: string) {
-    return this.RpcCall(mtd.address.code);
+    return this.RpcCall(mtd.address.code, [address, status]);
   }
 
   /**
@@ -248,6 +249,7 @@ export class EthereumClient extends Client {
     ]);
 
     return {
+      address: token,
       decimals: tmp[2],
       // if name === "" set it equal with symbol
       // eg. EOS token has no name

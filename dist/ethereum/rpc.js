@@ -56,7 +56,7 @@ class EthereumClient extends client_1.default {
         return this.RpcCall(mtd_1.EthereumMethods.tx.call, [param, status]);
     }
     getCode(address, status) {
-        return this.RpcCall(mtd_1.EthereumMethods.address.code);
+        return this.RpcCall(mtd_1.EthereumMethods.address.code, [address, status]);
     }
     getEstimateGas(param, status = "latest") {
         return this.RpcCall(mtd_1.EthereumMethods.gas.estimate, [param, status]);
@@ -157,6 +157,7 @@ class EthereumClient extends client_1.default {
                 this.ERC20TotalSupply(token)
             ]);
             return {
+                address: token,
                 decimals: tmp[2],
                 name: tmp[0] || tmp[1],
                 symbol: tmp[1],
