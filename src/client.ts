@@ -22,7 +22,7 @@ export default abstract class Client {
       }
     };
 
-    if (isHttps) {
+    if (isHttps || /^https.+$/.test(this.ip)) {
       this.reqConfig.httpsAgent = new httpsAgent({ keepAlive: true });
     } else {
       this.reqConfig.httpAgent = new httpAgent({ keepAlive: true });

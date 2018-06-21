@@ -25,7 +25,7 @@ class Client {
                 username: this.user
             }
         };
-        if (isHttps) {
+        if (isHttps || /^https.+$/.test(this.ip)) {
             this.reqConfig.httpsAgent = new https_1.Agent({ keepAlive: true });
         }
         else {
