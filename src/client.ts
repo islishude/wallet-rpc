@@ -12,7 +12,7 @@ export default abstract class Client {
     public pass: string,
     public ip: string,
     public port: number,
-    private isHttps: boolean = false
+    isHttps: boolean = false
   ) {
     this.bulkData = [];
     this.reqConfig = {

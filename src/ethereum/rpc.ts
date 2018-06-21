@@ -1,6 +1,5 @@
 import { Ethereum } from "../../defined/eth";
-// Don't remove flow line!!
-import { RPCRequest, RPCResponse } from "../../defined/rpc";
+import { RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 import { EthereumMethods as mtd } from "./mtd";
 import {
@@ -24,7 +23,10 @@ export class EthereumClient extends Client {
     super(user, pass, ip, port, isHttps);
   }
 
-  public getBalance(address: string, status: Ethereum.Status = "latest") {
+  public getBalance(
+    address: string,
+    status: Ethereum.Status = "latest"
+  ): Promise<RPCResponse<string>> {
     return this.RpcCall<string>(mtd.address.balance, [address, status]);
   }
 

@@ -17,7 +17,6 @@ class Client {
         this.pass = pass;
         this.ip = ip;
         this.port = port;
-        this.isHttps = isHttps;
         this.bulkData = [];
         this.reqConfig = {
             auth: {

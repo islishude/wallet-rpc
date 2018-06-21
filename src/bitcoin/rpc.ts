@@ -18,7 +18,7 @@ export class BitcoinClient extends Client {
     return this.RpcCall<Bitcoin.WalletInfo>(mtd.info.info);
   }
 
-  public getBlockCount() {
+  public getBlockCount(): Promise<RPCResponse<number>> {
     return this.RpcCall<number>(mtd.block.count);
   }
 

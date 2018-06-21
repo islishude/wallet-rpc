@@ -5,7 +5,6 @@ export default abstract class Client {
     pass: string;
     ip: string;
     port: number;
-    private isHttps;
     protected uri: string;
     protected bulkData: RPCRequest[];
     protected reqConfig: AxiosRequestConfig;

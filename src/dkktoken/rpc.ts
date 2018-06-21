@@ -20,7 +20,7 @@ export class DKKTClient extends Client {
     return this.RpcCall<DKKToken.WalletInfo>(mtd.info);
   }
 
-  public getBlockCount() {
+  public getBlockCount(): Promise<RPCResponse<number>> {
     return this.RpcCall<number>(block.count);
   }
 
