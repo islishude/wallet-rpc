@@ -2,7 +2,7 @@ import { DKKToken } from "../../defined/dkkt";
 import { RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 export declare class DKKTClient extends Client {
-    constructor(user: string, pass: string, ip: string, port?: number);
+    constructor(user: string, pass: string, ip: string, port?: number, isHttps?: boolean);
     getInfo(): Promise<RPCResponse<DKKToken.WalletInfo>>;
     getBlockCount(): Promise<RPCResponse<number>>;
     getBlockHash(height: number): Promise<RPCResponse<string>>;

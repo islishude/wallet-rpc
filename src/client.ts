@@ -4,24 +4,35 @@ import { Agent as httpsAgent } from "https";
 import { RPCError, RPCRequest, RPCResponse } from "../defined/rpc";
 
 export default abstract class Client {
-  protected uri: string = /^http.+$/.test(this.ip)
-    ? `${this.ip}:${this.port}`
-    : `http://${this.ip}:${this.port}`;
-  protected bulkData: RPCRequest[] = [];
-  protected reqConfig: AxiosRequestConfig = {
-    auth: {
-      password: this.pass,
-      username: this.user
-    },
-    httpAgent: new httpAgent({ keepAlive: true }),
-    httpsAgent: new httpsAgent({ keepAlive: true })
-  };
+  protected uri: string;
+  protected bulkData: RPCRequest[];
+  protected reqConfig: AxiosRequestConfig;
   constructor(
     public user: string,
     public pass: string,
     public ip: string,
-    public port: number
-  ) {}
+    public port: number,
+    private isHttps: boolean = false
+  ) {
+    this.bulkData = [];
+    this.reqConfig = {
+      auth: {
+        password: this.pass,
+        username: this.user
+      }
+    };
+
+    if (isHttps) {
+      this.reqConfig.httpsAgent = new httpsAgent({ keepAlive: true });
+    } else {
+      this.reqConfig.httpAgent = new httpAgent({ keepAlive: true });
+    }
+    this.uri = /^http.+$/.test(this.ip)
+      ? `${this.ip}:${this.port}`
+      : isHttps
+        ? `https://${this.ip}:${this.port}`
+        : `http://${this.ip}:${this.port}`;
+  }
 
   public async RpcCall<T = string>(
     method: string,

@@ -4,8 +4,8 @@ const client_1 = require("../client");
 const mtd_1 = require("./mtd");
 const { block, tx } = mtd_1.DKKTokenMethods;
 class DKKTClient extends client_1.default {
-    constructor(user, pass, ip, port = 28880) {
-        super(user, pass, ip, port);
+    constructor(user, pass, ip, port = 28880, isHttps = false) {
+        super(user, pass, ip, port, isHttps);
     }
     getInfo() {
         return this.RpcCall(mtd_1.DKKTokenMethods.info);

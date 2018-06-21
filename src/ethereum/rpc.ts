@@ -18,9 +18,10 @@ export class EthereumClient extends Client {
     ip: string,
     port: number = 30303,
     user: string = "",
-    pass: string = ""
+    pass: string = "",
+    isHttps: boolean = false
   ) {
-    super(user, pass, ip, port);
+    super(user, pass, ip, port, isHttps);
   }
 
   public getBalance(address: string, status: Ethereum.Status = "latest") {

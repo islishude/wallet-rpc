@@ -12,8 +12,8 @@ const client_1 = require("../client");
 const mtd_1 = require("./mtd");
 const util_1 = require("./util");
 class EthereumClient extends client_1.default {
-    constructor(ip, port = 30303, user = "", pass = "") {
-        super(user, pass, ip, port);
+    constructor(ip, port = 30303, user = "", pass = "", isHttps = false) {
+        super(user, pass, ip, port, isHttps);
     }
     getBalance(address, status = "latest") {
         return this.RpcCall(mtd_1.EthereumMethods.address.balance, [address, status]);

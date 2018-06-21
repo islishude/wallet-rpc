@@ -12,23 +12,30 @@ const axios_1 = require("axios");
 const http_1 = require("http");
 const https_1 = require("https");
 class Client {
-    constructor(user, pass, ip, port) {
+    constructor(user, pass, ip, port, isHttps = false) {
         this.user = user;
         this.pass = pass;
         this.ip = ip;
         this.port = port;
-        this.uri = /^http.+$/.test(this.ip)
-            ? `${this.ip}:${this.port}`
-            : `http://${this.ip}:${this.port}`;
+        this.isHttps = isHttps;
         this.bulkData = [];
         this.reqConfig = {
             auth: {
                 password: this.pass,
                 username: this.user
-            },
-            httpAgent: new http_1.Agent({ keepAlive: true }),
-            httpsAgent: new https_1.Agent({ keepAlive: true })
+            }
         };
+        if (isHttps) {
+            this.reqConfig.httpsAgent = new https_1.Agent({ keepAlive: true });
+        }
+        else {
+            this.reqConfig.httpAgent = new http_1.Agent({ keepAlive: true });
+        }
+        this.uri = /^http.+$/.test(this.ip)
+            ? `${this.ip}:${this.port}`
+            : isHttps
+                ? `https://${this.ip}:${this.port}`
+                : `http://${this.ip}:${this.port}`;
     }
     RpcCall(method, param, id) {
         return __awaiter(this, void 0, void 0, function* () {

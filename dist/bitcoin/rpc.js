@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("../client");
 const mtd_1 = require("./mtd");
 class BitcoinClient extends client_1.default {
-    constructor(user, pass, ip, port = 8332) {
-        super(user, pass, ip, port);
+    constructor(user, pass, ip, port = 8332, isHttps = false) {
+        super(user, pass, ip, port, isHttps);
     }
     getInfo() {
         return this.RpcCall(mtd_1.BitcoinMethods.info.info);
