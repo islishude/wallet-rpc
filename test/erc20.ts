@@ -4,10 +4,7 @@ import { Ethereum } from "../src/index";
 
 const Client = new Ethereum.RPC(
   "https://mainnet.infura.io/weSJ3zFGeV2C0gF3Yxpn",
-  443,
-  "",
-  "",
-  true
+  443
 );
 
 const TRX = "0xf230b790e05390fc8295f4d3f60332c93bed42e2";
