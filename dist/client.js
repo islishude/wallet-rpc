@@ -38,14 +38,14 @@ class Client {
     }
     RpcCall(method, param, id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = {
+            const reqData = {
                 id: id || Date.now(),
                 jsonrpc: "2.0",
                 method,
                 params: param || []
             };
-            const res = yield axios_1.default.post(this.uri, data, this.reqConfig);
-            return res.data;
+            const { data } = yield axios_1.default.post(this.uri, reqData, this.reqConfig);
+            return data;
         });
     }
     BulkAdd(method, param, id) {
@@ -59,10 +59,10 @@ class Client {
     }
     BulkRpcCall() {
         return __awaiter(this, void 0, void 0, function* () {
-            const data = this.bulkData;
+            const reqData = this.bulkData;
             this.bulkData = [];
-            const res = yield axios_1.default.post(this.uri, data, this.reqConfig);
-            return res.data;
+            const { data } = yield axios_1.default.post(this.uri, reqData, this.reqConfig);
+            return data;
         });
     }
     getErrorResponse(error) {

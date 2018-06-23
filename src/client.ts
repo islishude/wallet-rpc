@@ -39,15 +39,15 @@ export default abstract class Client {
     param?: any[],
     id?: number
   ): Promise<RPCResponse<T>> {
-    const data: RPCRequest = {
+    const reqData: RPCRequest = {
       id: id || Date.now(),
       jsonrpc: "2.0",
       method,
       params: param || []
     };
 
-    const res = await Axios.post(this.uri, data, this.reqConfig);
-    return res.data;
+    const { data } = await Axios.post(this.uri, reqData, this.reqConfig);
+    return data;
   }
 
   /**
@@ -71,15 +71,16 @@ export default abstract class Client {
    * recommendation using it from same request bulk
    */
   public async BulkRpcCall(): Promise<RPCResponse[]> {
-    const data: RPCRequest[] = this.bulkData;
+    const reqData: RPCRequest[] = this.bulkData;
     // clear data
     this.bulkData = [];
-    const res = await Axios.post(this.uri, data, this.reqConfig);
-    return res.data;
+    const { data } = await Axios.post(this.uri, reqData, this.reqConfig);
+    return data;
   }
 
   /**
    * RPC Response error handler
+   * @deprecated 
    */
   public getErrorResponse(error: AxiosError): RPCError {
     if (error.response) {
