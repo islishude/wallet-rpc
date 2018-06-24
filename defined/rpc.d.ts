@@ -2,7 +2,7 @@ export interface RPCResponse<T = any> {
   jsonrpc?: string;
   id?: number | string;
   result: T;
-  error: RPCErrorStruct | void;
+  error?: RPCErrorStruct;
 }
 
 export interface RPCErrorStruct {
