@@ -242,7 +242,7 @@ export class EthereumClient extends Client {
   }
 
   public async ERC20TokenInfo(token: string) {
-    const tmp = await Promise.all([
+    const [name, symbol, decimals, totalSupply] = await Promise.all([
       this.ERC20Name(token),
       this.ERC20Symbol(token),
       this.ERC20Decimals(token),
@@ -251,12 +251,12 @@ export class EthereumClient extends Client {
 
     return {
       address: token,
-      decimals: tmp[2],
+      decimals,
       // if name === "" set it equal with symbol
       // eg. EOS token has no name
-      name: tmp[0] || tmp[1],
-      symbol: tmp[1],
-      totalSupply: tmp[3]
+      name: name || symbol,
+      symbol,
+      totalSupply
     };
   }
 }

@@ -147,7 +147,7 @@ class EthereumClient extends client_1.default {
     }
     ERC20TokenInfo(token) {
         return __awaiter(this, void 0, void 0, function* () {
-            const tmp = yield Promise.all([
+            const [name, symbol, decimals, totalSupply] = yield Promise.all([
                 this.ERC20Name(token),
                 this.ERC20Symbol(token),
                 this.ERC20Decimals(token),
@@ -155,10 +155,10 @@ class EthereumClient extends client_1.default {
             ]);
             return {
                 address: token,
-                decimals: tmp[2],
-                name: tmp[0] || tmp[1],
-                symbol: tmp[1],
-                totalSupply: tmp[3]
+                decimals,
+                name: name || symbol,
+                symbol,
+                totalSupply
             };
         });
     }
