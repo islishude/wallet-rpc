@@ -12,6 +12,9 @@ exports.hexToDecimalString = (hex) => {
     if (hex === "0x") {
         return "0";
     }
+    if (!hex.includes("0x")) {
+        hex = "0x" + hex;
+    }
     return new bignumber_js_1.default(hex).toString(10);
 };
 exports.numberToHex = (int) => {
