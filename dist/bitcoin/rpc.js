@@ -20,7 +20,7 @@ class BitcoinClient extends client_1.default {
     }
     getTxInfo(id) {
         const param = [id, true];
-        return this.RpcCall(mtd_1.BitcoinMethods.tx.detail, param);
+        return this.RpcCall(mtd_1.BitcoinMethods.tx.raw, param);
     }
     getRawTxInfo(id) {
         const param = [id, false];

@@ -34,12 +34,12 @@ export class BitcoinClient extends Client {
   // use getRawTransaction method and decode
   public getTxInfo(id: string) {
     const param: [string, boolean] = [id, true];
-    return this.RpcCall<Bitcoin.TxInfo>(mtd.tx.detail, param);
+    return this.RpcCall<Bitcoin.TxInfo>(mtd.tx.raw, param);
   }
 
   public getRawTxInfo(id: string) {
     const param: [string, boolean] = [id, false];
-    return this.RpcCall(mtd.tx.raw, param);
+    return this.RpcCall<string>(mtd.tx.raw, param);
   }
 
   /**
