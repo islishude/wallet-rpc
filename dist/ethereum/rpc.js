@@ -58,8 +58,8 @@ class EthereumClient extends client_1.default {
     getCode(address, status) {
         return this.RpcCall(mtd_1.EthereumMethods.address.code, [address, status]);
     }
-    getEstimateGas(param, status = "latest") {
-        return this.RpcCall(mtd_1.EthereumMethods.gas.estimate, [param, status]);
+    getEstimateGas(param) {
+        return this.RpcCall(mtd_1.EthereumMethods.gas.estimate, [param]);
     }
     traceTx(tx, opt) {
         return this.RpcCall(mtd_1.EthereumMethods.debug.traceTx, [tx, opt]);

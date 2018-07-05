@@ -135,11 +135,8 @@ export class EthereumClient extends Client {
    * Note that the estimate may be significantly more than the amount of gas actually used by the transaction,
    * for a variety of reasons including EVM mechanics and node performance.
    */
-  public getEstimateGas(
-    param: Ethereum.ICallFuncParam,
-    status: Ethereum.Status = "latest"
-  ) {
-    return this.RpcCall(mtd.gas.estimate, [param, status]);
+  public getEstimateGas(param: Ethereum.ICallFuncParam) {
+    return this.RpcCall(mtd.gas.estimate, [param]);
   }
 
   /**

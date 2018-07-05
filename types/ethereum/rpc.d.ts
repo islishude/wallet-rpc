@@ -16,7 +16,7 @@ export declare class EthereumClient extends Client {
     getCurrentGasPrice(): Promise<RPCResponse<string>>;
     callFunc(param: Ethereum.ICallFuncParam, status?: Ethereum.Status): Promise<RPCResponse<string>>;
     getCode(address: string, status: string): Promise<RPCResponse<string>>;
-    getEstimateGas(param: Ethereum.ICallFuncParam, status?: Ethereum.Status): Promise<RPCResponse<string>>;
+    getEstimateGas(param: Ethereum.ICallFuncParam): Promise<RPCResponse<string>>;
     traceTx(tx: string, opt?: {
         disableStorage?: boolean;
         disableMemory?: boolean;
