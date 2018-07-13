@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const bignumber_js_1 = require("../../node_modules/bignumber.js");
+const bignumber_js_1 = require("bignumber.js");
 const client_1 = require("../client");
 const mtd_1 = require("./mtd");
 const util_1 = require("./util");

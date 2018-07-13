@@ -1,6 +1,6 @@
+import BigNumber from "bignumber.js";
 import { Ethereum } from "../../defined/eth";
 import { RPCResponse } from "../../defined/rpc";
-import BigNumber from "../../node_modules/bignumber.js";
 import Client from "../client";
 import { EthereumMethods as mtd } from "./mtd";
 import {
