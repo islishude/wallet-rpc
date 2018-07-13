@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const bignumber_js_1 = require("../../node_modules/bignumber.js");
 const client_1 = require("../client");
 const mtd_1 = require("./mtd");
 const util_1 = require("./util");
@@ -153,12 +154,15 @@ class EthereumClient extends client_1.default {
                 this.ERC20Decimals(token),
                 this.ERC20TotalSupply(token)
             ]);
+            const total = totalSupply === "0"
+                ? "0"
+                : new bignumber_js_1.default(totalSupply).div(Math.pow(10, decimals)).toString(10);
             return {
                 address: token,
                 decimals,
                 name: name || symbol,
                 symbol,
-                totalSupply
+                totalSupply: total
             };
         });
     }

@@ -1,5 +1,6 @@
 import { Ethereum } from "../../defined/eth";
 import { RPCResponse } from "../../defined/rpc";
+import BigNumber from "../../node_modules/bignumber.js";
 import Client from "../client";
 import { EthereumMethods as mtd } from "./mtd";
 import {
@@ -246,6 +247,11 @@ export class EthereumClient extends Client {
       this.ERC20TotalSupply(token)
     ]);
 
+    const total =
+      totalSupply === "0"
+        ? "0"
+        : new BigNumber(totalSupply).div(10 ** decimals).toString(10);
+
     return {
       address: token,
       decimals,
@@ -253,7 +259,7 @@ export class EthereumClient extends Client {
       // eg. EOS token has no name
       name: name || symbol,
       symbol,
-      totalSupply
+      totalSupply: total
     };
   }
 }
