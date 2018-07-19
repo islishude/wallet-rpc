@@ -91,7 +91,7 @@ class EthereumClient extends client_1.default {
                 this.callFunc(PARAM)
             ]);
             if (decimals === "0x" && DECIMALS === "0x") {
-                return 0;
+                return -1;
             }
             return util_1.hexToNumber(decimals === "0x" ? DECIMALS : decimals);
         });
