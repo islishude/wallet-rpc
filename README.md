@@ -116,9 +116,8 @@ ERC20TokenInfo(token: string): Promise<{
 
 ### CLI
 ```
-# or install with -g
-npm install wallet-rpc
 npx wallet-rpc
+# or run `npm i -g wallet-rpc`
 # and CLI ready for you!
 > const eth = new Ethereum.RPC("https://mainnet.infura.io", 443)
 > eth.getBlockCount()
