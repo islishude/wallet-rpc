@@ -6,6 +6,8 @@ MultiCryptoCoins RPC Lib by TypeScript for Node.js
 - Ethereum(geth 1.8.0+) and ERC20
 - DKKToken
 
+And CLI Supports, [learn more](#cli)!
+
 ## TODO Supports
 
 - [ ] BitcoinCash
@@ -110,6 +112,16 @@ ERC20TokenInfo(token: string): Promise<{
     symbol: string;
     totalSupply: number;
 }>;
+```
+
+### CLI
+```
+# or install with -g
+npm install wallet-rpc
+npx wallet-rpc
+# and CLI ready for you!
+> const eth = new Ethereum.RPC("https://mainnet.infura.io", 443)
+> eth.getBlockCount()
 ```
 
 ### RPC Methods List
