@@ -3,7 +3,9 @@
   "extends": ["tslint:latest", "tslint-config-prettier"],
   "jsRules": {},
   "rules": {
-    "no-submodule-imports": false
+    "no-submodule-imports": false,
+    "object-literal-sort-keys": false,
+    "no-var-requires": false
   },
   "rulesDirectory": []
 }

@@ -95,6 +95,7 @@ export class EthereumClient extends Client {
   /**
    * Returns the number of transactions sent from an address.
    * alias for getTxCount
+   * !! Geth(<=1.8.12) isn't supports pending nonce. 
    */
   public getAddrNonce(address: string, status: Ethereum.Status = "latest") {
     const param: string[] = [address, status];
@@ -187,7 +188,10 @@ export class EthereumClient extends Client {
       this.callFunc(PARAM)
     ]);
     if (decimals === "0x" && DECIMALS === "0x") {
-      return -1;
+      // ERC721 Token balance is TokenId's amount
+      // So there should be 0
+      // e.g new BigNumber(balance).div(10 ** decimals) 
+      return 0;
     }
     return hexToNumber(decimals === "0x" ? DECIMALS : decimals);
   }
@@ -258,7 +262,7 @@ export class EthereumClient extends Client {
       // if name === "" set it equal with symbol
       // eg. EOS token has no name
       name: name || symbol,
-      symbol,
+      symbol: symbol || name,
       totalSupply: total
     };
   }

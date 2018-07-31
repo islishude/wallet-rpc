@@ -8,6 +8,9 @@
     "test": "ts-node test/*.ts",
     "pub": "git push --all && git push --tags && npm publish"
   },
+  "bin": {
+    "wallet-rpc": "dist/bin/cli.js"
+  },
   "keywords": [
     "Bitcoin",
     "DKKToken",

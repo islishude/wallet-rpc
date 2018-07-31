@@ -11,7 +11,7 @@ Client.ERC20TokenInfo(TRX)
     assert(decimals === 6);
     assert(name === "Tronix");
     assert(symbol === "TRX");
-    assert(totalSupply === "100000000000000000");
+    assert(totalSupply === "100000000000");
   })
   .catch(err => log(err.message));
 
@@ -22,7 +22,7 @@ Client.ERC20TokenInfo(HPB)
     assert(decimals === 18);
     assert(name === "HPBCoin");
     assert(symbol === "HPB");
-    assert(totalSupply === "100000000000000000000000000");
+    assert(totalSupply === "100000000");
   })
   .catch(err => log(err.message));
 
@@ -33,6 +33,6 @@ Client.ERC20TokenInfo(EGCC)
     assert(decimals === 18);
     assert(name === "EngineToken");
     assert(symbol === "EGCC");
-    assert(totalSupply === "10000000000000000000000000000");
+    assert(totalSupply === "10000000000");
   })
   .catch(err => log(err.message));
