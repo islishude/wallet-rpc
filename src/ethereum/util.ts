@@ -5,7 +5,7 @@ export const hexToNumber = (hex: string): number => {
   if (hex === "0x") {
     return 0;
   }
-  return Number.parseInt(hex);
+  return Number.parseInt(hex, 16);
 };
 
 export const hexToDecimalString = (hex: string): string => {

@@ -6,7 +6,7 @@ exports.hexToNumber = (hex) => {
     if (hex === "0x") {
         return 0;
     }
-    return Number.parseInt(hex);
+    return Number.parseInt(hex, 16);
 };
 exports.hexToDecimalString = (hex) => {
     if (hex === "0x") {

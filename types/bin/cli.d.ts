@@ -1,2 +1,2 @@
-#!/usr/bin/env node
+#!/user/bin/env node
 export {};
