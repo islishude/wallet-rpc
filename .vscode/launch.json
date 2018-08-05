@@ -11,7 +11,7 @@
             "stopOnEntry": true,
             "runtimeArgs": [
                 "-r",
-                "ts-node/registry"
+                "ts-node/register"
             ],
             "args": [
                 "${relativeFile}"
