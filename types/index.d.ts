@@ -59,6 +59,9 @@ export declare const Ethereum: {
             receipt: string;
             send: string;
             sendRaw: string;
+            parity: {
+                trace: string;
+            };
         };
         txpool: {
             content: string;

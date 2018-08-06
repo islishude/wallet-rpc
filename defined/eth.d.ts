@@ -111,4 +111,52 @@ declare namespace Ethereum {
       err: string;
     }>;
   }
+
+  export interface IParityTypeAction {
+    from: string;
+    value: string;
+    gas: string;
+    init: string;
+  }
+
+  export interface IParityCallAction {
+    callType: "call" | "callcode" | "delegatecall" | "staticcall";
+    from: string;
+    to: string;
+    value: string;
+    gas: string;
+    input: string;
+  }
+
+  export interface IParitySuicideAction {
+    address: string;
+    refundAddress: string;
+    balance: string;
+  }
+
+  export interface IParityCreateResult {
+    address: string;
+    code: string;
+    gasUsed: string;
+  }
+
+  export interface IParityCallResult {
+    gasUsed: string;
+    output: string;
+  }
+
+  export interface IParityTxTrace {
+    action: IParityCallAction | IParityTypeAction | IParitySuicideAction;
+    blockHash: string;
+    blockNumber: number;
+    // if `suicide` result will be null
+    result: IParityCallResult | IParityCreateResult | null;
+    subtraces: number;
+    error?: string;
+    traceAddress: string[];
+    transactionHash: string;
+    transactionPosition: number;
+    // for block trace has `reward` type
+    type: "create" | "call" | "suicide";
+  }
 }

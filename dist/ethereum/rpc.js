@@ -1,12 +1,4 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const bignumber_js_1 = require("bignumber.js");
 const client_1 = require("../client");
@@ -62,109 +54,104 @@ class EthereumClient extends client_1.default {
     getEstimateGas(param) {
         return this.RpcCall(mtd_1.EthereumMethods.gas.estimate, [param]);
     }
-    traceTx(tx, opt) {
-        return this.RpcCall(mtd_1.EthereumMethods.debug.traceTx, [tx, opt]);
+    traceTx(txid, opt) {
+        return this.RpcCall(mtd_1.EthereumMethods.debug.traceTx, [
+            txid,
+            opt
+        ]);
     }
-    ERC20Balance(token, address, isPending = true) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const status = isPending ? "pending" : "latest";
-            const param = {
-                data: util_1.ERC20FuncSig.balanceOf + util_1.padAddress(address),
-                to: token
-            };
-            const { result: balance } = yield this.callFunc(param, status);
-            return balance;
-        });
+    traceTxByParity(txid) {
+        return this.RpcCall(mtd_1.EthereumMethods.tx.parity.trace, [txid]);
     }
-    ERC20Decimals(token) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const param = {
-                data: util_1.ERC20FuncSig.decimals,
-                to: token
-            };
-            const PARAM = {
-                data: util_1.ERC20FuncSigUpper.DECIMALS,
-                to: token
-            };
-            const [{ result: decimals }, { result: DECIMALS }] = yield Promise.all([
-                this.callFunc(param),
-                this.callFunc(PARAM)
-            ]);
-            if (decimals === "0x" && DECIMALS === "0x") {
-                return 0;
-            }
-            return util_1.hexToNumber(decimals === "0x" ? DECIMALS : decimals);
-        });
+    async ERC20Balance(token, address, isPending = true) {
+        const status = isPending ? "pending" : "latest";
+        const param = {
+            data: util_1.ERC20FuncSig.balanceOf + util_1.padAddress(address),
+            to: token
+        };
+        const { result: balance } = await this.callFunc(param, status);
+        return balance;
     }
-    ERC20TotalSupply(token) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const param = {
-                data: util_1.ERC20FuncSig.totalSupply,
-                to: token
-            };
-            const { result: totalSupply } = yield this.callFunc(param);
-            return util_1.hexToDecimalString(totalSupply);
-        });
+    async ERC20Decimals(token) {
+        const param = {
+            data: util_1.ERC20FuncSig.decimals,
+            to: token
+        };
+        const PARAM = {
+            data: util_1.ERC20FuncSigUpper.DECIMALS,
+            to: token
+        };
+        const [{ result: decimals }, { result: DECIMALS }] = await Promise.all([
+            this.callFunc(param),
+            this.callFunc(PARAM)
+        ]);
+        if (decimals === "0x" && DECIMALS === "0x") {
+            return 0;
+        }
+        return util_1.hexToNumber(decimals === "0x" ? DECIMALS : decimals);
     }
-    ERC20Name(token) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const param = {
-                data: util_1.ERC20FuncSig.name,
-                to: token
-            };
-            const PARAM = {
-                data: util_1.ERC20FuncSigUpper.NAME,
-                to: token
-            };
-            const [{ result: name }, { result: NAME }] = yield Promise.all([
-                this.callFunc(param),
-                this.callFunc(PARAM)
-            ]);
-            if (name === "0x" && NAME === "0x") {
-                return "";
-            }
-            return util_1.toUtf8(name === "0x" ? NAME : name);
-        });
+    async ERC20TotalSupply(token) {
+        const param = {
+            data: util_1.ERC20FuncSig.totalSupply,
+            to: token
+        };
+        const { result: totalSupply } = await this.callFunc(param);
+        return util_1.hexToDecimalString(totalSupply);
     }
-    ERC20Symbol(token) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const param = {
-                data: util_1.ERC20FuncSig.symbol,
-                to: token
-            };
-            const PARAM = {
-                data: util_1.ERC20FuncSigUpper.SYMBOL,
-                to: token
-            };
-            const [{ result: symbol }, { result: SYMBOL }] = yield Promise.all([
-                this.callFunc(param),
-                this.callFunc(PARAM)
-            ]);
-            if (symbol === "0x" && SYMBOL === "0x") {
-                return "";
-            }
-            return util_1.toUtf8(symbol === "0x" ? SYMBOL : symbol);
-        });
+    async ERC20Name(token) {
+        const param = {
+            data: util_1.ERC20FuncSig.name,
+            to: token
+        };
+        const PARAM = {
+            data: util_1.ERC20FuncSigUpper.NAME,
+            to: token
+        };
+        const [{ result: name }, { result: NAME }] = await Promise.all([
+            this.callFunc(param),
+            this.callFunc(PARAM)
+        ]);
+        if (name === "0x" && NAME === "0x") {
+            return "";
+        }
+        return util_1.toUtf8(name === "0x" ? NAME : name);
     }
-    ERC20TokenInfo(token) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const [name, symbol, decimals, totalSupply] = yield Promise.all([
-                this.ERC20Name(token),
-                this.ERC20Symbol(token),
-                this.ERC20Decimals(token),
-                this.ERC20TotalSupply(token)
-            ]);
-            const total = totalSupply === "0"
-                ? "0"
-                : new bignumber_js_1.default(totalSupply).div(Math.pow(10, decimals)).toString(10);
-            return {
-                address: token,
-                decimals,
-                name: name || symbol,
-                symbol: symbol || name,
-                totalSupply: total
-            };
-        });
+    async ERC20Symbol(token) {
+        const param = {
+            data: util_1.ERC20FuncSig.symbol,
+            to: token
+        };
+        const PARAM = {
+            data: util_1.ERC20FuncSigUpper.SYMBOL,
+            to: token
+        };
+        const [{ result: symbol }, { result: SYMBOL }] = await Promise.all([
+            this.callFunc(param),
+            this.callFunc(PARAM)
+        ]);
+        if (symbol === "0x" && SYMBOL === "0x") {
+            return "";
+        }
+        return util_1.toUtf8(symbol === "0x" ? SYMBOL : symbol);
+    }
+    async ERC20TokenInfo(token) {
+        const [name, symbol, decimals, totalSupply] = await Promise.all([
+            this.ERC20Name(token),
+            this.ERC20Symbol(token),
+            this.ERC20Decimals(token),
+            this.ERC20TotalSupply(token)
+        ]);
+        const val = new bignumber_js_1.default(10).pow(decimals);
+        const total = totalSupply === "0"
+            ? "0"
+            : new bignumber_js_1.default(totalSupply).div(val).toString(10);
+        return {
+            address: token,
+            decimals,
+            name: name || symbol,
+            symbol: symbol || name,
+            totalSupply: total
+        };
     }
 }
 exports.EthereumClient = EthereumClient;

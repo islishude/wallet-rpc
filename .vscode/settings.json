@@ -1,7 +1,11 @@
 {
     "cSpell.words": [
+        "callcode",
+        "delegatecall",
         "geth",
         "rpcapi",
+        "staticcall",
+        "subtraces",
         "txpool"
     ]
 }

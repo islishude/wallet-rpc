@@ -95,7 +95,7 @@ export class EthereumClient extends Client {
   /**
    * Returns the number of transactions sent from an address.
    * alias for getTxCount
-   * !! Geth(<=1.8.12) isn't supports pending nonce. 
+   * !! Geth(<=1.8.12) isn't supports pending nonce.
    */
   public getAddrNonce(address: string, status: Ethereum.Status = "latest") {
     const param: string[] = [address, status];
@@ -147,7 +147,7 @@ export class EthereumClient extends Client {
    * @see https://github.com/ethereum/go-ethereum/wiki/Management-APIs#debug_tracetransaction
    */
   public traceTx(
-    tx: string,
+    txid: string,
     opt?: {
       disableStorage?: boolean;
       disableMemory?: boolean;
@@ -156,7 +156,14 @@ export class EthereumClient extends Client {
       timeout?: string;
     }
   ) {
-    return this.RpcCall<Ethereum.ITraceTxReturn>(mtd.debug.traceTx, [tx, opt]);
+    return this.RpcCall<Ethereum.ITraceTxReturn>(mtd.debug.traceTx, [
+      txid,
+      opt
+    ]);
+  }
+
+  public traceTxByParity(txid: string) {
+    return this.RpcCall<Ethereum.IParityTxTrace>(mtd.tx.parity.trace, [txid]);
   }
 
   public async ERC20Balance(
@@ -190,7 +197,7 @@ export class EthereumClient extends Client {
     if (decimals === "0x" && DECIMALS === "0x") {
       // ERC721 Token balance is TokenId's amount
       // So there should be 0
-      // e.g new BigNumber(balance).div(10 ** decimals) 
+      // e.g new BigNumber(balance).div(10 ** decimals)
       return 0;
     }
     return hexToNumber(decimals === "0x" ? DECIMALS : decimals);
@@ -251,10 +258,11 @@ export class EthereumClient extends Client {
       this.ERC20TotalSupply(token)
     ]);
 
+    const val: BigNumber = new BigNumber(10).pow(decimals);
     const total =
       totalSupply === "0"
         ? "0"
-        : new BigNumber(totalSupply).div(10 ** decimals).toString(10);
+        : new BigNumber(totalSupply).div(val).toString(10);
 
     return {
       address: token,

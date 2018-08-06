@@ -17,13 +17,14 @@ export declare class EthereumClient extends Client {
     callFunc(param: Ethereum.ICallFuncParam, status?: Ethereum.Status): Promise<RPCResponse<string>>;
     getCode(address: string, status: string): Promise<RPCResponse<string>>;
     getEstimateGas(param: Ethereum.ICallFuncParam): Promise<RPCResponse<string>>;
-    traceTx(tx: string, opt?: {
+    traceTx(txid: string, opt?: {
         disableStorage?: boolean;
         disableMemory?: boolean;
         disableStack?: boolean;
         trace?: string;
         timeout?: string;
     }): Promise<RPCResponse<Ethereum.ITraceTxReturn>>;
+    traceTxByParity(txid: string): Promise<RPCResponse<Ethereum.IParityTxTrace>>;
     ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
     ERC20Decimals(token: string): Promise<number>;
     ERC20TotalSupply(token: string): Promise<string>;

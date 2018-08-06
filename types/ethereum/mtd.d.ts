@@ -26,6 +26,9 @@ export declare const EthereumMethods: {
         receipt: string;
         send: string;
         sendRaw: string;
+        parity: {
+            trace: string;
+        };
     };
     txpool: {
         content: string;

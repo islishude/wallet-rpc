@@ -25,7 +25,10 @@ export const EthereumMethods = {
     call: "eth_call",
     receipt: "eth_getTransactionReceipt",
     send: "eth_sendTransaction",
-    sendRaw: "eth_sendRawTransaction"
+    sendRaw: "eth_sendRawTransaction",
+    parity: {
+      trace: "trace_transaction"
+    }
   },
   txpool: {
     content: "txpool_content",
