@@ -1,7 +1,5 @@
-import Axios, { AxiosError, AxiosRequestConfig } from "axios";
-import { Agent as httpAgent } from "http";
-import { Agent as httpsAgent } from "https";
-import { RPCError, RPCRequest, RPCResponse } from "../defined/rpc";
+import Axios, { AxiosRequestConfig } from "axios";
+import { RPCRequest, RPCResponse } from "../defined/rpc";
 
 export default abstract class Client {
   protected uri: string;
