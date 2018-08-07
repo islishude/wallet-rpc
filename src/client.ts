@@ -22,11 +22,11 @@ export default abstract class Client {
       }
     };
 
-    if (isHttps || /^https.+$/.test(this.ip)) {
-      this.reqConfig.httpsAgent = new httpsAgent({ keepAlive: true });
-    } else {
-      this.reqConfig.httpAgent = new httpAgent({ keepAlive: true });
-    }
+    // if (isHttps || /^https.+$/.test(this.ip)) {
+    //   this.reqConfig.httpsAgent = new httpsAgent({ keepAlive: true });
+    // } else {
+    //   this.reqConfig.httpAgent = new httpAgent({ keepAlive: true });
+    // }
     this.uri = /^http.+$/.test(this.ip)
       ? `${this.ip}:${this.port}`
       : isHttps
@@ -76,16 +76,6 @@ export default abstract class Client {
     this.bulkData = [];
     const { data } = await Axios.post(this.uri, reqData, this.reqConfig);
     return data;
-  }
-
-  /**
-   * RPC Response error handler
-   * @deprecated 
-   */
-  public getErrorResponse(error: AxiosError): RPCError {
-    if (error.response) {
-      return error.response.data;
-    }
   }
 
   /**

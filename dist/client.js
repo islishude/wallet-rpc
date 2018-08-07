@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
-const http_1 = require("http");
-const https_1 = require("https");
 class Client {
     constructor(user, pass, ip, port, isHttps = false) {
         this.user = user;
@@ -16,12 +14,6 @@ class Client {
                 username: this.user
             }
         };
-        if (isHttps || /^https.+$/.test(this.ip)) {
-            this.reqConfig.httpsAgent = new https_1.Agent({ keepAlive: true });
-        }
-        else {
-            this.reqConfig.httpAgent = new http_1.Agent({ keepAlive: true });
-        }
         this.uri = /^http.+$/.test(this.ip)
             ? `${this.ip}:${this.port}`
             : isHttps
@@ -52,11 +44,6 @@ class Client {
         this.bulkData = [];
         const { data } = await axios_1.default.post(this.uri, reqData, this.reqConfig);
         return data;
-    }
-    getErrorResponse(error) {
-        if (error.response) {
-            return error.response.data;
-        }
     }
     async BulkRpcExec(data) {
         const res = await axios_1.default.post(this.uri, data, this.reqConfig);
