@@ -153,7 +153,7 @@ declare namespace Ethereum {
     result: IParityCallResult | IParityCreateResult | null;
     subtraces: number;
     error?: string;
-    traceAddress: string[];
+    traceAddress: number[];
     transactionHash: string;
     transactionPosition: number;
     // for block trace has `reward` type
