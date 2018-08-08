@@ -6,14 +6,8 @@ import { DKKTokenMethods as mtd } from "./mtd";
 const { block, tx } = mtd;
 
 export class DKKTClient extends Client {
-  constructor(
-    user: string,
-    pass: string,
-    ip: string,
-    port: number = 28880,
-    isHttps: boolean = false
-  ) {
-    super(user, pass, ip, port, isHttps);
+  constructor(user: string, pass: string, ip: string, port: number = 28880) {
+    super(user, pass, ip, port);
   }
 
   public getInfo() {

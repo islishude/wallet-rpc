@@ -4,14 +4,8 @@ import Client from "../client";
 import { BitcoinMethods as mtd } from "./mtd";
 
 export class BitcoinClient extends Client {
-  constructor(
-    user: string,
-    pass: string,
-    ip: string,
-    port: number = 8332,
-    isHttps: boolean = false
-  ) {
-    super(user, pass, ip, port, isHttps);
+  constructor(user: string, pass: string, ip: string, port: number = 8332) {
+    super(user, pass, ip, port);
   }
 
   public getInfo() {

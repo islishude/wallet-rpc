@@ -9,8 +9,7 @@ export default abstract class Client {
     public user: string,
     public pass: string,
     public ip: string,
-    public port: number,
-    isHttps: boolean = false
+    public port: number
   ) {
     this.bulkData = [];
     this.reqConfig = {
@@ -20,16 +19,14 @@ export default abstract class Client {
       }
     };
 
-    // if (isHttps || /^https.+$/.test(this.ip)) {
+    // if (/^https.+$/.test(this.ip)) {
     //   this.reqConfig.httpsAgent = new httpsAgent({ keepAlive: true });
     // } else {
     //   this.reqConfig.httpAgent = new httpAgent({ keepAlive: true });
     // }
     this.uri = /^http.+$/.test(this.ip)
       ? `${this.ip}:${this.port}`
-      : isHttps
-        ? `https://${this.ip}:${this.port}`
-        : `http://${this.ip}:${this.port}`;
+      : `http://${this.ip}:${this.port}`;
   }
 
   public async RpcCall<T = string>(

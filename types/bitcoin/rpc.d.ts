@@ -2,7 +2,7 @@ import { Bitcoin } from "../../defined/btc";
 import { RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 export declare class BitcoinClient extends Client {
-    constructor(user: string, pass: string, ip: string, port?: number, isHttps?: boolean);
+    constructor(user: string, pass: string, ip: string, port?: number);
     getInfo(): Promise<RPCResponse<Bitcoin.WalletInfo>>;
     getBlockCount(): Promise<RPCResponse<number>>;
     getBlockHash(height: number): Promise<RPCResponse<string>>;

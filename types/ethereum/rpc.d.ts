@@ -2,7 +2,7 @@ import { Ethereum } from "../../defined/eth";
 import { RPCResponse } from "../../defined/rpc";
 import Client from "../client";
 export declare class EthereumClient extends Client {
-    constructor(ip: string, port?: number, user?: string, pass?: string, isHttps?: boolean);
+    constructor(ip: string, port?: number, user?: string, pass?: string);
     getBalance(address: string, status?: Ethereum.Status): Promise<RPCResponse<string>>;
     getBlockCount(): Promise<RPCResponse<string>>;
     getBlockByHash(hash: string, getFullTx?: boolean): Promise<RPCResponse<Ethereum.IBlock>>;

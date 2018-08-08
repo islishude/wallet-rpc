@@ -3,6 +3,7 @@
         "callcode",
         "delegatecall",
         "geth",
+        "litecoin",
         "rpcapi",
         "staticcall",
         "subtraces",

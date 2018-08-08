@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 class Client {
-    constructor(user, pass, ip, port, isHttps = false) {
+    constructor(user, pass, ip, port) {
         this.user = user;
         this.pass = pass;
         this.ip = ip;
@@ -16,9 +16,7 @@ class Client {
         };
         this.uri = /^http.+$/.test(this.ip)
             ? `${this.ip}:${this.port}`
-            : isHttps
-                ? `https://${this.ip}:${this.port}`
-                : `http://${this.ip}:${this.port}`;
+            : `http://${this.ip}:${this.port}`;
     }
     async RpcCall(method, param, id) {
         const reqData = {

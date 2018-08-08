@@ -1,17 +1,16 @@
-MultiCryptoCoins RPC Lib by TypeScript for Node.js
+RPC client of crypto coins by TypeScript
 
 ## Supports
 
 - Bitcoin(core 0.16+)
-- Ethereum(geth 1.8.0+) and ERC20
-- DKKToken
+- BitcoinCash(same with Bitcoin)
+- Litecoin(same with Bitcoin)
+- Ethereum(geth 1.8.0+ || parity 1.0.0+) and ERC20
 
 And CLI Supports, [learn more](#cli)!
 
 ## TODO Supports
 
-- [ ] BitcoinCash
-- [ ] LiteCoin
 - [ ] EOS
 
 ## Install
@@ -26,7 +25,7 @@ npm install wallet-rpc --save
 ### CommonJS
 
 ```js
-import { Bitcoin, Ethereum, DKKToken } from "wallet-rpc";
+import { Bitcoin, Ethereum } from "wallet-rpc";
 // the default rpc port of bitcoin is 8332
 const btcClient = new Bitcoin.RPC("username", "password", "ip", 8832);
 // the default rpc of geth has no username and no password
@@ -73,7 +72,6 @@ btcClient.BulkCall();
 
 - [Bitcoin](./types/bitcoin/rpc.d.ts)
 - [Ethereum](./types/ethereum/rpc.d.ts)
-- [DKKToken](./types/dkktoken/rpc.d.ts)
 
 #### EthereumUtil
 

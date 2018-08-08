@@ -16,12 +16,11 @@ export class EthereumClient extends Client {
   // go-ethereum client RPC settings has no user and password for rpc
   constructor(
     ip: string,
-    port: number = 30303,
+    port: number = 8545,
     user: string = "",
-    pass: string = "",
-    isHttps: boolean = false
+    pass: string = ""
   ) {
-    super(user, pass, ip, port, isHttps);
+    super(user, pass, ip, port);
   }
 
   public getBalance(
