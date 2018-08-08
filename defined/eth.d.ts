@@ -112,7 +112,7 @@ declare namespace Ethereum {
     }>;
   }
 
-  export interface IParityTypeAction {
+  export interface IParityCreateAction {
     from: string;
     value: string;
     gas: string;
@@ -146,7 +146,7 @@ declare namespace Ethereum {
   }
 
   export interface IParityTxTrace {
-    action: IParityCallAction | IParityTypeAction | IParitySuicideAction;
+    action: IParityCallAction | IParityCreateAction | IParitySuicideAction;
     blockHash: string;
     blockNumber: number;
     // if `suicide` result will be null
