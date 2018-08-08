@@ -12,6 +12,7 @@ And CLI Supports, [learn more](#cli)!
 ## TODO Supports
 
 - [ ] EOS
+- [ ] USDT
 
 ## Install
 
@@ -125,7 +126,6 @@ npx wallet-rpc
 
 - [Bitcoin](./src/bitcoin/mtd.ts)
 - [Ethereum](./src/ethereum/mtd.ts)
-- [DKKToken](./src/dkktoken/mtd.ts)
 
 ## Feedback
 
