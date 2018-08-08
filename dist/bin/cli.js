@@ -6,7 +6,6 @@ const repl_1 = require("repl");
 const index_1 = require("../index");
 const color = {
     yellow: "\x1b[33m",
-    green: "\x1b[32m",
     clear: "\x1b[0m",
     underscore: "\x1b[4m"
 };
