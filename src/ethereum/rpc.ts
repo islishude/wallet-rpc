@@ -84,7 +84,7 @@ export class EthereumClient extends Client {
   }
 
   public sendRawTx(raw: string) {
-    return this.RpcCall(mtd.tx.sendRaw, [raw]);
+    return this.RpcCall<string>(mtd.tx.sendRaw, [raw]);
   }
 
   /**
@@ -110,7 +110,7 @@ export class EthereumClient extends Client {
    */
   public getAddrNonce(address: string, status: Ethereum.Status = "latest") {
     const param: string[] = [address, status];
-    return this.RpcCall(mtd.address.nonce, param);
+    return this.RpcCall<string>(mtd.address.nonce, param);
   }
 
   /**
@@ -118,7 +118,7 @@ export class EthereumClient extends Client {
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_gasprice
    */
   public getCurrentGasPrice() {
-    return this.RpcCall(mtd.gas.price, []);
+    return this.RpcCall<string>(mtd.gas.price, []);
   }
 
   /**
@@ -129,7 +129,7 @@ export class EthereumClient extends Client {
     param: Ethereum.ICallFuncParam,
     status: Ethereum.Status = "latest"
   ) {
-    return this.RpcCall(mtd.tx.call, [param, status]);
+    return this.RpcCall<string>(mtd.tx.call, [param, status]);
   }
 
   /**
@@ -139,7 +139,7 @@ export class EthereumClient extends Client {
    * @returns the code from the given address
    */
   public getCode(address: string, status: string) {
-    return this.RpcCall(mtd.address.code, [address, status]);
+    return this.RpcCall<string>(mtd.address.code, [address, status]);
   }
 
   /**
@@ -149,7 +149,7 @@ export class EthereumClient extends Client {
    * for a variety of reasons including EVM mechanics and node performance.
    */
   public getEstimateGas(param: Ethereum.ICallFuncParam) {
-    return this.RpcCall(mtd.gas.estimate, [param]);
+    return this.RpcCall<string>(mtd.gas.estimate, [param]);
   }
 
   /**
