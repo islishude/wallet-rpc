@@ -18,15 +18,15 @@ class Client {
             ? `${this.ip}:${this.port}`
             : `http://${this.ip}:${this.port}`;
     }
-    async RpcCall(method, param, id) {
+    async RpcCall(method, params, id) {
         const reqData = {
             id: id || Date.now(),
             jsonrpc: "2.0",
             method,
-            params: param || []
+            params: params || []
         };
-        const { data } = await axios_1.default.post(this.uri, reqData, this.reqConfig);
-        return data;
+        const ret = await axios_1.default.post(this.uri, reqData, this.reqConfig);
+        return ret.data;
     }
     BulkAdd(method, param, id) {
         const data = {
@@ -40,8 +40,8 @@ class Client {
     async BulkRpcCall() {
         const reqData = this.bulkData;
         this.bulkData = [];
-        const { data } = await axios_1.default.post(this.uri, reqData, this.reqConfig);
-        return data;
+        const res = await axios_1.default.post(this.uri, reqData, this.reqConfig);
+        return res.data;
     }
     async BulkRpcExec(data) {
         const res = await axios_1.default.post(this.uri, data, this.reqConfig);

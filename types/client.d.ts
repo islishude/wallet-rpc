@@ -9,8 +9,8 @@ export default abstract class Client {
     protected bulkData: RPCRequest[];
     protected reqConfig: AxiosRequestConfig;
     constructor(user: string, pass: string, ip: string, port: number);
-    RpcCall<T = string>(method: string, param?: any[], id?: number): Promise<RPCResponse<T>>;
+    RpcCall<T = string>(method: string, params?: any[], id?: number | string): Promise<RPCResponse<T>>;
     BulkAdd(method: string, param?: any[], id?: number): void;
-    BulkRpcCall(): Promise<RPCResponse[]>;
-    BulkRpcExec<D>(data: RPCRequest[]): Promise<RPCResponse<D>[]>;
+    BulkRpcCall<T = any>(): Promise<RPCResponse<T>[]>;
+    BulkRpcExec<T = any>(data: RPCRequest[]): Promise<RPCResponse<T>[]>;
 }

@@ -31,18 +31,22 @@ export default abstract class Client {
 
   public async RpcCall<T = string>(
     method: string,
-    param?: any[],
-    id?: number
-  ): Promise<RPCResponse<T>> {
+    params?: any[],
+    id?: number | string
+  ) {
     const reqData: RPCRequest = {
       id: id || Date.now(),
       jsonrpc: "2.0",
       method,
-      params: param || []
+      params: params || []
     };
 
-    const { data } = await Axios.post(this.uri, reqData, this.reqConfig);
-    return data;
+    const ret = await Axios.post<RPCResponse<T>>(
+      this.uri,
+      reqData,
+      this.reqConfig
+    );
+    return ret.data;
   }
 
   /**
@@ -65,20 +69,28 @@ export default abstract class Client {
    * Bulk RPC Call func
    * recommendation using it from same request bulk
    */
-  public async BulkRpcCall(): Promise<RPCResponse[]> {
+  public async BulkRpcCall<T = any>() {
     const reqData: RPCRequest[] = this.bulkData;
     // clear data
     this.bulkData = [];
-    const { data } = await Axios.post(this.uri, reqData, this.reqConfig);
-    return data;
+    const res = await Axios.post<Array<RPCResponse<T>>>(
+      this.uri,
+      reqData,
+      this.reqConfig
+    );
+    return res.data;
   }
 
   /**
    * RPC Request by user defined bulk data
    * here no using this.bulkData
    */
-  public async BulkRpcExec<D>(data: RPCRequest[]) {
-    const res = await Axios.post(this.uri, data, this.reqConfig);
-    return res.data as Promise<Array<RPCResponse<D>>>;
+  public async BulkRpcExec<T = any>(data: RPCRequest[]) {
+    const res = await Axios.post<Array<RPCResponse<T>>>(
+      this.uri,
+      data,
+      this.reqConfig
+    );
+    return res.data;
   }
 }
