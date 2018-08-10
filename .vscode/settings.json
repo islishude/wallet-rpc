@@ -9,5 +9,6 @@
         "subtraces",
         "txpool",
         "usdt"
-    ]
+    ],
+    "typescript.tsdk": "node_modules/typescript/lib"
 }

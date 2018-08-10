@@ -89,7 +89,7 @@ class EthereumClient extends client_1.default {
             this.callFunc(PARAM)
         ]);
         if (decimals === "0x" && DECIMALS === "0x") {
-            return 0;
+            return undefined;
         }
         return util_1.hexToNumber(decimals === "0x" ? DECIMALS : decimals);
     }
@@ -99,6 +99,9 @@ class EthereumClient extends client_1.default {
             to: token
         };
         const { result: totalSupply } = await this.callFunc(param);
+        if (totalSupply === "0x") {
+            return undefined;
+        }
         return util_1.hexToDecimalString(totalSupply);
     }
     async ERC20Name(token) {
@@ -115,7 +118,7 @@ class EthereumClient extends client_1.default {
             this.callFunc(PARAM)
         ]);
         if (name === "0x" && NAME === "0x") {
-            return "";
+            return undefined;
         }
         return util_1.toUtf8(name === "0x" ? NAME : name);
     }
@@ -133,7 +136,7 @@ class EthereumClient extends client_1.default {
             this.callFunc(PARAM)
         ]);
         if (symbol === "0x" && SYMBOL === "0x") {
-            return "";
+            return undefined;
         }
         return util_1.toUtf8(symbol === "0x" ? SYMBOL : symbol);
     }
@@ -144,16 +147,14 @@ class EthereumClient extends client_1.default {
             this.ERC20Decimals(token),
             this.ERC20TotalSupply(token)
         ]);
-        const val = new bignumber_js_1.default(10).pow(decimals);
-        const total = totalSupply === "0"
-            ? "0"
-            : new bignumber_js_1.default(totalSupply).div(val).toString(10);
         return {
             address: token,
             decimals,
             name: name || symbol,
             symbol: symbol || name,
-            totalSupply: total
+            totalSupply: totalSupply === undefined
+                ? undefined
+                : new bignumber_js_1.default(totalSupply).div(new bignumber_js_1.default(10).pow(decimals)).toString(10)
         };
     }
 }

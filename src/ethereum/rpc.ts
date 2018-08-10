@@ -1,4 +1,4 @@
-import BigNumber from "bignumber.js";
+import bn from "bignumber.js";
 import { Ethereum } from "../../defined/eth";
 import { RPCResponse } from "../../defined/rpc";
 import Client from "../client";
@@ -190,7 +190,7 @@ export class EthereumClient extends Client {
     return balance;
   }
 
-  public async ERC20Decimals(token: string) {
+  public async ERC20Decimals(token: string): Promise<undefined | number> {
     const param: Ethereum.ICallFuncParam = {
       data: ERC20FuncSig.decimals,
       to: token
@@ -205,24 +205,24 @@ export class EthereumClient extends Client {
       this.callFunc(PARAM)
     ]);
     if (decimals === "0x" && DECIMALS === "0x") {
-      // ERC721 Token balance is TokenId's amount
-      // So there should be 0
-      // e.g new BigNumber(balance).div(10 ** decimals)
-      return 0;
+      return undefined;
     }
     return hexToNumber(decimals === "0x" ? DECIMALS : decimals);
   }
 
-  public async ERC20TotalSupply(token: string) {
+  public async ERC20TotalSupply(token: string): Promise<string | undefined> {
     const param: Ethereum.ICallFuncParam = {
       data: ERC20FuncSig.totalSupply,
       to: token
     };
     const { result: totalSupply } = await this.callFunc(param);
+    if (totalSupply === "0x") {
+      return undefined;
+    }
     return hexToDecimalString(totalSupply);
   }
 
-  public async ERC20Name(token: string) {
+  public async ERC20Name(token: string): Promise<undefined | string> {
     const param: Ethereum.ICallFuncParam = {
       data: ERC20FuncSig.name,
       to: token
@@ -236,12 +236,12 @@ export class EthereumClient extends Client {
       this.callFunc(PARAM)
     ]);
     if (name === "0x" && NAME === "0x") {
-      return "";
+      return undefined;
     }
     return toUtf8(name === "0x" ? NAME : name);
   }
 
-  public async ERC20Symbol(token: string) {
+  public async ERC20Symbol(token: string): Promise<undefined | string> {
     const param: Ethereum.ICallFuncParam = {
       data: ERC20FuncSig.symbol,
       to: token
@@ -255,24 +255,26 @@ export class EthereumClient extends Client {
       this.callFunc(PARAM)
     ]);
     if (symbol === "0x" && SYMBOL === "0x") {
-      return "";
+      return undefined;
     }
     return toUtf8(symbol === "0x" ? SYMBOL : symbol);
   }
 
-  public async ERC20TokenInfo(token: string) {
+  public async ERC20TokenInfo(
+    token: string
+  ): Promise<{
+    address: string;
+    decimals: number | undefined;
+    name: string | undefined;
+    symbol: string | undefined;
+    totalSupply: string | undefined;
+  }> {
     const [name, symbol, decimals, totalSupply] = await Promise.all([
       this.ERC20Name(token),
       this.ERC20Symbol(token),
       this.ERC20Decimals(token),
       this.ERC20TotalSupply(token)
     ]);
-
-    const val: BigNumber = new BigNumber(10).pow(decimals);
-    const total =
-      totalSupply === "0"
-        ? "0"
-        : new BigNumber(totalSupply).div(val).toString(10);
 
     return {
       address: token,
@@ -281,7 +283,10 @@ export class EthereumClient extends Client {
       // eg. EOS token has no name
       name: name || symbol,
       symbol: symbol || name,
-      totalSupply: total
+      totalSupply:
+        totalSupply === undefined
+          ? undefined
+          : new bn(totalSupply).div(new bn(10).pow(decimals)).toString(10)
     };
   }
 }

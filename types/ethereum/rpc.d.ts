@@ -27,15 +27,15 @@ export declare class EthereumClient extends Client {
     }): Promise<RPCResponse<Ethereum.ITraceTxReturn>>;
     traceTxByParity(txid: string): Promise<RPCResponse<Ethereum.IParityTxTrace>>;
     ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
-    ERC20Decimals(token: string): Promise<number>;
-    ERC20TotalSupply(token: string): Promise<string>;
-    ERC20Name(token: string): Promise<string>;
-    ERC20Symbol(token: string): Promise<string>;
+    ERC20Decimals(token: string): Promise<undefined | number>;
+    ERC20TotalSupply(token: string): Promise<string | undefined>;
+    ERC20Name(token: string): Promise<undefined | string>;
+    ERC20Symbol(token: string): Promise<undefined | string>;
     ERC20TokenInfo(token: string): Promise<{
         address: string;
-        decimals: number;
-        name: string;
-        symbol: string;
-        totalSupply: string;
+        decimals: number | undefined;
+        name: string | undefined;
+        symbol: string | undefined;
+        totalSupply: string | undefined;
     }>;
 }
