@@ -32,6 +32,9 @@ export declare const Bitcoin: {
 export declare const Ethereum: {
     RPC: typeof EthereumClient;
     mtd: {
+        info: {
+            syncing: string;
+        };
         address: {
             balance: string;
             code: string;

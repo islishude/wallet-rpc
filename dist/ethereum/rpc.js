@@ -8,6 +8,9 @@ class EthereumClient extends client_1.default {
     constructor(ip, port = 8545, user = "", pass = "") {
         super(user, pass, ip, port);
     }
+    syncProgress() {
+        return this.RpcCall(mtd_1.EthereumMethods.info.syncing, []);
+    }
     getBalance(address, status = "latest") {
         return this.RpcCall(mtd_1.EthereumMethods.address.balance, [address, status]);
     }

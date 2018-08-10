@@ -1,4 +1,7 @@
 export declare const EthereumMethods: {
+    info: {
+        syncing: string;
+    };
     address: {
         balance: string;
         code: string;

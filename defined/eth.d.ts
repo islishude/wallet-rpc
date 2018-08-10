@@ -1,6 +1,11 @@
 import { RPCResponse } from "./rpc";
 
 declare namespace Ethereum {
+  export interface IEthSyncing {
+    startingBlock: string;
+    currentBlock: string;
+    highestBlock: string;
+  }
   export type Status = "earliest" | "latest" | "pending";
 
   export interface IBlock {

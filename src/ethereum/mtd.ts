@@ -1,4 +1,7 @@
 export const EthereumMethods = {
+  info: {
+    syncing: "eth_syncing"
+  },
   address: {
     balance: "eth_getBalance",
     code: "eth_getCode",

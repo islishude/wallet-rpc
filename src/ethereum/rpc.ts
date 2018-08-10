@@ -23,6 +23,17 @@ export class EthereumClient extends Client {
     super(user, pass, ip, port);
   }
 
+  /**
+   * Returns an object with data about the sync status or false.
+   * returns value
+   * startingBlock: QUANTITY - The block at which the import started (will only be reset, after the sync reached his head)
+   * currentBlock: QUANTITY - The current block, same as eth_blockNumber
+   * highestBlock: QUANTITY - The estimated highest block
+   */
+  public syncProgress() {
+    return this.RpcCall<boolean | Ethereum.IEthSyncing>(mtd.info.syncing, []);
+  }
+
   public getBalance(
     address: string,
     status: Ethereum.Status = "latest"
