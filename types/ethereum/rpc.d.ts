@@ -38,4 +38,5 @@ export declare class EthereumClient extends Client {
         symbol: string | undefined;
         totalSupply: string | undefined;
     }>;
+    ABI(token: string): Promise<Ethereum.IEtherScanAbiResponse>;
 }

@@ -164,4 +164,20 @@ declare namespace Ethereum {
     // for block trace has `reward` type
     type: "create" | "call" | "suicide";
   }
+
+  export interface IEtherScanAbiResponse {
+    status: string;
+    message: string;
+    result: string;
+  }
+
+  export interface IAbiStruct {
+    constant?: boolean;
+    inputs?: Array<{ indexed?: boolean; name: string; type: string }>;
+    name?: string;
+    outputs?: Array<{ name: string; type: string }>;
+    payable: boolean;
+    type: string;
+    anonymous?: boolean;
+  }
 }

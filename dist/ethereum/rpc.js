@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const axios_1 = require("axios");
 const bignumber_js_1 = require("bignumber.js");
 const client_1 = require("../client");
 const mtd_1 = require("./mtd");
@@ -156,6 +157,17 @@ class EthereumClient extends client_1.default {
                 ? undefined
                 : new bignumber_js_1.default(totalSupply).div(new bignumber_js_1.default(10).pow(decimals)).toString(10)
         };
+    }
+    async ABI(token) {
+        const api = "https://api.etherscan.io/api";
+        const res = await axios_1.default.get(api, {
+            params: {
+                module: "contract",
+                action: "getabi",
+                address: token
+            }
+        });
+        return res.data;
     }
 }
 exports.EthereumClient = EthereumClient;
