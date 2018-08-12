@@ -5,6 +5,7 @@
         "getabi",
         "geth",
         "litecoin",
+        "nonpayable",
         "rpcapi",
         "staticcall",
         "subtraces",

@@ -82,7 +82,8 @@ npx wallet-rpc
 > let eth = new Ethereum.RPC("https://mainnet.infura.io", 443);
 > let tmp = eth.getBlockCount(log, log(e => e.message));
 ```
-for develope feature with `npx islishude/wallet-rpc`
+
+for develope feature with `npx islishude/wallet-rpc@dev`
 
 Will support top-level `await` until node.js 10 LTS released. 
 
