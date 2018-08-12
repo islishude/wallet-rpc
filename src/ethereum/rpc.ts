@@ -138,8 +138,24 @@ export class EthereumClient extends Client {
    * @param status integer block number, or the string "latest", "earliest" or "pending"
    * @returns the code from the given address
    */
-  public getCode(address: string, status: string) {
+  public getCode(address: string, status: Ethereum.Status) {
     return this.RpcCall<string>(mtd.address.code, [address, status]);
+  }
+
+  /**
+   * Detect the address given is contract address or not
+   * @param address string 
+   * @param status string
+   * @returns boolean
+   */
+  public async isContract(address: string): Promise<boolean> {
+    const { result } = await this.getCode(address, "latest");
+
+    if (result !== "0x") {
+      return true;
+    }
+
+    return false;
   }
 
   /**
@@ -289,26 +305,5 @@ export class EthereumClient extends Client {
           ? undefined
           : new bn(totalSupply).div(new bn(10).pow(decimals)).toString(10)
     };
-  }
-
-  /**
-   * Get Eth Token ABI from EtherScan.io
-   * @param token tokenAddress
-   * @returns { status: string, message: string, result: string}
-   * if status isn't "1" then the request is failed
-   * the result is ABI JSON string,you should use JSON.parse()
-   * type defined of ABI struct can be found in
-   * defined/eth.d.ts => Ethereum.IAbiStruct
-   */
-  public async ABI(token: string) {
-    const api: string = "https://api.etherscan.io/api";
-    const res = await Axios.get<Ethereum.IEtherScanAbiResponse>(api, {
-      params: {
-        module: "contract",
-        action: "getabi",
-        address: token
-      }
-    });
-    return res.data;
   }
 }

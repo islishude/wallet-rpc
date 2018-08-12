@@ -46,81 +46,45 @@ btcClient
 ```typescript
 // Bulk Call
 btcClient
-  // your can set generic
-  // and return `type[]`
-  // the types can import from defined/*.d.ts
+  // your can set generic `T` and return `T[]`
+  // all the usefull types can import from defined/*.d.ts
   .bulkRpcExec<string>([{
     id: 0,
     jsonrpc: "2.0",
     method: btcMtd.block.hash
-    params: [0]
+    params: [100]
   },{
     id: 1,
     jsonrpc: "2.0",
     method: btcMtd.block.hash
-    params: [1]
+    params: [200]
   }])
-  .then(console.log)
-  .catch(console.log);
 
 // Also can
-btcClient.BulkAdd(Bitcoin.mtd.block.hash, [0], 0);
-btcClient.BulkAdd(Bitcoin.mtd.block.hash, [1], 1);
+btcClient.BulkAdd(Bitcoin.mtd.block.hash, [100], 0);
+btcClient.BulkAdd(Bitcoin.mtd.block.hash, [200], 1);
 btcClient.BulkCall();
 ```
 
 ### API
 
 - [Bitcoin](./types/bitcoin/rpc.d.ts)
-- [Ethereum](./types/ethereum/rpc.d.ts)
+- [Ethereum && ERC20](./types/ethereum/rpc.d.ts)
+- [EthereumUtil](./types/ethereum/util.d.ts)
 
-#### EthereumUtil
-
-```typescript
-// ethereum.util....
-ERC20FuncSig: {
-  allowance: string;
-  approve: string;
-  balanceOf: string;
-  decimals: string;
-  name: string;
-  symbol: string;
-  totalSupply: string;
-  transfer: string;
-  transferFrom: string;
-}
-hexToNumber: (hex: string) => number;
-isAddress: (address: string) => boolean;
-isChecksumAddress: (address: string) => boolean;
-numberToHex: (int: number) => string;
-sha3: (message: string) => string;
-```
-
-#### ERC20
-
-```typescript
-// eg.new Ethereum.RPC().ERC20Balance("TokenAddress", "Address")
-ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
-ERC20Decimals(token: string): Promise<number>;
-ERC20TotalSupply(token: string): Promise<number>;
-ERC20Name(token: string): Promise<string>;
-ERC20Symbol(token: string): Promise<string>;
-ERC20TokenInfo(token: string): Promise<{
-    decimals: number;
-    name: string;
-    symbol: string;
-    totalSupply: number;
-}>;
-```
+Ethereum Util includes some useful methods like `getABI`, `sha3`. 
 
 ### CLI
 
 ```
 npx wallet-rpc
 
-> const eth = new Ethereum.RPC("https://mainnet.infura.io", 443);
+> let eth = new Ethereum.RPC("https://mainnet.infura.io", 443);
 > let tmp = eth.getBlockCount(log, log(e => e.message));
 ```
+for develope feature with `npx islishude/wallet-rpc`
+
+Will support top-level `await` until node.js 10 LTS released. 
 
 ### RPC Methods List
 

@@ -1,3 +1,4 @@
+import { Ethereum } from "../../defined/eth";
 export declare const hexToNumber: (hex: string) => number;
 export declare const hexToDecimalString: (hex: string) => string;
 export declare const numberToHex: (int: number) => string;
@@ -23,3 +24,4 @@ export declare const sha3: (message: string) => string;
 export declare const padAddress: (address: string) => string;
 export declare const toUtf8: (hex: string) => string;
 export declare const addressNull = "0x0000000000000000000000000000000000000000";
+export declare const getABI: (token: string, apiKey?: string) => Promise<Ethereum.IEtherScanAbiResponse>;

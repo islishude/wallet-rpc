@@ -16,7 +16,8 @@ export declare class EthereumClient extends Client {
     getAddrNonce(address: string, status?: Ethereum.Status): Promise<RPCResponse<string>>;
     getCurrentGasPrice(): Promise<RPCResponse<string>>;
     callFunc(param: Ethereum.ICallFuncParam, status?: Ethereum.Status): Promise<RPCResponse<string>>;
-    getCode(address: string, status: string): Promise<RPCResponse<string>>;
+    getCode(address: string, status: Ethereum.Status): Promise<RPCResponse<string>>;
+    isContract(address: string): Promise<boolean>;
     getEstimateGas(param: Ethereum.ICallFuncParam): Promise<RPCResponse<string>>;
     traceTx(txid: string, opt?: {
         disableStorage?: boolean;
@@ -38,5 +39,4 @@ export declare class EthereumClient extends Client {
         symbol: string | undefined;
         totalSupply: string | undefined;
     }>;
-    ABI(token: string): Promise<Ethereum.IEtherScanAbiResponse>;
 }

@@ -1,5 +1,7 @@
+import Axios from "axios";
 import BigNumber from "bignumber.js";
 import { SHA3 } from "crypto-js";
+import { Ethereum } from "../../defined/eth";
 
 export const hexToNumber = (hex: string): number => {
   if (hex === "0x") {
@@ -82,3 +84,25 @@ export const toUtf8 = (hex: string): string => {
 };
 
 export const addressNull = "0x0000000000000000000000000000000000000000";
+
+/**
+ * Get Eth Token ABI from EtherScan.io
+ * @param token tokenAddress
+ * @returns { status: string, message: string, result: string}
+ * if status isn't "1" then the request is failed
+ * the result is ABI JSON string,you should use JSON.parse()
+ * type defined of ABI struct can be found in
+ * defined/eth.d.ts => Ethereum.IAbiStruct
+ */
+export const getABI = async (token: string, apiKey: string = "YourApiKeyToken") => {
+  const api: string = "https://api.etherscan.io/api";
+  const res = await Axios.get<Ethereum.IEtherScanAbiResponse>(api, {
+    params: {
+      module: "contract",
+      action: "getabi",
+      address: token,
+      apiKey
+    }
+  });
+  return res.data;
+}

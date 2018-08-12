@@ -172,12 +172,25 @@ declare namespace Ethereum {
   }
 
   export interface IAbiStruct {
+    name: string;
+    // type can be omit,defaulting is "function"
+    type: "function" | "constructor" | "fallback";
+    // true if function is either pure or view
     constant?: boolean;
-    inputs?: Array<{ indexed?: boolean; name: string; type: string }>;
-    name?: string;
-    outputs?: Array<{ name: string; type: string }>;
-    payable: boolean;
-    type: string;
+    // `indexed` only for event type 
+    inputs?: Array<{ indexed?: boolean; name: string; type: string, components?: IAbiTurpleType[] }>;
+    outputs?: Array<{ name: string; type: string, components?: IAbiTurpleType[] }>;
+    // for function type
+    payable?: boolean;
+    // for function type
+    stateMutability?: "view" | "pure" | "nonpayable" | "payable";
+    // true if event was declear as anonymous
     anonymous?: boolean;
+  }
+
+  export interface IAbiTurpleType {
+    name: string;
+    type: string;
+    components: IAbiTurpleType[];
   }
 }
