@@ -1,4 +1,4 @@
-import Axios, { AxiosRequestConfig } from "axios";
+import Axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { RPCRequest, RPCResponse } from "../defined/rpc";
 
 export default abstract class Client {
@@ -29,6 +29,14 @@ export default abstract class Client {
       : `http://${this.ip}:${this.port}`;
   }
 
+  /**
+   * JSON-RPC call func
+   * @param method RPC Request Method
+   * @param params RPC Request Params
+   * @param id RPC Request id
+   * @returns RPCResponse<T>
+   * @throws Response non-2xx response or request error
+   */
   public async RpcCall<T = string>(
     method: string,
     params?: any[],
@@ -41,12 +49,25 @@ export default abstract class Client {
       params: params || []
     };
 
-    const ret = await Axios.post<RPCResponse<T>>(
-      this.uri,
-      reqData,
-      this.reqConfig
-    );
-    return ret.data;
+    try {
+      const ret = await Axios.post<RPCResponse<T>>(
+        this.uri,
+        reqData,
+        this.reqConfig
+      );
+      return ret.data;
+    } catch (e) {
+      const { response, message } = e as AxiosError
+
+      if (response !== undefined) {
+        const { data, status } = response;
+        const msg: string = data && data.message;
+        const code: number = data && data.code;
+        throw new Error(`RPC Response ${status} Error: code = ${code} msg = ${msg}`);
+      }
+
+      throw new Error(`RPC Request Error: ${message}`);
+    }
   }
 
   /**

@@ -25,8 +25,20 @@ class Client {
             method,
             params: params || []
         };
-        const ret = await axios_1.default.post(this.uri, reqData, this.reqConfig);
-        return ret.data;
+        try {
+            const ret = await axios_1.default.post(this.uri, reqData, this.reqConfig);
+            return ret.data;
+        }
+        catch (e) {
+            const { response, message } = e;
+            if (response !== undefined) {
+                const { data, status } = response;
+                const msg = data && data.message;
+                const code = data && data.code;
+                throw new Error(`RPC Response ${status} Error: code = ${code} msg = ${msg}`);
+            }
+            throw new Error(`RPC Request Error: ${message}`);
+        }
     }
     BulkAdd(method, param, id) {
         const data = {
