@@ -1,4 +1,4 @@
-import Axios from "axios";
+import { ok } from "assert";
 import bn from "bignumber.js";
 import { Ethereum } from "../../defined/eth";
 import { RPCResponse } from "../../defined/rpc";
@@ -9,6 +9,7 @@ import {
   ERC20FuncSigUpper,
   hexToDecimalString,
   hexToNumber,
+  isAddress,
   padAddress,
   toUtf8
 } from "./util";
@@ -169,6 +170,17 @@ export class EthereumClient extends Client {
   }
 
   /**
+   * Sign Message.
+   * NOT Suports address which doesn't in you eth-rpc
+   * @param address the address to sign with must be unlocked.
+   * @param data N Bytes - message to sign
+   */
+  public signMessage(address: string, data: Buffer) {
+    ok(isAddress(address), "Not a valid Ethereum address");
+    return this.RpcCall<string>(mtd.tool.sign, [address, data.toString("hex")])
+  }
+
+  /**
    * debug trace transaction
    * you should start geth with `--rpcapi="web3,trace"
    * @see https://github.com/ethereum/go-ethereum/wiki/Management-APIs#debug_tracetransaction
@@ -293,6 +305,7 @@ export class EthereumClient extends Client {
       this.ERC20TotalSupply(token)
     ]);
 
+
     return {
       address: token,
       decimals,
@@ -300,10 +313,9 @@ export class EthereumClient extends Client {
       // eg. EOS token has no name
       name: name || symbol,
       symbol: symbol || name,
-      totalSupply:
-        totalSupply === undefined
-          ? undefined
-          : new bn(totalSupply).div(new bn(10).pow(decimals)).toString(10)
+      totalSupply: totalSupply === undefined || decimals === undefined
+        ? undefined
+        : new bn(totalSupply).div(new bn(10).pow(decimals)).toString(10)
     };
   }
 }

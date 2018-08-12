@@ -35,6 +35,9 @@ export declare const Ethereum: {
         info: {
             syncing: string;
         };
+        tool: {
+            sign: string;
+        };
         address: {
             balance: string;
             code: string;

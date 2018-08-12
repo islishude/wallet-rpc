@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { Ethereum } from "../../defined/eth";
 import { RPCResponse } from "../../defined/rpc";
 import Client from "../client";
@@ -19,6 +20,7 @@ export declare class EthereumClient extends Client {
     getCode(address: string, status: Ethereum.Status): Promise<RPCResponse<string>>;
     isContract(address: string): Promise<boolean>;
     getEstimateGas(param: Ethereum.ICallFuncParam): Promise<RPCResponse<string>>;
+    signMessage(address: string, data: Buffer): Promise<RPCResponse<string>>;
     traceTx(txid: string, opt?: {
         disableStorage?: boolean;
         disableMemory?: boolean;

@@ -2,13 +2,21 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "lib": ["es2018"],
+    "lib": [
+      "es2018"
+    ],
     "outDir": "dist",
     "declaration": true,
     "declarationDir": "types",
     "removeComments": true,
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "strict": true
   },
-  "include": ["src/**/*", "defined/*.d.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*",
+    "defined/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

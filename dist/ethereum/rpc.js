@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const assert_1 = require("assert");
 const bignumber_js_1 = require("bignumber.js");
 const client_1 = require("../client");
 const mtd_1 = require("./mtd");
@@ -63,6 +64,10 @@ class EthereumClient extends client_1.default {
     }
     getEstimateGas(param) {
         return this.RpcCall(mtd_1.EthereumMethods.gas.estimate, [param]);
+    }
+    signMessage(address, data) {
+        assert_1.ok(util_1.isAddress(address), "Not a valid Ethereum address");
+        return this.RpcCall(mtd_1.EthereumMethods.tool.sign, [address, data.toString("hex")]);
     }
     traceTx(txid, opt) {
         return this.RpcCall(mtd_1.EthereumMethods.debug.traceTx, [
@@ -159,7 +164,7 @@ class EthereumClient extends client_1.default {
             decimals,
             name: name || symbol,
             symbol: symbol || name,
-            totalSupply: totalSupply === undefined
+            totalSupply: totalSupply === undefined || decimals === undefined
                 ? undefined
                 : new bignumber_js_1.default(totalSupply).div(new bignumber_js_1.default(10).pow(decimals)).toString(10)
         };

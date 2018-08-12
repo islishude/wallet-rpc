@@ -4,6 +4,9 @@ exports.EthereumMethods = {
     info: {
         syncing: "eth_syncing"
     },
+    tool: {
+        sign: "eth_sign"
+    },
     address: {
         balance: "eth_getBalance",
         code: "eth_getCode",

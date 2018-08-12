@@ -2,6 +2,9 @@ export declare const EthereumMethods: {
     info: {
         syncing: string;
     };
+    tool: {
+        sign: string;
+    };
     address: {
         balance: string;
         code: string;
