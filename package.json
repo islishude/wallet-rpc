@@ -8,6 +8,11 @@
     "test": "ts-node test/*.ts",
     "pub": "git push --all && git push --tags && npm publish"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/islishude/wallet-rpc"
+  },
+  "homepage": "https://github.com/islishude/walelt-rpc#readme",
   "bin": {
     "wallet-rpc": "dist/bin/cli.js"
   },
