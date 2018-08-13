@@ -21,6 +21,12 @@ exports.hexToDecimalString = (hex) => {
 exports.numberToHex = (int) => {
     return "0x" + new bignumber_js_1.default(int).toString(16);
 };
+exports.addHexPad = (hex) => {
+    if (!hex.startsWith("0x")) {
+        hex = "0x" + hex;
+    }
+    return hex;
+};
 exports.ERC20FuncSig = {
     allowance: "0xdd62ed3e",
     approve: "0x095ea7b3",

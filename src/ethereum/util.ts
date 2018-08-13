@@ -24,6 +24,13 @@ export const numberToHex = (int: number): string => {
   return "0x" + new BigNumber(int).toString(16);
 };
 
+export const addHexPad = (hex: string): string => {
+  if (!hex.startsWith("0x")) {
+    hex = "0x" + hex;
+  }
+  return hex;
+};
+
 export const ERC20FuncSig = {
   allowance: "0xdd62ed3e",
   approve: "0x095ea7b3",
