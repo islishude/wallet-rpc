@@ -145,7 +145,7 @@ export class EthereumClient extends Client {
 
   /**
    * Detect the address given is contract address or not
-   * @param address string 
+   * @param address string
    * @param status string
    * @returns boolean
    */
@@ -171,13 +171,13 @@ export class EthereumClient extends Client {
 
   /**
    * Sign Message.
-   * NOT Suports address which doesn't in you eth-rpc
+   * NOT Supports address which doesn't in you eth-rpc
    * @param address the address to sign with must be unlocked.
    * @param data N Bytes - message to sign
    */
   public signMessage(address: string, data: Buffer) {
     ok(isAddress(address), "Not a valid Ethereum address");
-    return this.RpcCall<string>(mtd.tool.sign, [address, data.toString("hex")])
+    return this.RpcCall<string>(mtd.tool.sign, [address, data.toString("hex")]);
   }
 
   /**
@@ -305,7 +305,6 @@ export class EthereumClient extends Client {
       this.ERC20TotalSupply(token)
     ]);
 
-
     return {
       address: token,
       decimals,
@@ -313,9 +312,10 @@ export class EthereumClient extends Client {
       // eg. EOS token has no name
       name: name || symbol,
       symbol: symbol || name,
-      totalSupply: totalSupply === undefined || decimals === undefined
-        ? undefined
-        : new bn(totalSupply).div(new bn(10).pow(decimals)).toString(10)
+      totalSupply:
+        totalSupply === undefined || decimals === undefined
+          ? undefined
+          : new bn(totalSupply).div(new bn(10).pow(decimals)).toString(10)
     };
   }
 }

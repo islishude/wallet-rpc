@@ -94,15 +94,28 @@ export const addressNull = "0x0000000000000000000000000000000000000000";
  * type defined of ABI struct can be found in
  * defined/eth.d.ts => Ethereum.IAbiStruct
  */
-export const getABI = async (token: string, apiKey: string = "YourApiKeyToken") => {
+export const getABI = async (
+  token: string,
+  apiKey: string = "YourApiKeyToken"
+): Promise<Ethereum.IAbiStruct[] | null> => {
   const api: string = "https://api.etherscan.io/api";
-  const res = await Axios.get<Ethereum.IEtherScanAbiResponse>(api, {
-    params: {
-      module: "contract",
-      action: "getabi",
-      address: token,
-      apiKey
+
+  try {
+    const { data } = await Axios.get<Ethereum.IEtherScanAbiResponse>(api, {
+      params: {
+        module: "contract",
+        action: "getabi",
+        address: token,
+        apiKey
+      }
+    });
+
+    if (data.status === "0") {
+      return null;
     }
-  });
-  return res.data;
-}
+
+    return JSON.parse(data.result) as Ethereum.IAbiStruct[];
+  } catch (e) {
+    throw new Error(e.message);
+  }
+};

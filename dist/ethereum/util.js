@@ -73,13 +73,21 @@ exports.toUtf8 = (hex) => {
 exports.addressNull = "0x0000000000000000000000000000000000000000";
 exports.getABI = async (token, apiKey = "YourApiKeyToken") => {
     const api = "https://api.etherscan.io/api";
-    const res = await axios_1.default.get(api, {
-        params: {
-            module: "contract",
-            action: "getabi",
-            address: token,
-            apiKey
+    try {
+        const { data } = await axios_1.default.get(api, {
+            params: {
+                module: "contract",
+                action: "getabi",
+                address: token,
+                apiKey
+            }
+        });
+        if (data.status === "0") {
+            return null;
         }
-    });
-    return res.data;
+        return JSON.parse(data.result);
+    }
+    catch (e) {
+        throw new Error(e.message);
+    }
 };
