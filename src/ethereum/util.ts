@@ -42,6 +42,11 @@ export const ERC20FuncSigUpper = {
   SYMBOL: "0xf76f8d78"
 };
 
+export const ERC20EventSig = {
+  Approve: "0xdf586a81df66595b89d3dbd58e5b14ee6c0fb16da8977f97ea7d24c654994ac7",
+  Transfer: "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+};
+
 export const isAddress = (address: string): boolean => {
   return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
 };
