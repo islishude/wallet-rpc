@@ -15,7 +15,13 @@ class OmniLayerClient extends client_1.default {
     sendRawTx(fromAddress, rawTransaction, referenceAddress, redeemAddress, referenceAmount) {
         const params = [fromAddress, rawTransaction];
         if (referenceAddress !== undefined) {
-            params.push(referenceAddress, redeemAddress, referenceAmount);
+            params.push(referenceAddress);
+        }
+        if (redeemAddress !== undefined) {
+            params.push(redeemAddress);
+        }
+        if (referenceAmount !== undefined) {
+            params.push(referenceAmount);
         }
         return this.RpcCall(mtd_1.OmniLayerMethods.tx.sendRaw, params);
     }
@@ -26,10 +32,10 @@ class OmniLayerClient extends client_1.default {
         return this.RpcCall(mtd_1.OmniLayerMethods.tx.detail, [txid]);
     }
     getTxList(height) {
-        return this.RpcCall(mtd_1.OmniLayerMethods.block.txList, [height]);
+        return this.RpcCall(mtd_1.OmniLayerMethods.tx.list, [height]);
     }
     getPendingTxList(address) {
-        return this.RpcCall(mtd_1.OmniLayerMethods.block.pendingTxList, [address]);
+        return this.RpcCall(mtd_1.OmniLayerMethods.tx.pending, [address]);
     }
     getProperty(id = 31) {
         return this.RpcCall(mtd_1.OmniLayerMethods.property.info, [id]);

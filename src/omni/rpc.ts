@@ -29,9 +29,17 @@ export class OmniLayerClient extends Client {
     redeemAddress?: string,
     referenceAmount?: string
   ) {
-    const params: any[] = [fromAddress, rawTransaction];
+    const params: string[] = [fromAddress, rawTransaction];
     if (referenceAddress !== undefined) {
-      params.push(referenceAddress, redeemAddress, referenceAmount);
+      params.push(referenceAddress);
+    }
+
+    if (redeemAddress !== undefined) {
+      params.push(redeemAddress);
+    }
+
+    if (referenceAmount !== undefined) {
+      params.push(referenceAmount);
     }
     return this.RpcCall<string>(mtd.tx.sendRaw, params);
   }
@@ -61,11 +69,11 @@ export class OmniLayerClient extends Client {
    * @param height the block height or block index
    */
   public getTxList(height: number) {
-    return this.RpcCall<string[]>(mtd.block.txList, [height]);
+    return this.RpcCall<string[]>(mtd.tx.list, [height]);
   }
 
   public getPendingTxList(address?: string) {
-    return this.RpcCall<OmniLayer.txInfo[]>(mtd.block.pendingTxList, [address]);
+    return this.RpcCall<OmniLayer.txInfo[]>(mtd.tx.pending, [address]);
   }
 
   /**

@@ -2,6 +2,7 @@ import { BitcoinClient } from "./bitcoin/rpc";
 import { DKKTClient } from "./dkktoken/rpc";
 import { EthereumClient } from "./ethereum/rpc";
 import * as EthereumUtil from "./ethereum/util";
+import { OmniLayerClient } from "./omni/rpc";
 export declare const Bitcoin: {
     mtd: {
         block: {
@@ -97,4 +98,29 @@ export declare const DKKToken: {
         };
     };
     RPC: typeof DKKTClient;
+};
+export declare const OmniLayer: {
+    mtd: {
+        block: {
+            count: string;
+        };
+        info: {
+            client: string;
+        };
+        property: {
+            list: string;
+            info: string;
+        };
+        address: {
+            balance: string;
+        };
+        tx: {
+            detail: string;
+            payload: string;
+            sendRaw: string;
+            list: string;
+            pending: string;
+        };
+    };
+    RPC: typeof OmniLayerClient;
 };
