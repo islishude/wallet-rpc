@@ -6,13 +6,13 @@ RPC client of crypto coins by TypeScript
 - BitcoinCash(same with Bitcoin)
 - Litecoin(same with Bitcoin)
 - Ethereum(geth 1.8.0+ || parity 1.0.0+) and ERC20
+- OmniLayer(includes USDT)
 
 And CLI Supports, [learn more](#cli)!
 
 ## TODO Supports
 
 - [ ] EOS
-- [ ] USDT
 
 ## Install
 
@@ -71,8 +71,9 @@ btcClient.BulkCall();
 - [Bitcoin](./types/bitcoin/rpc.d.ts)
 - [Ethereum && ERC20](./types/ethereum/rpc.d.ts)
 - [EthereumUtil](./types/ethereum/util.d.ts)
+- [OmniLayer(USDT)](./types/omni/rpc.d.ts)
 
-Ethereum Util includes some useful methods like `getABI`, `sha3`. 
+Ethereum Util includes some useful methods like `getABI`, `sha3`.
 
 ### CLI
 
@@ -85,12 +86,13 @@ npx wallet-rpc
 
 for develope feature with `npx islishude/wallet-rpc@dev`
 
-Will support top-level `await` until node.js 10 LTS released. 
+Will support top-level `await` until node.js 10 LTS released.
 
 ### RPC Methods List
 
 - [Bitcoin](./src/bitcoin/mtd.ts)
 - [Ethereum](./src/ethereum/mtd.ts)
+- [OmniLayer(USDT)](./src/omni/mtd.ts)
 
 ## Feedback
 
