@@ -76,7 +76,9 @@ class EthereumClient extends client_1.default {
         ]);
     }
     traceTxByParity(txid) {
-        return this.RpcCall(mtd_1.EthereumMethods.tx.parity.trace, [txid]);
+        return this.RpcCall(mtd_1.EthereumMethods.tx.parity.trace, [
+            txid
+        ]);
     }
     async ERC20Balance(token, address, isPending = true) {
         const status = isPending ? "pending" : "latest";

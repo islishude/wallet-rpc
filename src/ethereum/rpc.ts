@@ -202,7 +202,9 @@ export class EthereumClient extends Client {
   }
 
   public traceTxByParity(txid: string) {
-    return this.RpcCall<Ethereum.IParityTxTrace[]>(mtd.tx.parity.trace, [txid]);
+    return this.RpcCall<Ethereum.IParityTxTrace[] | null>(mtd.tx.parity.trace, [
+      txid
+    ]);
   }
 
   public async ERC20Balance(

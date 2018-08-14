@@ -28,7 +28,7 @@ export declare class EthereumClient extends Client {
         trace?: string;
         timeout?: string;
     }): Promise<RPCResponse<Ethereum.ITraceTxReturn>>;
-    traceTxByParity(txid: string): Promise<RPCResponse<Ethereum.IParityTxTrace[]>>;
+    traceTxByParity(txid: string): Promise<RPCResponse<Ethereum.IParityTxTrace[] | null>>;
     ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
     ERC20Decimals(token: string): Promise<undefined | number>;
     ERC20TotalSupply(token: string): Promise<string | undefined>;
