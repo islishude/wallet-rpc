@@ -12,7 +12,8 @@ exports.OmniLayerMethods = {
         info: "omni_getproperty"
     },
     address: {
-        balance: "omni_getbalance"
+        balance: "omni_getbalance",
+        allBalance: "omni_getallbalancesforaddress"
     },
     tx: {
         detail: "omni_gettransaction",

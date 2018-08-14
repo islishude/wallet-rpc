@@ -56,6 +56,11 @@ export class OmniLayerClient extends Client {
     );
   }
 
+  public getAllBalance(address: string) {
+    type tmp = Array<{ propertyid: number; balance: string; reserved: string }>;
+    return this.RpcCall<tmp>(mtd.address.allBalance, [address]);
+  }
+
   /**
    * Get detailed information about an Omni transaction.
    * @param txid the hash of the transaction to lookup

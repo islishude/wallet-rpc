@@ -6,6 +6,7 @@
         "geth",
         "litecoin",
         "nonpayable",
+        "propertyid",
         "rpcapi",
         "staticcall",
         "subtraces",

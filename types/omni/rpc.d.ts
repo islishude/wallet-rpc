@@ -8,6 +8,11 @@ export declare class OmniLayerClient extends Client {
         balance: string;
         reserved: string;
     }>>;
+    getAllBalance(address: string): Promise<import("../../defined/rpc").RPCResponse<{
+        propertyid: number;
+        balance: string;
+        reserved: string;
+    }[]>>;
     getTxInfo(txid: string): Promise<import("../../defined/rpc").RPCResponse<OmniLayer.txInfo>>;
     getTxList(height: number): Promise<import("../../defined/rpc").RPCResponse<string[]>>;
     getPendingTxList(address?: string): Promise<import("../../defined/rpc").RPCResponse<OmniLayer.txInfo[]>>;

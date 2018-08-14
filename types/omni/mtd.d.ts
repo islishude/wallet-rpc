@@ -11,6 +11,7 @@ export declare const OmniLayerMethods: {
     };
     address: {
         balance: string;
+        allBalance: string;
     };
     tx: {
         detail: string;

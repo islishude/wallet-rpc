@@ -28,6 +28,9 @@ class OmniLayerClient extends client_1.default {
     getBalance(address, propertyId) {
         return this.RpcCall(mtd_1.OmniLayerMethods.address.balance, [address, propertyId]);
     }
+    getAllBalance(address) {
+        return this.RpcCall(mtd_1.OmniLayerMethods.address.allBalance, [address]);
+    }
     getTxInfo(txid) {
         return this.RpcCall(mtd_1.OmniLayerMethods.tx.detail, [txid]);
     }

@@ -113,6 +113,7 @@ export declare const OmniLayer: {
         };
         address: {
             balance: string;
+            allBalance: string;
         };
         tx: {
             detail: string;
