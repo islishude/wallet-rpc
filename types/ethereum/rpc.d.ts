@@ -11,6 +11,7 @@ export declare class EthereumClient extends Client {
     getBlock(symbol: string): Promise<RPCResponse<Ethereum.IBlockSimple>>;
     getBlockVerbose(symbol: string): Promise<RPCResponse<Ethereum.IBlockVerbose>>;
     getTxByHash(hash: string): Promise<RPCResponse<Ethereum.ITransaction>>;
+    getRawTxByHash(hash: string): Promise<RPCResponse<string>>;
     getTxReceipt(hash: string): Promise<RPCResponse<Ethereum.ITxReceipt>>;
     sendRawTx(raw: string): Promise<RPCResponse<string>>;
     sendTx(tx: Ethereum.ISentTxStruct): Promise<RPCResponse<string>>;

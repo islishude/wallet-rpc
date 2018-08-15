@@ -74,6 +74,15 @@ export class EthereumClient extends Client {
   }
 
   /**
+   * Return raw transaction by hash
+   * There is an "undocumented" method eth_getRawTransactionByHash
+   * @param hash 
+   */
+  public getRawTxByHash(hash: string) {
+    return this.RpcCall<string>(mtd.tx.rawByHash, [hash]);
+  }
+
+  /**
    * Returns the receipt of a transaction by transaction hash.
    * Note That the receipt is not available for pending transactions.
    * @param hash tx hash

@@ -26,6 +26,7 @@ export declare const EthereumMethods: {
         price: string;
     };
     tx: {
+        rawByHash: string;
         byHash: string;
         byHeight: string;
         call: string;

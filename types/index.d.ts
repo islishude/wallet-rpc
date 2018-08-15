@@ -60,6 +60,7 @@ export declare const Ethereum: {
             price: string;
         };
         tx: {
+            rawByHash: string;
             byHash: string;
             byHeight: string;
             call: string;

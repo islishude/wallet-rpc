@@ -26,6 +26,7 @@ export const EthereumMethods = {
     price: "eth_gasPrice"
   },
   tx: {
+    rawByHash: "eth_getRawTransactionByHash",
     byHash: "eth_getTransactionByHash",
     byHeight: "eth_getTransactionByBlockHashAndIndex",
     call: "eth_call",
