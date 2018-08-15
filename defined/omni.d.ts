@@ -1,3 +1,5 @@
+import { RPCResponse } from "./rpc";
+
 declare namespace OmniLayer {
   /** spell-checker: disable */
   export interface clientInfo {

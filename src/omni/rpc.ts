@@ -1,3 +1,4 @@
+import { OmniLayer } from "../../defined/omni";
 import { BitcoinClient } from "../bitcoin/rpc";
 import { OmniLayerMethods as mtd } from "./mtd";
 

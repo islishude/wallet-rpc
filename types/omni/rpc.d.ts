@@ -1,3 +1,4 @@
+import { OmniLayer } from "../../defined/omni";
 import { BitcoinClient } from "../bitcoin/rpc";
 export declare class OmniLayerClient extends BitcoinClient {
     constructor(user: string, pass: string, ip: string, port?: number);
