@@ -19,5 +19,6 @@ export declare const OmniLayerMethods: {
         sendRaw: string;
         list: string;
         pending: string;
+        wallet: string;
     };
 };

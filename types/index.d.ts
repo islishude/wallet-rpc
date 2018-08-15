@@ -122,6 +122,7 @@ export declare const OmniLayer: {
             sendRaw: string;
             list: string;
             pending: string;
+            wallet: string;
         };
     };
     RPC: typeof OmniLayerClient;

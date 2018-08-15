@@ -47,7 +47,7 @@ btcClient
 // Bulk Call
 btcClient
   // your can set generic `T` and return `T[]`
-  // all the usefull types can import from defined/*.d.ts
+  // all the useful types can import from defined/*.d.ts
   .bulkRpcExec<string>([{
     id: 0,
     jsonrpc: "2.0",

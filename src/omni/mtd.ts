@@ -19,6 +19,7 @@ export const OmniLayerMethods = {
     payload: "omni_getpayload",
     sendRaw: "omni_sendrawtx",
     list: "omni_listblocktransactions",
-    pending: "omni_listpendingtransactions"
+    pending: "omni_listpendingtransactions",
+    wallet: "omni_listtransactions"
   }
 };

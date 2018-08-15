@@ -16,4 +16,5 @@ export declare class OmniLayerClient extends BitcoinClient {
     getOmniTxList(height: number): Promise<import("../../defined/rpc").RPCResponse<string[]>>;
     getOmniPendingTxList(address?: string): Promise<import("../../defined/rpc").RPCResponse<OmniLayer.txInfo[]>>;
     getOmniProperty(id?: number): Promise<import("../../defined/rpc").RPCResponse<string>>;
+    listTx(txid?: string, count?: number, skip?: number, startBlock?: number, endBlock?: number): Promise<import("../../defined/rpc").RPCResponse<OmniLayer.txInfo[]>>;
 }

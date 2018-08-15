@@ -37,5 +37,9 @@ class OmniLayerClient extends rpc_1.BitcoinClient {
     getOmniProperty(id = 31) {
         return this.RpcCall(mtd_1.OmniLayerMethods.property.info, [id]);
     }
+    listTx(txid = "*", count = 10, skip = 0, startBlock = 0, endBlock = 999999) {
+        const params = [txid, count, skip, startBlock, endBlock];
+        return this.RpcCall(mtd_1.OmniLayerMethods.tx.wallet, params);
+    }
 }
 exports.OmniLayerClient = OmniLayerClient;

@@ -86,4 +86,24 @@ export class OmniLayerClient extends BitcoinClient {
   public getOmniProperty(id: number = 31) {
     return this.RpcCall(mtd.property.info, [id]);
   }
+
+  /**
+   * List WALLET transactions, optionally filtered by an address and block boundaries.
+   * !! only your wallet tx list !!
+   * @param txid	string	optional	address filter (default: "*")
+   * @param count	number	optional	show at most n transactions (default: 10)
+   * @param skip	number	optional	skip the first n transactions (default: 0)
+   * @param startBlock	number	optional	first block to begin the search (default: 0)
+   * @param endBlock	number	optional	last block to include in the search (default: 999999)
+   */
+  public listTx(
+    txid = "*",
+    count = 10,
+    skip = 0,
+    startBlock = 0,
+    endBlock = 999999
+  ) {
+    const params: any[] = [txid, count, skip, startBlock, endBlock];
+    return this.RpcCall<OmniLayer.txInfo[]>(mtd.tx.wallet, params);
+  }
 }

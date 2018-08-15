@@ -19,29 +19,37 @@ declare namespace OmniLayer {
   }
 
   export interface txInfo {
-    amount: string;
-    block: number;
-    blockhash: string;
-    blocktime: number;
-    category: string;
-    confirmations: number;
-    data: string;
-    divisible: boolean;
-    ecosystem: string;
-    fee: string;
-    ismine: boolean;
-    positioninblock: number;
-    propertyid: number;
-    propertyname: string;
-    propertytype: string;
-    sendingaddress: string;
-    subcategory: string;
     txid: string;
-    type: string;
+    fee: string;
+    // from
+    sendingaddress: string;
+    // to
+    referenceaddress: string;
+    // in rpc wallet?
+    ismine: boolean;
+    version: number;
     type_int: number;
-    url: string;
+    type: string;
     valid: boolean;
     invalidreason?: string;
-    version: number;
+    block: number;
+    confirmations: number;
+
+    propertyid: number;
+    propertyname: string;
+    divisible: boolean;
+    amount: string;
+
+    blockhash: string;
+    blocktime: number;
+    positioninblock: number;
+
+    // CrowSale Purchase
+    // purchasedpropertyid?: number;
+    // purchasedpropertyname?: string;
+    // purchasedpropertydivisible?: boolean;
+    // purchasedtokens?: string;
+    // issuertokens?: string;
+    // ...
   }
 }
