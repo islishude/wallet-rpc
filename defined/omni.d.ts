@@ -41,6 +41,7 @@ declare namespace OmniLayer {
     type_int: number;
     url: string;
     valid: boolean;
+    invalidreason?: string;
     version: number;
   }
 }

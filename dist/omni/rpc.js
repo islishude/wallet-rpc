@@ -1,46 +1,40 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const client_1 = require("../client");
+const rpc_1 = require("../bitcoin/rpc");
 const mtd_1 = require("./mtd");
-class OmniLayerClient extends client_1.default {
+class OmniLayerClient extends rpc_1.BitcoinClient {
     constructor(user, pass, ip, port = 8332) {
         super(user, pass, ip, port);
     }
-    getInfo() {
+    getOmniInfo() {
         return this.RpcCall(mtd_1.OmniLayerMethods.info.client);
     }
-    getBlockCount() {
-        return this.RpcCall(mtd_1.OmniLayerMethods.block.count);
-    }
-    sendRawTx(fromAddress, rawTransaction, referenceAddress, redeemAddress, referenceAmount) {
-        const params = [fromAddress, rawTransaction];
-        if (referenceAddress !== undefined) {
-            params.push(referenceAddress);
-        }
-        if (redeemAddress !== undefined) {
-            params.push(redeemAddress);
-        }
-        if (referenceAmount !== undefined) {
-            params.push(referenceAmount);
-        }
+    sendOmniRawTx(fromAddress, rawTransaction, referenceAddress, redeemAddress, referenceAmount) {
+        const params = [
+            fromAddress,
+            rawTransaction,
+            referenceAddress,
+            redeemAddress,
+            referenceAmount
+        ];
         return this.RpcCall(mtd_1.OmniLayerMethods.tx.sendRaw, params);
     }
-    getBalance(address, propertyId) {
+    getPropertyBalance(address, propertyId) {
         return this.RpcCall(mtd_1.OmniLayerMethods.address.balance, [address, propertyId]);
     }
-    getAllBalance(address) {
+    getAllPropertyBalance(address) {
         return this.RpcCall(mtd_1.OmniLayerMethods.address.allBalance, [address]);
     }
-    getTxInfo(txid) {
+    getOmniTxInfo(txid) {
         return this.RpcCall(mtd_1.OmniLayerMethods.tx.detail, [txid]);
     }
-    getTxList(height) {
+    getOmniTxList(height) {
         return this.RpcCall(mtd_1.OmniLayerMethods.tx.list, [height]);
     }
-    getPendingTxList(address) {
+    getOmniPendingTxList(address) {
         return this.RpcCall(mtd_1.OmniLayerMethods.tx.pending, [address]);
     }
-    getProperty(id = 31) {
+    getOmniProperty(id = 31) {
         return this.RpcCall(mtd_1.OmniLayerMethods.property.info, [id]);
     }
 }

@@ -1,20 +1,19 @@
-import Client from "../client";
-export declare class OmniLayerClient extends Client {
+import { BitcoinClient } from "../bitcoin/rpc";
+export declare class OmniLayerClient extends BitcoinClient {
     constructor(user: string, pass: string, ip: string, port?: number);
-    getInfo(): Promise<import("../../defined/rpc").RPCResponse<OmniLayer.clientInfo>>;
-    getBlockCount(): Promise<import("../../defined/rpc").RPCResponse<number>>;
-    sendRawTx(fromAddress: string, rawTransaction: string, referenceAddress?: string, redeemAddress?: string, referenceAmount?: string): Promise<import("../../defined/rpc").RPCResponse<string>>;
-    getBalance(address: string, propertyId: number): Promise<import("../../defined/rpc").RPCResponse<{
+    getOmniInfo(): Promise<import("../../defined/rpc").RPCResponse<OmniLayer.clientInfo>>;
+    sendOmniRawTx(fromAddress: string, rawTransaction: string, referenceAddress?: string, redeemAddress?: string, referenceAmount?: string): Promise<import("../../defined/rpc").RPCResponse<string>>;
+    getPropertyBalance(address: string, propertyId: number): Promise<import("../../defined/rpc").RPCResponse<{
         balance: string;
         reserved: string;
     }>>;
-    getAllBalance(address: string): Promise<import("../../defined/rpc").RPCResponse<{
+    getAllPropertyBalance(address: string): Promise<import("../../defined/rpc").RPCResponse<{
         propertyid: number;
         balance: string;
         reserved: string;
     }[]>>;
-    getTxInfo(txid: string): Promise<import("../../defined/rpc").RPCResponse<OmniLayer.txInfo>>;
-    getTxList(height: number): Promise<import("../../defined/rpc").RPCResponse<string[]>>;
-    getPendingTxList(address?: string): Promise<import("../../defined/rpc").RPCResponse<OmniLayer.txInfo[]>>;
-    getProperty(id?: number): Promise<import("../../defined/rpc").RPCResponse<string>>;
+    getOmniTxInfo(txid: string): Promise<import("../../defined/rpc").RPCResponse<OmniLayer.txInfo>>;
+    getOmniTxList(height: number): Promise<import("../../defined/rpc").RPCResponse<string[]>>;
+    getOmniPendingTxList(address?: string): Promise<import("../../defined/rpc").RPCResponse<OmniLayer.txInfo[]>>;
+    getOmniProperty(id?: number): Promise<import("../../defined/rpc").RPCResponse<string>>;
 }
