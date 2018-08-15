@@ -75,6 +75,12 @@ btcClient.BulkCall();
 
 Ethereum Util includes some useful methods like `getABI`, `sha3`.
 
+### RPC Methods List
+
+- [Bitcoin](./src/bitcoin/mtd.ts)
+- [Ethereum](./src/ethereum/mtd.ts)
+- [OmniLayer(USDT)](./src/omni/mtd.ts)
+
 ### CLI
 
 ```
@@ -84,15 +90,7 @@ npx wallet-rpc
 > let tmp = eth.getBlockCount(log, log(e => e.message));
 ```
 
-for develope feature with `npx islishude/wallet-rpc@dev`
-
-Will support top-level `await` until node.js 10 LTS released.
-
-### RPC Methods List
-
-- [Bitcoin](./src/bitcoin/mtd.ts)
-- [Ethereum](./src/ethereum/mtd.ts)
-- [OmniLayer(USDT)](./src/omni/mtd.ts)
+for development feature with `npx islishude/wallet-rpc@dev`
 
 ## Feedback
 
