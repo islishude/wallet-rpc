@@ -30,7 +30,7 @@ declare namespace OmniLayer {
     version: number;
     type_int: number;
     type: string;
-    valid: boolean;
+    valid?: boolean;
     invalidreason?: string;
     block: number;
     confirmations: number;
