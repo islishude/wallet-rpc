@@ -17,7 +17,7 @@ And CLI Supports, [learn more](#cli)!
 ## Install
 
 ```shell
-# PRE-REQUIRED: Node.js 8.x && NPM 5.6+
+# pre-required: Node.js 8.9.x LTS && NPM 5.6+
 npm install wallet-rpc --save
 ```
 
@@ -66,7 +66,7 @@ btcClient.BulkAdd(Bitcoin.mtd.block.hash, [200], 1);
 btcClient.BulkCall();
 ```
 
-### API
+## API
 
 - [Bitcoin](./types/bitcoin/rpc.d.ts)
 - [Ethereum && ERC20](./types/ethereum/rpc.d.ts)
@@ -75,13 +75,13 @@ btcClient.BulkCall();
 
 Ethereum Util includes some useful methods like `getABI`, `sha3`.
 
-### RPC Methods List
+## RPC Methods List
 
 - [Bitcoin](./src/bitcoin/mtd.ts)
 - [Ethereum](./src/ethereum/mtd.ts)
 - [OmniLayer(USDT)](./src/omni/mtd.ts)
 
-### CLI
+## CLI
 
 ```
 npx wallet-rpc
