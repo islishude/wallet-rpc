@@ -102,9 +102,6 @@ export declare const DKKToken: {
 };
 export declare const OmniLayer: {
     mtd: {
-        block: {
-            count: string;
-        };
         info: {
             client: string;
         };

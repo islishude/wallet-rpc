@@ -1,9 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OmniLayerMethods = {
-    block: {
-        count: "getblockcount"
-    },
     info: {
         client: "omni_getinfo"
     },

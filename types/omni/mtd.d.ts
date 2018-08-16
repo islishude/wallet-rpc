@@ -1,7 +1,4 @@
 export declare const OmniLayerMethods: {
-    block: {
-        count: string;
-    };
     info: {
         client: string;
     };

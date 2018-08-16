@@ -1,8 +1,5 @@
 /* spell-checker: disable */
 export const OmniLayerMethods = {
-  block: {
-    count: "getblockcount"
-  },
   info: {
     client: "omni_getinfo"
   },

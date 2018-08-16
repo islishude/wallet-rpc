@@ -13,7 +13,7 @@ export class OmniLayerClient extends BitcoinClient {
 
   /**
    * Broadcasts a raw Omni Layer transaction.
-   * Use `BitcoinClientInstance.sendRawTx` for anyone instead of sendOmniRawTx
+   * Use `this.sendRawTx` for anyone instead of sendOmniRawTx
    * @param fromAddress the address to send from
    * @param rawTransaction	the hex-encoded raw transaction
    * @param referenceAddress a reference address (none by default)
