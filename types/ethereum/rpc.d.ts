@@ -16,6 +16,7 @@ export declare class EthereumClient extends Client {
     sendRawTx(raw: string): Promise<RPCResponse<string>>;
     sendTx(tx: Ethereum.ISentTxStruct): Promise<RPCResponse<string>>;
     getAddrNonce(address: string, status?: Ethereum.Status): Promise<RPCResponse<string>>;
+    getAddrNextNonce(address: string): Promise<RPCResponse<string>>;
     getCurrentGasPrice(): Promise<RPCResponse<string>>;
     callFunc(param: Ethereum.ICallFuncParam, status?: Ethereum.Status): Promise<RPCResponse<string>>;
     getCode(address: string, status: Ethereum.Status): Promise<RPCResponse<string>>;

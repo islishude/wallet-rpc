@@ -49,6 +49,9 @@ class EthereumClient extends client_1.default {
         const param = [address, status];
         return this.RpcCall(mtd_1.EthereumMethods.address.nonce, param);
     }
+    getAddrNextNonce(address) {
+        return this.RpcCall(mtd_1.EthereumMethods.address.parity.pendingNonce, [address]);
+    }
     getCurrentGasPrice() {
         return this.RpcCall(mtd_1.EthereumMethods.gas.price, []);
     }

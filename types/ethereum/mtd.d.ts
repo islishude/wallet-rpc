@@ -9,6 +9,9 @@ export declare const EthereumMethods: {
         balance: string;
         code: string;
         nonce: string;
+        parity: {
+            pendingNonce: string;
+        };
     };
     block: {
         byHash: string;

@@ -76,7 +76,7 @@ export class EthereumClient extends Client {
   /**
    * Return raw transaction by hash
    * There is an "undocumented" method eth_getRawTransactionByHash
-   * @param hash 
+   * @param hash
    */
   public getRawTxByHash(hash: string) {
     return this.RpcCall<string>(mtd.tx.rawByHash, [hash]);
@@ -121,6 +121,16 @@ export class EthereumClient extends Client {
   public getAddrNonce(address: string, status: Ethereum.Status = "latest") {
     const param: string[] = [address, status];
     return this.RpcCall<string>(mtd.address.nonce, param);
+  }
+
+  /**
+   * Returns next available nonce for transaction from given account. Includes pending block and transaction queue.
+   * !! Only for parity node
+   * @param address 
+   * @see https://wiki.parity.io/JSONRPC-parity-module#parity_nextnonce
+   */
+  public getAddrNextNonce(address: string) {
+    return this.RpcCall<string>(mtd.address.parity.pendingNonce, [address]);
   }
 
   /**

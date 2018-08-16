@@ -10,7 +10,10 @@ exports.EthereumMethods = {
     address: {
         balance: "eth_getBalance",
         code: "eth_getCode",
-        nonce: "eth_getTransactionCount"
+        nonce: "eth_getTransactionCount",
+        parity: {
+            pendingNonce: "parity_nextNonce"
+        }
     },
     block: {
         byHash: "eth_getBlockByHash",

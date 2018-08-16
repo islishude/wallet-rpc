@@ -43,6 +43,9 @@ export declare const Ethereum: {
             balance: string;
             code: string;
             nonce: string;
+            parity: {
+                pendingNonce: string;
+            };
         };
         block: {
             byHash: string;
