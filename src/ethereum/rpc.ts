@@ -164,6 +164,7 @@ export class EthereumClient extends Client {
 
   /**
    * Detect the address given is contract address or not
+   * if contract self destructor return false
    * @param address string
    * @param status string
    * @returns boolean
