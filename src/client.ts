@@ -16,7 +16,8 @@ export default abstract class Client {
       auth: {
         password: this.pass,
         username: this.user
-      }
+      },
+      timeout: 60000
     };
 
     // if (/^https.+$/.test(this.ip)) {
@@ -57,13 +58,15 @@ export default abstract class Client {
       );
       return ret.data;
     } catch (e) {
-      const { response, message } = e as AxiosError
+      const { response, message } = e as AxiosError;
 
       if (response !== undefined) {
         const { data, status } = response;
         const msg: string = data && data.message;
         const code: number = data && data.code;
-        throw new Error(`RPC Response ${status} Error: code = ${code} msg = ${msg}`);
+        throw new Error(
+          `RPC Response ${status} Error: code = ${code} msg = ${msg}`
+        );
       }
 
       throw new Error(`RPC Request Error: ${message}`);

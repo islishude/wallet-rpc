@@ -1,4 +1,4 @@
-RPC client of crypto coins by TypeScript
+JSON RPC client of crypto coins by TypeScript
 
 ## Supports
 

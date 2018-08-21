@@ -1,7 +1,7 @@
 {
   "name": "wallet-rpc",
-  "version": "3.6.3",
-  "description": "RPC client of crypto coins by TypeScript",
+  "version": "3.6.4",
+  "description": "JSON RPC client of crypto coins by TypeScript",
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist types && tsc",

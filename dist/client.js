@@ -12,7 +12,8 @@ class Client {
             auth: {
                 password: this.pass,
                 username: this.user
-            }
+            },
+            timeout: 60000
         };
         this.uri = /^http.+$/.test(this.ip)
             ? `${this.ip}:${this.port}`
