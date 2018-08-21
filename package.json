@@ -22,7 +22,9 @@
     "Ethereum",
     "BitcoinCash",
     "Litecoin",
-    "RPC"
+    "USDT",
+    "OmniLayer",
+    "JSONRPC"
   ],
   "author": {
     "email": "lishude@foxmail.com",
