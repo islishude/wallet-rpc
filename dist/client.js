@@ -34,11 +34,9 @@ class Client {
             const { response, message } = e;
             if (response !== undefined) {
                 const { data, status } = response;
-                const msg = data && data.message;
-                const code = data && data.code;
-                throw new Error(`RPC Response ${status} Error: code = ${code} msg = ${msg}`);
+                throw new Error(`JSON RPC Response ${status} Error: data = ${JSON.stringify(data)}`);
             }
-            throw new Error(`RPC Request Error: ${message}`);
+            throw new Error(`JSON RPC Request Error: ${message}`);
         }
     }
     BulkAdd(method, param, id) {

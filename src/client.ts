@@ -62,14 +62,12 @@ export default abstract class Client {
 
       if (response !== undefined) {
         const { data, status } = response;
-        const msg: string = data && data.message;
-        const code: number = data && data.code;
         throw new Error(
-          `RPC Response ${status} Error: code = ${code} msg = ${msg}`
+          `JSON RPC Response ${status} Error: data = ${JSON.stringify(data)}`
         );
       }
 
-      throw new Error(`RPC Request Error: ${message}`);
+      throw new Error(`JSON RPC Request Error: ${message}`);
     }
   }
 
