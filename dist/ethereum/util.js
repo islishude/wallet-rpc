@@ -18,6 +18,14 @@ exports.hexToDecimalString = (hex) => {
     }
     return new bignumber_js_1.default(hex).toString(10);
 };
+exports.toWei = (eth) => {
+    const tmp = new bignumber_js_1.default(10).pow(18);
+    return new bignumber_js_1.default(eth).times(tmp).toString(10);
+};
+exports.toEth = (wei) => {
+    const tmp = new bignumber_js_1.default(10).pow(18);
+    return new bignumber_js_1.default(wei).div(tmp).toString(10);
+};
 exports.numberToHex = (int) => {
     return "0x" + new bignumber_js_1.default(int).toString(16);
 };

@@ -1,6 +1,8 @@
 import { Ethereum } from "../../defined/eth";
 export declare const hexToNumber: (hex: string) => number;
 export declare const hexToDecimalString: (hex: string) => string;
+export declare const toWei: (eth: number) => string;
+export declare const toEth: (wei: string) => string;
 export declare const numberToHex: (int: number) => string;
 export declare const addHexPad: (hex: string) => string;
 export declare const ERC20FuncSig: {

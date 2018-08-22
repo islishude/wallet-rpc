@@ -20,6 +20,16 @@ export const hexToDecimalString = (hex: string): string => {
   return new BigNumber(hex).toString(10);
 };
 
+export const toWei = (eth: number): string => {
+  const tmp = new BigNumber(10).pow(18);
+  return new BigNumber(eth).times(tmp).toString(10);
+};
+
+export const toEth = (wei: string): string => {
+  const tmp = new BigNumber(10).pow(18);
+  return new BigNumber(wei).div(tmp).toString(10);
+};
+
 export const numberToHex = (int: number): string => {
   return "0x" + new BigNumber(int).toString(16);
 };
