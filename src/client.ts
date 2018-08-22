@@ -44,7 +44,7 @@ export default abstract class Client {
     id?: number | string
   ) {
     const reqData: RPCRequest = {
-      id: id || Date.now(),
+      id,
       jsonrpc: "2.0",
       method,
       params: params || []
@@ -77,9 +77,9 @@ export default abstract class Client {
    * @param param
    * @param id
    */
-  public BulkAdd(method: string, param?: any[], id?: number): void {
+  public BulkAdd(method: string, param?: any[], id?: number | string): void {
     const data: RPCRequest = {
-      id: id || Date.now(),
+      id,
       jsonrpc: "2.0",
       method,
       params: param || []

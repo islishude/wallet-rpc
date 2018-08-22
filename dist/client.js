@@ -21,7 +21,7 @@ class Client {
     }
     async RpcCall(method, params, id) {
         const reqData = {
-            id: id || Date.now(),
+            id,
             jsonrpc: "2.0",
             method,
             params: params || []
@@ -41,7 +41,7 @@ class Client {
     }
     BulkAdd(method, param, id) {
         const data = {
-            id: id || Date.now(),
+            id,
             jsonrpc: "2.0",
             method,
             params: param || []
