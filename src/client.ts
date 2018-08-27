@@ -44,7 +44,7 @@ export default abstract class Client {
     id?: number | string
   ) {
     const reqData: RPCRequest = {
-      id,
+      id: id || Date.now(),
       jsonrpc: "2.0",
       method,
       params: params || []
