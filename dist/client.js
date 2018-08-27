@@ -41,7 +41,7 @@ class Client {
     }
     BulkAdd(method, param, id) {
         const data = {
-            id,
+            id: id || Date.now(),
             jsonrpc: "2.0",
             method,
             params: param || []

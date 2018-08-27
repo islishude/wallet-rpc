@@ -79,7 +79,7 @@ export default abstract class Client {
    */
   public BulkAdd(method: string, param?: any[], id?: number | string): void {
     const data: RPCRequest = {
-      id,
+      id: id || Date.now(),
       jsonrpc: "2.0",
       method,
       params: param || []
