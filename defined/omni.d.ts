@@ -22,7 +22,7 @@ declare namespace OmniLayer {
 
   export interface txInfo {
     txid: string;
-    fee: string;
+    fee: number;
     // from
     sendingaddress: string;
     // to
