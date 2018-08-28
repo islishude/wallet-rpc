@@ -155,7 +155,8 @@ declare namespace Ethereum {
     blockHash: string;
     blockNumber: number;
     // if `suicide` result will be null
-    result: IParityCallResult | IParityCreateResult | null;
+    // if error occured then result will be undefined
+    result?: IParityCallResult | IParityCreateResult | null;
     subtraces: number;
     error?: string;
     traceAddress: number[];
