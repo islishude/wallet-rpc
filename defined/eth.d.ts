@@ -60,12 +60,14 @@ declare namespace Ethereum {
     transactionIndex: string;
     blockHash: string;
     blockNumber: string;
+    from: string;
+    to: string;
     cumulativeGasUsed: string;
     gasUsed: string;
     contractAddress?: string;
     logs: Array<IReceiptLogs>;
     logsBloom: string;
-    status?: string;
+    status?: "0x1" | "0x0";
     root?: string;
   }
 
