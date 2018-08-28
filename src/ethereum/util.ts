@@ -64,6 +64,18 @@ export const ERC20EventSig = {
   Transfer: "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
 };
 
+export const ERC721FunSig = {
+  name: "0x06fdde03",
+  symbol: "0x95d89b41",
+  totalSupply: "0x18160ddd",
+  // safeTransferFrom(address,address,uint256)
+  safeTransferFrom: "0x42842e0e",
+  // safeTransferFrom(address,address,uint256,bytes)
+  safeTransferFromWithData: "0x42842e0e",
+  // transferFrom(address,address,uint256)
+  transferFrom: "0x23b872dd"
+};
+
 export const isAddress = (address: string): boolean => {
   return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
 };

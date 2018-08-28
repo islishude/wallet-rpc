@@ -55,6 +55,14 @@ exports.ERC20EventSig = {
     Approve: "0xdf586a81df66595b89d3dbd58e5b14ee6c0fb16da8977f97ea7d24c654994ac7",
     Transfer: "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
 };
+exports.ERC721FunSig = {
+    name: "0x06fdde03",
+    symbol: "0x95d89b41",
+    totalSupply: "0x18160ddd",
+    safeTransferFrom: "0x42842e0e",
+    safeTransferFromWithData: "0x42842e0e",
+    transferFrom: "0x23b872dd"
+};
 exports.isAddress = (address) => {
     return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
 };
