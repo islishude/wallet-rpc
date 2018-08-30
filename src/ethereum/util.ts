@@ -14,7 +14,7 @@ export const hexToDecimalString = (hex: string): string => {
   if (hex === "0x") {
     return "0";
   }
-  if (!hex.includes("0x")) {
+  if (!hex.startsWith("0x")) {
     hex = "0x" + hex;
   }
   return new BigNumber(hex).toString(10);

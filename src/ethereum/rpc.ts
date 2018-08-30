@@ -126,7 +126,7 @@ export class EthereumClient extends Client {
   /**
    * Returns next available nonce for transaction from given account. Includes pending block and transaction queue.
    * !! Only for parity node
-   * @param address 
+   * @param address
    * @see https://wiki.parity.io/JSONRPC-parity-module#parity_nextnonce
    */
   public getAddrNextNonce(address: string) {
@@ -256,7 +256,12 @@ export class EthereumClient extends Client {
       this.callFunc(PARAM)
     ]);
     if (decimals === "0x" && DECIMALS === "0x") {
-      return undefined;
+      return;
+    }
+    // For parity fix
+    // If a contract ISN'T a ERC20 will be throw
+    if (decimals === undefined && DECIMALS === undefined) {
+      return;
     }
     return hexToNumber(decimals === "0x" ? DECIMALS : decimals);
   }
@@ -267,8 +272,8 @@ export class EthereumClient extends Client {
       to: token
     };
     const { result: totalSupply } = await this.callFunc(param);
-    if (totalSupply === "0x") {
-      return undefined;
+    if (totalSupply === "0x" || totalSupply === undefined) {
+      return;
     }
     return hexToDecimalString(totalSupply);
   }
@@ -287,7 +292,12 @@ export class EthereumClient extends Client {
       this.callFunc(PARAM)
     ]);
     if (name === "0x" && NAME === "0x") {
-      return undefined;
+      return;
+    }
+    // For parity fix
+    // If a contract ISN'T a ERC20 will be throw
+    if (name === undefined && NAME === undefined) {
+      return;
     }
     return toUtf8(name === "0x" ? NAME : name);
   }
@@ -306,7 +316,12 @@ export class EthereumClient extends Client {
       this.callFunc(PARAM)
     ]);
     if (symbol === "0x" && SYMBOL === "0x") {
-      return undefined;
+      return;
+    }
+    // For parity fix
+    // If a contract ISN'T a ERC20 will be throw
+    if (symbol === undefined && SYMBOL === undefined) {
+      return;
     }
     return toUtf8(symbol === "0x" ? SYMBOL : symbol);
   }
@@ -334,10 +349,11 @@ export class EthereumClient extends Client {
       // eg. EOS token has no name
       name: name || symbol,
       symbol: symbol || name,
+      // For ERC721 it's not fixed
       totalSupply:
-        totalSupply === undefined || decimals === undefined
+        totalSupply === undefined
           ? undefined
-          : new bn(totalSupply).div(new bn(10).pow(decimals)).toString(10)
+          : new bn(totalSupply).div(new bn(10).pow(decimals || 0)).toString(10)
     };
   }
 }

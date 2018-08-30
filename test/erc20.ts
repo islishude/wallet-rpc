@@ -37,3 +37,14 @@ Client.ERC20TokenInfo(EGCC)
     equal(totalSupply, "10000000000");
   })
   .catch(err => log(err.message));
+
+const NON_ERC20_TOKEN = "0xce44c75d3c2864421df2a1d2f068d8da8375f579";
+Client.ERC20TokenInfo(NON_ERC20_TOKEN)
+  .then(({ decimals, name, totalSupply, symbol }) => {
+    log(decimals, name, symbol, totalSupply);
+    equal(decimals, undefined);
+    equal(name, undefined);
+    equal(symbol, undefined);
+    equal(totalSupply, undefined);
+  })
+  .catch(err => log(err.message));
