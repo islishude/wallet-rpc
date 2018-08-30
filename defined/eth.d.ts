@@ -60,12 +60,14 @@ declare namespace Ethereum {
     transactionIndex: string;
     blockHash: string;
     blockNumber: string;
+    from: string;
+    to: string | null;
+    contractAddress: string | null;
     cumulativeGasUsed: string;
     gasUsed: string;
-    contractAddress?: string;
     logs: Array<IReceiptLogs>;
     logsBloom: string;
-    status?: string;
+    status?: "0x1" | "0x0";
     root?: string;
   }
 
@@ -155,7 +157,8 @@ declare namespace Ethereum {
     blockHash: string;
     blockNumber: number;
     // if `suicide` result will be null
-    result: IParityCallResult | IParityCreateResult | null;
+    // if error occured then result will be undefined
+    result?: IParityCallResult | IParityCreateResult | null;
     subtraces: number;
     error?: string;
     traceAddress: number[];

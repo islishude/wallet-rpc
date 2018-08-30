@@ -14,7 +14,7 @@ export const hexToDecimalString = (hex: string): string => {
   if (hex === "0x") {
     return "0";
   }
-  if (!hex.includes("0x")) {
+  if (!hex.startsWith("0x")) {
     hex = "0x" + hex;
   }
   return new BigNumber(hex).toString(10);
@@ -62,6 +62,18 @@ export const ERC20FuncSigUpper = {
 export const ERC20EventSig = {
   Approve: "0xdf586a81df66595b89d3dbd58e5b14ee6c0fb16da8977f97ea7d24c654994ac7",
   Transfer: "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+};
+
+export const ERC721FunSig = {
+  name: "0x06fdde03",
+  symbol: "0x95d89b41",
+  totalSupply: "0x18160ddd",
+  // safeTransferFrom(address,address,uint256)
+  safeTransferFrom: "0x42842e0e",
+  // safeTransferFrom(address,address,uint256,bytes)
+  safeTransferFromWithData: "0x42842e0e",
+  // transferFrom(address,address,uint256)
+  transferFrom: "0x23b872dd"
 };
 
 export const isAddress = (address: string): boolean => {

@@ -109,7 +109,10 @@ class EthereumClient extends client_1.default {
             this.callFunc(PARAM)
         ]);
         if (decimals === "0x" && DECIMALS === "0x") {
-            return undefined;
+            return;
+        }
+        if (decimals === undefined && DECIMALS === undefined) {
+            return;
         }
         return util_1.hexToNumber(decimals === "0x" ? DECIMALS : decimals);
     }
@@ -119,8 +122,8 @@ class EthereumClient extends client_1.default {
             to: token
         };
         const { result: totalSupply } = await this.callFunc(param);
-        if (totalSupply === "0x") {
-            return undefined;
+        if (totalSupply === "0x" || totalSupply === undefined) {
+            return;
         }
         return util_1.hexToDecimalString(totalSupply);
     }
@@ -138,7 +141,10 @@ class EthereumClient extends client_1.default {
             this.callFunc(PARAM)
         ]);
         if (name === "0x" && NAME === "0x") {
-            return undefined;
+            return;
+        }
+        if (name === undefined && NAME === undefined) {
+            return;
         }
         return util_1.toUtf8(name === "0x" ? NAME : name);
     }
@@ -156,7 +162,10 @@ class EthereumClient extends client_1.default {
             this.callFunc(PARAM)
         ]);
         if (symbol === "0x" && SYMBOL === "0x") {
-            return undefined;
+            return;
+        }
+        if (symbol === undefined && SYMBOL === undefined) {
+            return;
         }
         return util_1.toUtf8(symbol === "0x" ? SYMBOL : symbol);
     }
@@ -172,9 +181,9 @@ class EthereumClient extends client_1.default {
             decimals,
             name: name || symbol,
             symbol: symbol || name,
-            totalSupply: totalSupply === undefined || decimals === undefined
+            totalSupply: totalSupply === undefined
                 ? undefined
-                : new bignumber_js_1.default(totalSupply).div(new bignumber_js_1.default(10).pow(decimals)).toString(10)
+                : new bignumber_js_1.default(totalSupply).div(new bignumber_js_1.default(10).pow(decimals || 0)).toString(10)
         };
     }
 }
