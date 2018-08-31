@@ -59,22 +59,21 @@ export default abstract class Client {
       );
       return ret.data;
     } catch (e) {
-      const { response, message, request } = e as AxiosError;
+      const { response, message } = e as AxiosError;
       const req: string = format("%s => %O", this.uri, reqData);
 
       if (response !== undefined) {
-        const sts = response.status;
+        // Catch non-200 error
+        const status = response.status;
         const data = format("%O", response.data);
         throw new Error(
-          `JSONRPC Response ${sts} Error.\nRequest: ${req}\nResponse: ${data}`
+          `JSONRPC Response ${status} Error.\nReason: ${message}\nReqData: ${req}\nRespData: ${data}`
         );
       }
 
-      if (request !== undefined) {
-        throw new Error(`JSONRPC Request Error.\nRequest: ${req}`);
-      }
-
-      throw new Error(`JSONRPC Error: \nMsg:${message}\nRequest: ${req}`);
+      throw new Error(
+        `JSONRPC Request Error: \nReason:${message}\nReqData: ${req}`
+      );
     }
   }
 
