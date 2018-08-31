@@ -1,4 +1,5 @@
 import Axios, { AxiosError, AxiosRequestConfig } from "axios";
+import { format } from "util";
 import { RPCRequest, RPCResponse } from "../defined/rpc";
 
 export default abstract class Client {
@@ -58,16 +59,22 @@ export default abstract class Client {
       );
       return ret.data;
     } catch (e) {
-      const { response, message } = e as AxiosError;
+      const { response, message, request } = e as AxiosError;
+      const req: string = format("%s => %O", this.uri, reqData);
 
       if (response !== undefined) {
-        const { data, status } = response;
+        const sts = response.status;
+        const data = format("%O", response.data);
         throw new Error(
-          `JSON RPC Response ${status} Error: data = ${JSON.stringify(data)}`
+          `JSONRPC Response ${sts} Error.\nRequest: ${req}\nResponse: ${data}`
         );
       }
 
-      throw new Error(`JSON RPC Request Error: ${message}`);
+      if (request !== undefined) {
+        throw new Error(`JSONRPC Request Error.\nRequest: ${req}`);
+      }
+
+      throw new Error(`JSONRPC Error: \nMsg:${message}\nRequest: ${req}`);
     }
   }
 

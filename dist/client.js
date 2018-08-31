@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
+const util_1 = require("util");
 class Client {
     constructor(user, pass, ip, port) {
         this.user = user;
@@ -31,12 +32,17 @@ class Client {
             return ret.data;
         }
         catch (e) {
-            const { response, message } = e;
+            const { response, message, request } = e;
+            const req = util_1.format("%s => %O", this.uri, reqData);
             if (response !== undefined) {
-                const { data, status } = response;
-                throw new Error(`JSON RPC Response ${status} Error: data = ${JSON.stringify(data)}`);
+                const sts = response.status;
+                const data = util_1.format("%O", response.data);
+                throw new Error(`JSONRPC Response ${sts} Error.\nRequest: ${req}\nResponse: ${data}`);
             }
-            throw new Error(`JSON RPC Request Error: ${message}`);
+            if (request !== undefined) {
+                throw new Error(`JSONRPC Request Error.\nRequest: ${req}`);
+            }
+            throw new Error(`JSONRPC Error: \nMsg:${message}\nRequest: ${req}`);
         }
     }
     BulkAdd(method, param, id) {
