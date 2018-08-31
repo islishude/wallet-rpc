@@ -111,10 +111,14 @@ class EthereumClient extends client_1.default {
         if (decimals === "0x" && DECIMALS === "0x") {
             return;
         }
-        if (decimals === undefined && DECIMALS === undefined) {
+        if (!decimals && !DECIMALS) {
             return;
         }
-        return util_1.hexToNumber(decimals === "0x" ? DECIMALS : decimals);
+        const tmp = decimals === "0x" ? DECIMALS : decimals;
+        if (!tmp) {
+            return;
+        }
+        return util_1.hexToNumber(tmp);
     }
     async ERC20TotalSupply(token) {
         const param = {
@@ -146,7 +150,11 @@ class EthereumClient extends client_1.default {
         if (name === undefined && NAME === undefined) {
             return;
         }
-        return util_1.toUtf8(name === "0x" ? NAME : name);
+        const tmp = name === "0x" ? NAME : name;
+        if (!tmp) {
+            return;
+        }
+        return util_1.toUtf8(tmp);
     }
     async ERC20Symbol(token) {
         const param = {
@@ -164,10 +172,14 @@ class EthereumClient extends client_1.default {
         if (symbol === "0x" && SYMBOL === "0x") {
             return;
         }
-        if (symbol === undefined && SYMBOL === undefined) {
+        if (!symbol && !SYMBOL) {
             return;
         }
-        return util_1.toUtf8(symbol === "0x" ? SYMBOL : symbol);
+        const tmp = symbol === "0x" ? SYMBOL : symbol;
+        if (!tmp) {
+            return;
+        }
+        return util_1.toUtf8(tmp);
     }
     async ERC20TokenInfo(token) {
         const [name, symbol, decimals, totalSupply] = await Promise.all([

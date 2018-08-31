@@ -260,10 +260,14 @@ export class EthereumClient extends Client {
     }
     // For parity fix
     // If a contract ISN'T a ERC20 will be throw
-    if (decimals === undefined && DECIMALS === undefined) {
+    if (!decimals && !DECIMALS) {
       return;
     }
-    return hexToNumber(decimals === "0x" ? DECIMALS : decimals);
+    const tmp = decimals === "0x" ? DECIMALS : decimals;
+    if (!tmp) {
+      return;
+    }
+    return hexToNumber(tmp);
   }
 
   public async ERC20TotalSupply(token: string): Promise<string | undefined> {
@@ -299,7 +303,11 @@ export class EthereumClient extends Client {
     if (name === undefined && NAME === undefined) {
       return;
     }
-    return toUtf8(name === "0x" ? NAME : name);
+    const tmp = name === "0x" ? NAME : name;
+    if (!tmp) {
+      return;
+    }
+    return toUtf8(tmp);
   }
 
   public async ERC20Symbol(token: string): Promise<undefined | string> {
@@ -320,10 +328,14 @@ export class EthereumClient extends Client {
     }
     // For parity fix
     // If a contract ISN'T a ERC20 will be throw
-    if (symbol === undefined && SYMBOL === undefined) {
+    if (!symbol && !SYMBOL) {
       return;
     }
-    return toUtf8(symbol === "0x" ? SYMBOL : symbol);
+    const tmp = symbol === "0x" ? SYMBOL : symbol;
+    if (!tmp) {
+      return;
+    }
+    return toUtf8(tmp);
   }
 
   public async ERC20TokenInfo(
