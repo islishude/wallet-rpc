@@ -70,17 +70,16 @@ btcClient.BulkCall();
 ## API
 
 - [Bitcoin](./types/bitcoin/rpc.d.ts)
-- [Ethereum && ERC20](./types/ethereum/rpc.d.ts)
-- [EthereumUtil](./types/ethereum/util.d.ts)
-- [OmniLayer(USDT)](./types/omni/rpc.d.ts)
+- [Ethereum](./types/ethereum/rpc.d.ts)
+- [OmniLayer](./types/omni/rpc.d.ts)
 
-Ethereum Util includes some useful methods like `getABI`, `sha3`.
+[EthereumUtil](./types/ethereum/util.d.ts) includes some useful methods like `getABI`, `toWei`, `toETH`, `isAddress` and so on.
 
 ## RPC Methods List
 
 - [Bitcoin](./src/bitcoin/mtd.ts)
 - [Ethereum](./src/ethereum/mtd.ts)
-- [OmniLayer(USDT)](./src/omni/mtd.ts)
+- [OmniLayer](./src/omni/mtd.ts)
 
 ## CLI
 
@@ -88,7 +87,7 @@ Ethereum Util includes some useful methods like `getABI`, `sha3`.
 npx wallet-rpc
 
 > let eth = new EthereumClient("https://mainnet.infura.io", 443);
-> let tmp = eth.getBlockCount(log, log(e => e.message));
+> let tmp = eth.getBlockCount().then(log, log);
 ```
 
 for development feature with `npx islishude/wallet-rpc@dev`

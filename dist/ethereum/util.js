@@ -68,27 +68,6 @@ exports.ERC721FunSig = {
 exports.isAddress = (address) => {
     return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
 };
-// Checks if the given string is a checksum address
-// export const isChecksumAddress = (address: string) => {
-//   if (!isAddress(address)) {
-//     return false;
-//   }
-//   const aHash = sha3(address.replace("0x", "").toLowerCase());
-//   for (let i = 0; i < 40; i++) {
-//     const toNumber = Number.parseInt(aHash[i], 16);
-//     const upper = address[i].toUpperCase();
-//     if (
-//       (toNumber > 7 && upper !== address[i]) ||
-//       (toNumber <= 7 && upper !== address[i])
-//     ) {
-//       return false;
-//     }
-//   }
-//   return true;
-// };
-// export const sha3 = (message: string): string => {
-//   return SHA3(message, { outputLength: 256 }).toString();
-// };
 exports.padAddress = (address) => {
     if (!exports.isAddress(address)) {
         throw new Error("Not a valid address");

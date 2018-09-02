@@ -39,7 +39,7 @@ See the README to learn more API and RPC supports list.
 e.g.
 ${color.yellow}
   const eth = new Ethereum.RPC("https://mainnet.infura.io", 443);
-  let tmp = eth.getBlockCount().then(log, e => log(e.message));
+  let tmp = eth.getBlockCount().then(log, log);
 ${color.clear}
 `);
 
