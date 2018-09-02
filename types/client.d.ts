@@ -44,7 +44,7 @@ export default abstract class RPCClient {
      * @returns RPCResponse<T>
      * @throws Response non-2xx response or request error
      */
-    RpcCall<T = string>(method: string, params?: any[], id?: number | string): Promise<IRpcResponse<T>>;
+    RpcCall<T = any>(method: string, params?: any[], id?: number | string): Promise<IRpcResponse<T>>;
     /**
      * Bulk rpc call addition
      * @param method

@@ -108,7 +108,7 @@ export class DKKTClient extends RPCClient {
   }
 
   public getBlockHash(height: number) {
-    return this.RpcCall(mtd.block.hash, [height]);
+    return this.RpcCall<string>(mtd.block.hash, [height]);
   }
 
   public getBlockInfo(id: string) {
@@ -121,7 +121,7 @@ export class DKKTClient extends RPCClient {
   }
 
   public sendRawTx(raw: string) {
-    return this.RpcCall(mtd.tx.sendRaw, [raw]);
+    return this.RpcCall<string>(mtd.tx.sendRaw, [raw]);
   }
 
   public getMemPool() {

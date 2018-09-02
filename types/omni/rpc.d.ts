@@ -39,6 +39,21 @@ export interface IOmniTxInfo {
     blocktime: number;
     positioninblock: number;
 }
+export interface IOmniPropertyInfo {
+    propertyid: number;
+    name: string;
+    category: string;
+    subcategory: string;
+    data: string;
+    url: string;
+    divisible: boolean;
+    issuer: string;
+    creationtxid: string;
+    fixedissuance: boolean;
+    managedissuance: boolean;
+    freezingenabled: boolean;
+    totaltokens: string;
+}
 export declare class OmniLayerClient extends BitcoinClient {
     constructor(conf: IRpcConfig);
     getOmniInfo(): Promise<import("../client").IRpcResponse<IOmniClientInfo>>;
@@ -81,7 +96,7 @@ export declare class OmniLayerClient extends BitcoinClient {
      * Returns details for about the tokens or smart property to lookup.
      * @param id property id default is USDT
      */
-    getOmniProperty(id?: number): Promise<import("../client").IRpcResponse<string>>;
+    getOmniProperty(id?: number): Promise<import("../client").IRpcResponse<IOmniPropertyInfo>>;
     /**
      * List WALLET transactions, optionally filtered by an address and block boundaries.
      * !! only your wallet tx list !!

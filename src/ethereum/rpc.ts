@@ -246,7 +246,7 @@ export class EthereumClient extends RPCClient {
   // get block count
   // return hex number
   public getBlockCount() {
-    return this.RpcCall(mtd.block.count);
+    return this.RpcCall<string>(mtd.block.count);
   }
 
   public getBlockByHash(hash: string, getFullTx: boolean = false) {
@@ -310,7 +310,7 @@ export class EthereumClient extends RPCClient {
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sendtransaction
    */
   public sendTx(tx: IEthSentTxStruct) {
-    return this.RpcCall(mtd.tx.send, [tx]);
+    return this.RpcCall<string>(mtd.tx.send, [tx]);
   }
 
   /**

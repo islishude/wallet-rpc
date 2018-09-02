@@ -56,6 +56,22 @@ export interface IOmniTxInfo {
   // ...
 }
 
+export interface IOmniPropertyInfo {
+  propertyid: number; // (number) the identifier
+  name: string; // (string) the name of the tokens
+  category: string; // (string) the category used for the tokens
+  subcategory: string; // (string) the subcategory used for the tokens
+  data: string; // (string) additional information or a description
+  url: string; // (string) an URI, for example pointing to a website
+  divisible: boolean; // (boolean) whether the tokens are divisible
+  issuer: string; // (string) the Bitcoin address of the issuer on record
+  creationtxid: string; // (string) the hex-encoded creation transaction hash
+  fixedissuance: boolean; // (boolean) whether the token supply is fixed
+  managedissuance: boolean; // (boolean) whether the token supply is managed by the issuer
+  freezingenabled: boolean; // (boolean) whether freezing is enabled for the property (managed properties only)
+  totaltokens: string; // (string) the total number of tokens in existence
+}
+
 export class OmniLayerClient extends BitcoinClient {
   constructor(conf: IRpcConfig) {
     super(conf);
@@ -139,7 +155,7 @@ export class OmniLayerClient extends BitcoinClient {
    * @param id property id default is USDT
    */
   public getOmniProperty(id: number = 31) {
-    return this.RpcCall(mtd.property.info, [id]);
+    return this.RpcCall<IOmniPropertyInfo>(mtd.property.info, [id]);
   }
 
   /**

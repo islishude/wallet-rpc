@@ -71,7 +71,7 @@ export default abstract class RPCClient {
    * @returns RPCResponse<T>
    * @throws Response non-2xx response or request error
    */
-  public async RpcCall<T = string>(
+  public async RpcCall<T = any>(
     method: string,
     params?: any[],
     id?: number | string

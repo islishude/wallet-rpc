@@ -181,7 +181,7 @@ export class BitcoinClient extends RPCClient {
   }
 
   public getBlockHash(height: number) {
-    return this.RpcCall(mtd.block.hash, [height]);
+    return this.RpcCall<string>(mtd.block.hash, [height]);
   }
 
   public getBlockInfo(id: string) {
@@ -205,7 +205,7 @@ export class BitcoinClient extends RPCClient {
    * return the txid
    */
   public sendRawTx(raw: string, highFee: boolean = false) {
-    return this.RpcCall(mtd.tx.sendRaw, [raw, highFee]);
+    return this.RpcCall<string>(mtd.tx.sendRaw, [raw, highFee]);
   }
 
   public getBlockchainInfo() {
