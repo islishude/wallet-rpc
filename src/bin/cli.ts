@@ -1,8 +1,17 @@
 #!/usr/bin/env node
-
 import { log } from "console";
 import { start } from "repl";
-import { Bitcoin, DKKToken, Ethereum } from "../index";
+import {
+  BitcoinClient,
+  BitcoinMethods,
+  DKKTClient,
+  DKKTokenMethods,
+  EthereumClient,
+  EthereumMethods,
+  EthereumUtil,
+  OmniLayerClient,
+  OmniLayerMethods
+} from "../index";
 
 const color = {
   yellow: "\x1b[33m",
@@ -44,6 +53,16 @@ const terminal = start({
 });
 
 terminal.context.log = log;
-terminal.context.Bitcoin = Bitcoin;
-terminal.context.Ethereum = Ethereum;
-terminal.context.DKKToken = DKKToken;
+
+terminal.context.BitcoinClient = BitcoinClient;
+terminal.context.BitcoinMethods = BitcoinMethods;
+
+terminal.context.EthereumClient = EthereumClient;
+terminal.context.EthereumMethods = EthereumMethods;
+terminal.context.EthereumUtil = EthereumUtil;
+
+terminal.context.DKKTClient = DKKTClient;
+terminal.context.DKKTokenMethods = DKKTokenMethods;
+
+terminal.context.OmniLayerClient = OmniLayerClient;
+terminal.context.OmniLayerMethods = OmniLayerMethods;

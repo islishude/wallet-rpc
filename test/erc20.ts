@@ -1,9 +1,12 @@
 import { equal } from "assert";
 import { log } from "console";
-import { Ethereum } from "../src/index";
+import { EthereumClient } from "../src/index";
 /* spell-checker: disable */
 
-const Client = new Ethereum.RPC("https://mainnet.infura.io", 443);
+const Client = new EthereumClient({
+  ip: "https://mainnet.infura.io",
+  port: "443"
+});
 
 const TRX = "0xf230b790e05390fc8295f4d3f60332c93bed42e2";
 Client.ERC20TokenInfo(TRX)

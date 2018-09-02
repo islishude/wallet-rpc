@@ -1,7 +1,6 @@
 import Axios from "axios";
 import BigNumber from "bignumber.js";
-import { SHA3 } from "crypto-js";
-import { Ethereum } from "../../defined/eth";
+import { IEthAbiStruct, IEtherScanAbiResponse } from "./rpc";
 
 export const hexToNumber = (hex: string): number => {
   if (hex === "0x") {
@@ -80,28 +79,28 @@ export const isAddress = (address: string): boolean => {
   return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
 };
 
-// Checks if the given string is a checksummed address
-export const isChecksumAddress = (address: string) => {
-  if (!isAddress(address)) {
-    return false;
-  }
-  const aHash = sha3(address.replace("0x", "").toLowerCase());
-  for (let i = 0; i < 40; i++) {
-    const toNumber = Number.parseInt(aHash[i], 16);
-    const upper = address[i].toUpperCase();
-    if (
-      (toNumber > 7 && upper !== address[i]) ||
-      (toNumber <= 7 && upper !== address[i])
-    ) {
-      return false;
-    }
-  }
-  return true;
-};
+// Checks if the given string is a checksum address
+// export const isChecksumAddress = (address: string) => {
+//   if (!isAddress(address)) {
+//     return false;
+//   }
+//   const aHash = sha3(address.replace("0x", "").toLowerCase());
+//   for (let i = 0; i < 40; i++) {
+//     const toNumber = Number.parseInt(aHash[i], 16);
+//     const upper = address[i].toUpperCase();
+//     if (
+//       (toNumber > 7 && upper !== address[i]) ||
+//       (toNumber <= 7 && upper !== address[i])
+//     ) {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
 
-export const sha3 = (message: string): string => {
-  return SHA3(message, { outputLength: 256 }).toString();
-};
+// export const sha3 = (message: string): string => {
+//   return SHA3(message, { outputLength: 256 }).toString();
+// };
 
 export const padAddress = (address: string): string => {
   if (!isAddress(address)) {
@@ -131,11 +130,11 @@ export const addressNull = "0x0000000000000000000000000000000000000000";
 export const getABI = async (
   token: string,
   apiKey: string = "YourApiKeyToken"
-): Promise<Ethereum.IAbiStruct[] | null> => {
+): Promise<IEthAbiStruct[] | null> => {
   const api: string = "https://api.etherscan.io/api";
 
   try {
-    const { data } = await Axios.get<Ethereum.IEtherScanAbiResponse>(api, {
+    const { data } = await Axios.get<IEtherScanAbiResponse>(api, {
       params: {
         module: "contract",
         action: "getabi",
@@ -148,7 +147,7 @@ export const getABI = async (
       return null;
     }
 
-    return JSON.parse(data.result) as Ethereum.IAbiStruct[];
+    return JSON.parse(data.result) as IEthAbiStruct[];
   } catch (e) {
     throw new Error(e.message);
   }

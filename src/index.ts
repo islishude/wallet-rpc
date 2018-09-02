@@ -1,18 +1,62 @@
-import { BitcoinMethods } from "./bitcoin/mtd";
-import { BitcoinClient } from "./bitcoin/rpc";
-import { DKKTokenMethods } from "./dkktoken/mtd";
-import { DKKTClient } from "./dkktoken/rpc";
-import { EthereumMethods } from "./ethereum/mtd";
-import { EthereumClient } from "./ethereum/rpc";
+export { BitcoinMethods } from "./bitcoin/mtd";
+export { BitcoinClient } from "./bitcoin/rpc";
+export { DKKTokenMethods } from "./dkktoken/mtd";
+export { DKKTClient } from "./dkktoken/rpc";
+export { EthereumMethods } from "./ethereum/mtd";
+export { EthereumClient } from "./ethereum/rpc";
 import * as EthereumUtil from "./ethereum/util";
-import { OmniLayerMethods } from "./omni/mtd";
-import { OmniLayerClient } from "./omni/rpc";
+export { EthereumUtil };
+export { OmniLayerMethods } from "./omni/mtd";
+export { OmniLayerClient } from "./omni/rpc";
 
-export const Bitcoin = { mtd: BitcoinMethods, RPC: BitcoinClient };
-export const Ethereum = {
-  RPC: EthereumClient,
-  mtd: EthereumMethods,
-  util: EthereumUtil
-};
-export const DKKToken = { mtd: DKKTokenMethods, RPC: DKKTClient };
-export const OmniLayer = { mtd: OmniLayerMethods, RPC: OmniLayerClient };
+export {
+  IRpcRequest,
+  IRpcErrorStruct,
+  IRpcResponse,
+  IRpcConfig
+} from "./client";
+export {
+  IEthAbiCommonStruct,
+  IEthAbiInputStruct,
+  IEthAbiOutputStruct,
+  IEthAbiStruct,
+  IEthBlock,
+  IEthBlockSimple,
+  IEthBlockVerbose,
+  IEthCallFuncParam,
+  IEtherScanAbiResponse,
+  IEthReceiptLogs,
+  IEthSentTxStruct,
+  IEthStatus,
+  IEthSyncing,
+  IEthTraceTxReturn,
+  IEthTx,
+  IEthTxReceipt,
+  IParityCallAction,
+  IParityCallResult,
+  IParityCreateAction,
+  IParityCreateResult,
+  IParitySuicideAction,
+  IParityTxTrace
+} from "./ethereum/rpc";
+
+export { IOmniClientInfo, IOmniTxInfo } from "./omni/rpc";
+
+export {
+  IDkktBlockInfo,
+  IDkktTxInfo,
+  IDkktWalletInfo,
+  IDkktTxVinStruct,
+  IDkktTxVoutStruct
+} from "./dkktoken/rpc";
+
+export {
+  IBtcBlockchainInfo,
+  IBtcBlockInfo,
+  IBtcFee,
+  IBtcMemoryInfo,
+  IBtcNetworkInfo,
+  IBtcTxInfo,
+  IBtcVerboseMemPool,
+  IBtcWalletInfo
+} from "./bitcoin/rpc";

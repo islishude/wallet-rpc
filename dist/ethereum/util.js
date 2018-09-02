@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 const bignumber_js_1 = require("bignumber.js");
-const crypto_js_1 = require("crypto-js");
 exports.hexToNumber = (hex) => {
     if (hex === "0x") {
         return 0;
@@ -59,31 +58,37 @@ exports.ERC721FunSig = {
     name: "0x06fdde03",
     symbol: "0x95d89b41",
     totalSupply: "0x18160ddd",
+    // safeTransferFrom(address,address,uint256)
     safeTransferFrom: "0x42842e0e",
+    // safeTransferFrom(address,address,uint256,bytes)
     safeTransferFromWithData: "0x42842e0e",
+    // transferFrom(address,address,uint256)
     transferFrom: "0x23b872dd"
 };
 exports.isAddress = (address) => {
     return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
 };
-exports.isChecksumAddress = (address) => {
-    if (!exports.isAddress(address)) {
-        return false;
-    }
-    const aHash = exports.sha3(address.replace("0x", "").toLowerCase());
-    for (let i = 0; i < 40; i++) {
-        const toNumber = Number.parseInt(aHash[i], 16);
-        const upper = address[i].toUpperCase();
-        if ((toNumber > 7 && upper !== address[i]) ||
-            (toNumber <= 7 && upper !== address[i])) {
-            return false;
-        }
-    }
-    return true;
-};
-exports.sha3 = (message) => {
-    return crypto_js_1.SHA3(message, { outputLength: 256 }).toString();
-};
+// Checks if the given string is a checksum address
+// export const isChecksumAddress = (address: string) => {
+//   if (!isAddress(address)) {
+//     return false;
+//   }
+//   const aHash = sha3(address.replace("0x", "").toLowerCase());
+//   for (let i = 0; i < 40; i++) {
+//     const toNumber = Number.parseInt(aHash[i], 16);
+//     const upper = address[i].toUpperCase();
+//     if (
+//       (toNumber > 7 && upper !== address[i]) ||
+//       (toNumber <= 7 && upper !== address[i])
+//     ) {
+//       return false;
+//     }
+//   }
+//   return true;
+// };
+// export const sha3 = (message: string): string => {
+//   return SHA3(message, { outputLength: 256 }).toString();
+// };
 exports.padAddress = (address) => {
     if (!exports.isAddress(address)) {
         throw new Error("Not a valid address");
@@ -97,6 +102,15 @@ exports.toUtf8 = (hex) => {
     return result ? result.join("") : "";
 };
 exports.addressNull = "0x0000000000000000000000000000000000000000";
+/**
+ * Get Eth Token ABI from EtherScan.io
+ * @param token tokenAddress
+ * @returns { status: string, message: string, result: string}
+ * if status isn't "1" then the request is failed
+ * the result is ABI JSON string,you should use JSON.parse()
+ * type defined of ABI struct can be found in
+ * defined/eth.d.ts => Ethereum.IAbiStruct
+ */
 exports.getABI = async (token, apiKey = "YourApiKeyToken") => {
     const api = "https://api.etherscan.io/api";
     try {

@@ -1,11 +1,16 @@
 {
     "cSpell.words": [
+        "blockchain",
         "callcode",
         "delegatecall",
+        "dkkt",
+        "foxmail",
         "getabi",
         "geth",
         "litecoin",
+        "mempool",
         "nonpayable",
+        "omni",
         "propertyid",
         "rpcapi",
         "staticcall",

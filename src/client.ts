@@ -1,16 +1,48 @@
 import Axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { format } from "util";
-import { RPCRequest, RPCResponse } from "../defined/rpc";
 
-export default abstract class Client {
+export interface IRpcResponse<T = any> {
+  jsonrpc?: string;
+  id?: number | string;
+  result: T;
+  error?: IRpcErrorStruct;
+}
+
+export interface IRpcErrorStruct {
+  code: number;
+  message: string;
+}
+
+export interface IRpcError {
+  jsonrpc?: string;
+  id?: number | string;
+  result: void;
+  error: IRpcErrorStruct;
+}
+
+export interface IRpcRequest {
+  jsonrpc?: "2.0" | "1.0";
+  id: number | string;
+  method: string;
+  params: any[];
+}
+
+export interface IRpcConfig {
+  ip?: string;
+  port?: string;
+  user?: string;
+  pass?: string;
+}
+
+export default abstract class RPCClient {
   protected uri: string;
-  protected bulkData: RPCRequest[];
+  protected bulkData: IRpcRequest[];
   protected reqConfig: AxiosRequestConfig;
   constructor(
     public user: string,
     public pass: string,
     public ip: string,
-    public port: number
+    public port: string
   ) {
     this.bulkData = [];
     this.reqConfig = {
@@ -44,7 +76,7 @@ export default abstract class Client {
     params?: any[],
     id?: number | string
   ) {
-    const reqData: RPCRequest = {
+    const reqData: IRpcRequest = {
       id: id || Date.now(),
       jsonrpc: "2.0",
       method,
@@ -52,7 +84,7 @@ export default abstract class Client {
     };
 
     try {
-      const ret = await Axios.post<RPCResponse<T>>(
+      const ret = await Axios.post<IRpcResponse<T>>(
         this.uri,
         reqData,
         this.reqConfig
@@ -84,7 +116,7 @@ export default abstract class Client {
    * @param id
    */
   public BulkAdd(method: string, param?: any[], id?: number | string): void {
-    const data: RPCRequest = {
+    const data: IRpcRequest = {
       id: id || Date.now(),
       jsonrpc: "2.0",
       method,
@@ -98,10 +130,10 @@ export default abstract class Client {
    * recommendation using it from same request bulk
    */
   public async BulkRpcCall<T = any>() {
-    const reqData: RPCRequest[] = this.bulkData;
+    const reqData: IRpcRequest[] = this.bulkData;
     // clear data
     this.bulkData = [];
-    const res = await Axios.post<Array<RPCResponse<T>>>(
+    const res = await Axios.post<Array<IRpcResponse<T>>>(
       this.uri,
       reqData,
       this.reqConfig
@@ -113,8 +145,8 @@ export default abstract class Client {
    * RPC Request by user defined bulk data
    * here no using this.bulkData
    */
-  public async BulkRpcExec<T = any>(data: RPCRequest[]) {
-    const res = await Axios.post<Array<RPCResponse<T>>>(
+  public async BulkRpcExec<T = any>(data: IRpcRequest[]) {
+    const res = await Axios.post<Array<IRpcResponse<T>>>(
       this.uri,
       data,
       this.reqConfig

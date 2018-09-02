@@ -1,19 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const mtd_1 = require("./bitcoin/mtd");
-const rpc_1 = require("./bitcoin/rpc");
-const mtd_2 = require("./dkktoken/mtd");
-const rpc_2 = require("./dkktoken/rpc");
-const mtd_3 = require("./ethereum/mtd");
-const rpc_3 = require("./ethereum/rpc");
+var mtd_1 = require("./bitcoin/mtd");
+exports.BitcoinMethods = mtd_1.BitcoinMethods;
+var rpc_1 = require("./bitcoin/rpc");
+exports.BitcoinClient = rpc_1.BitcoinClient;
+var mtd_2 = require("./dkktoken/mtd");
+exports.DKKTokenMethods = mtd_2.DKKTokenMethods;
+var rpc_2 = require("./dkktoken/rpc");
+exports.DKKTClient = rpc_2.DKKTClient;
+var mtd_3 = require("./ethereum/mtd");
+exports.EthereumMethods = mtd_3.EthereumMethods;
+var rpc_3 = require("./ethereum/rpc");
+exports.EthereumClient = rpc_3.EthereumClient;
 const EthereumUtil = require("./ethereum/util");
-const mtd_4 = require("./omni/mtd");
-const rpc_4 = require("./omni/rpc");
-exports.Bitcoin = { mtd: mtd_1.BitcoinMethods, RPC: rpc_1.BitcoinClient };
-exports.Ethereum = {
-    RPC: rpc_3.EthereumClient,
-    mtd: mtd_3.EthereumMethods,
-    util: EthereumUtil
-};
-exports.DKKToken = { mtd: mtd_2.DKKTokenMethods, RPC: rpc_2.DKKTClient };
-exports.OmniLayer = { mtd: mtd_4.OmniLayerMethods, RPC: rpc_4.OmniLayerClient };
+exports.EthereumUtil = EthereumUtil;
+var mtd_4 = require("./omni/mtd");
+exports.OmniLayerMethods = mtd_4.OmniLayerMethods;
+var rpc_4 = require("./omni/rpc");
+exports.OmniLayerClient = rpc_4.OmniLayerClient;

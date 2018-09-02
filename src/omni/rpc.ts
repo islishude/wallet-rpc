@@ -1,14 +1,68 @@
-import { OmniLayer } from "../../defined/omni";
 import { BitcoinClient } from "../bitcoin/rpc";
+import { IRpcConfig } from "../client";
 import { OmniLayerMethods as mtd } from "./mtd";
 
+/** spell-checker: disable */
+export interface IOmniClientInfo {
+  omnicoreversion_int: number;
+  omnicoreversion: string;
+  mastercoreversion: string;
+  bitcoincoreversion: string;
+  commitinfo: string;
+  block: number;
+  blocktime: number;
+  blocktransactions: number;
+  totaltransactions: number;
+  alerts: Array<{
+    alerttype: number;
+    alertype: string;
+    alertexpiry: string;
+    alertmessage: string;
+  }>;
+}
+
+export interface IOmniTxInfo {
+  txid: string;
+  fee: number;
+  // from
+  sendingaddress: string;
+  // to
+  referenceaddress: string;
+  // in rpc wallet?
+  ismine: boolean;
+  version: number;
+  type_int: number;
+  type: string;
+  valid?: boolean;
+  invalidreason?: string;
+  block: number;
+  confirmations: number;
+
+  propertyid: number;
+  propertyname: string;
+  divisible: boolean;
+  amount: string;
+
+  blockhash: string;
+  blocktime: number;
+  positioninblock: number;
+
+  // CrowSale Purchase
+  // purchasedpropertyid?: number;
+  // purchasedpropertyname?: string;
+  // purchasedpropertydivisible?: boolean;
+  // purchasedtokens?: string;
+  // issuertokens?: string;
+  // ...
+}
+
 export class OmniLayerClient extends BitcoinClient {
-  constructor(user: string, pass: string, ip: string, port: number = 8332) {
-    super(user, pass, ip, port);
+  constructor(conf: IRpcConfig) {
+    super(conf);
   }
 
   public getOmniInfo() {
-    return this.RpcCall<OmniLayer.clientInfo>(mtd.info.client);
+    return this.RpcCall<IOmniClientInfo>(mtd.info.client);
   }
 
   /**
@@ -65,7 +119,7 @@ export class OmniLayerClient extends BitcoinClient {
    * @param txid the hash of the transaction to lookup
    */
   public getOmniTxInfo(txid: string) {
-    return this.RpcCall<OmniLayer.txInfo>(mtd.tx.detail, [txid]);
+    return this.RpcCall<IOmniTxInfo>(mtd.tx.detail, [txid]);
   }
 
   /**
@@ -77,7 +131,7 @@ export class OmniLayerClient extends BitcoinClient {
   }
 
   public getOmniPendingTxList(address?: string) {
-    return this.RpcCall<OmniLayer.txInfo[]>(mtd.tx.pending, [address]);
+    return this.RpcCall<IOmniTxInfo[]>(mtd.tx.pending, [address]);
   }
 
   /**
@@ -105,6 +159,6 @@ export class OmniLayerClient extends BitcoinClient {
     endBlock = 999999
   ) {
     const params: any[] = [txid, count, skip, startBlock, endBlock];
-    return this.RpcCall<OmniLayer.txInfo[]>(mtd.tx.wallet, params);
+    return this.RpcCall<IOmniTxInfo[]>(mtd.tx.wallet, params);
   }
 }

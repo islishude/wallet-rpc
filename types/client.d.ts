@@ -1,16 +1,65 @@
 import { AxiosRequestConfig } from "axios";
-import { RPCRequest, RPCResponse } from "../defined/rpc";
-export default abstract class Client {
+export interface IRpcResponse<T = any> {
+    jsonrpc?: string;
+    id?: number | string;
+    result: T;
+    error?: IRpcErrorStruct;
+}
+export interface IRpcErrorStruct {
+    code: number;
+    message: string;
+}
+export interface IRpcError {
+    jsonrpc?: string;
+    id?: number | string;
+    result: void;
+    error: IRpcErrorStruct;
+}
+export interface IRpcRequest {
+    jsonrpc?: "2.0" | "1.0";
+    id: number | string;
+    method: string;
+    params: any[];
+}
+export interface IRpcConfig {
+    ip?: string;
+    port?: string;
+    user?: string;
+    pass?: string;
+}
+export default abstract class RPCClient {
     user: string;
     pass: string;
     ip: string;
-    port: number;
+    port: string;
     protected uri: string;
-    protected bulkData: RPCRequest[];
+    protected bulkData: IRpcRequest[];
     protected reqConfig: AxiosRequestConfig;
-    constructor(user: string, pass: string, ip: string, port: number);
-    RpcCall<T = string>(method: string, params?: any[], id?: number | string): Promise<RPCResponse<T>>;
+    constructor(user: string, pass: string, ip: string, port: string);
+    /**
+     * JSON-RPC call func
+     * @param method RPC Request Method
+     * @param params RPC Request Params
+     * @param id RPC Request id
+     * @returns RPCResponse<T>
+     * @throws Response non-2xx response or request error
+     */
+    RpcCall<T = string>(method: string, params?: any[], id?: number | string): Promise<IRpcResponse<T>>;
+    /**
+     * Bulk rpc call addition
+     * @param method
+     * @param param
+     * @param id
+     */
     BulkAdd(method: string, param?: any[], id?: number | string): void;
-    BulkRpcCall<T = any>(): Promise<RPCResponse<T>[]>;
-    BulkRpcExec<T = any>(data: RPCRequest[]): Promise<RPCResponse<T>[]>;
+    /**
+     * Bulk RPC Call func
+     * recommendation using it from same request bulk
+     */
+    BulkRpcCall<T = any>(): Promise<IRpcResponse<T>[]>;
+    /**
+     * RPC Request by user defined bulk data
+     * here no using this.bulkData
+     */
+    BulkRpcExec<T = any>(data: IRpcRequest[]): Promise<IRpcResponse<T>[]>;
 }

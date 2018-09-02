@@ -1,129 +1,15 @@
-import { BitcoinClient } from "./bitcoin/rpc";
-import { DKKTClient } from "./dkktoken/rpc";
-import { EthereumClient } from "./ethereum/rpc";
+export { BitcoinMethods } from "./bitcoin/mtd";
+export { BitcoinClient } from "./bitcoin/rpc";
+export { DKKTokenMethods } from "./dkktoken/mtd";
+export { DKKTClient } from "./dkktoken/rpc";
+export { EthereumMethods } from "./ethereum/mtd";
+export { EthereumClient } from "./ethereum/rpc";
 import * as EthereumUtil from "./ethereum/util";
-import { OmniLayerClient } from "./omni/rpc";
-export declare const Bitcoin: {
-    mtd: {
-        block: {
-            count: string;
-            detail: string;
-            hash: string;
-        };
-        fee: string;
-        info: {
-            chain: string;
-            difficulty: string;
-            info: string;
-            memory: string;
-            wallet: string;
-        };
-        mempool: {
-            detail: string;
-        };
-        tx: {
-            decode: string;
-            detail: string;
-            raw: string;
-            sendRaw: string;
-        };
-    };
-    RPC: typeof BitcoinClient;
-};
-export declare const Ethereum: {
-    RPC: typeof EthereumClient;
-    mtd: {
-        info: {
-            syncing: string;
-        };
-        tool: {
-            sign: string;
-        };
-        address: {
-            balance: string;
-            code: string;
-            nonce: string;
-            parity: {
-                pendingNonce: string;
-            };
-        };
-        block: {
-            byHash: string;
-            byHeight: string;
-            count: string;
-            txCountByHash: string;
-            txCountByHeight: string;
-        };
-        debug: {
-            traceBlock: string;
-            traceTx: string;
-        };
-        gas: {
-            estimate: string;
-            price: string;
-        };
-        tx: {
-            rawByHash: string;
-            byHash: string;
-            byHeight: string;
-            call: string;
-            receipt: string;
-            send: string;
-            sendRaw: string;
-            parity: {
-                trace: string;
-            };
-        };
-        txpool: {
-            content: string;
-            status: string;
-        };
-        uncle: {
-            byHash: string;
-            byHeight: string;
-        };
-    };
-    util: typeof EthereumUtil;
-};
-export declare const DKKToken: {
-    mtd: {
-        block: {
-            count: string;
-            detail: string;
-            hash: string;
-        };
-        info: string;
-        mempool: string;
-        tx: {
-            decode: string;
-            detail: string;
-            raw: string;
-            sendRaw: string;
-        };
-    };
-    RPC: typeof DKKTClient;
-};
-export declare const OmniLayer: {
-    mtd: {
-        info: {
-            client: string;
-        };
-        property: {
-            list: string;
-            info: string;
-        };
-        address: {
-            balance: string;
-            allBalance: string;
-        };
-        tx: {
-            detail: string;
-            payload: string;
-            sendRaw: string;
-            list: string;
-            pending: string;
-            wallet: string;
-        };
-    };
-    RPC: typeof OmniLayerClient;
-};
+export { EthereumUtil };
+export { OmniLayerMethods } from "./omni/mtd";
+export { OmniLayerClient } from "./omni/rpc";
+export { IRpcRequest, IRpcErrorStruct, IRpcResponse, IRpcConfig } from "./client";
+export { IEthAbiCommonStruct, IEthAbiInputStruct, IEthAbiOutputStruct, IEthAbiStruct, IEthBlock, IEthBlockSimple, IEthBlockVerbose, IEthCallFuncParam, IEtherScanAbiResponse, IEthReceiptLogs, IEthSentTxStruct, IEthStatus, IEthSyncing, IEthTraceTxReturn, IEthTx, IEthTxReceipt, IParityCallAction, IParityCallResult, IParityCreateAction, IParityCreateResult, IParitySuicideAction, IParityTxTrace } from "./ethereum/rpc";
+export { IOmniClientInfo, IOmniTxInfo } from "./omni/rpc";
+export { IDkktBlockInfo, IDkktTxInfo, IDkktWalletInfo, IDkktTxVinStruct, IDkktTxVoutStruct } from "./dkktoken/rpc";
+export { IBtcBlockchainInfo, IBtcBlockInfo, IBtcFee, IBtcMemoryInfo, IBtcNetworkInfo, IBtcTxInfo, IBtcVerboseMemPool, IBtcWalletInfo } from "./bitcoin/rpc";

@@ -1,18 +1,182 @@
-import { Bitcoin } from "../../defined/btc";
-import { RPCResponse } from "../../defined/rpc";
-import Client from "../client";
+import RPCClient, { IRpcConfig, IRpcResponse } from "../client";
 import { BitcoinMethods as mtd } from "./mtd";
 
-export class BitcoinClient extends Client {
-  constructor(user: string, pass: string, ip: string, port: number = 8332) {
+/** spell-checker: disable */
+export interface IBtcWalletInfo {
+  version: number;
+  protocolversion: number;
+  walletversion: number;
+  balance: number;
+  blocks: number;
+  timeoffset: number;
+  connections: number;
+  proxy: string;
+  difficulty: number;
+  testnet: boolean;
+  paytxfee: number;
+  realyfee: number;
+  errors: null;
+}
+
+export interface IBtcTxInfo {
+  txid: string;
+  hash: string;
+  size: number;
+  vsize: number;
+  version: number;
+  time: number;
+  locktime: number;
+  blockhash?: string;
+  confirmations?: number;
+  vin: IBtcTxVin[];
+  vout: IBtcTxVout[];
+  hex?: string;
+  blocktime?: number;
+}
+
+interface IBtcTxVin {
+  txid?: string;
+  vout?: number;
+  scriptSig: {
+    asm: string;
+    hex: string;
+  };
+  sequence: number;
+  coinbase?: string;
+  txinwitness?: string[];
+}
+
+interface IBtcTxVout {
+  value: number;
+  n: number;
+  scriptPubKey: {
+    asm: string;
+    hex: string;
+    reqSigs?: number;
+    type: string;
+    addresses?: string[];
+  };
+}
+
+export interface IBtcBlockInfo {
+  hash: string;
+  confirmations: number;
+  size: number;
+  height: number;
+  version: number;
+  versionHex: number;
+  merkleroot: string;
+  time: number;
+  mediantime: number;
+  nonce: number;
+  bits: string;
+  difficulty: number;
+  previousblockhash: string;
+  nextblockhash?: string;
+  tx: string[];
+  strippedsize: number;
+  chainwork: string;
+  weight: number;
+}
+
+export interface IBtcBlockchainInfo {
+  chain: string;
+  blocks: number;
+  headers: number;
+  blockhash: string;
+  difficulty: number;
+  mediantime: number;
+  verificationprogress: number;
+  initialblockdownload: boolean;
+  chainwork: string;
+  warnings: string;
+  pruned: boolean;
+  size_on_disk: number;
+  softforks: IBlockchainInfoSoftfork[];
+}
+
+interface IBlockchainInfoSoftfork {
+  id: string;
+  version: number;
+  reject: {
+    status: boolean;
+  };
+}
+
+export interface IBtcNetworkInfo {
+  version: number;
+  subversion: string;
+  protocolversion: number;
+  localservices: string;
+  localrelay: boolean;
+  timeoffset: number;
+  networkactive: boolean;
+  connections: number;
+  relayfee: number;
+  incrementalfee: number;
+  warnings: string;
+  localaddresses: string[];
+  networks: INetworksInfo[];
+}
+
+interface INetworksInfo {
+  name: string;
+  limited: boolean;
+  reachable: boolean;
+  proxy: string;
+  proxy_randomize_credentials: boolean;
+}
+
+export interface IBtcVerboseMemPool {
+  [txid: string]: {
+    size: number;
+    fee: number;
+    modifiedfee: number;
+    time: number;
+    height: number;
+    descendantcount: number;
+    descendantsize: number;
+    descendantfees: number;
+    ancestorcount: number;
+    ancestorsize: number;
+    ancestorfees: number;
+    wtxid: string;
+    depends: string[];
+  };
+}
+
+export interface IBtcFee {
+  feerate: number;
+  blocks: number;
+  errors?: string[];
+}
+
+export interface IBtcMemoryInfo {
+  [locked: string]: {
+    used: number;
+    free: number;
+    total: number;
+    locked: number;
+    chunks_used: number;
+    chunks_free: number;
+  };
+}
+/** spell-checker: enable */
+
+export class BitcoinClient extends RPCClient {
+  constructor(conf: IRpcConfig) {
+    const ip = conf.ip || "http://127.0.0.1";
+    const user = conf.user || "";
+    const pass = conf.pass || "";
+    const port = conf.port || "8332";
     super(user, pass, ip, port);
   }
 
   public getInfo() {
-    return this.RpcCall<Bitcoin.WalletInfo>(mtd.info.info);
+    return this.RpcCall<IBtcWalletInfo>(mtd.info.info);
   }
 
-  public getBlockCount(): Promise<RPCResponse<number>> {
+  public getBlockCount(): Promise<IRpcResponse<number>> {
     return this.RpcCall<number>(mtd.block.count);
   }
 
@@ -21,14 +185,14 @@ export class BitcoinClient extends Client {
   }
 
   public getBlockInfo(id: string) {
-    return this.RpcCall<Bitcoin.BlockInfo>(mtd.block.detail, [id]);
+    return this.RpcCall<IBtcBlockInfo>(mtd.block.detail, [id]);
   }
 
   // get transaction for bitcoin core 0.16
   // use getRawTransaction method and decode
   public getTxInfo(id: string) {
     const param: [string, boolean] = [id, true];
-    return this.RpcCall<Bitcoin.TxInfo>(mtd.tx.raw, param);
+    return this.RpcCall<IBtcTxInfo>(mtd.tx.raw, param);
   }
 
   public getRawTxInfo(id: string) {
@@ -45,7 +209,7 @@ export class BitcoinClient extends Client {
   }
 
   public getBlockchainInfo() {
-    return this.RpcCall<Bitcoin.BlockchainInfo>(mtd.info.chain);
+    return this.RpcCall<IBtcBlockchainInfo>(mtd.info.chain);
   }
 
   /**
@@ -57,7 +221,7 @@ export class BitcoinClient extends Client {
   }
 
   public getVerboseMemPool() {
-    return this.RpcCall<Bitcoin.verboseMemPool[]>(mtd.mempool.detail, [true]);
+    return this.RpcCall<IBtcVerboseMemPool[]>(mtd.mempool.detail, [true]);
   }
 
   /**
@@ -79,15 +243,15 @@ export class BitcoinClient extends Client {
     mode: "ECONOMICAL" | "CONSERVATIVE" = "CONSERVATIVE"
   ) {
     const params: [number, string] = [target, mode];
-    return this.RpcCall<Bitcoin.fee>(mtd.fee, params);
+    return this.RpcCall<IBtcFee>(mtd.fee, params);
   }
 
   public decodeRawTx(tx: string, isWitness: boolean = false) {
-    return this.RpcCall<Bitcoin.TxInfo>(mtd.tx.decode, [tx, isWitness]);
+    return this.RpcCall<IBtcTxInfo>(mtd.tx.decode, [tx, isWitness]);
   }
 
   // get information about memory usage.
   public getMemoryInfo() {
-    return this.RpcCall<Bitcoin.memoryInfo>(mtd.info.memory);
+    return this.RpcCall<IBtcMemoryInfo>(mtd.info.memory);
   }
 }

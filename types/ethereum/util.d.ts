@@ -1,4 +1,4 @@
-import { Ethereum } from "../../defined/eth";
+import { IEthAbiStruct } from "./rpc";
 export declare const hexToNumber: (hex: string) => number;
 export declare const hexToDecimalString: (hex: string) => string;
 export declare const toWei: (eth: number) => string;
@@ -34,9 +34,16 @@ export declare const ERC721FunSig: {
     transferFrom: string;
 };
 export declare const isAddress: (address: string) => boolean;
-export declare const isChecksumAddress: (address: string) => boolean;
-export declare const sha3: (message: string) => string;
 export declare const padAddress: (address: string) => string;
 export declare const toUtf8: (hex: string) => string;
 export declare const addressNull = "0x0000000000000000000000000000000000000000";
-export declare const getABI: (token: string, apiKey?: string) => Promise<Ethereum.IAbiStruct[] | null>;
+/**
+ * Get Eth Token ABI from EtherScan.io
+ * @param token tokenAddress
+ * @returns { status: string, message: string, result: string}
+ * if status isn't "1" then the request is failed
+ * the result is ABI JSON string,you should use JSON.parse()
+ * type defined of ABI struct can be found in
+ * defined/eth.d.ts => Ethereum.IAbiStruct
+ */
+export declare const getABI: (token: string, apiKey?: string) => Promise<IEthAbiStruct[] | null>;

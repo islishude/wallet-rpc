@@ -6,6 +6,7 @@ const repl_1 = require("repl");
 const index_1 = require("../index");
 const color = {
     yellow: "\x1b[33m",
+    // green: "\x1b[32m",
     clear: "\x1b[0m",
     underscore: "\x1b[4m"
 };
@@ -38,6 +39,12 @@ const terminal = repl_1.start({
     ignoreUndefined: true
 });
 terminal.context.log = console_1.log;
-terminal.context.Bitcoin = index_1.Bitcoin;
-terminal.context.Ethereum = index_1.Ethereum;
-terminal.context.DKKToken = index_1.DKKToken;
+terminal.context.BitcoinClient = index_1.BitcoinClient;
+terminal.context.BitcoinMethods = index_1.BitcoinMethods;
+terminal.context.EthereumClient = index_1.EthereumClient;
+terminal.context.EthereumMethods = index_1.EthereumMethods;
+terminal.context.EthereumUtil = index_1.EthereumUtil;
+terminal.context.DKKTClient = index_1.DKKTClient;
+terminal.context.DKKTokenMethods = index_1.DKKTokenMethods;
+terminal.context.OmniLayerClient = index_1.OmniLayerClient;
+terminal.context.OmniLayerMethods = index_1.OmniLayerMethods;

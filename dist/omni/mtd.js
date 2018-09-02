@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/* spell-checker: disable */
 exports.OmniLayerMethods = {
     info: {
         client: "omni_getinfo"
