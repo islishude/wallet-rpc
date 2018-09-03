@@ -2,7 +2,7 @@ import Axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { format } from "util";
 
 export interface IRpcResponse<T = any> {
-  jsonrpc?: string;
+  jsonrpc: string;
   id: number | string;
   result: T;
   error?: IRpcErrorStruct;
@@ -14,7 +14,7 @@ export interface IRpcErrorStruct {
 }
 
 export interface IRpcRequest {
-  jsonrpc?: "2.0" | "1.0";
+  jsonrpc: "2.0" | "1.0";
   id: number | string;
   method: string;
   params: any[];
@@ -108,13 +108,7 @@ export default abstract class RPCClient {
    * @param param
    * @param id
    */
-  public BulkAdd(method: string, param?: any[], id?: number | string): void {
-    const data: IRpcRequest = {
-      id: id || Date.now(),
-      jsonrpc: "2.0",
-      method,
-      params: param || []
-    };
+  public BulkAdd(data: IRpcRequest): void {
     this.bulkData.push(data);
   }
 
@@ -123,6 +117,9 @@ export default abstract class RPCClient {
    * recommendation using it from same request bulk
    */
   public async BulkRpcCall<T = any>() {
+    if (this.bulkData.length === 0) {
+      return [];
+    }
     const reqData: IRpcRequest[] = this.bulkData;
     // clear data
     this.bulkData = [];

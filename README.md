@@ -80,6 +80,33 @@ export const example1 = async () => {
     console.log("%O", result);
   }
 };
+
+// Another BulkCall example(NOT RECOMMEND)
+export const example3 = async () => {
+  const txidList: string[] = [
+    "0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098",
+    "ce3ab453f96020a32ca382d07967231fa463cf1f365ce4bdc52764faf20371bf"
+  ];
+
+  for (const txid of txidList) {
+    const tmp: IRpcRequest = {
+      jsonrpc: "2.0",
+      id: txid,
+      method: BitcoinMethods.tx.detail,
+      params: [txid]
+    };
+    BitClient.BulkAdd(tmp);
+  }
+
+  const res = await BtcClient.BulkRpcCall<IBtcTxInfo>();
+
+  for (const { result, error } of res) {
+    if (error !== undefined) {
+      //...
+    }
+    console.log("%O", result);
+  }
+};
 ```
 
 ## API

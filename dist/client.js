@@ -62,13 +62,7 @@ class RPCClient {
      * @param param
      * @param id
      */
-    BulkAdd(method, param, id) {
-        const data = {
-            id: id || Date.now(),
-            jsonrpc: "2.0",
-            method,
-            params: param || []
-        };
+    BulkAdd(data) {
         this.bulkData.push(data);
     }
     /**
@@ -76,6 +70,9 @@ class RPCClient {
      * recommendation using it from same request bulk
      */
     async BulkRpcCall() {
+        if (this.bulkData.length === 0) {
+            return [];
+        }
         const reqData = this.bulkData;
         // clear data
         this.bulkData = [];

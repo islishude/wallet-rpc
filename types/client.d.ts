@@ -1,6 +1,6 @@
 import { AxiosRequestConfig } from "axios";
 export interface IRpcResponse<T = any> {
-    jsonrpc?: string;
+    jsonrpc: string;
     id: number | string;
     result: T;
     error?: IRpcErrorStruct;
@@ -10,7 +10,7 @@ export interface IRpcErrorStruct {
     message: string;
 }
 export interface IRpcRequest {
-    jsonrpc?: "2.0" | "1.0";
+    jsonrpc: "2.0" | "1.0";
     id: number | string;
     method: string;
     params: any[];
@@ -45,7 +45,7 @@ export default abstract class RPCClient {
      * @param param
      * @param id
      */
-    BulkAdd(method: string, param?: any[], id?: number | string): void;
+    BulkAdd(data: IRpcRequest): void;
     /**
      * Bulk RPC Call func
      * recommendation using it from same request bulk
