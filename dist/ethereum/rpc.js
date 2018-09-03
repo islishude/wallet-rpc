@@ -5,6 +5,7 @@ const bignumber_js_1 = require("bignumber.js");
 const client_1 = require("../client");
 const mtd_1 = require("./mtd");
 const util_1 = require("./util");
+const { ERC20FuncSig, ERC20FuncSigUpper, hexToDecimalString, hexToNumber, isAddress, padAddress, toUtf8 } = util_1.EthereumUtil;
 class EthereumClient extends client_1.default {
     // go-ethereum client RPC settings has no user and password for rpc
     constructor(conf) {
@@ -161,7 +162,7 @@ class EthereumClient extends client_1.default {
      * @param data N Bytes - message to sign
      */
     signMessage(address, data) {
-        assert_1.ok(util_1.isAddress(address), "Not a valid Ethereum address");
+        assert_1.ok(isAddress(address), "Not a valid Ethereum address");
         return this.RpcCall(mtd_1.EthereumMethods.tool.sign, [address, data.toString("hex")]);
     }
     /**
@@ -178,7 +179,7 @@ class EthereumClient extends client_1.default {
     async ERC20Balance(token, address, isPending = true) {
         const status = isPending ? "pending" : "latest";
         const param = {
-            data: util_1.ERC20FuncSig.balanceOf + util_1.padAddress(address),
+            data: ERC20FuncSig.balanceOf + padAddress(address),
             to: token
         };
         const { result: balance } = await this.callFunc(param, status);
@@ -186,11 +187,11 @@ class EthereumClient extends client_1.default {
     }
     async ERC20Decimals(token) {
         const param = {
-            data: util_1.ERC20FuncSig.decimals,
+            data: ERC20FuncSig.decimals,
             to: token
         };
         const PARAM = {
-            data: util_1.ERC20FuncSigUpper.DECIMALS,
+            data: ERC20FuncSigUpper.DECIMALS,
             to: token
         };
         const [{ result: decimals }, { result: DECIMALS }] = await Promise.all([
@@ -209,26 +210,26 @@ class EthereumClient extends client_1.default {
         if (!tmp) {
             return;
         }
-        return util_1.hexToNumber(tmp);
+        return hexToNumber(tmp);
     }
     async ERC20TotalSupply(token) {
         const param = {
-            data: util_1.ERC20FuncSig.totalSupply,
+            data: ERC20FuncSig.totalSupply,
             to: token
         };
         const { result: totalSupply } = await this.callFunc(param);
         if (totalSupply === "0x" || totalSupply === undefined) {
             return;
         }
-        return util_1.hexToDecimalString(totalSupply);
+        return hexToDecimalString(totalSupply);
     }
     async ERC20Name(token) {
         const param = {
-            data: util_1.ERC20FuncSig.name,
+            data: ERC20FuncSig.name,
             to: token
         };
         const PARAM = {
-            data: util_1.ERC20FuncSigUpper.NAME,
+            data: ERC20FuncSigUpper.NAME,
             to: token
         };
         const [{ result: name }, { result: NAME }] = await Promise.all([
@@ -247,15 +248,15 @@ class EthereumClient extends client_1.default {
         if (!tmp) {
             return;
         }
-        return util_1.toUtf8(tmp);
+        return toUtf8(tmp);
     }
     async ERC20Symbol(token) {
         const param = {
-            data: util_1.ERC20FuncSig.symbol,
+            data: ERC20FuncSig.symbol,
             to: token
         };
         const PARAM = {
-            data: util_1.ERC20FuncSigUpper.SYMBOL,
+            data: ERC20FuncSigUpper.SYMBOL,
             to: token
         };
         const [{ result: symbol }, { result: SYMBOL }] = await Promise.all([
@@ -274,7 +275,7 @@ class EthereumClient extends client_1.default {
         if (!tmp) {
             return;
         }
-        return util_1.toUtf8(tmp);
+        return toUtf8(tmp);
     }
     async ERC20TokenInfo(token) {
         const [name, symbol, decimals, totalSupply] = await Promise.all([

@@ -2,7 +2,9 @@ import { ok } from "assert";
 import BN from "bignumber.js";
 import RPCClient, { IRpcConfig, IRpcResponse } from "../client";
 import { EthereumMethods as mtd } from "./mtd";
-import {
+import { EthereumUtil } from "./util";
+
+const {
   ERC20FuncSig,
   ERC20FuncSigUpper,
   hexToDecimalString,
@@ -10,7 +12,7 @@ import {
   isAddress,
   padAddress,
   toUtf8
-} from "./util";
+} = EthereumUtil;
 
 export interface IEthSyncing {
   startingBlock: string;

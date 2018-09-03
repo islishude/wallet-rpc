@@ -4,8 +4,7 @@ export { DKKTokenMethods } from "./dkktoken/mtd";
 export { DKKTClient } from "./dkktoken/rpc";
 export { EthereumMethods } from "./ethereum/mtd";
 export { EthereumClient } from "./ethereum/rpc";
-import * as EthereumUtil from "./ethereum/util";
-export { EthereumUtil };
+export { EthereumUtil } from "./ethereum/util";
 export { OmniLayerMethods } from "./omni/mtd";
 export { OmniLayerClient } from "./omni/rpc";
 
