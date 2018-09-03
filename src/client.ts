@@ -3,7 +3,7 @@ import { format } from "util";
 
 export interface IRpcResponse<T = any> {
   jsonrpc?: string;
-  id?: number | string;
+  id: number | string;
   result: T;
   error?: IRpcErrorStruct;
 }
@@ -11,13 +11,6 @@ export interface IRpcResponse<T = any> {
 export interface IRpcErrorStruct {
   code: number;
   message: string;
-}
-
-export interface IRpcError {
-  jsonrpc?: string;
-  id?: number | string;
-  result: void;
-  error: IRpcErrorStruct;
 }
 
 export interface IRpcRequest {
