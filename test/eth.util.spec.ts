@@ -1,6 +1,7 @@
 import { ok } from "assert";
-import { hexToDecimalString } from "../src/ethereum/util";
+import { EthereumUtil } from "../src/ethereum/util";
 
+const { hexToDecimalString } = EthereumUtil;
 {
   // hexToDecimalString testing
   const test1 = hexToDecimalString("0x") === "0";

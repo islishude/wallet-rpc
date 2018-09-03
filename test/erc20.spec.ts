@@ -1,6 +1,6 @@
 import { equal } from "assert";
 import { log } from "console";
-import { EthereumClient } from "../src/index";
+import { EthereumClient } from "../src";
 /* spell-checker: disable */
 
 const Client = new EthereumClient({

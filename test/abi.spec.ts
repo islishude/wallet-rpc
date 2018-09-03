@@ -1,6 +1,8 @@
 import { ok } from "assert";
 import { log } from "console";
-import { getABI } from "../src/ethereum/util";
+import { EthereumUtil } from "../src/ethereum/util";
+
+const { getABI } = EthereumUtil;
 
 const getType = (t: any): string => {
   return Object.prototype.toString.call(t).match(/\s(\w+)/)[1];
