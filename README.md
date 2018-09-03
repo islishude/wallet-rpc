@@ -21,50 +21,65 @@ And CLI Supports, [learn more](#cli)!
 npm install wallet-rpc --save
 ```
 
-## Usage
+## Example
 
-### CommonJS
+```typescript
+import {
+  IBtcTxInfo,
+  BitcoinMethods,
+  IRpcRequest,
+  BitcoinClient,
+  IRpcConfig
+} from "wallet-rpc";
 
-```js
-import { BitcoinClient } from "wallet-rpc";
-const DefaultBtcRpcConf = {
+const DefaultBtcRpcConf: IRpcConfig = {
   user: "",
   pass: "",
   ip: "http://127.0.0.1",
+  // ps. port is `8545` of Ethereum
   port: "8332"
 };
+
 const BtcClient = new BitcoinClient(DefaultBtcRpcConf);
-BtcClient
-  .getTxInfo("txid")
-  .then(txInfo => console.log)
-  .catch(console.log);
-// ...
-// BulkCall see flow
-```
 
-### TypeScript
+// Simple Example
+export const example0 = async () => {
+  const txid =
+    "0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098";
+  const { error, result, id } = await BtcClient.getTxInfo(txid);
+  if (error !== undefined) {
+    // ...
+  }
+  console.log(id);
+  return result;
+};
 
-```typescript
-import { IBtcTxInfo, BitcoinMethods as BtcMtd } from "wallet-rpc";
-// Bulk Call
-BtcClient
-  // your can set generic `T` and return `IRpcResponse<T[]>`
-  .bulkRpcExec<IBtcTxInfo>([{
-    id: 0,
-    jsonrpc: "2.0",
-    method: BtcMtd.tx.detail
-    params: ["0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098"]
-  },{
-    id: 1,
-    jsonrpc: "2.0",
-    method: BtcMtd.tx.detail
-    params: ["ce3ab453f96020a32ca382d07967231fa463cf1f365ce4bdc52764faf20371bf"]
-  }])
+// BulkCall example
+export const example1 = async () => {
+  const txidList: string[] = [
+    "0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098",
+    "ce3ab453f96020a32ca382d07967231fa463cf1f365ce4bdc52764faf20371bf"
+  ];
 
-// Also can
-BtcClient.BulkAdd(BtcMtd.block.hash, [100], 0);
-BtcClient.BulkAdd(BtcMtd.block.hash, [200], 1);
-BtcClient.BulkCall();
+  const reqData: IRpcRequest[] = txidList.map((txid, id) => {
+    const tmp: IRpcRequest = {
+      jsonrpc: "2.0",
+      id,
+      method: BitcoinMethods.tx.detail,
+      params: [txid]
+    };
+    return tmp;
+  });
+
+  const res = await BtcClient.BulkRpcExec<IBtcTxInfo>(reqData);
+
+  for (const { result, error } of res) {
+    if (error !== undefined) {
+      //...
+    }
+    console.log("%O", result);
+  }
+};
 ```
 
 ## API
