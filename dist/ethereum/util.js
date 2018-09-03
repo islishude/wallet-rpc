@@ -7,7 +7,7 @@ class EthereumUtil {
         if (hex === "0x") {
             return 0;
         }
-        return Number.parseInt(hex, 16);
+        return new bignumber_js_1.default(hex, 16).toNumber();
     }
     static async getRecommendGasPrice(apiKey = "YourApiKeyToken") {
         const api = "https://api.etherscan.io/api";

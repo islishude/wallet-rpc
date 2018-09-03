@@ -53,7 +53,7 @@ export class EthereumUtil {
     if (hex === "0x") {
       return 0;
     }
-    return Number.parseInt(hex, 16);
+    return new BigNumber(hex, 16).toNumber();
   }
 
   public static async getRecommendGasPrice(apiKey: string = "YourApiKeyToken") {
