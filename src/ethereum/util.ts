@@ -1,6 +1,9 @@
 import Axios from "axios";
 import BigNumber from "bignumber.js";
+import { IRpcResponse } from "../client";
 import { IEthAbiStruct, IEtherScanAbiResponse } from "./rpc";
+
+export const gWei = new BigNumber(10).pow(9);
 
 export const hexToNumber = (hex: string): number => {
   if (hex === "0x") {
@@ -128,4 +131,22 @@ export const getABI = async (
   } catch (e) {
     throw new Error(e.message);
   }
+};
+
+export const getRecommendGasPrice = async (
+  apiKey: string = "YourApiKeyToken"
+) => {
+  const api: string = "https://api.etherscan.io/api";
+  const { data } = await Axios.get<IRpcResponse<string>>(api, {
+    params: {
+      module: "proxy",
+      action: "eth_gasPrice",
+      apiKey
+    }
+  });
+  const tmp = new BigNumber(data.result, 16).div(gWei);
+  if (tmp.lt(20)) {
+    return "20";
+  }
+  return tmp.times(1.2).toFixed(0);
 };

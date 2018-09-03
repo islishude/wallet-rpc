@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 const bignumber_js_1 = require("bignumber.js");
+exports.gWei = new bignumber_js_1.default(10).pow(9);
 exports.hexToNumber = (hex) => {
     if (hex === "0x") {
         return 0;
@@ -109,4 +110,19 @@ exports.getABI = async (token, apiKey = "YourApiKeyToken") => {
     catch (e) {
         throw new Error(e.message);
     }
+};
+exports.getRecommendGasPrice = async (apiKey = "YourApiKeyToken") => {
+    const api = "https://api.etherscan.io/api";
+    const { data } = await axios_1.default.get(api, {
+        params: {
+            module: "proxy",
+            action: "eth_gasPrice",
+            apiKey
+        }
+    });
+    const tmp = new bignumber_js_1.default(data.result, 16).div(exports.gWei);
+    if (tmp.lt(20)) {
+        return "20";
+    }
+    return tmp.times(1.2).toFixed(0);
 };

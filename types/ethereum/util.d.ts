@@ -1,4 +1,6 @@
+import BigNumber from "bignumber.js";
 import { IEthAbiStruct } from "./rpc";
+export declare const gWei: BigNumber;
 export declare const hexToNumber: (hex: string) => number;
 export declare const hexToDecimalString: (hex: string) => string;
 export declare const toWei: (eth: number) => string;
@@ -47,3 +49,4 @@ export declare const addressNull = "0x0000000000000000000000000000000000000000";
  * defined/eth.d.ts => Ethereum.IAbiStruct
  */
 export declare const getABI: (token: string, apiKey?: string) => Promise<IEthAbiStruct[] | null>;
+export declare const getRecommendGasPrice: (apiKey?: string) => Promise<string>;
