@@ -128,7 +128,7 @@ export const example3 = async () => {
 ```
 npx wallet-rpc
 
-> let eth = new EthereumClient("https://mainnet.infura.io", 443);
+> let eth = new EthereumClient({ ip: "https://mainnet.infura.io", port: "443" });
 > let tmp = eth.getBlockCount().then(log, log);
 ```
 

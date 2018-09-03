@@ -38,7 +38,7 @@ See the README to learn more API and RPC supports list.
 
 e.g.
 ${color.yellow}
-  const eth = new Ethereum.RPC("https://mainnet.infura.io", 443);
+  let eth = new EthereumClient({ ip: "https://mainnet.infura.io", port: "443" });
   let tmp = eth.getBlockCount().then(log, log);
 ${color.clear}
 `);
