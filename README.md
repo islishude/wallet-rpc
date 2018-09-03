@@ -33,8 +33,8 @@ const DefaultBtcRpcConf = {
   ip: "http://127.0.0.1",
   port: "8332"
 };
-const btcClient = new BitcoinClient(DefaultBtcRpcConf);
-btcClient
+const BtcClient = new BitcoinClient(DefaultBtcRpcConf);
+BtcClient
   .getTxInfo("txid")
   .then(txInfo => console.log)
   .catch(console.log);
@@ -47,7 +47,7 @@ btcClient
 ```typescript
 import { IBtcTxInfo, BitcoinMethods as BtcMtd } from "wallet-rpc";
 // Bulk Call
-btcClient
+BtcClient
   // your can set generic `T` and return `IRpcResponse<T[]>`
   .bulkRpcExec<IBtcTxInfo>([{
     id: 0,
@@ -62,9 +62,9 @@ btcClient
   }])
 
 // Also can
-btcClient.BulkAdd(Bitcoin.mtd.block.hash, [100], 0);
-btcClient.BulkAdd(Bitcoin.mtd.block.hash, [200], 1);
-btcClient.BulkCall();
+BtcClient.BulkAdd(BtcMtd.block.hash, [100], 0);
+BtcClient.BulkAdd(BtcMtd.block.hash, [200], 1);
+BtcClient.BulkCall();
 ```
 
 ## API
