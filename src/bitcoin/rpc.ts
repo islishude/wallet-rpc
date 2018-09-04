@@ -34,7 +34,7 @@ export interface IBtcTxInfo {
   blocktime?: number;
 }
 
-interface IBtcTxVin {
+export interface IBtcTxVin {
   txid?: string;
   vout?: number;
   scriptSig: {
@@ -46,7 +46,7 @@ interface IBtcTxVin {
   txinwitness?: string[];
 }
 
-interface IBtcTxVout {
+export interface IBtcTxVout {
   value: number;
   n: number;
   scriptPubKey: {

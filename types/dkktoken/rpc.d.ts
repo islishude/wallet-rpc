@@ -33,11 +33,11 @@ export interface IDkktTxInfo {
     locktime: number;
     blockhash: string;
     confirmations: number;
-    vin: IDkktTxVinStruct[];
-    vout: IDkktTxVoutStruct[];
+    vin: IDkktTxVin[];
+    vout: IDkktTxVout[];
     hex: string;
 }
-export interface IDkktTxVinStruct {
+export interface IDkktTxVin {
     txid?: string;
     vout?: number;
     scriptSig?: {
@@ -47,7 +47,7 @@ export interface IDkktTxVinStruct {
     sequence: number;
     coinbase?: string;
 }
-export interface IDkktTxVoutStruct {
+export interface IDkktTxVout {
     value: number;
     n: number;
     scriptPubKey: {

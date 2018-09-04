@@ -45,8 +45,8 @@ export {
   IDkktBlockInfo,
   IDkktTxInfo,
   IDkktWalletInfo,
-  IDkktTxVinStruct,
-  IDkktTxVoutStruct
+  IDkktTxVin,
+  IDkktTxVout
 } from "./dkktoken/rpc";
 
 export {
@@ -57,5 +57,7 @@ export {
   IBtcNetworkInfo,
   IBtcTxInfo,
   IBtcVerboseMemPool,
-  IBtcWalletInfo
+  IBtcWalletInfo,
+  IBtcTxVin,
+  IBtcTxVout
 } from "./bitcoin/rpc";

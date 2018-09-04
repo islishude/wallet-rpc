@@ -30,7 +30,7 @@ export interface IBtcTxInfo {
     hex?: string;
     blocktime?: number;
 }
-interface IBtcTxVin {
+export interface IBtcTxVin {
     txid?: string;
     vout?: number;
     scriptSig: {
@@ -41,7 +41,7 @@ interface IBtcTxVin {
     coinbase?: string;
     txinwitness?: string[];
 }
-interface IBtcTxVout {
+export interface IBtcTxVout {
     value: number;
     n: number;
     scriptPubKey: {
