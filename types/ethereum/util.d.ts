@@ -40,7 +40,7 @@ export declare class EthereumUtil {
     static toUtf8(hex: string): string;
     /**
      * validate eth address
-     * @param address
+     * @param address a checked eth address or not
      */
     static isAddress(address: string): boolean;
     /**

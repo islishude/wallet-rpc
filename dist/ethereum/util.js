@@ -38,10 +38,10 @@ class EthereumUtil {
     }
     /**
      * validate eth address
-     * @param address
+     * @param address a checked eth address or not
      */
     static isAddress(address) {
-        return /^(0x)?[0-9a-f]{40}$/.test(address.toLowerCase());
+        return /^(0x)?[0-9a-fA-F]{40}$/.test(address.toLowerCase());
     }
     /**
      * add `0x` to hex string
