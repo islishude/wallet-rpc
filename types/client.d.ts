@@ -26,8 +26,8 @@ export default abstract class RPCClient {
     pass: string;
     ip: string;
     port: string;
-    protected uri: string;
-    protected bulkData: IRpcRequest[];
+    protected URL: string;
+    protected BulkData: IRpcRequest[];
     protected reqConfig: AxiosRequestConfig;
     constructor(user: string, pass: string, ip: string, port: string);
     /**

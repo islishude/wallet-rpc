@@ -7,6 +7,7 @@ export { EthereumClient } from "./ethereum/rpc";
 export { EthereumUtil } from "./ethereum/util";
 export { OmniLayerMethods } from "./omni/mtd";
 export { OmniLayerClient } from "./omni/rpc";
+export { EOSClient } from "./eos/rpc";
 
 export {
   IRpcRequest,

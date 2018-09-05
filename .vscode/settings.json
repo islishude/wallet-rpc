@@ -9,6 +9,7 @@
         "geth",
         "litecoin",
         "mempool",
+        "mroot",
         "nonpayable",
         "omni",
         "propertyid",

@@ -18,3 +18,5 @@ var mtd_4 = require("./omni/mtd");
 exports.OmniLayerMethods = mtd_4.OmniLayerMethods;
 var rpc_4 = require("./omni/rpc");
 exports.OmniLayerClient = rpc_4.OmniLayerClient;
+var rpc_5 = require("./eos/rpc");
+exports.EOSClient = rpc_5.EOSClient;

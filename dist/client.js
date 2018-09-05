@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
-const util_1 = require("util");
+const helper_1 = require("./helper");
 class RPCClient {
     constructor(user, pass, ip, port) {
         this.user = user;
         this.pass = pass;
         this.ip = ip;
         this.port = port;
-        this.bulkData = [];
+        this.BulkData = [];
         this.reqConfig = {
             auth: {
                 password: this.pass,
@@ -21,7 +21,7 @@ class RPCClient {
         // } else {
         //   this.reqConfig.httpAgent = new httpAgent({ keepAlive: true });
         // }
-        this.uri = /^http.+$/.test(this.ip)
+        this.URL = /^http.+$/.test(this.ip)
             ? `${this.ip}:${this.port}`
             : `http://${this.ip}:${this.port}`;
     }
@@ -41,19 +41,11 @@ class RPCClient {
             params: params || []
         };
         try {
-            const ret = await axios_1.default.post(this.uri, reqData, this.reqConfig);
+            const ret = await axios_1.default.post(this.URL, reqData, this.reqConfig);
             return ret.data;
         }
         catch (e) {
-            const { response, message } = e;
-            const req = util_1.format("%s => %O", this.uri, reqData);
-            if (response !== undefined) {
-                // Catch non-200 error
-                const status = response.status;
-                const data = util_1.format("%O", response.data);
-                throw new Error(`JSONRPC Response ${status} Error.\nReason: ${message}\nReqData: ${req}\nRespData: ${data}`);
-            }
-            throw new Error(`JSONRPC Request Error: \nReason:${message}\nReqData: ${req}`);
+            throw new Error(helper_1.HandleError(e, this.URL, reqData));
         }
     }
     /**
@@ -63,20 +55,20 @@ class RPCClient {
      * @param id
      */
     BulkAdd(data) {
-        this.bulkData.push(data);
+        this.BulkData.push(data);
     }
     /**
      * Bulk RPC Call func
      * recommendation using it from same request bulk
      */
     async BulkRpcCall() {
-        if (this.bulkData.length === 0) {
+        if (this.BulkData.length === 0) {
             return [];
         }
-        const reqData = this.bulkData;
+        const reqData = this.BulkData;
         // clear data
-        this.bulkData = [];
-        const res = await axios_1.default.post(this.uri, reqData, this.reqConfig);
+        this.BulkData = [];
+        const res = await axios_1.default.post(this.URL, reqData, this.reqConfig);
         return res.data;
     }
     /**
@@ -84,7 +76,7 @@ class RPCClient {
      * here no using this.bulkData
      */
     async BulkRpcExec(data) {
-        const res = await axios_1.default.post(this.uri, data, this.reqConfig);
+        const res = await axios_1.default.post(this.URL, data, this.reqConfig);
         return res.data;
     }
 }
