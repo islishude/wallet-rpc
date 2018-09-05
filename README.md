@@ -7,7 +7,7 @@ JSON RPC client of crypto coins by TypeScript
 - Litecoin(same with Bitcoin)
 - Ethereum(geth 1.8.0+ || parity 1.0.0+) and ERC20
 - OmniLayer(includes USDT)
-- EOS
+- EOS(v1.2.0 stable)
 
 And CLI Supports, [learn more](#cli)!
 

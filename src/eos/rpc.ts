@@ -139,7 +139,7 @@ export class EOSClient {
     });
   }
 
-  public sendTxes(body: string) {
+  public sendTxes(body: object) {
     return this.CALL<ISendTxReturn>(mtd.chain.sendTxes, { body });
   }
 

@@ -78,7 +78,7 @@ export declare class EOSClient {
      * @param tx packed_trx: json of hex
      */
     sendTx(signs: string[], compression: "true" | "false", data: string, tx: string): Promise<ISendTxReturn>;
-    sendTxes(body: string): Promise<ISendTxReturn>;
+    sendTxes(body: object): Promise<ISendTxReturn>;
     getTxInfo(id: number): Promise<any>;
     getKeyAccount(pubKey: string): Promise<any>;
     getControlledAccounts(account: string): Promise<any>;
