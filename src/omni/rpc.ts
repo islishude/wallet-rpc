@@ -1,3 +1,4 @@
+import { BitcoinMethods } from "../bitcoin/mtd";
 import { BitcoinClient } from "../bitcoin/rpc";
 import { IRpcConfig } from "../client";
 import { OmniLayerMethods as mtd } from "./mtd";
@@ -79,6 +80,10 @@ export class OmniLayerClient extends BitcoinClient {
 
   public getOmniInfo() {
     return this.RpcCall<IOmniClientInfo>(mtd.info.client);
+  }
+
+  public sendRawTx(data: string) {
+    return this.RpcCall<string>(BitcoinMethods.tx.sendRaw, [data]);
   }
 
   /**

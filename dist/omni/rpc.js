@@ -1,13 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+const mtd_1 = require("../bitcoin/mtd");
 const rpc_1 = require("../bitcoin/rpc");
-const mtd_1 = require("./mtd");
+const mtd_2 = require("./mtd");
 class OmniLayerClient extends rpc_1.BitcoinClient {
     constructor(conf) {
         super(conf);
     }
     getOmniInfo() {
-        return this.RpcCall(mtd_1.OmniLayerMethods.info.client);
+        return this.RpcCall(mtd_2.OmniLayerMethods.info.client);
+    }
+    sendRawTx(data) {
+        return this.RpcCall(mtd_1.BitcoinMethods.tx.sendRaw, [data]);
     }
     /**
      * Broadcasts a raw Omni Layer transaction.
@@ -32,7 +36,7 @@ class OmniLayerClient extends rpc_1.BitcoinClient {
             redeemAddress,
             referenceAmount
         ];
-        return this.RpcCall(mtd_1.OmniLayerMethods.tx.sendRaw, params);
+        return this.RpcCall(mtd_2.OmniLayerMethods.tx.sendRaw, params);
     }
     /**
      * Returns the token balance for a given address and property.
@@ -40,34 +44,34 @@ class OmniLayerClient extends rpc_1.BitcoinClient {
      * @param propertyId the property identifier
      */
     getPropertyBalance(address, propertyId) {
-        return this.RpcCall(mtd_1.OmniLayerMethods.address.balance, [address, propertyId]);
+        return this.RpcCall(mtd_2.OmniLayerMethods.address.balance, [address, propertyId]);
     }
     getAllPropertyBalance(address) {
-        return this.RpcCall(mtd_1.OmniLayerMethods.address.allBalance, [address]);
+        return this.RpcCall(mtd_2.OmniLayerMethods.address.allBalance, [address]);
     }
     /**
      * Get detailed information about an Omni transaction.
      * @param txid the hash of the transaction to lookup
      */
     getOmniTxInfo(txid) {
-        return this.RpcCall(mtd_1.OmniLayerMethods.tx.detail, [txid]);
+        return this.RpcCall(mtd_2.OmniLayerMethods.tx.detail, [txid]);
     }
     /**
      * Lists all Omni transactions in a block.
      * @param height the block height or block index
      */
     getOmniTxList(height) {
-        return this.RpcCall(mtd_1.OmniLayerMethods.tx.list, [height]);
+        return this.RpcCall(mtd_2.OmniLayerMethods.tx.list, [height]);
     }
     getOmniPendingTxList(address) {
-        return this.RpcCall(mtd_1.OmniLayerMethods.tx.pending, [address]);
+        return this.RpcCall(mtd_2.OmniLayerMethods.tx.pending, [address]);
     }
     /**
      * Returns details for about the tokens or smart property to lookup.
      * @param id property id default is USDT
      */
     getOmniProperty(id = 31) {
-        return this.RpcCall(mtd_1.OmniLayerMethods.property.info, [id]);
+        return this.RpcCall(mtd_2.OmniLayerMethods.property.info, [id]);
     }
     /**
      * List WALLET transactions, optionally filtered by an address and block boundaries.
@@ -80,7 +84,7 @@ class OmniLayerClient extends rpc_1.BitcoinClient {
      */
     listTx(txid = "*", count = 10, skip = 0, startBlock = 0, endBlock = 999999) {
         const params = [txid, count, skip, startBlock, endBlock];
-        return this.RpcCall(mtd_1.OmniLayerMethods.tx.wallet, params);
+        return this.RpcCall(mtd_2.OmniLayerMethods.tx.wallet, params);
     }
 }
 exports.OmniLayerClient = OmniLayerClient;

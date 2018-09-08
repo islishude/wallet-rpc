@@ -9,11 +9,9 @@ JSON RPC client of crypto coins by TypeScript
 - OmniLayer(includes USDT)
 - EOS(v1.2.0 stable)
 
-And CLI Supports, [learn more](#cli)!
+the EOS type defined in progressing,PR welcome!
 
-## TODO Supports
-
-- [ ] Doge
+And CLI Supports, [learn more](#cli)
 
 ## Install
 

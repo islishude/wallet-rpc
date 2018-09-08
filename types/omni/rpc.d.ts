@@ -57,6 +57,7 @@ export interface IOmniPropertyInfo {
 export declare class OmniLayerClient extends BitcoinClient {
     constructor(conf: IRpcConfig);
     getOmniInfo(): Promise<import("../client").IRpcResponse<IOmniClientInfo>>;
+    sendRawTx(data: string): Promise<import("../client").IRpcResponse<string>>;
     /**
      * Broadcasts a raw Omni Layer transaction.
      * Use `this.sendRawTx` for anyone instead of sendOmniRawTx
