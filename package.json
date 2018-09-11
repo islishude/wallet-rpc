@@ -4,7 +4,7 @@
   "description": "JSON RPC client of crypto coins by TypeScript",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf dist types && tsc",
+    "build": "tslint -p tsconfig.json && rm -rf dist types && tsc",
     "test": "ts-node test/*.ts",
     "pub": "git push --all && git push --tags && npm publish"
   },
@@ -24,7 +24,8 @@
     "Litecoin",
     "USDT",
     "OmniLayer",
-    "JSONRPC"
+    "JSONRPC",
+    "EOS"
   ],
   "author": {
     "email": "lishude@foxmail.com",

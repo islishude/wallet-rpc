@@ -1,10 +1,4 @@
 export declare const EthereumMethods: {
-    info: {
-        syncing: string;
-    };
-    tool: {
-        sign: string;
-    };
     address: {
         balance: string;
         code: string;
@@ -28,17 +22,23 @@ export declare const EthereumMethods: {
         estimate: string;
         price: string;
     };
+    info: {
+        syncing: string;
+    };
+    tool: {
+        sign: string;
+    };
     tx: {
-        rawByHash: string;
         byHash: string;
         byHeight: string;
         call: string;
-        receipt: string;
-        send: string;
-        sendRaw: string;
         parity: {
             trace: string;
         };
+        rawByHash: string;
+        receipt: string;
+        send: string;
+        sendRaw: string;
     };
     txpool: {
         content: string;

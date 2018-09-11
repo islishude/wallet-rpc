@@ -132,10 +132,10 @@ export class EOSClient {
     tx: string
   ) {
     return this.CALL<ISendTxReturn>(mtd.chain.sendTx, {
-      signatures: signs,
       compression,
       packed_context_free_data: data,
-      packed_tx: tx
+      packed_tx: tx,
+      signatures: signs,
     });
   }
 

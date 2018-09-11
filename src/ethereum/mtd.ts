@@ -1,10 +1,4 @@
 export const EthereumMethods = {
-  info: {
-    syncing: "eth_syncing"
-  },
-  tool: {
-    sign: "eth_sign"
-  },
   address: {
     balance: "eth_getBalance",
     code: "eth_getCode",
@@ -28,17 +22,23 @@ export const EthereumMethods = {
     estimate: "eth_estimateGas",
     price: "eth_gasPrice"
   },
+  info: {
+    syncing: "eth_syncing"
+  },
+  tool: {
+    sign: "eth_sign"
+  },
   tx: {
-    rawByHash: "eth_getRawTransactionByHash",
     byHash: "eth_getTransactionByHash",
     byHeight: "eth_getTransactionByBlockHashAndIndex",
     call: "eth_call",
-    receipt: "eth_getTransactionReceipt",
-    send: "eth_sendTransaction",
-    sendRaw: "eth_sendRawTransaction",
     parity: {
       trace: "trace_transaction"
-    }
+    },
+    rawByHash: "eth_getRawTransactionByHash",
+    receipt: "eth_getTransactionReceipt",
+    send: "eth_sendTransaction",
+    sendRaw: "eth_sendRawTransaction"
   },
   txpool: {
     content: "txpool_content",

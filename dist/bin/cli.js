@@ -5,10 +5,10 @@ const console_1 = require("console");
 const repl_1 = require("repl");
 const index_1 = require("../index");
 const color = {
-    yellow: "\x1b[33m",
-    // green: "\x1b[32m",
     clear: "\x1b[0m",
-    underscore: "\x1b[4m"
+    underscore: "\x1b[4m",
+    yellow: "\x1b[33m"
+    // green: "\x1b[32m",
 };
 console_1.log(`
 Wallet RPC CLI by isLishude <${color.underscore}https://github.com/islishude/wallet-rpc${color.clear}>
@@ -31,12 +31,12 @@ ${color.yellow}
 ${color.clear}
 `);
 const terminal = repl_1.start({
-    prompt: "> ",
+    ignoreUndefined: true,
     input: process.stdin,
     output: process.stdout,
+    prompt: "> ",
     terminal: process.stdout.isTTY,
-    useGlobal: true,
-    ignoreUndefined: true
+    useGlobal: true
 });
 terminal.context.log = console_1.log;
 terminal.context.BitcoinClient = index_1.BitcoinClient;

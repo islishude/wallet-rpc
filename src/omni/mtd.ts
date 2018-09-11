@@ -1,22 +1,22 @@
 /* spell-checker: disable */
 export const OmniLayerMethods = {
+  address: {
+    allBalance: "omni_getallbalancesforaddress",
+    balance: "omni_getbalance"
+  },
   info: {
     client: "omni_getinfo"
   },
   property: {
-    list: "omni_listproperties",
-    info: "omni_getproperty"
-  },
-  address: {
-    balance: "omni_getbalance",
-    allBalance: "omni_getallbalancesforaddress"
+    info: "omni_getproperty",
+    list: "omni_listproperties"
   },
   tx: {
     detail: "omni_gettransaction",
-    payload: "omni_getpayload",
-    sendRaw: "omni_sendrawtx",
     list: "omni_listblocktransactions",
+    payload: "omni_getpayload",
     pending: "omni_listpendingtransactions",
+    sendRaw: "omni_sendrawtx",
     wallet: "omni_listtransactions"
   }
 };

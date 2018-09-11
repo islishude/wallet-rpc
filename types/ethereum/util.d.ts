@@ -24,10 +24,10 @@ export declare class EthereumUtil {
     };
     static readonly ERC721FunSig: {
         name: string;
-        symbol: string;
-        totalSupply: string;
         safeTransferFrom: string;
         safeTransferFromWithData: string;
+        symbol: string;
+        totalSupply: string;
         transferFrom: string;
     };
     /**

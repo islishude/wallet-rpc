@@ -1,31 +1,31 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EOSMethods = {
+    DBSize: {
+        get: "/db_size/get"
+    },
     chain: {
-        info: "chain/get_info",
+        abi: "chain/get_abi",
+        account: "chain/get_account",
+        balance: "chain/get_currency_balance",
         block: "chain/get_block",
         blockHeaderState: "chain/get_block_header_state",
-        account: "chain/get_account",
-        abi: "chain/get_abi",
         code: "chain/get_code",
+        info: "chain/get_info",
         rawCodeAndABI: "chain/get_raw_code_and_abi",
-        balance: "chain/get_currency_balance",
         sendTx: "chain/push_transaction",
         sendTxes: "chain/push_transactions"
     },
     history: {
         actions: "history/get_actions",
-        tx: "history/get_transaction",
+        ctrlAccounts: "history/get_controlled_accounts",
         keyAccounts: "history/get_key_accounts",
-        ctrlAccounts: "history/get_controlled_accounts"
+        tx: "history/get_transaction"
     },
     net: {
         connect: "net/connect",
-        disconnect: "net/disconnect",
         connections: "net/connections",
+        disconnect: "net/disconnect",
         status: "net/status"
-    },
-    DBSize: {
-        get: "/db_size/get"
     }
 };

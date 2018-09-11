@@ -14,10 +14,10 @@ import {
 } from "../index";
 
 const color = {
-  yellow: "\x1b[33m",
-  // green: "\x1b[32m",
   clear: "\x1b[0m",
-  underscore: "\x1b[4m"
+  underscore: "\x1b[4m",
+  yellow: "\x1b[33m"
+  // green: "\x1b[32m",
 };
 
 log(`
@@ -44,12 +44,12 @@ ${color.clear}
 `);
 
 const terminal = start({
-  prompt: "> ",
+  ignoreUndefined: true,
   input: process.stdin,
   output: process.stdout,
+  prompt: "> ",
   terminal: process.stdout.isTTY,
-  useGlobal: true,
-  ignoreUndefined: true
+  useGlobal: true
 });
 
 terminal.context.log = log;

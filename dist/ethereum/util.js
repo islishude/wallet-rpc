@@ -13,9 +13,9 @@ class EthereumUtil {
         const api = "https://api.etherscan.io/api";
         const { data } = await axios_1.default.get(api, {
             params: {
-                module: "proxy",
                 action: "eth_gasPrice",
-                apiKey
+                apiKey,
+                module: "proxy"
             }
         });
         const tmp = new bignumber_js_1.default(data.result, 16).div(EthereumUtil.gWei);
@@ -68,10 +68,10 @@ class EthereumUtil {
         try {
             const { data } = await axios_1.default.get(api, {
                 params: {
-                    module: "contract",
                     action: "getabi",
                     address: token,
-                    apiKey
+                    apiKey,
+                    module: "contract"
                 }
             });
             if (data.status === "0") {
@@ -127,12 +127,12 @@ EthereumUtil.ERC20EventSig = {
 };
 EthereumUtil.ERC721FunSig = {
     name: "0x06fdde03",
-    symbol: "0x95d89b41",
-    totalSupply: "0x18160ddd",
     // safeTransferFrom(address,address,uint256)
     safeTransferFrom: "0x42842e0e",
     // safeTransferFrom(address,address,uint256,bytes)
     safeTransferFromWithData: "0x42842e0e",
+    symbol: "0x95d89b41",
+    totalSupply: "0x18160ddd",
     // transferFrom(address,address,uint256)
     transferFrom: "0x23b872dd"
 };

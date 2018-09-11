@@ -78,10 +78,10 @@ class EOSClient {
      */
     sendTx(signs, compression, data, tx) {
         return this.CALL(mtd_1.EOSMethods.chain.sendTx, {
-            signatures: signs,
             compression,
             packed_context_free_data: data,
-            packed_tx: tx
+            packed_tx: tx,
+            signatures: signs,
         });
     }
     sendTxes(body) {

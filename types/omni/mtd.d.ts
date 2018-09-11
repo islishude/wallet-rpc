@@ -1,21 +1,21 @@
 export declare const OmniLayerMethods: {
+    address: {
+        allBalance: string;
+        balance: string;
+    };
     info: {
         client: string;
     };
     property: {
-        list: string;
         info: string;
-    };
-    address: {
-        balance: string;
-        allBalance: string;
+        list: string;
     };
     tx: {
         detail: string;
-        payload: string;
-        sendRaw: string;
         list: string;
+        payload: string;
         pending: string;
+        sendRaw: string;
         wallet: string;
     };
 };

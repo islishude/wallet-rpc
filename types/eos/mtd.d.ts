@@ -1,29 +1,29 @@
 export declare const EOSMethods: {
+    DBSize: {
+        get: string;
+    };
     chain: {
-        info: string;
+        abi: string;
+        account: string;
+        balance: string;
         block: string;
         blockHeaderState: string;
-        account: string;
-        abi: string;
         code: string;
+        info: string;
         rawCodeAndABI: string;
-        balance: string;
         sendTx: string;
         sendTxes: string;
     };
     history: {
         actions: string;
-        tx: string;
-        keyAccounts: string;
         ctrlAccounts: string;
+        keyAccounts: string;
+        tx: string;
     };
     net: {
         connect: string;
-        disconnect: string;
         connections: string;
+        disconnect: string;
         status: string;
-    };
-    DBSize: {
-        get: string;
     };
 };
