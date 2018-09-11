@@ -29,6 +29,12 @@ export const example1 = async () => {
   const { result: latest } = await EthClient.getBalance(address, "latest");
   const { result: pending } = await EthClient.getBalance(address, "pending");
   log(latest, pending);
+
+  // Concurrency
+  await Promise.all([
+    EthClient.getBalance(address, "latest"),
+    EthClient.getBalance(address, "pending")
+  ]);
 };
 
 export const example2 = async () => {
@@ -39,12 +45,8 @@ export const example2 = async () => {
   log(latest, pending);
 
   const TRX = "0xf230b790e05390fc8295f4d3f60332c93bed42e2";
-  const {
-    decimals,
-    name,
-    totalSupply,
-    symbol
-  } = await EthClient.ERC20TokenInfo(TRX);
+  const TokenInfo = await EthClient.ERC20TokenInfo(TRX);
+  const { decimals, name, totalSupply, symbol } = TokenInfo;
   log(decimals, name, totalSupply, symbol);
 };
 
