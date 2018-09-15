@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/islishude/wallet-rpc"
   },
-  "homepage": "https://github.com/islishude/walelt-rpc#readme",
+  "homepage": "https://github.com/islishude/wallet-rpc#readme",
   "bin": {
     "wallet-rpc": "dist/bin/cli.js"
   },
