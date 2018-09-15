@@ -2,10 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const assert_1 = require("assert");
 const bignumber_js_1 = require("bignumber.js");
+const util_1 = require("util");
 const client_1 = require("../client");
 const mtd_1 = require("./mtd");
-const util_1 = require("./util");
-const { ERC20FuncSig, ERC20FuncSigUpper, hexToDecimalString, hexToNumber, isAddress, padAddress, toUtf8 } = util_1.EthereumUtil;
+const util_2 = require("./util");
+const { ERC20FuncSig, ERC20FuncSigUpper, hexToDecimalString, hexToNumber, isAddress, padAddress, toUtf8 } = util_2.EthereumUtil;
 class EthereumClient extends client_1.default {
     // go-ethereum client RPC settings has no user and password for rpc
     constructor(conf) {
@@ -182,8 +183,11 @@ class EthereumClient extends client_1.default {
             data: ERC20FuncSig.balanceOf + padAddress(address),
             to: token
         };
-        const { result: balance } = await this.callFunc(param, status);
-        return balance;
+        const { result, error } = await this.callFunc(param, status);
+        if (!util_1.isNullOrUndefined(error)) {
+            return "0";
+        }
+        return result;
     }
     async ERC20Decimals(token) {
         const param = {
@@ -218,7 +222,7 @@ class EthereumClient extends client_1.default {
             to: token
         };
         const { result: totalSupply } = await this.callFunc(param);
-        if (totalSupply === "0x" || totalSupply === undefined) {
+        if (totalSupply === "0x" || util_1.isNullOrUndefined(totalSupply)) {
             return;
         }
         return hexToDecimalString(totalSupply);
@@ -236,16 +240,14 @@ class EthereumClient extends client_1.default {
             this.callFunc(param),
             this.callFunc(PARAM)
         ]);
+        if (!util_1.isString(name) && !util_1.isString(NAME)) {
+            return;
+        }
         if (name === "0x" && NAME === "0x") {
             return;
         }
-        // For parity fix
-        // If a contract ISN'T a ERC20 will be throw
-        if (name === undefined && NAME === undefined) {
-            return;
-        }
         const tmp = name === "0x" ? NAME : name;
-        if (!tmp) {
+        if (!util_1.isString(tmp)) {
             return;
         }
         return toUtf8(tmp);
@@ -263,16 +265,14 @@ class EthereumClient extends client_1.default {
             this.callFunc(param),
             this.callFunc(PARAM)
         ]);
+        if (!util_1.isString(symbol) && !util_1.isString(SYMBOL)) {
+            return;
+        }
         if (symbol === "0x" && SYMBOL === "0x") {
             return;
         }
-        // For parity fix
-        // If a contract ISN'T a ERC20 will be throw
-        if (!symbol && !SYMBOL) {
-            return;
-        }
         const tmp = symbol === "0x" ? SYMBOL : symbol;
-        if (!tmp) {
+        if (!util_1.isString(tmp)) {
             return;
         }
         return toUtf8(tmp);
@@ -292,7 +292,7 @@ class EthereumClient extends client_1.default {
             name: name || symbol,
             symbol: symbol || name,
             // For ERC721 it's not fixed
-            totalSupply: totalSupply === undefined
+            totalSupply: util_1.isUndefined(totalSupply)
                 ? undefined
                 : new bignumber_js_1.default(totalSupply).div(new bignumber_js_1.default(10).pow(decimals || 0)).toString(10)
         };

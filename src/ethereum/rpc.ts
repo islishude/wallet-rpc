@@ -1,5 +1,6 @@
 import { ok } from "assert";
 import BN from "bignumber.js";
+import { isNullOrUndefined, isString, isUndefined } from "util";
 import RPCClient, { IRpcConfig, IRpcResponse } from "../client";
 import { EthereumMethods as mtd } from "./mtd";
 import { EthereumUtil } from "./util";
@@ -433,8 +434,13 @@ export class EthereumClient extends RPCClient {
       data: ERC20FuncSig.balanceOf + padAddress(address),
       to: token
     };
-    const { result: balance } = await this.callFunc(param, status);
-    return balance;
+    const { result, error } = await this.callFunc(param, status);
+
+    if (!isNullOrUndefined(error)) {
+      return "0";
+    }
+
+    return result;
   }
 
   public async ERC20Decimals(token: string): Promise<undefined | number> {
@@ -472,7 +478,7 @@ export class EthereumClient extends RPCClient {
       to: token
     };
     const { result: totalSupply } = await this.callFunc(param);
-    if (totalSupply === "0x" || totalSupply === undefined) {
+    if (totalSupply === "0x" || isNullOrUndefined(totalSupply)) {
       return;
     }
     return hexToDecimalString(totalSupply);
@@ -491,18 +497,21 @@ export class EthereumClient extends RPCClient {
       this.callFunc(param),
       this.callFunc(PARAM)
     ]);
+
+    if (!isString(name) && !isString(NAME)) {
+      return;
+    }
+
     if (name === "0x" && NAME === "0x") {
       return;
     }
-    // For parity fix
-    // If a contract ISN'T a ERC20 will be throw
-    if (name === undefined && NAME === undefined) {
-      return;
-    }
+
     const tmp = name === "0x" ? NAME : name;
-    if (!tmp) {
+
+    if (!isString(tmp)) {
       return;
     }
+
     return toUtf8(tmp);
   }
 
@@ -519,16 +528,18 @@ export class EthereumClient extends RPCClient {
       this.callFunc(param),
       this.callFunc(PARAM)
     ]);
+
+    if (!isString(symbol) && !isString(SYMBOL)) {
+      return;
+    }
+
     if (symbol === "0x" && SYMBOL === "0x") {
       return;
     }
-    // For parity fix
-    // If a contract ISN'T a ERC20 will be throw
-    if (!symbol && !SYMBOL) {
-      return;
-    }
+
     const tmp = symbol === "0x" ? SYMBOL : symbol;
-    if (!tmp) {
+
+    if (!isString(tmp)) {
       return;
     }
     return toUtf8(tmp);
@@ -558,10 +569,9 @@ export class EthereumClient extends RPCClient {
       name: name || symbol,
       symbol: symbol || name,
       // For ERC721 it's not fixed
-      totalSupply:
-        totalSupply === undefined
-          ? undefined
-          : new BN(totalSupply).div(new BN(10).pow(decimals || 0)).toString(10)
+      totalSupply: isUndefined(totalSupply)
+        ? undefined
+        : new BN(totalSupply).div(new BN(10).pow(decimals || 0)).toString(10)
     };
   }
 }
