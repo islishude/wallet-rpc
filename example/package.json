@@ -8,7 +8,11 @@
   },
   "author": "islishude",
   "license": "MIT",
+  "devDependencies": {
+    "@types/crypto-js": "^3.1.43"
+  },
   "dependencies": {
+    "crypto-js": "^3.1.9-1",
     "wallet-rpc": "file:.."
   }
 }
