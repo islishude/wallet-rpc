@@ -55,7 +55,7 @@ export interface IOmniPropertyInfo {
     totaltokens: string;
 }
 export declare class OmniLayerClient extends BitcoinClient {
-    constructor(conf: IRpcConfig);
+    constructor(conf?: IRpcConfig);
     getOmniInfo(): Promise<import("../client").IRpcResponse<IOmniClientInfo>>;
     sendRawTx(data: string): Promise<import("../client").IRpcResponse<string>>;
     /**

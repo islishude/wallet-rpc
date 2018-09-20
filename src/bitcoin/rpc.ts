@@ -164,7 +164,7 @@ export interface IBtcMemoryInfo {
 /** spell-checker: enable */
 
 export class BitcoinClient extends RPCClient {
-  constructor(conf: IRpcConfig) {
+  constructor(conf: IRpcConfig = {}) {
     const ip = conf.ip || "http://127.0.0.1";
     const user = conf.user || "";
     const pass = conf.pass || "";

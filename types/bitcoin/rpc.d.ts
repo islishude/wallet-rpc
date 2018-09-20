@@ -150,7 +150,7 @@ export interface IBtcMemoryInfo {
 }
 /** spell-checker: enable */
 export declare class BitcoinClient extends RPCClient {
-    constructor(conf: IRpcConfig);
+    constructor(conf?: IRpcConfig);
     getInfo(): Promise<IRpcResponse<IBtcWalletInfo>>;
     getBlockCount(): Promise<IRpcResponse<number>>;
     getBlockHash(height: number): Promise<IRpcResponse<string>>;

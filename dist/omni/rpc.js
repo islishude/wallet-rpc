@@ -4,7 +4,7 @@ const mtd_1 = require("../bitcoin/mtd");
 const rpc_1 = require("../bitcoin/rpc");
 const mtd_2 = require("./mtd");
 class OmniLayerClient extends rpc_1.BitcoinClient {
-    constructor(conf) {
+    constructor(conf = {}) {
         super(conf);
     }
     getOmniInfo() {

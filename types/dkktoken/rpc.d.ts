@@ -84,7 +84,7 @@ export interface IDkktBlockInfo {
 }
 /** spell-checker: enable */
 export declare class DKKTClient extends RPCClient {
-    constructor(conf: IRpcConfig);
+    constructor(conf?: IRpcConfig);
     getInfo(): Promise<IRpcResponse<IDkktWalletInfo>>;
     getBlockCount(): Promise<IRpcResponse<number>>;
     getBlockHash(height: number): Promise<IRpcResponse<string>>;

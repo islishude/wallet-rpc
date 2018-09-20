@@ -91,7 +91,7 @@ export interface IDkktBlockInfo {
 /** spell-checker: enable */
 
 export class DKKTClient extends RPCClient {
-  constructor(conf: IRpcConfig) {
+  constructor(conf: IRpcConfig = {}) {
     const ip = conf.ip || "http://127.0.0.1";
     const user = conf.user || "";
     const pass = conf.pass || "";

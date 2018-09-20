@@ -1,6 +1,6 @@
 {
   "name": "wallet-rpc",
-  "version": "4.1.1",
+  "version": "4.1.2",
   "description": "JSON RPC client of crypto coins by TypeScript",
   "main": "dist/index.js",
   "scripts": {
@@ -25,7 +25,8 @@
     "USDT",
     "OmniLayer",
     "JSONRPC",
-    "EOS"
+    "EOS",
+    "web3"
   ],
   "author": {
     "email": "lishude@foxmail.com",

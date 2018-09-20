@@ -9,7 +9,7 @@ const util_2 = require("./util");
 const { ERC20FuncSig, ERC20FuncSigUpper, hexToDecimalString, hexToNumber, isAddress, padAddress, toUtf8 } = util_2.EthereumUtil;
 class EthereumClient extends client_1.default {
     // go-ethereum client RPC settings has no user and password for rpc
-    constructor(conf) {
+    constructor(conf = {}) {
         const ip = conf.ip || "http://127.0.0.1";
         const user = conf.user || "";
         const pass = conf.pass || "";

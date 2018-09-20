@@ -220,7 +220,7 @@ export interface IEthAbiInputStruct extends IEthAbiCommonStruct {
 
 export class EthereumClient extends RPCClient {
   // go-ethereum client RPC settings has no user and password for rpc
-  constructor(conf: IRpcConfig) {
+  constructor(conf: IRpcConfig = {}) {
     const ip = conf.ip || "http://127.0.0.1";
     const user = conf.user || "";
     const pass = conf.pass || "";

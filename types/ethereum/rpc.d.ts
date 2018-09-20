@@ -171,7 +171,7 @@ export interface IEthAbiInputStruct extends IEthAbiCommonStruct {
     indexed?: boolean;
 }
 export declare class EthereumClient extends RPCClient {
-    constructor(conf: IRpcConfig);
+    constructor(conf?: IRpcConfig);
     /**
      * Returns an object with data about the sync status or false.
      * returns value

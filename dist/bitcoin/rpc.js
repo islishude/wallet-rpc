@@ -4,7 +4,7 @@ const client_1 = require("../client");
 const mtd_1 = require("./mtd");
 /** spell-checker: enable */
 class BitcoinClient extends client_1.default {
-    constructor(conf) {
+    constructor(conf = {}) {
         const ip = conf.ip || "http://127.0.0.1";
         const user = conf.user || "";
         const pass = conf.pass || "";
