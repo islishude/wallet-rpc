@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
+const console_1 = require("console");
 const helper_1 = require("../helper");
 const mtd_1 = require("./mtd");
 class EOSClient {
@@ -10,6 +11,7 @@ class EOSClient {
      * @param ver API Version Now only supports `v1`
      */
     constructor(url = "http://127.0.0.1:8888", ver = "v1") {
+        console_1.log("\x1b[41m\x1b[37mEOS module of wallet-prc is still under active development,use of the feature is not recommended in production environments\x1b[0m");
         this.URL = `${url}/${ver}/`;
     }
     /**

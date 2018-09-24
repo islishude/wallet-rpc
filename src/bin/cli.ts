@@ -1,29 +1,29 @@
 #!/usr/bin/env node
 import { log } from "console";
 import { start } from "repl";
-import {
-  BitcoinClient,
-  BitcoinMethods,
-  DKKTClient,
-  DKKTokenMethods,
-  EthereumClient,
-  EthereumMethods,
-  EthereumUtil,
-  OmniLayerClient,
-  OmniLayerMethods
-} from "../index";
+import { BitcoinMethods } from "../bitcoin/mtd";
+import { BitcoinClient } from "../bitcoin/rpc";
+import { DKKTokenMethods } from "../dkktoken/mtd";
+import { DKKTClient } from "../dkktoken/rpc";
+import { EOSMethods } from "../eos/mtd";
+import { EOSClient } from "../eos/rpc";
+import { EthereumMethods } from "../ethereum/mtd";
+import { EthereumClient } from "../ethereum/rpc";
+import { EthereumUtil } from "../ethereum/util";
+import { OmniLayerMethods } from "../omni/mtd";
+import { OmniLayerClient } from "../omni/rpc";
 
 const color = {
+  _: "\x1b[4m",
   clear: "\x1b[0m",
-  underscore: "\x1b[4m",
   yellow: "\x1b[33m"
   // green: "\x1b[32m",
 };
 
 log(`
 Wallet RPC CLI by isLishude <${
-  color.underscore
-}https://github.com/islishude/wallet-rpc${color.clear}>
+  color._
+  }https://github.com/islishude/wallet-rpc${color.clear}>
 
 The available global variable are
 
@@ -31,6 +31,7 @@ ${color.yellow}
 - log(alias "console.log")
 - Bitcoin 
 - Ethereum 
+- EOS
 - ...
 ${color.clear} 
 
@@ -68,3 +69,6 @@ terminal.context.DKKTokenMethods = DKKTokenMethods;
 
 terminal.context.OmniLayerClient = OmniLayerClient;
 terminal.context.OmniLayerMethods = OmniLayerMethods;
+
+terminal.context.EOSClient = EOSClient;
+terminal.context.EOSMethods = EOSMethods;

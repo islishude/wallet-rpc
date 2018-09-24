@@ -3,15 +3,25 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const console_1 = require("console");
 const repl_1 = require("repl");
-const index_1 = require("../index");
+const mtd_1 = require("../bitcoin/mtd");
+const rpc_1 = require("../bitcoin/rpc");
+const mtd_2 = require("../dkktoken/mtd");
+const rpc_2 = require("../dkktoken/rpc");
+const mtd_3 = require("../eos/mtd");
+const rpc_3 = require("../eos/rpc");
+const mtd_4 = require("../ethereum/mtd");
+const rpc_4 = require("../ethereum/rpc");
+const util_1 = require("../ethereum/util");
+const mtd_5 = require("../omni/mtd");
+const rpc_5 = require("../omni/rpc");
 const color = {
+    _: "\x1b[4m",
     clear: "\x1b[0m",
-    underscore: "\x1b[4m",
     yellow: "\x1b[33m"
     // green: "\x1b[32m",
 };
 console_1.log(`
-Wallet RPC CLI by isLishude <${color.underscore}https://github.com/islishude/wallet-rpc${color.clear}>
+Wallet RPC CLI by isLishude <${color._}https://github.com/islishude/wallet-rpc${color.clear}>
 
 The available global variable are
 
@@ -19,6 +29,7 @@ ${color.yellow}
 - log(alias "console.log")
 - Bitcoin 
 - Ethereum 
+- EOS
 - ...
 ${color.clear} 
 
@@ -41,12 +52,14 @@ const terminal = repl_1.start({
     useGlobal: true
 });
 terminal.context.log = console_1.log;
-terminal.context.BitcoinClient = index_1.BitcoinClient;
-terminal.context.BitcoinMethods = index_1.BitcoinMethods;
-terminal.context.EthereumClient = index_1.EthereumClient;
-terminal.context.EthereumMethods = index_1.EthereumMethods;
-terminal.context.EthereumUtil = index_1.EthereumUtil;
-terminal.context.DKKTClient = index_1.DKKTClient;
-terminal.context.DKKTokenMethods = index_1.DKKTokenMethods;
-terminal.context.OmniLayerClient = index_1.OmniLayerClient;
-terminal.context.OmniLayerMethods = index_1.OmniLayerMethods;
+terminal.context.BitcoinClient = rpc_1.BitcoinClient;
+terminal.context.BitcoinMethods = mtd_1.BitcoinMethods;
+terminal.context.EthereumClient = rpc_4.EthereumClient;
+terminal.context.EthereumMethods = mtd_4.EthereumMethods;
+terminal.context.EthereumUtil = util_1.EthereumUtil;
+terminal.context.DKKTClient = rpc_2.DKKTClient;
+terminal.context.DKKTokenMethods = mtd_2.DKKTokenMethods;
+terminal.context.OmniLayerClient = rpc_5.OmniLayerClient;
+terminal.context.OmniLayerMethods = mtd_5.OmniLayerMethods;
+terminal.context.EOSClient = rpc_3.EOSClient;
+terminal.context.EOSMethods = mtd_3.EOSMethods;

@@ -1,4 +1,5 @@
 import Axios from "axios";
+import { log } from "console";
 import { HandleError } from "../helper";
 import { EOSMethods as mtd } from "./mtd";
 
@@ -50,6 +51,7 @@ export class EOSClient {
     url: string = "http://127.0.0.1:8888",
     ver: EOSVersion = "v1"
   ) {
+    log("\x1b[41m\x1b[37mEOS module of wallet-prc is still under active development,use of the feature is not recommended in production environments\x1b[0m")
     this.URL = `${url}/${ver}/`;
   }
 
