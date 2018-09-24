@@ -36,10 +36,12 @@ ${color.clear}
 
 See the README to learn more API and RPC supports list.
 
+Run with \`npx -n --experimental-repl-await wallet-rpc\` to enable top-level await if you are in the node.js v10 or above.
+
 e.g.
 ${color.yellow}
-  let eth = new EthereumClient({ ip: "https://mainnet.infura.io", port: "443" });
-  let tmp = eth.getBlockCount().then(log, log);
+  let eth = new EthereumClient();
+  await eth.getBlockCount();
 ${color.clear}
 `);
 
