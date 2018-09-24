@@ -3,11 +3,16 @@
   "version": "0.0.1",
   "description": "wallet-rpc-example",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "postinstall": "echo install successful"
   },
   "author": "islishude",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/islishude/wallet-rpc"
+  },
   "devDependencies": {
     "@types/crypto-js": "^3.1.43"
   },
