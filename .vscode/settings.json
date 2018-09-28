@@ -1,12 +1,16 @@
 {
     "cSpell.words": [
+        "binargs",
         "blockchain",
         "callcode",
         "delegatecall",
         "dkkt",
+        "eos",
+        "eosio",
         "foxmail",
         "getabi",
         "geth",
+        "i",
         "litecoin",
         "mempool",
         "mroot",
@@ -18,6 +22,5 @@
         "subtraces",
         "txpool",
         "usdt"
-    ],
-    "typescript.tsdk": "node_modules/typescript/lib"
+    ]
 }

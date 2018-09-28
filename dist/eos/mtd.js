@@ -2,30 +2,38 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EOSMethods = {
     DBSize: {
-        get: "/db_size/get"
+        get: "get"
     },
     chain: {
-        abi: "chain/get_abi",
-        account: "chain/get_account",
-        balance: "chain/get_currency_balance",
-        block: "chain/get_block",
-        blockHeaderState: "chain/get_block_header_state",
-        code: "chain/get_code",
-        info: "chain/get_info",
-        rawCodeAndABI: "chain/get_raw_code_and_abi",
-        sendTx: "chain/push_transaction",
-        sendTxes: "chain/push_transactions"
+        abi: "get_abi",
+        account: "get_account",
+        atob: "abi_json_to_bin",
+        balance: "get_currency_balance",
+        block: "get_block",
+        blockHeaderState: "get_block_header_state",
+        btoa: "abi_bin_to_json",
+        code: "get_code",
+        info: "get_info",
+        rawCodeAndABI: "get_raw_code_and_abi",
+        sendTx: "push_transaction",
+        sendTxList: "push_transactions"
     },
     history: {
-        actions: "history/get_actions",
-        ctrlAccounts: "history/get_controlled_accounts",
-        keyAccounts: "history/get_key_accounts",
-        tx: "history/get_transaction"
+        actions: "get_actions",
+        ctrlAccounts: "get_controlled_accounts",
+        keyAccounts: "get_key_accounts",
+        tx: "get_transaction"
     },
     net: {
-        connect: "net/connect",
-        connections: "net/connections",
-        disconnect: "net/disconnect",
-        status: "net/status"
+        connect: "connect",
+        connections: "connections",
+        disconnect: "disconnect",
+        status: "status"
     }
+};
+exports.EosModule = {
+    DBSize: "DBSize",
+    chain: "chain",
+    history: "history",
+    net: "net"
 };

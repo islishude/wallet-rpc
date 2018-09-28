@@ -1,31 +1,4 @@
-export interface IEosChainInfo {
-    server_version: string;
-    head_block_num: number;
-    last_irreversible_block_num: number;
-    head_block_id: string;
-    head_block_time: string;
-    head_block_producer: string;
-}
-export interface IEosBlockInfo {
-    previous: string;
-    timestamp: string;
-    transaction_mroot: string;
-    action_mroot: string;
-    block_mroot: string;
-    producer: string;
-    schedule_version: number;
-    new_producers: any;
-    producer_signature: string;
-    regions: any[];
-    input_transactions: [];
-    id: string;
-    block_num: number;
-    ref_block_prefix: number;
-}
-export interface IEosAccount {
-    account_name: string;
-    permissions: any[];
-}
+import { IEosAccount, IEosBlockInfo, IEosChainInfo, IEosTrx } from "./mtd";
 declare type EOSVersion = "v1";
 interface ISendTxReturn {
     transaction_id: string;
@@ -38,12 +11,13 @@ export declare class EOSClient {
      * @param ver API Version Now only supports `v1`
      */
     constructor(url?: string, ver?: EOSVersion);
+    getCallURL(module: string, api: string): string;
     /**
      * RPC Call helper func
      * @param method request method from "./mtd.ts"
      * @throws Request or Response error throw
      */
-    CALL<T>(method: string, body?: object): Promise<T>;
+    CALL<T>(module: string, method: string, body?: object): Promise<T>;
     /**
      * Returns an object containing various details about the blockchain.
      */
@@ -52,7 +26,7 @@ export declare class EOSClient {
      * Returns an object containing various details about a specific block on the blockchain.
      * @param id Provide a block number or a block id
      */
-    getBlock(id: string): Promise<IEosBlockInfo>;
+    getBlock(id: string | number): Promise<IEosBlockInfo>;
     /**
      * Returns an object containing various details about a specific account on the blockchain.
      */
@@ -69,17 +43,36 @@ export declare class EOSClient {
      * @param id Provide a block number or a block id
      */
     getBlockHeaderState(id: string): Promise<any>;
-    getBalance(code: string, account: string, symbol: string): Promise<any>;
+    getBalance(code: string, account: string, symbol?: string): Promise<any>;
     /**
      * This method expects a transaction in JSON format and will attempt to apply it to the blockchain.
-     * @param signs signatures array of signatures required to authorize transaction
+     * @param signatures signatures array of signatures required to authorize transaction
      * @param compression compression used, usually false
-     * @param data packed_context_free_data: json of hex
-     * @param tx packed_trx: json of hex
+     * @param packedCtxFreeData packed_context_free_data: json of hex
+     * @param packedTrx packed_trx: json of hex
      */
-    sendTx(signs: string[], compression: "true" | "false", data: string, tx: string): Promise<ISendTxReturn>;
-    sendTxes(body: object): Promise<ISendTxReturn>;
-    getTxInfo(id: number): Promise<any>;
+    pushTransaction(signatures: string[], compression: "true" | "false", packedCtxFreeData: string, packedTrx: string): Promise<ISendTxReturn>;
+    pushTransactions(body: object): Promise<ISendTxReturn>;
+    /**
+     * Serializes json to binary hex.
+     * The resulting binary hex is usually used for the data field in push_transaction.
+     * @param code Account name
+     * @param action action name
+     * @param args json args
+     */
+    abiJSONToBin(code: string, action: string, args: object): Promise<{
+        binargs: string;
+    }>;
+    /**
+     * Serializes binary hex to json.
+     * @param code Account name
+     * @param action action name
+     * @param binargs binary args
+     */
+    abiBinToJSON(code: string, action: string, binargs: string): Promise<{
+        args: any;
+    }>;
+    getTxInfo(id: number): Promise<IEosTrx>;
     getKeyAccount(pubKey: string): Promise<any>;
     getControlledAccounts(account: string): Promise<any>;
 }
