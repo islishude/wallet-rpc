@@ -1,3 +1,5 @@
+import { ITypeAuthority } from "./abi/eosio";
+
 export const EOSMethods = {
   DBSize: {
     get: "get"
@@ -38,10 +40,10 @@ export const EosModule = {
 };
 
 export interface IEosTrx {
-  // executed  = 0, ///< succeed, no error handler executed
-  // soft_fail = 1, ///< objectively failed (not executed), error handler executed
-  // hard_fail = 2, ///< objectively failed and error handler objectively failed thus no state change
-  // delayed   = 3, ///< transaction delayed/deferred/scheduled for future execution
+  // executed  = 0 ///< succeed, no error handler executed
+  // soft_fail = 1 ///< objectively failed (not executed), error handler executed
+  // hard_fail = 2 ///< objectively failed and error handler objectively failed thus no state change
+  // delayed   = 3 ///< transaction delayed/deferred/scheduled for future execution
   // expired   = 4  ///< transaction expired and storage space refunded to user
   status: "executed" | "soft_fail" | "hard_fail" | "delayed" | "expired";
   // millisecond
@@ -55,7 +57,7 @@ export interface IEosTrx {
     signatures: string[];
     compression: "none" | "zlib";
     packed_context_free_data: string;
-    context_free_data: any[];
+    context_free_data: string[];
     packed_trx: string;
     transaction: {
       expiration: string;
@@ -65,12 +67,13 @@ export interface IEosTrx {
       max_cpu_usage_ms: number;
       delay_sec: number;
       context_free_actions: any[];
+      authorization: Array<{ actor: string; permission: string }>;
       /** spell-checker: disable */
       actions: Array<{
         // EOS transfer is "eosio.token"
         account: string;
         name: string;
-        authorization: Array<{ actor: string; permission: string }>;
+        authorization: ITypeAuthority[];
         data: any;
         hex_data: string;
       }>;
@@ -152,7 +155,26 @@ export interface IEosAccount {
     cpu_weight: string;
     ram_bytes: number;
   };
-  self_delegated_bandwidth: any;
-  refund_request: any;
-  voter_info: any;
+  self_delegated_bandwidth: {
+    from: string;
+    to: string;
+    net_weight: string;
+    cpu_weight: string;
+  };
+  refund_request: null | {
+    onwer: string;
+    request_time: string;
+    net_amount: string;
+    cpu_amount: string;
+  };
+  voter_info: {
+    owner: string;
+    proxy: string;
+    producers: string[];
+    staked: number;
+    last_vote_weight: string;
+    proxied_vote_weight: string;
+    // nubmer 0 | 1
+    is_proxy: boolean;
+  };
 }

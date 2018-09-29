@@ -1,3 +1,4 @@
+import { ITypeAuthority } from "./abi/eosio";
 export declare const EOSMethods: {
     DBSize: {
         get: string;
@@ -44,7 +45,7 @@ export interface IEosTrx {
         signatures: string[];
         compression: "none" | "zlib";
         packed_context_free_data: string;
-        context_free_data: any[];
+        context_free_data: string[];
         packed_trx: string;
         transaction: {
             expiration: string;
@@ -54,14 +55,15 @@ export interface IEosTrx {
             max_cpu_usage_ms: number;
             delay_sec: number;
             context_free_actions: any[];
+            authorization: Array<{
+                actor: string;
+                permission: string;
+            }>;
             /** spell-checker: disable */
             actions: Array<{
                 account: string;
                 name: string;
-                authorization: Array<{
-                    actor: string;
-                    permission: string;
-                }>;
+                authorization: ITypeAuthority[];
                 data: any;
                 hex_data: string;
             }>;
@@ -141,7 +143,25 @@ export interface IEosAccount {
         cpu_weight: string;
         ram_bytes: number;
     };
-    self_delegated_bandwidth: any;
-    refund_request: any;
-    voter_info: any;
+    self_delegated_bandwidth: {
+        from: string;
+        to: string;
+        net_weight: string;
+        cpu_weight: string;
+    };
+    refund_request: null | {
+        onwer: string;
+        request_time: string;
+        net_amount: string;
+        cpu_amount: string;
+    };
+    voter_info: {
+        owner: string;
+        proxy: string;
+        producers: string[];
+        staked: number;
+        last_vote_weight: string;
+        proxied_vote_weight: string;
+        is_proxy: boolean;
+    };
 }
