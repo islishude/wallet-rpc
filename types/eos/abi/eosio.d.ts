@@ -38,6 +38,25 @@ export interface ITypeBidRefund {
     bidder: account_name;
     newname: account_name;
 }
+export interface ITypeBlockChainParam {
+    max_block_net_usage: number;
+    target_block_net_usage_pct: number;
+    max_transaction_net_usage: number;
+    base_per_transaction_net_usage: number;
+    net_usage_leeway: number;
+    context_free_discount_net_usage_num: number;
+    context_free_discount_net_usage_den: number;
+    max_block_cpu_usage: number;
+    target_block_cpu_usage_pct: number;
+    max_transaction_cpu_usage: number;
+    min_transaction_cpu_usage: number;
+    max_transaction_lifetime: number;
+    deferred_trx_expiration_window: number;
+    max_transaction_delay: number;
+    max_inline_action_size: number;
+    max_inline_action_depth: number;
+    max_authority_depth: number;
+}
 export interface INewAccount {
     account: "eosio";
     name: "newaccount";
@@ -186,10 +205,6 @@ export interface ISetRam {
         max_ram_size: number;
     };
 }
-/**
- * Sets the number of new bytes of ram to create per block
- * and resyncs bancor base connector balance
- */
 export interface ISetRAMRate {
     account: "eosio";
     name: "setramrate";
@@ -287,54 +302,11 @@ export interface ISetProducers {
         }>;
     };
 }
-export interface IRequireAuth {
-    account: "eosio";
-    name: "reqauth";
-    data: {
-        params: {
-            max_block_net_usage: number;
-            target_block_net_usage_pct: number;
-            max_transaction_net_usage: number;
-            base_per_transaction_net_usage: number;
-            net_usage_leeway: number;
-            context_free_discount_net_usage_num: number;
-            context_free_discount_net_usage_den: number;
-            max_block_cpu_usage: number;
-            target_block_cpu_usage_pct: number;
-            max_transaction_cpu_usage: number;
-            min_transaction_cpu_usage: number;
-            max_transaction_lifetime: number;
-            deferred_trx_expiration_window: number;
-            max_transaction_delay: number;
-            max_inline_action_size: number;
-            max_inline_action_depth: number;
-            max_authority_depth: number;
-        };
-    };
-}
 export interface ISetParams {
     account: "eosio";
     name: "setparams";
     data: {
-        params: {
-            max_block_net_usage: number;
-            target_block_net_usage_pct: number;
-            max_transaction_net_usage: number;
-            base_per_transaction_net_usage: number;
-            net_usage_leeway: number;
-            context_free_discount_net_usage_num: number;
-            context_free_discount_net_usage_den: number;
-            max_block_cpu_usage: number;
-            target_block_cpu_usage_pct: number;
-            max_transaction_cpu_usage: number;
-            min_transaction_cpu_usage: number;
-            max_transaction_lifetime: number;
-            deferred_trx_expiration_window: number;
-            max_transaction_delay: number;
-            max_inline_action_size: number;
-            max_inline_action_depth: number;
-            max_authority_depth: number;
-        };
+        params: ITypeBlockChainParam;
     };
 }
 export {};
