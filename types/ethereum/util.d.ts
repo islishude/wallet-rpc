@@ -35,8 +35,21 @@ export declare class EthereumUtil {
      */
     static readonly addressNull: string;
     static hexToNumber(hex: string): number;
+    /**
+     * Get recommend gas price by `eth_gasPrice` RPC call from EtherScan.io
+     * @param apiKey you EtherScan API key
+     */
     static getRecommendGasPrice(apiKey?: string): Promise<string>;
+    /**
+     * Pad ethereum address to 64 bits hex string without 0x
+     * Can be use for ERC20 transfer call and ERC20 balance call
+     * @param address
+     */
     static padAddress(address: string): string;
+    /**
+     * transform Hex string to UTF8-encoding and trim string
+     * @param hex hex string
+     */
     static toUtf8(hex: string): string;
     /**
      * validate eth address

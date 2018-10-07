@@ -2,13 +2,21 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "commonjs",
-    "lib": ["esnext"],
+    "lib": [
+      "es2018"
+    ],
     "outDir": "dist",
     "declaration": true,
     "declarationDir": "types",
     "alwaysStrict": true,
-    "strict": true
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
