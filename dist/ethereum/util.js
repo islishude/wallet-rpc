@@ -31,10 +31,7 @@ class EthereumUtil {
         return "0".repeat(24) + address.replace("0x", "");
     }
     static toUtf8(hex) {
-        const result = Buffer.from(hex.replace("0x", ""), "hex")
-            .toString()
-            .match(/\w+/g);
-        return result ? result.join("") : "";
+        return Buffer.from(hex.replace("0x", ""), "hex").toString().replace(/[\u0000-\u001f]/g, "").trim();
     }
     /**
      * validate eth address

@@ -1,5 +1,6 @@
 import Axios from "axios";
 import BigNumber from "bignumber.js";
+import { log } from "console";
 import { IRpcResponse } from "../client";
 import { IEthAbiStruct, IEtherScanAbiResponse } from "./rpc";
 
@@ -80,10 +81,7 @@ export class EthereumUtil {
   }
 
   public static toUtf8(hex: string): string {
-    const result = Buffer.from(hex.replace("0x", ""), "hex")
-      .toString()
-      .match(/\w+/g);
-    return result ? result.join("") : "";
+    return Buffer.from(hex.replace("0x", ""), "hex").toString().replace(/[\u0000-\u001f]/g, "").trim();
   }
 
   /**
