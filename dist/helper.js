@@ -10,11 +10,11 @@ const util_1 = require("util");
 exports.HandleError = (e, url, reqData) => {
     const { response, message } = e;
     const req = util_1.format("%s => %O", url, reqData);
-    if (response !== void 0) {
-        // Catch non-200 error
-        const status = response.status;
-        const data = util_1.format("%O", response.data);
-        return `JSONRPC Response ${status} Error.\nReason: ${message}\nReqData: ${req}\nRespData: ${data}`;
+    if (util_1.isUndefined(response)) {
+        return `JSONRPC Request Error: \nReason:${message}\nReqData: ${req}`;
     }
-    return `JSONRPC Request Error: \nReason:${message}\nReqData: ${req}`;
+    // Catch non-200 error
+    const status = response.status;
+    const data = util_1.format("%O", response.data);
+    return `JSONRPC Response ${status} Error.\nReason: ${message}\nReqData: ${req}\nRespData: ${data}`;
 };

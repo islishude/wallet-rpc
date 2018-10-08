@@ -13,7 +13,7 @@ export interface IBtcWalletInfo {
     testnet: boolean;
     paytxfee: number;
     realyfee: number;
-    errors: null;
+    errors: string | null;
 }
 export interface IBtcTxInfo {
     txid: string;
