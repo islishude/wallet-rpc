@@ -12,10 +12,6 @@ import {
 
 type EOSVersion = "v1";
 
-interface ISendTxReturn {
-  transaction_id: string;
-}
-
 export class EOSClient {
   public URL: string;
   /**
@@ -131,7 +127,9 @@ export class EOSClient {
     packedCtxFreeData: string,
     packedTrx: string
   ) {
-    return this.CALL<ISendTxReturn>(mdl.chain, mtd.chain.sendTx, {
+    return this.CALL<{
+      transaction_id: string;
+    }>(mdl.chain, mtd.chain.sendTx, {
       compression,
       packed_context_free_data: packedCtxFreeData,
       packed_tx: packedTrx,
@@ -139,19 +137,19 @@ export class EOSClient {
     });
   }
 
-  public pushTransactions(body: object) {
-    return this.CALL<ISendTxReturn>(mdl.chain, mtd.chain.sendTxList, { body });
-  }
-
   /**
-   * Serializes json to binary hex. 
+   * Serializes json to binary hex.
    * The resulting binary hex is usually used for the data field in push_transaction.
    * @param code Account name
    * @param action action name
    * @param args json args
    */
   public abiJSONToBin(code: string, action: string, args: object) {
-    return this.CALL<{ binargs: string }>(mdl.chain, mtd.chain.atob, { code, action, args })
+    return this.CALL<{ binargs: string }>(mdl.chain, mtd.chain.atob, {
+      action,
+      args,
+      code
+    });
   }
 
   /**
@@ -161,7 +159,11 @@ export class EOSClient {
    * @param binargs binary args
    */
   public abiBinToJSON(code: string, action: string, binargs: string) {
-    return this.CALL<{ args: any }>(mdl.chain, mtd.chain.btoa, { code, action, binargs })
+    return this.CALL<{ args: any }>(mdl.chain, mtd.chain.btoa, {
+      action,
+      binargs,
+      code
+    });
   }
 
   public getTxInfo(id: number) {

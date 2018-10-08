@@ -1,8 +1,5 @@
 import { IEosAccount, IEosBlockInfo, IEosChainInfo, IEosTrx } from "./mtd";
 declare type EOSVersion = "v1";
-interface ISendTxReturn {
-    transaction_id: string;
-}
 export declare class EOSClient {
     URL: string;
     /**
@@ -51,8 +48,9 @@ export declare class EOSClient {
      * @param packedCtxFreeData packed_context_free_data: json of hex
      * @param packedTrx packed_trx: json of hex
      */
-    pushTransaction(signatures: string[], compression: "true" | "false", packedCtxFreeData: string, packedTrx: string): Promise<ISendTxReturn>;
-    pushTransactions(body: object): Promise<ISendTxReturn>;
+    pushTransaction(signatures: string[], compression: "true" | "false", packedCtxFreeData: string, packedTrx: string): Promise<{
+        transaction_id: string;
+    }>;
     /**
      * Serializes json to binary hex.
      * The resulting binary hex is usually used for the data field in push_transaction.

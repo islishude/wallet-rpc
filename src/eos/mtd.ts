@@ -1,4 +1,3 @@
-import { ITypeAuthority } from "./abi/eosio";
 /** spell-checker: disable */
 export const EOSMethods = {
   DBSize: {
@@ -38,6 +37,30 @@ export const EosModule = {
   history: "history",
   net: "net"
 };
+
+export interface ITypeKeyWeight {
+  key: string;
+  weight: number;
+}
+
+export interface ITypeAuthority {
+  threshold: number;
+  keys: Array<{
+    key: string;
+    weight: number;
+  }>;
+  account: Array<{
+    permission: {
+      actor: string;
+      permission_name: string;
+    };
+    weight: number;
+  }>;
+  waits: Array<{
+    wait_sec: number;
+    weight: number;
+  }>;
+}
 
 export interface IEosTrx {
   // executed  = 0 ///< succeed, no error handler executed

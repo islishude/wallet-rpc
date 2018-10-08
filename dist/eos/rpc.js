@@ -101,9 +101,6 @@ class EOSClient {
             signatures
         });
     }
-    pushTransactions(body) {
-        return this.CALL(mtd_1.EosModule.chain, mtd_1.EOSMethods.chain.sendTxList, { body });
-    }
     /**
      * Serializes json to binary hex.
      * The resulting binary hex is usually used for the data field in push_transaction.
@@ -112,7 +109,11 @@ class EOSClient {
      * @param args json args
      */
     abiJSONToBin(code, action, args) {
-        return this.CALL(mtd_1.EosModule.chain, mtd_1.EOSMethods.chain.atob, { code, action, args });
+        return this.CALL(mtd_1.EosModule.chain, mtd_1.EOSMethods.chain.atob, {
+            action,
+            args,
+            code
+        });
     }
     /**
      * Serializes binary hex to json.
@@ -121,7 +122,11 @@ class EOSClient {
      * @param binargs binary args
      */
     abiBinToJSON(code, action, binargs) {
-        return this.CALL(mtd_1.EosModule.chain, mtd_1.EOSMethods.chain.btoa, { code, action, binargs });
+        return this.CALL(mtd_1.EosModule.chain, mtd_1.EOSMethods.chain.btoa, {
+            action,
+            binargs,
+            code
+        });
     }
     getTxInfo(id) {
         return this.CALL(mtd_1.EosModule.history, mtd_1.EOSMethods.history.tx, { id });
