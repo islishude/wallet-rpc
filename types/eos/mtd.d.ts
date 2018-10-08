@@ -1,4 +1,5 @@
 import { ITypeAuthority } from "./abi/eosio";
+/** spell-checker: disable */
 export declare const EOSMethods: {
     DBSize: {
         get: string;
@@ -40,7 +41,7 @@ export interface IEosTrx {
     status: "executed" | "soft_fail" | "hard_fail" | "delayed" | "expired";
     cpu_usage_us: number;
     net_usage_words: number;
-    trx: {
+    trx: string | {
         id: string;
         signatures: string[];
         compression: "none" | "zlib";
@@ -59,7 +60,6 @@ export interface IEosTrx {
                 actor: string;
                 permission: string;
             }>;
-            /** spell-checker: disable */
             actions: Array<{
                 account: string;
                 name: string;
@@ -150,7 +150,7 @@ export interface IEosAccount {
         cpu_weight: string;
     };
     refund_request: null | {
-        onwer: string;
+        owner: string;
         request_time: string;
         net_amount: string;
         cpu_amount: string;

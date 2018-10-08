@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/** spell-checker: disable */
 exports.EOSMethods = {
     DBSize: {
         get: "get"

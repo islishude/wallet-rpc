@@ -141,7 +141,9 @@ export interface IParityCreateAction {
 }
 
 export interface IParityCallAction {
+  /** spell-checker: disable */
   callType: "call" | "callcode" | "delegatecall" | "staticcall";
+  /** spell-checker: enable */
   from: string;
   to: string;
   value: string;

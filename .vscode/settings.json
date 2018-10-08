@@ -1,26 +1,10 @@
 {
-    "cSpell.words": [
-        "binargs",
-        "blockchain",
-        "callcode",
-        "delegatecall",
-        "dkkt",
-        "eos",
-        "eosio",
-        "foxmail",
-        "getabi",
-        "geth",
-        "i",
-        "litecoin",
-        "mempool",
-        "mroot",
-        "nonpayable",
-        "omni",
-        "propertyid",
-        "rpcapi",
-        "staticcall",
-        "subtraces",
-        "txpool",
-        "usdt"
-    ]
+  "cSpell.words": [
+    "binargs",
+    "getabi",
+    "nonpayable",
+    "rpcapi",
+    "subtraces",
+    "txpool"
+  ]
 }

@@ -1,5 +1,5 @@
 import { ITypeAuthority } from "./abi/eosio";
-
+/** spell-checker: disable */
 export const EOSMethods = {
   DBSize: {
     get: "get"
@@ -51,35 +51,36 @@ export interface IEosTrx {
   // bytes
   net_usage_words: number;
   // `trx` may be a `string`
-  trx: {
-    // txid
-    id: string;
-    signatures: string[];
-    compression: "none" | "zlib";
-    packed_context_free_data: string;
-    context_free_data: string[];
-    packed_trx: string;
-    transaction: {
-      expiration: string;
-      ref_block_num: number;
-      ref_block_prefix: number;
-      max_net_usage_ms: number;
-      max_cpu_usage_ms: number;
-      delay_sec: number;
-      context_free_actions: any[];
-      authorization: Array<{ actor: string; permission: string }>;
-      /** spell-checker: disable */
-      actions: Array<{
-        // EOS transfer is "eosio.token"
-        account: string;
-        name: string;
-        authorization: ITypeAuthority[];
-        data: any;
-        hex_data: string;
-      }>;
-      transaction_extensions: any[];
-    };
-  };
+  trx:
+    | string
+    | {
+        // txid
+        id: string;
+        signatures: string[];
+        compression: "none" | "zlib";
+        packed_context_free_data: string;
+        context_free_data: string[];
+        packed_trx: string;
+        transaction: {
+          expiration: string;
+          ref_block_num: number;
+          ref_block_prefix: number;
+          max_net_usage_ms: number;
+          max_cpu_usage_ms: number;
+          delay_sec: number;
+          context_free_actions: any[];
+          authorization: Array<{ actor: string; permission: string }>;
+          actions: Array<{
+            // EOS transfer is "eosio.token"
+            account: string;
+            name: string;
+            authorization: ITypeAuthority[];
+            data: any;
+            hex_data: string;
+          }>;
+          transaction_extensions: any[];
+        };
+      };
 }
 
 export interface IEosChainInfo {
@@ -162,7 +163,7 @@ export interface IEosAccount {
     cpu_weight: string;
   };
   refund_request: null | {
-    onwer: string;
+    owner: string;
     request_time: string;
     net_amount: string;
     cpu_amount: string;
@@ -174,7 +175,7 @@ export interface IEosAccount {
     staked: number;
     last_vote_weight: string;
     proxied_vote_weight: string;
-    // nubmer 0 | 1
+    // number 0 | 1
     is_proxy: boolean;
   };
 }
