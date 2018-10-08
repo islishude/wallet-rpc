@@ -35,7 +35,7 @@ Client.ERC20TokenInfo(EGCC)
   .then(({ decimals, name, totalSupply, symbol }) => {
     log(decimals, name, symbol, totalSupply);
     equal(decimals, 18);
-    equal(name, "EngineToken");
+    equal(name, "Engine Token");
     equal(symbol, "EGCC");
     equal(totalSupply, "10000000000");
   })

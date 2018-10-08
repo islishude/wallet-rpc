@@ -9,6 +9,10 @@ class EthereumUtil {
         }
         return new bignumber_js_1.default(hex, 16).toNumber();
     }
+    /**
+     * Get recommend gas price by `eth_gasPrice` RPC call from EtherScan.io
+     * @param apiKey you EtherScan API key
+     */
     static async getRecommendGasPrice(apiKey = "YourApiKeyToken") {
         const api = "https://api.etherscan.io/api";
         const { data } = await axios_1.default.get(api, {
@@ -24,17 +28,23 @@ class EthereumUtil {
         }
         return tmp.times(1.2).toFixed(0);
     }
+    /**
+     * Pad ethereum address to 64 bits hex string without 0x
+     * Can be use for ERC20 transfer call and ERC20 balance call
+     * @param address
+     */
     static padAddress(address) {
         if (!EthereumUtil.isAddress(address)) {
             throw new Error("Not a valid address");
         }
         return "0".repeat(24) + address.replace("0x", "");
     }
+    /**
+     * transform Hex string to UTF8-encoding and trim string
+     * @param hex hex string
+     */
     static toUtf8(hex) {
-        const result = Buffer.from(hex.replace("0x", ""), "hex")
-            .toString()
-            .match(/\w+/g);
-        return result ? result.join("") : "";
+        return Buffer.from(hex.replace("0x", ""), "hex").toString().replace(/[\u0000-\u001f]/g, "").trim();
     }
     /**
      * validate eth address

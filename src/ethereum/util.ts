@@ -56,6 +56,10 @@ export class EthereumUtil {
     return new BigNumber(hex, 16).toNumber();
   }
 
+  /**
+   * Get recommend gas price by `eth_gasPrice` RPC call from EtherScan.io
+   * @param apiKey you EtherScan API key
+   */
   public static async getRecommendGasPrice(apiKey: string = "YourApiKeyToken") {
     const api: string = "https://api.etherscan.io/api";
     const { data } = await Axios.get<IRpcResponse<string>>(api, {
@@ -72,6 +76,11 @@ export class EthereumUtil {
     return tmp.times(1.2).toFixed(0);
   }
 
+  /**
+   * Pad ethereum address to 64 bits hex string without 0x
+   * Can be use for ERC20 transfer call and ERC20 balance call
+   * @param address 
+   */
   public static padAddress(address: string): string {
     if (!EthereumUtil.isAddress(address)) {
       throw new Error("Not a valid address");
@@ -79,11 +88,12 @@ export class EthereumUtil {
     return "0".repeat(24) + address.replace("0x", "");
   }
 
+  /**
+   * transform Hex string to UTF8-encoding and trim string
+   * @param hex hex string
+   */
   public static toUtf8(hex: string): string {
-    const result = Buffer.from(hex.replace("0x", ""), "hex")
-      .toString()
-      .match(/\w+/g);
-    return result ? result.join("") : "";
+    return Buffer.from(hex.replace("0x", ""), "hex").toString().replace(/[\u0000-\u001f]/g, "").trim();
   }
 
   /**
