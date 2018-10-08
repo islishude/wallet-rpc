@@ -10,11 +10,20 @@ export { OmniLayerClient } from "./omni/rpc";
 export { EOSClient } from "./eos/rpc";
 
 export {
+  IEosAccount,
+  IEosAuthority,
+  IEosBlockInfo,
+  IEosChainInfo,
+  IEosTrx
+} from "./eos/mtd";
+
+export {
   IRpcRequest,
   IRpcErrorStruct,
   IRpcResponse,
   IRpcConfig
 } from "./client";
+
 export {
   IEthAbiCommonStruct,
   IEthAbiInputStruct,

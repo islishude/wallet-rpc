@@ -36,11 +36,7 @@ export declare const EosModule: {
     history: string;
     net: string;
 };
-export interface ITypeKeyWeight {
-    key: string;
-    weight: number;
-}
-export interface ITypeAuthority {
+export interface IEosAuthority {
     threshold: number;
     keys: Array<{
         key: string;
@@ -84,7 +80,7 @@ export interface IEosTrx {
             actions: Array<{
                 account: string;
                 name: string;
-                authorization: ITypeAuthority[];
+                authorization: IEosAuthority[];
                 data: any;
                 hex_data: string;
             }>;

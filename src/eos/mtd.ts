@@ -38,12 +38,7 @@ export const EosModule = {
   net: "net"
 };
 
-export interface ITypeKeyWeight {
-  key: string;
-  weight: number;
-}
-
-export interface ITypeAuthority {
+export interface IEosAuthority {
   threshold: number;
   keys: Array<{
     key: string;
@@ -97,7 +92,7 @@ export interface IEosTrx {
             // EOS transfer is "eosio.token"
             account: string;
             name: string;
-            authorization: ITypeAuthority[];
+            authorization: IEosAuthority[];
             data: any;
             hex_data: string;
           }>;

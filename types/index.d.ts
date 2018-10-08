@@ -8,6 +8,7 @@ export { EthereumUtil } from "./ethereum/util";
 export { OmniLayerMethods } from "./omni/mtd";
 export { OmniLayerClient } from "./omni/rpc";
 export { EOSClient } from "./eos/rpc";
+export { IEosAccount, IEosAuthority, IEosBlockInfo, IEosChainInfo, IEosTrx } from "./eos/mtd";
 export { IRpcRequest, IRpcErrorStruct, IRpcResponse, IRpcConfig } from "./client";
 export { IEthAbiCommonStruct, IEthAbiInputStruct, IEthAbiOutputStruct, IEthAbiStruct, IEthBlock, IEthBlockSimple, IEthBlockVerbose, IEthCallFuncParam, IEtherScanAbiResponse, IEthReceiptLogs, IEthSentTxStruct, IEthStatus, IEthSyncing, IEthTraceTxReturn, IEthTx, IEthTxReceipt, IParityCallAction, IParityCallResult, IParityCreateAction, IParityCreateResult, IParitySuicideAction, IParityTxTrace } from "./ethereum/rpc";
 export { IOmniClientInfo, IOmniTxInfo } from "./omni/rpc";
