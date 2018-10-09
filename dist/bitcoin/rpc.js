@@ -26,11 +26,11 @@ class BitcoinClient extends client_1.default {
     // get transaction for bitcoin core 0.16
     // use getRawTransaction method and decode
     getTxInfo(id) {
-        const param = [id, true];
+        const param = [id, 1];
         return this.RpcCall(mtd_1.BitcoinMethods.tx.raw, param);
     }
     getRawTxInfo(id) {
-        const param = [id, false];
+        const param = [id, 0];
         return this.RpcCall(mtd_1.BitcoinMethods.tx.raw, param);
     }
     /**

@@ -191,12 +191,12 @@ export class BitcoinClient extends RPCClient {
   // get transaction for bitcoin core 0.16
   // use getRawTransaction method and decode
   public getTxInfo(id: string) {
-    const param: [string, boolean] = [id, true];
+    const param: [string, number] = [id, 1];
     return this.RpcCall<IBtcTxInfo>(mtd.tx.raw, param);
   }
 
   public getRawTxInfo(id: string) {
-    const param: [string, boolean] = [id, false];
+    const param: [string, number] = [id, 0];
     return this.RpcCall<string>(mtd.tx.raw, param);
   }
 
