@@ -8,7 +8,7 @@ import { IRpcRequest } from "./client";
  * @param url request path
  * @param reqData request data
  */
-export const HandleError = (
+export const ErrorResolver = (
   e: AxiosError,
   url: string,
   reqData?: IRpcRequest

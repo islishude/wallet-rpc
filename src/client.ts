@@ -1,5 +1,5 @@
 import Axios, { AxiosRequestConfig } from "axios";
-import { HandleError } from "./helper";
+import { ErrorResolver } from "./helper";
 
 export interface IRpcResponse<T = any> {
   jsonrpc: string;
@@ -84,7 +84,7 @@ export default abstract class RPCClient {
       );
       return ret.data;
     } catch (e) {
-      throw new Error(HandleError(e, this.URL, reqData));
+      throw new Error(ErrorResolver(e, this.URL, reqData));
     }
   }
 

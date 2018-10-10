@@ -1,6 +1,6 @@
 import Axios from "axios";
 import { log } from "console";
-import { HandleError } from "../helper";
+import { ErrorResolver } from "../helper";
 import {
   EOSMethods as mtd,
   EosModule as mdl,
@@ -48,7 +48,7 @@ export class EOSClient {
       const result = await Axios.post<T>(url, body, { timeout: 60000 });
       return result.data;
     } catch (e) {
-      throw new Error(HandleError(e, this.URL));
+      throw new Error(ErrorResolver(e, this.URL));
     }
   }
 
@@ -177,7 +177,7 @@ export class EOSClient {
   }
 
   public getControlledAccounts(account: string) {
-    return this.CALL<any>(mdl.history, mtd.history.ctrlAccounts, {
+    return this.CALL<{controlled_accounts: string[]}>(mdl.history, mtd.history.ctrlAccounts, {
       controlling_account: account
     });
   }
