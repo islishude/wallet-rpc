@@ -6,4 +6,4 @@ import { IRpcRequest } from "./client";
  * @param url request path
  * @param reqData request data
  */
-export declare const HandleError: (e: AxiosError, url: string, reqData?: IRpcRequest | undefined) => string;
+export declare const ErrorResolver: (e: AxiosError, url: string, reqData?: IRpcRequest | undefined) => string;

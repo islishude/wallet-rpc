@@ -17,7 +17,8 @@ exports.EOSMethods = {
         info: "get_info",
         rawCodeAndABI: "get_raw_code_and_abi",
         sendTx: "push_transaction",
-        sendTxList: "push_transactions"
+        sendTxList: "push_transactions",
+        stats: "get_currency_stats"
     },
     history: {
         actions: "get_actions",
@@ -32,7 +33,7 @@ exports.EOSMethods = {
         status: "status"
     }
 };
-exports.EosModule = {
+exports.EOSPlugins = {
     DBSize: "DBSize",
     chain: "chain",
     history: "history",

@@ -15,7 +15,8 @@ export const EOSMethods = {
     info: "get_info",
     rawCodeAndABI: "get_raw_code_and_abi",
     sendTx: "push_transaction",
-    sendTxList: "push_transactions"
+    sendTxList: "push_transactions",
+    stats: "get_currency_stats"
   },
   history: {
     actions: "get_actions",
@@ -31,7 +32,7 @@ export const EOSMethods = {
   }
 };
 
-export const EosModule = {
+export const EOSPlugins = {
   DBSize: "DBSize",
   chain: "chain",
   history: "history",
@@ -196,4 +197,26 @@ export interface IEosAccount {
     // number 0 | 1
     is_proxy: boolean;
   };
+}
+
+export interface IEosAbi {
+  version: string;
+  types: Array<{ new_type_name: string; type: string }>;
+  structs: Array<{
+    name: string;
+    base: string;
+    fields: Array<{ name: string; type: string }>;
+  }>;
+  actions: Array<{ name: string; type: string; ricardian_contract: string }>;
+  tables: Array<{
+    name: string;
+    type: string;
+    index_type: string;
+    key_names: string[];
+    key_types: string[];
+  }>;
+  ricardian_clauses: Array<{ id: string; body: string }>;
+  error_messages: Array<{ error_code: string; error_msg: string }>;
+  abi_extensions: Array<{ tag: number; value: string }>;
+  variants?: Array<{ name: string; types: string[] }>;
 }

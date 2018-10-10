@@ -2,8 +2,9 @@ import Axios from "axios";
 import { log } from "console";
 import { ErrorResolver } from "../helper";
 import {
-  EOSMethods as mtd,
-  EosModule as mdl,
+  EOSMethods as methods,
+  EOSPlugins as plugins,
+  IEosAbi,
   IEosAccount,
   IEosBlockInfo,
   IEosChainInfo,
@@ -56,7 +57,7 @@ export class EOSClient {
    * Returns an object containing various details about the blockchain.
    */
   public getInfo() {
-    return this.CALL<IEosChainInfo>(mdl.chain, mtd.chain.info);
+    return this.CALL<IEosChainInfo>(plugins.chain, methods.chain.info);
   }
 
   /**
@@ -64,7 +65,7 @@ export class EOSClient {
    * @param id Provide a block number or a block id
    */
   public getBlock(id: string | number) {
-    return this.CALL<IEosBlockInfo>(mdl.chain, mtd.chain.block, {
+    return this.CALL<IEosBlockInfo>(plugins.chain, methods.chain.block, {
       block_num_or_id: id
     });
   }
@@ -73,15 +74,30 @@ export class EOSClient {
    * Returns an object containing various details about a specific account on the blockchain.
    */
   public getAccountInfo(account: string) {
-    return this.CALL<IEosAccount>(mdl.chain, mtd.chain.block, {
+    return this.CALL<IEosAccount>(plugins.chain, methods.chain.block, {
       account_name: account
     });
   }
 
   public getAccountsByPubKey(pubKey: string) {
-    return this.CALL<{ accounts_name: string[] }>(mdl.history, mtd.history.tx, {
-      public_key: pubKey
-    });
+    return this.CALL<{ accounts_name: string[] }>(
+      plugins.history,
+      methods.history.tx,
+      {
+        public_key: pubKey
+      }
+    );
+  }
+
+  public getCurrencyStats(code: string, symbol: string) {
+    return this.CALL<{ supply: string; max_supply: string; issuer: string }>(
+      plugins.chain,
+      methods.chain.stats,
+      {
+        code,
+        symbol
+      }
+    );
   }
 
   /**
@@ -89,15 +105,32 @@ export class EOSClient {
    * @param account
    */
   public getABI(account: string) {
-    return this.CALL<any>(mdl.chain, mtd.chain.abi, { account_name: account });
+    return this.CALL<{
+      account_name: string;
+      abi: IEosAbi;
+    }>(plugins.chain, methods.chain.abi, {
+      account_name: account
+    });
   }
 
   public getCode(account: string) {
-    return this.CALL<any>(mdl.chain, mtd.chain.code, { account_name: account });
+    return this.CALL<{
+      account_name: string;
+      code_hash: string;
+      wast: string;
+      wasm: string;
+      abi: IEosAbi;
+    }>(plugins.chain, methods.chain.code, {
+      account_name: account
+    });
   }
 
   public getRawCodeAndABI(account: string) {
-    return this.CALL<any>(mdl.chain, mtd.chain.rawCodeAndABI, {
+    return this.CALL<{
+      account_name: string;
+      wasm: string;
+      abi: string;
+    }>(plugins.chain, methods.chain.rawCodeAndABI, {
       account_name: account
     });
   }
@@ -107,13 +140,20 @@ export class EOSClient {
    * @param id Provide a block number or a block id
    */
   public getBlockHeaderState(id: string) {
-    return this.CALL<any>(mdl.chain, mtd.chain.blockHeaderState, {
+    return this.CALL<any>(plugins.chain, methods.chain.blockHeaderState, {
       block_num_or_id: id
     });
   }
 
+  /**
+   * Get Balance of your account with token symbol
+   * @param code token account name
+   * @param account your account name
+   * @param symbol option token symbol
+   * @returns string e.g. `1.0001 EOS`
+   */
   public getBalance(code: string, account: string, symbol?: string) {
-    return this.CALL<any>(mdl.chain, mtd.chain.balance, {
+    return this.CALL<string[]>(plugins.chain, methods.chain.balance, {
       account,
       code,
       symbol
@@ -135,7 +175,7 @@ export class EOSClient {
   ) {
     return this.CALL<{
       transaction_id: string;
-    }>(mdl.chain, mtd.chain.sendTx, {
+    }>(plugins.chain, methods.chain.sendTx, {
       compression,
       packed_context_free_data: packedCtxFreeData,
       packed_tx: packedTrx,
@@ -151,7 +191,7 @@ export class EOSClient {
    * @param args json args
    */
   public abiJSONToBin(code: string, action: string, args: object) {
-    return this.CALL<{ binargs: string }>(mdl.chain, mtd.chain.atob, {
+    return this.CALL<{ binargs: string }>(plugins.chain, methods.chain.atob, {
       action,
       args,
       code
@@ -165,7 +205,7 @@ export class EOSClient {
    * @param binargs binary args
    */
   public abiBinToJSON(code: string, action: string, binargs: string) {
-    return this.CALL<{ args: any }>(mdl.chain, mtd.chain.btoa, {
+    return this.CALL<{ args: any }>(plugins.chain, methods.chain.btoa, {
       action,
       binargs,
       code
@@ -173,12 +213,16 @@ export class EOSClient {
   }
 
   public getTxInfo(id: number) {
-    return this.CALL<IEosTrx>(mdl.history, mtd.history.tx, { id });
+    return this.CALL<IEosTrx>(plugins.history, methods.history.tx, { id });
   }
 
   public getControlledAccounts(account: string) {
-    return this.CALL<{controlled_accounts: string[]}>(mdl.history, mtd.history.ctrlAccounts, {
-      controlling_account: account
-    });
+    return this.CALL<{ controlled_accounts: string[] }>(
+      plugins.history,
+      methods.history.ctrlAccounts,
+      {
+        controlling_account: account
+      }
+    );
   }
 }

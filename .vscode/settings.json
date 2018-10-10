@@ -4,8 +4,11 @@
     "getabi",
     "litecoin",
     "nonpayable",
+    "ricardian",
     "rpcapi",
+    "structs",
     "subtraces",
-    "txpool"
+    "txpool",
+    "u"
   ]
 }

@@ -1,4 +1,4 @@
-import { IEosAccount, IEosBlockInfo, IEosChainInfo, IEosTrx } from "./mtd";
+import { IEosAbi, IEosAccount, IEosBlockInfo, IEosChainInfo, IEosTrx } from "./mtd";
 declare type EOSVersion = "v1";
 export declare class EOSClient {
     URL: string;
@@ -31,19 +31,44 @@ export declare class EOSClient {
     getAccountsByPubKey(pubKey: string): Promise<{
         accounts_name: string[];
     }>;
+    getCurrencyStats(code: string, symbol: string): Promise<{
+        supply: string;
+        max_supply: string;
+        issuer: string;
+    }>;
     /**
      * get ABI of providing account name
      * @param account
      */
-    getABI(account: string): Promise<any>;
-    getCode(account: string): Promise<any>;
-    getRawCodeAndABI(account: string): Promise<any>;
+    getABI(account: string): Promise<{
+        account_name: string;
+        abi: IEosAbi;
+    }>;
+    getCode(account: string): Promise<{
+        account_name: string;
+        code_hash: string;
+        wast: string;
+        wasm: string;
+        abi: IEosAbi;
+    }>;
+    getRawCodeAndABI(account: string): Promise<{
+        account_name: string;
+        wasm: string;
+        abi: string;
+    }>;
     /**
      * Get block header state
      * @param id Provide a block number or a block id
      */
     getBlockHeaderState(id: string): Promise<any>;
-    getBalance(code: string, account: string, symbol?: string): Promise<any>;
+    /**
+     * Get Balance of your account with token symbol
+     * @param code token account name
+     * @param account your account name
+     * @param symbol option token symbol
+     * @returns string e.g. `1.0001 EOS`
+     */
+    getBalance(code: string, account: string, symbol?: string): Promise<string[]>;
     /**
      * This method expects a transaction in JSON format and will attempt to apply it to the blockchain.
      * @param signatures signatures array of signatures required to authorize transaction
@@ -74,6 +99,8 @@ export declare class EOSClient {
         args: any;
     }>;
     getTxInfo(id: number): Promise<IEosTrx>;
-    getControlledAccounts(account: string): Promise<any>;
+    getControlledAccounts(account: string): Promise<{
+        controlled_accounts: string[];
+    }>;
 }
 export {};

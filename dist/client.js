@@ -45,7 +45,7 @@ class RPCClient {
             return ret.data;
         }
         catch (e) {
-            throw new Error(helper_1.HandleError(e, this.URL, reqData));
+            throw new Error(helper_1.ErrorResolver(e, this.URL, reqData));
         }
     }
     /**

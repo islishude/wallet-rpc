@@ -16,6 +16,7 @@ export declare const EOSMethods: {
         rawCodeAndABI: string;
         sendTx: string;
         sendTxList: string;
+        stats: string;
     };
     history: {
         actions: string;
@@ -30,7 +31,7 @@ export declare const EOSMethods: {
         status: string;
     };
 };
-export declare const EosModule: {
+export declare const EOSPlugins: {
     DBSize: string;
     chain: string;
     history: string;
@@ -181,4 +182,47 @@ export interface IEosAccount {
         proxied_vote_weight: string;
         is_proxy: boolean;
     };
+}
+export interface IEosAbi {
+    version: string;
+    types: Array<{
+        new_type_name: string;
+        type: string;
+    }>;
+    structs: Array<{
+        name: string;
+        base: string;
+        fields: Array<{
+            name: string;
+            type: string;
+        }>;
+    }>;
+    actions: Array<{
+        name: string;
+        type: string;
+        ricardian_contract: string;
+    }>;
+    tables: Array<{
+        name: string;
+        type: string;
+        index_type: string;
+        key_names: string[];
+        key_types: string[];
+    }>;
+    ricardian_clauses: Array<{
+        id: string;
+        body: string;
+    }>;
+    error_messages: Array<{
+        error_code: string;
+        error_msg: string;
+    }>;
+    abi_extensions: Array<{
+        tag: number;
+        value: string;
+    }>;
+    variants?: Array<{
+        name: string;
+        types: string[];
+    }>;
 }

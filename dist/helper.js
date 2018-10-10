@@ -7,7 +7,7 @@ const util_1 = require("util");
  * @param url request path
  * @param reqData request data
  */
-exports.HandleError = (e, url, reqData) => {
+exports.ErrorResolver = (e, url, reqData) => {
     const { response, message } = e;
     const req = util_1.format("%s => %O", url, reqData);
     if (util_1.isUndefined(response)) {
