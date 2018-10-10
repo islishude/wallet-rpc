@@ -124,15 +124,16 @@ export class OmniLayerClient extends BitcoinClient {
    * @param propertyId the property identifier
    */
   public getPropertyBalance(address: string, propertyId: number) {
-    return this.RpcCall<{ balance: string; reserved: string }>(
+    return this.RpcCall<{ balance: string; reserved: string; frozen: string }>(
       mtd.address.balance,
       [address, propertyId]
     );
   }
 
   public getAllPropertyBalance(address: string) {
-    type tmp = Array<{ propertyid: number; balance: string; reserved: string }>;
-    return this.RpcCall<tmp>(mtd.address.allBalance, [address]);
+    return this.RpcCall<
+      Array<{ propertyid: number; balance: string; reserved: string }>
+    >(mtd.address.allBalance, [address]);
   }
 
   /**

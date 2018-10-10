@@ -7,7 +7,7 @@ import {
   IRpcRequest
 } from "wallet-rpc";
 
-const DefaultBtcRpcConf: IRpcConfig = {
+export const DefaultBtcRpcConf: IRpcConfig = {
   ip: "http://127.0.0.1",
   pass: "",
   port: "8332",

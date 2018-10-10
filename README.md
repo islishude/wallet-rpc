@@ -25,6 +25,7 @@ npm install wallet-rpc --save
 - [Bitcoin](./types/bitcoin/rpc.d.ts)
 - [Ethereum](./types/ethereum/rpc.d.ts)
 - [OmniLayer](./types/omni/rpc.d.ts)
+- [EOS](./types/eos/rpc.d.ts)
 
 [EthereumUtil](./types/ethereum/util.d.ts) includes some useful methods like `getABI`, `toWei`, `toETH`, `isAddress` and so on.
 
@@ -40,6 +41,7 @@ for v3 users,v4 has been remove `sha3` and `isChecksumAddress`,you can import [t
 
 - [Bitcoin](./example/bitcoin.ts)
 - [Ethereum](./example/ethereum.ts)
+- [OmniLayer](./example/omnis.ts)
 
 ## CLI
 
