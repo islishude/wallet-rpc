@@ -72,9 +72,15 @@ export class EOSClient {
   /**
    * Returns an object containing various details about a specific account on the blockchain.
    */
-  public getAccount(account: string) {
+  public getAccountInfo(account: string) {
     return this.CALL<IEosAccount>(mdl.chain, mtd.chain.block, {
       account_name: account
+    });
+  }
+
+  public getAccountsByPubKey(pubKey: string) {
+    return this.CALL<{ accounts_name: string[] }>(mdl.history, mtd.history.tx, {
+      public_key: pubKey
     });
   }
 
@@ -168,10 +174,6 @@ export class EOSClient {
 
   public getTxInfo(id: number) {
     return this.CALL<IEosTrx>(mdl.history, mtd.history.tx, { id });
-  }
-
-  public getKeyAccount(pubKey: string) {
-    return this.CALL<any>(mdl.history, mtd.history.tx, { public_key: pubKey });
   }
 
   public getControlledAccounts(account: string) {

@@ -50,9 +50,14 @@ class EOSClient {
     /**
      * Returns an object containing various details about a specific account on the blockchain.
      */
-    getAccount(account) {
+    getAccountInfo(account) {
         return this.CALL(mtd_1.EosModule.chain, mtd_1.EOSMethods.chain.block, {
             account_name: account
+        });
+    }
+    getAccountsByPubKey(pubKey) {
+        return this.CALL(mtd_1.EosModule.history, mtd_1.EOSMethods.history.tx, {
+            public_key: pubKey
         });
     }
     /**
@@ -130,9 +135,6 @@ class EOSClient {
     }
     getTxInfo(id) {
         return this.CALL(mtd_1.EosModule.history, mtd_1.EOSMethods.history.tx, { id });
-    }
-    getKeyAccount(pubKey) {
-        return this.CALL(mtd_1.EosModule.history, mtd_1.EOSMethods.history.tx, { public_key: pubKey });
     }
     getControlledAccounts(account) {
         return this.CALL(mtd_1.EosModule.history, mtd_1.EOSMethods.history.ctrlAccounts, {

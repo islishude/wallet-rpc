@@ -27,7 +27,10 @@ export declare class EOSClient {
     /**
      * Returns an object containing various details about a specific account on the blockchain.
      */
-    getAccount(account: string): Promise<IEosAccount>;
+    getAccountInfo(account: string): Promise<IEosAccount>;
+    getAccountsByPubKey(pubKey: string): Promise<{
+        accounts_name: string[];
+    }>;
     /**
      * get ABI of providing account name
      * @param account
@@ -71,7 +74,6 @@ export declare class EOSClient {
         args: any;
     }>;
     getTxInfo(id: number): Promise<IEosTrx>;
-    getKeyAccount(pubKey: string): Promise<any>;
     getControlledAccounts(account: string): Promise<any>;
 }
 export {};
