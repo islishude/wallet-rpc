@@ -18,7 +18,8 @@ exports.EOSMethods = {
         rawCodeAndABI: "get_raw_code_and_abi",
         sendTx: "push_transaction",
         sendTxList: "push_transactions",
-        stats: "get_currency_stats"
+        stats: "get_currency_stats",
+        tableRaw: "get_table_raw"
     },
     history: {
         actions: "get_actions",

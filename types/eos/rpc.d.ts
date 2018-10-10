@@ -1,6 +1,12 @@
 import { IEosAbi, IEosAccount, IEosBlockInfo, IEosChainInfo, IEosTrx } from "./mtd";
 declare type EOSVersion = "v1";
 export declare class EOSClient {
+    static RAMFeeRequestData: {
+        code: string;
+        json: boolean;
+        scope: string;
+        table: string;
+    };
     URL: string;
     /**
      * EOS RPC isn't JSONRPC,so here is diff with bitcoin.
@@ -14,7 +20,7 @@ export declare class EOSClient {
      * @param method request method from "./mtd.ts"
      * @throws Request or Response error throw
      */
-    CALL<T>(module: string, method: string, body?: object): Promise<T>;
+    CALL<T = any>(module: string, method: string, body?: object): Promise<T>;
     /**
      * Returns an object containing various details about the blockchain.
      */
@@ -55,6 +61,18 @@ export declare class EOSClient {
         account_name: string;
         wasm: string;
         abi: string;
+    }>;
+    getTableRaws<T = any>(data: {
+        scope: string;
+        code: string;
+        table: string;
+        json: boolean;
+        lower_bound?: number;
+        upper_bound?: number;
+        limit?: number;
+    }): Promise<{
+        rows: T[];
+        more: boolean;
     }>;
     /**
      * Get block header state
@@ -102,5 +120,6 @@ export declare class EOSClient {
     getControlledAccounts(account: string): Promise<{
         controlled_accounts: string[];
     }>;
+    getRAMPrice(): Promise<number>;
 }
 export {};

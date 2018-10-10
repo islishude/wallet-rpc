@@ -17,6 +17,7 @@ export declare const EOSMethods: {
         sendTx: string;
         sendTxList: string;
         stats: string;
+        tableRaw: string;
     };
     history: {
         actions: string;

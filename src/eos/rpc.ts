@@ -14,6 +14,12 @@ import {
 type EOSVersion = "v1";
 
 export class EOSClient {
+  public static RAMFeeRequestData = {
+    code: "eosio",
+    json: true,
+    scope: "eosio",
+    table: "rammarket"
+  };
   public URL: string;
   /**
    * EOS RPC isn't JSONRPC,so here is diff with bitcoin.
@@ -39,7 +45,7 @@ export class EOSClient {
    * @param method request method from "./mtd.ts"
    * @throws Request or Response error throw
    */
-  public async CALL<T>(
+  public async CALL<T = any>(
     module: string,
     method: string,
     body?: object
@@ -135,6 +141,22 @@ export class EOSClient {
     });
   }
 
+  public getTableRaws<T = any>(data: {
+    scope: string;
+    code: string;
+    table: string;
+    json: boolean;
+    lower_bound?: number;
+    upper_bound?: number;
+    limit?: number;
+  }) {
+    return this.CALL<{ rows: T[]; more: boolean }>(
+      plugins.chain,
+      methods.chain.tableRaw,
+      data
+    );
+  }
+
   /**
    * Get block header state
    * @param id Provide a block number or a block id
@@ -223,6 +245,15 @@ export class EOSClient {
       {
         controlling_account: account
       }
+    );
+  }
+
+  public async getRAMPrice() {
+    const result = await this.getTableRaws(EOSClient.RAMFeeRequestData);
+
+    return (
+      result.rows[0].quote.balance.split(" ")[0] /
+      (1 + result.rows[0].base.balance.split(" ")[0] / 1024)
     );
   }
 }

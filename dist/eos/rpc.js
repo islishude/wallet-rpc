@@ -85,6 +85,9 @@ class EOSClient {
             account_name: account
         });
     }
+    getTableRaws(data) {
+        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.tableRaw, data);
+    }
     /**
      * Get block header state
      * @param id Provide a block number or a block id
@@ -158,5 +161,16 @@ class EOSClient {
             controlling_account: account
         });
     }
+    async getRAMPrice() {
+        const result = await this.getTableRaws(EOSClient.RAMFeeRequestData);
+        return (result.rows[0].quote.balance.split(" ")[0] /
+            (1 + result.rows[0].base.balance.split(" ")[0] / 1024));
+    }
 }
+EOSClient.RAMFeeRequestData = {
+    code: "eosio",
+    json: true,
+    scope: "eosio",
+    table: "rammarket"
+};
 exports.EOSClient = EOSClient;

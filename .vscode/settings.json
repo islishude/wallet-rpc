@@ -4,6 +4,7 @@
     "getabi",
     "litecoin",
     "nonpayable",
+    "rammarket",
     "ricardian",
     "rpcapi",
     "structs",
