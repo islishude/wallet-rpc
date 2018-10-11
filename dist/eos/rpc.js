@@ -169,7 +169,12 @@ class EOSClient {
         const baseBalance = (1 + Number(base.balance.split(/\s/)[0])) / 1024;
         return (quoteBalance / baseBalance).toFixed(4);
     }
-    async getNETAndCPUPrice(refAccount = "eosnewyorkio") {
+    /**
+     * Get NET And CPU price
+     * Get these value should compute from a referer account,
+     * so you can pass a EOS exchange platform account
+     */
+    async getNETAndCPUPrice(refAccount = "heztanrqgene") {
         const result = await this.getAccountInfo(refAccount);
         const netStaked = Number(result.total_resources.net_weight.split(/\s/)[0]);
         // convert bytes to kilobytes
