@@ -33,7 +33,7 @@ export class EOSClient {
     log(
       "\x1b[41m\x1b[37mEOS Client of wallet-prc is still under active development,use of the feature is not recommended in production environments\x1b[0m"
     );
-    this.URL = `${url}/${ver}/`;
+    this.URL = `${url}/${ver}`;
   }
 
   public getCallURL(module: string, api: string): string {
@@ -55,7 +55,7 @@ export class EOSClient {
       const result = await Axios.post<T>(url, body, { timeout: 60000 });
       return result.data;
     } catch (e) {
-      throw new Error(ErrorResolver(e, this.URL));
+      throw new Error(ErrorResolver(e, url));
     }
   }
 
@@ -80,7 +80,7 @@ export class EOSClient {
    * Returns an object containing various details about a specific account on the blockchain.
    */
   public getAccountInfo(account: string) {
-    return this.CALL<IEosAccount>(plugins.chain, methods.chain.block, {
+    return this.CALL<IEosAccount>(plugins.chain, methods.chain.account, {
       account_name: account
     });
   }
@@ -152,7 +152,7 @@ export class EOSClient {
   }) {
     return this.CALL<{ rows: T[]; more: boolean }>(
       plugins.chain,
-      methods.chain.tableRaw,
+      methods.chain.tableRows,
       data
     );
   }
@@ -249,11 +249,32 @@ export class EOSClient {
   }
 
   public async getRAMPrice() {
-    const result = await this.getTableRaws(EOSClient.RAMFeeRequestData);
+    const { rows } = await this.getTableRaws<{
+      supply: string;
+      base: { balance: string; weight: string };
+      quote: { balance: string; weight: string };
+    }>(EOSClient.RAMFeeRequestData);
 
-    return (
-      result.rows[0].quote.balance.split(" ")[0] /
-      (1 + result.rows[0].base.balance.split(" ")[0] / 1024)
-    );
+    const { base, quote } = rows[0];
+    // RAM PRICE = (n * quote.balance) / (n + base.balance / 1024)
+    const quoteBalance = Number(quote.balance.split(/\s/)[0]);
+    const baseBalance = (1 + Number(base.balance.split(/\s/)[0])) / 1024;
+    return (quoteBalance / baseBalance).toFixed(4);
+  }
+
+  public async getNETAndCPUPrice(refAccount: string = "eosnewyorkio") {
+    const result = await this.getAccountInfo(refAccount);
+    const netStaked = Number(result.total_resources.net_weight.split(/\s/)[0]);
+    // convert bytes to kilobytes
+    const netAvailable = result.net_limit.max / 1024;
+
+    const cpuStaked = Number(result.total_resources.cpu_weight.split(/\s/)[0]);
+    // convert microseconds to milliseconds
+    const cpuAvailable = result.cpu_limit.max / 1000;
+
+    return {
+      cpuPrice: (cpuStaked / cpuAvailable).toFixed(4),
+      netPrice: (netStaked / netAvailable).toFixed(4)
+    };
   }
 }

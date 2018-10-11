@@ -120,6 +120,10 @@ export declare class EOSClient {
     getControlledAccounts(account: string): Promise<{
         controlled_accounts: string[];
     }>;
-    getRAMPrice(): Promise<number>;
+    getRAMPrice(): Promise<string>;
+    getNETAndCPUPrice(refAccount?: string): Promise<{
+        cpuPrice: string;
+        netPrice: string;
+    }>;
 }
 export {};

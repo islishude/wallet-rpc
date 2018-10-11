@@ -17,7 +17,7 @@ export const EOSMethods = {
     sendTx: "push_transaction",
     sendTxList: "push_transactions",
     stats: "get_currency_stats",
-    tableRaw: "get_table_raw"
+    tableRows: "get_table_rows"
   },
   history: {
     actions: "get_actions",

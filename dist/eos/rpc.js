@@ -12,7 +12,7 @@ class EOSClient {
      */
     constructor(url = "http://127.0.0.1:8888", ver = "v1") {
         console_1.log("\x1b[41m\x1b[37mEOS Client of wallet-prc is still under active development,use of the feature is not recommended in production environments\x1b[0m");
-        this.URL = `${url}/${ver}/`;
+        this.URL = `${url}/${ver}`;
     }
     getCallURL(module, api) {
         return `${this.URL}/${module}/${api}`;
@@ -29,7 +29,7 @@ class EOSClient {
             return result.data;
         }
         catch (e) {
-            throw new Error(helper_1.ErrorResolver(e, this.URL));
+            throw new Error(helper_1.ErrorResolver(e, url));
         }
     }
     /**
@@ -51,7 +51,7 @@ class EOSClient {
      * Returns an object containing various details about a specific account on the blockchain.
      */
     getAccountInfo(account) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.block, {
+        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.account, {
             account_name: account
         });
     }
@@ -86,7 +86,7 @@ class EOSClient {
         });
     }
     getTableRaws(data) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.tableRaw, data);
+        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.tableRows, data);
     }
     /**
      * Get block header state
@@ -162,9 +162,25 @@ class EOSClient {
         });
     }
     async getRAMPrice() {
-        const result = await this.getTableRaws(EOSClient.RAMFeeRequestData);
-        return (result.rows[0].quote.balance.split(" ")[0] /
-            (1 + result.rows[0].base.balance.split(" ")[0] / 1024));
+        const { rows } = await this.getTableRaws(EOSClient.RAMFeeRequestData);
+        const { base, quote } = rows[0];
+        // RAM PRICE = (n * quote.balance) / (n + base.balance / 1024)
+        const quoteBalance = Number(quote.balance.split(/\s/)[0]);
+        const baseBalance = (1 + Number(base.balance.split(/\s/)[0])) / 1024;
+        return (quoteBalance / baseBalance).toFixed(4);
+    }
+    async getNETAndCPUPrice(refAccount = "eosnewyorkio") {
+        const result = await this.getAccountInfo(refAccount);
+        const netStaked = Number(result.total_resources.net_weight.split(/\s/)[0]);
+        // convert bytes to kilobytes
+        const netAvailable = result.net_limit.max / 1024;
+        const cpuStaked = Number(result.total_resources.cpu_weight.split(/\s/)[0]);
+        // convert microseconds to milliseconds
+        const cpuAvailable = result.cpu_limit.max / 1000;
+        return {
+            cpuPrice: (cpuStaked / cpuAvailable).toFixed(4),
+            netPrice: (netStaked / netAvailable).toFixed(4)
+        };
     }
 }
 EOSClient.RAMFeeRequestData = {
