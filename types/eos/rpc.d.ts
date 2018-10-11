@@ -99,6 +99,7 @@ export declare class EOSClient {
     }>;
     /**
      * Serializes json to binary hex.
+     *
      * The resulting binary hex is usually used for the data field in push_transaction.
      * @param code Account name
      * @param action action name
@@ -123,6 +124,7 @@ export declare class EOSClient {
     getRAMPrice(): Promise<string>;
     /**
      * Get NET And CPU price
+     *
      * get these value should compute from a referer account,
      * so you can pass a EOS exchange platform account
      */
