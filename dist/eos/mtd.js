@@ -34,7 +34,7 @@ exports.EOSMethods = {
         status: "status"
     }
 };
-exports.EOSPlugins = {
+exports.EOSModules = {
     DBSize: "DBSize",
     chain: "chain",
     history: "history",

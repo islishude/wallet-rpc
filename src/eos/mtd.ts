@@ -33,7 +33,7 @@ export const EOSMethods = {
   }
 };
 
-export const EOSPlugins = {
+export const EOSModules = {
   DBSize: "DBSize",
   chain: "chain",
   history: "history",

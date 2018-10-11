@@ -36,14 +36,14 @@ class EOSClient {
      * Returns an object containing various details about the blockchain.
      */
     getInfo() {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.info);
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.info);
     }
     /**
      * Returns an object containing various details about a specific block on the blockchain.
      * @param id Provide a block number or a block id
      */
     getBlock(id) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.block, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.block, {
             block_num_or_id: id
         });
     }
@@ -51,17 +51,17 @@ class EOSClient {
      * Returns an object containing various details about a specific account on the blockchain.
      */
     getAccountInfo(account) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.account, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.account, {
             account_name: account
         });
     }
     getAccountsByPubKey(pubKey) {
-        return this.CALL(mtd_1.EOSPlugins.history, mtd_1.EOSMethods.history.tx, {
+        return this.CALL(mtd_1.EOSModules.history, mtd_1.EOSMethods.history.tx, {
             public_key: pubKey
         });
     }
     getCurrencyStats(code, symbol) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.stats, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.stats, {
             code,
             symbol
         });
@@ -71,29 +71,29 @@ class EOSClient {
      * @param account
      */
     getABI(account) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.abi, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.abi, {
             account_name: account
         });
     }
     getCode(account) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.code, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.code, {
             account_name: account
         });
     }
     getRawCodeAndABI(account) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.rawCodeAndABI, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.rawCodeAndABI, {
             account_name: account
         });
     }
-    getTableRaws(data) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.tableRows, data);
+    getTableRows(data) {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.tableRows, data);
     }
     /**
      * Get block header state
      * @param id Provide a block number or a block id
      */
     getBlockHeaderState(id) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.blockHeaderState, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.blockHeaderState, {
             block_num_or_id: id
         });
     }
@@ -105,7 +105,7 @@ class EOSClient {
      * @returns string e.g. `1.0001 EOS`
      */
     getBalance(code, account, symbol) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.balance, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.balance, {
             account,
             code,
             symbol
@@ -119,7 +119,7 @@ class EOSClient {
      * @param packedTrx packed_trx: json of hex
      */
     pushTransaction(signatures, compression, packedCtxFreeData, packedTrx) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.sendTx, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.sendTx, {
             compression,
             packed_context_free_data: packedCtxFreeData,
             packed_tx: packedTrx,
@@ -134,7 +134,7 @@ class EOSClient {
      * @param args json args
      */
     abiJSONToBin(code, action, args) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.atob, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.atob, {
             action,
             args,
             code
@@ -147,22 +147,22 @@ class EOSClient {
      * @param binargs binary args
      */
     abiBinToJSON(code, action, binargs) {
-        return this.CALL(mtd_1.EOSPlugins.chain, mtd_1.EOSMethods.chain.btoa, {
+        return this.CALL(mtd_1.EOSModules.chain, mtd_1.EOSMethods.chain.btoa, {
             action,
             binargs,
             code
         });
     }
     getTxInfo(id) {
-        return this.CALL(mtd_1.EOSPlugins.history, mtd_1.EOSMethods.history.tx, { id });
+        return this.CALL(mtd_1.EOSModules.history, mtd_1.EOSMethods.history.tx, { id });
     }
     getControlledAccounts(account) {
-        return this.CALL(mtd_1.EOSPlugins.history, mtd_1.EOSMethods.history.ctrlAccounts, {
+        return this.CALL(mtd_1.EOSModules.history, mtd_1.EOSMethods.history.ctrlAccounts, {
             controlling_account: account
         });
     }
     async getRAMPrice() {
-        const { rows } = await this.getTableRaws(EOSClient.RAMFeeRequestData);
+        const { rows } = await this.getTableRows(EOSClient.RAMFeeRequestData);
         const { base, quote } = rows[0];
         // RAM PRICE = (n * quote.balance) / (n + base.balance / 1024)
         const quoteBalance = Number(quote.balance.split(/\s/)[0]);

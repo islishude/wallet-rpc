@@ -32,7 +32,7 @@ export declare const EOSMethods: {
         status: string;
     };
 };
-export declare const EOSPlugins: {
+export declare const EOSModules: {
     DBSize: string;
     chain: string;
     history: string;

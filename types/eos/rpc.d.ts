@@ -62,7 +62,7 @@ export declare class EOSClient {
         wasm: string;
         abi: string;
     }>;
-    getTableRaws<T = any>(data: {
+    getTableRows<T = any>(data: {
         scope: string;
         code: string;
         table: string;
