@@ -166,22 +166,22 @@ class EOSClient {
         const { base, quote } = rows[0];
         // RAM PRICE = (n * quote.balance) / (n + base.balance / 1024)
         const quoteBalance = Number(quote.balance.split(/\s/)[0]);
-        const baseBalance = (1 + Number(base.balance.split(/\s/)[0])) / 1024;
-        return (quoteBalance / baseBalance).toFixed(4);
+        const baseBalance = 1 + Number(base.balance.split(/\s/)[0]);
+        return (quoteBalance / (baseBalance / 1024)).toFixed(4);
     }
     /**
      * Get NET And CPU price
-     * Get these value should compute from a referer account,
+     * get these value should compute from a referer account,
      * so you can pass a EOS exchange platform account
      */
     async getNETAndCPUPrice(refAccount = "heztanrqgene") {
-        const result = await this.getAccountInfo(refAccount);
-        const netStaked = Number(result.total_resources.net_weight.split(/\s/)[0]);
+        const { total_resources: { net_weight, cpu_weight }, net_limit, cpu_limit } = await this.getAccountInfo(refAccount);
+        const netStaked = Number(net_weight.split(/\s/)[0]);
         // convert bytes to kilobytes
-        const netAvailable = result.net_limit.max / 1024;
-        const cpuStaked = Number(result.total_resources.cpu_weight.split(/\s/)[0]);
+        const netAvailable = net_limit.max / 1024;
+        const cpuStaked = Number(cpu_weight.split(/\s/)[0]);
         // convert microseconds to milliseconds
-        const cpuAvailable = result.cpu_limit.max / 1000;
+        const cpuAvailable = cpu_limit.max / 1000;
         return {
             cpuPrice: (cpuStaked / cpuAvailable).toFixed(4),
             netPrice: (netStaked / netAvailable).toFixed(4)
