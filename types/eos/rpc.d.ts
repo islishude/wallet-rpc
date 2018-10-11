@@ -128,7 +128,7 @@ export declare class EOSClient {
      * get these value should compute from a referer account,
      * so you can pass a EOS exchange platform account
      */
-    getNETAndCPUPrice(refAccount?: string): Promise<{
+    getNetAndCpuPrice(refAccount?: string): Promise<{
         cpuPrice: string;
         netPrice: string;
     }>;

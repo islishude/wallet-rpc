@@ -144,7 +144,10 @@ export interface IEosAccount {
   privileged: boolean;
   last_code_update: string;
   created_at: string;
+  // Your all RAM
   ram_quota: number;
+  // Your RAM usage
+  ram_usage: number;
   net_weight: number;
   cpu_weight: number;
 
@@ -159,7 +162,6 @@ export interface IEosAccount {
     available: number;
     max: number;
   };
-  ram_usage: number;
   permissions: Array<{
     perm_name: string;
     parent: string;

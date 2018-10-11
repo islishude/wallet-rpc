@@ -130,6 +130,7 @@ export interface IEosAccount {
     last_code_update: string;
     created_at: string;
     ram_quota: number;
+    ram_usage: number;
     net_weight: number;
     cpu_weight: number;
     net_limit: {
@@ -142,7 +143,6 @@ export interface IEosAccount {
         available: number;
         max: number;
     };
-    ram_usage: number;
     permissions: Array<{
         perm_name: string;
         parent: string;

@@ -265,23 +265,30 @@ export class EOSClient {
 
   /**
    * Get NET And CPU price
-   * 
+   *
    * get these value should compute from a referer account,
    * so you can pass a EOS exchange platform account
    */
-  public async getNETAndCPUPrice(refAccount: string = "heztanrqgene") {
+  public async getNetAndCpuPrice(refAccount: string = "heztanrqgene") {
     const {
-      total_resources: { net_weight, cpu_weight },
       net_limit,
-      cpu_limit
+      cpu_limit,
+      net_weight,
+      cpu_weight
     } = await this.getAccountInfo(refAccount);
-    const netStaked = Number(net_weight.split(/\s/)[0]);
+    const netStaked = net_weight / 10000;
     // convert bytes to kilobytes
     const netAvailable = net_limit.max / 1024;
 
-    const cpuStaked = Number(cpu_weight.split(/\s/)[0]);
+    const cpuStaked = cpu_weight / 10000;
     // convert microseconds to milliseconds
     const cpuAvailable = cpu_limit.max / 1000;
+
+    if (cpuAvailable === 0 || netAvailable === 0) {
+      throw new Error(
+        "[getNetAndCpuPrice] Please check your refAccount and then call this."
+      );
+    }
 
     return {
       cpuPrice: (cpuStaked / cpuAvailable).toFixed(4),
