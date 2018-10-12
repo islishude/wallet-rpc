@@ -40,6 +40,9 @@ export const EOSModules = {
   net: "net"
 };
 
+export type account_name = string;
+export type asset = string;
+
 export interface IEosAuthority {
   threshold: number;
   keys: Array<{
@@ -48,7 +51,7 @@ export interface IEosAuthority {
   }>;
   account: Array<{
     permission: {
-      actor: string;
+      actor: account_name;
       permission_name: string;
     };
     weight: number;
@@ -92,7 +95,7 @@ export interface IEosTrx {
           authorization: Array<{ actor: string; permission: string }>;
           actions: Array<{
             // EOS transfer is "eosio.token"
-            account: string;
+            account: account_name;
             name: string;
             authorization: IEosAuthority[];
             data: any;
@@ -164,36 +167,45 @@ export interface IEosAccount {
   };
   permissions: Array<{
     perm_name: string;
-    parent: string;
+    parent: account_name;
     required_auth: {
       threshold: number;
       key: Array<{ key: string; weight: number }>;
     };
-    accounts: any[];
-    waits: any[];
+    accounts: Array<{
+      permission: {
+        actor: account_name;
+        permission_name: string;
+      };
+      weight: number;
+    }>;
+    waits: Array<{
+      wait_sec: number;
+      weight: number;
+    }>;
   }>;
   total_resources: {
-    owner: string;
-    net_weight: string;
-    cpu_weight: string;
+    owner: account_name;
+    net_weight: asset;
+    cpu_weight: asset;
     ram_bytes: number;
   };
   self_delegated_bandwidth: {
-    from: string;
-    to: string;
-    net_weight: string;
-    cpu_weight: string;
+    from: account_name;
+    to: account_name;
+    net_weight: asset;
+    cpu_weight: asset;
   };
   refund_request: null | {
-    owner: string;
+    owner: account_name;
     request_time: string;
-    net_amount: string;
-    cpu_amount: string;
+    net_amount: asset;
+    cpu_amount: asset;
   };
   voter_info: {
-    owner: string;
-    proxy: string;
-    producers: string[];
+    owner: account_name;
+    proxy: account_name;
+    producers: account_name[];
     staked: number;
     last_vote_weight: string;
     proxied_vote_weight: string;
