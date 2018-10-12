@@ -15,4 +15,4 @@ JSON RPC client of crypto coins by TypeScript
 
 ## Feedback
 
-[Issue here](https://github.com/isLishude/wallet-rpc/issues)
+[Issue here](https://github.com/isLishude/wallet-rpc/issues/new)
