@@ -4,7 +4,7 @@ import { EOSClient } from "../src/eos/rpc";
 const eos = new EOSClient("https://eos.oasisgo.net:3852");
 
 async function test() {
-  const NetAndCpuPrice = await eos.getNETAndCPUPrice();
+  const NetAndCpuPrice = await eos.getNetAndCpuPrice();
   log(NetAndCpuPrice);
 
   const RamPrice = await eos.getRAMPrice();
