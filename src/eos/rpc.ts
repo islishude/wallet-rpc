@@ -1,5 +1,4 @@
 import Axios from "axios";
-import { log } from "console";
 import { ErrorResolver } from "../helper";
 import {
   EOSMethods as methods,
@@ -30,9 +29,6 @@ export class EOSClient {
     url: string = "http://127.0.0.1:8888",
     ver: EOSVersion = "v1"
   ) {
-    log(
-      "\x1b[41m\x1b[37mEOS Client of wallet-prc is still under active development,use of the feature is not recommended in production environments\x1b[0m"
-    );
     this.URL = `${url}/${ver}`;
   }
 
@@ -294,5 +290,17 @@ export class EOSClient {
       cpuPrice: (cpuStaked / cpuAvailable).toFixed(4),
       netPrice: (netStaked / netAvailable).toFixed(4)
     };
+  }
+
+  public async getProducerList(limit: number = 1000) {
+    return this.getTableRows({
+      code: "eosio",
+      json: true,
+      limit,
+      lower_bound: 0,
+      scope: "eosio",
+      table: "producers",
+      upper_bound: -1
+    });
   }
 }

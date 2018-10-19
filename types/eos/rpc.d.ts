@@ -132,5 +132,9 @@ export declare class EOSClient {
         cpuPrice: string;
         netPrice: string;
     }>;
+    getProducerList(limit?: number): Promise<{
+        rows: any[];
+        more: boolean;
+    }>;
 }
 export {};
