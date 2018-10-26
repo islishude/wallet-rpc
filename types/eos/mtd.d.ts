@@ -39,7 +39,7 @@ export declare const EOSModules: {
     net: string;
 };
 export declare type account_name = string;
-export declare type asset = string;
+export declare type asset = "1.001 EOS";
 export interface IEosAuthority {
     threshold: number;
     keys: Array<{

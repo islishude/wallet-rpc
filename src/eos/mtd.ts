@@ -41,7 +41,7 @@ export const EOSModules = {
 };
 
 export type account_name = string;
-export type asset = string;
+export type asset = "1.001 EOS";
 
 export interface IEosAuthority {
   threshold: number;

@@ -282,7 +282,7 @@ export class EOSClient {
 
     if (cpuAvailable === 0 || netAvailable === 0) {
       throw new Error(
-        "[getNetAndCpuPrice] Please check your refAccount and then call this."
+        "[EOS::GetNetAndCpuPrice] Please check your refAccount and then call this."
       );
     }
 
