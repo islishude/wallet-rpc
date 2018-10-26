@@ -145,6 +145,9 @@ export class EOSClient {
     lower_bound?: number;
     upper_bound?: number;
     limit?: number;
+    key_type?: string;
+    index_position?: number;
+    encode_type?: "dec" | "hex";
   }) {
     return this.CALL<{ rows: T[]; more: boolean }>(
       modules.chain,
