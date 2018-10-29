@@ -3,6 +3,11 @@ import BigNumber from "bignumber.js";
 import { IRpcResponse } from "../client";
 import { IEthAbiStruct, IEtherScanAbiResponse } from "./rpc";
 
+const hexPrefixReg = /0x/;
+const zeroPadding = "0".repeat(24);
+const isAddrReg = /^(0x)?[0-9a-fA-F]{40}$/;
+const nonPrintCharReg = /[\u0000-\u001f]/g;
+
 export class EthereumUtil {
   public static readonly gWei = new BigNumber(10).pow(9);
 
@@ -79,21 +84,24 @@ export class EthereumUtil {
   /**
    * Pad ethereum address to 64 bits hex string without 0x
    * Can be use for ERC20 transfer call and ERC20 balance call
-   * @param address 
+   * @param address
    */
   public static padAddress(address: string): string {
     if (!EthereumUtil.isAddress(address)) {
       throw new Error("Not a valid address");
     }
-    return "0".repeat(24) + address.replace("0x", "");
+    return zeroPadding + address.replace("0x", "");
   }
 
   /**
    * transform Hex string to UTF8-encoding and trim string
-   * @param hex hex string
+   * @param hex hex string that can be prefix with `0x`
    */
   public static toUtf8(hex: string): string {
-    return Buffer.from(hex.replace("0x", ""), "hex").toString().replace(/[\u0000-\u001f]/g, "").trim();
+    return Buffer.from(hex.replace(hexPrefixReg, ""), "hex")
+      .toString()
+      .replace(nonPrintCharReg, "")
+      .trim();
   }
 
   /**
@@ -101,13 +109,12 @@ export class EthereumUtil {
    * @param address a checked eth address or not
    */
   public static isAddress(address: string): boolean {
-    return /^(0x)?[0-9a-fA-F]{40}$/.test(address.toLowerCase());
+    return isAddrReg.test(address.toLowerCase());
   }
 
   /**
    * add `0x` to hex string
    * if param starts with `0x` would return origin
-   * @param hex
    */
   public static addHexPad(hex: string): string {
     if (!hex.startsWith("0x")) {

@@ -48,7 +48,7 @@ export declare class EthereumUtil {
     static padAddress(address: string): string;
     /**
      * transform Hex string to UTF8-encoding and trim string
-     * @param hex hex string
+     * @param hex hex string that can be prefix with `0x`
      */
     static toUtf8(hex: string): string;
     /**
@@ -59,7 +59,6 @@ export declare class EthereumUtil {
     /**
      * add `0x` to hex string
      * if param starts with `0x` would return origin
-     * @param hex
      */
     static addHexPad(hex: string): string;
     /**
