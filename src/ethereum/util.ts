@@ -74,7 +74,13 @@ export class EthereumUtil {
         module: "proxy"
       }
     });
-    const tmp = new BigNumber(data.result, 16).div(EthereumUtil.gWei);
+    const tmp = new BigNumber(data.result).div(EthereumUtil.gWei);
+    if (tmp.lt(5)) {
+      return "5";
+    }
+    if (tmp.lt(10)) {
+      return "10";
+    }
     if (tmp.lt(20)) {
       return "20";
     }
