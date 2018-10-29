@@ -81,10 +81,15 @@ export class EOSClient {
     });
   }
 
+  /**
+   * Get account list under public key provided
+   * ref to `get_key_accounts`
+   * @see https://developers.eos.io/eosio-nodeos/reference#get_key_accounts-1
+   */
   public getAccountsByPubKey(pubKey: string) {
     return this.CALL<{ accounts_name: string[] }>(
       modules.history,
-      methods.history.tx,
+      methods.history.keyAccounts,
       {
         public_key: pubKey
       }

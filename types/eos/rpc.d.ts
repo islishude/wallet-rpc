@@ -34,6 +34,11 @@ export declare class EOSClient {
      * Returns an object containing various details about a specific account on the blockchain.
      */
     getAccountInfo(account: string): Promise<IEosAccount>;
+    /**
+     * Get account list under public key provided
+     * ref to `get_key_accounts`
+     * @see https://developers.eos.io/eosio-nodeos/reference#get_key_accounts-1
+     */
     getAccountsByPubKey(pubKey: string): Promise<{
         accounts_name: string[];
     }>;
