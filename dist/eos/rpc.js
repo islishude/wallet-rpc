@@ -190,6 +190,8 @@ class EOSClient {
             netPrice: (netStaked / netAvailable).toFixed(4)
         };
     }
+    // get bp list
+    // TODO: sorting and skip params
     async getProducerList(limit = 1000) {
         return this.getTableRows({
             code: "eosio",

@@ -9,6 +9,9 @@ async function test() {
 
   const RamPrice = await eos.getRAMPrice();
   log(RamPrice);
+
+  const producerList = await eos.getProducerList(2);
+  log(producerList);
 }
 
 test().catch(log);

@@ -295,8 +295,19 @@ export class EOSClient {
     };
   }
 
+  // get bp list
+  // TODO: sorting and skip params
   public async getProducerList(limit: number = 1000) {
-    return this.getTableRows({
+    return this.getTableRows<{
+      owner: string;
+      total_votes: string;
+      producer_key: string;
+      is_active: number;
+      url: string;
+      unpaid_blocks: number;
+      last_claim_time: number;
+      location: number;
+    }>({
       code: "eosio",
       json: true,
       limit,
