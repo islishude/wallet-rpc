@@ -7,8 +7,8 @@ export interface IEthSyncing {
 }
 export declare type IEthStatus = "earliest" | "latest" | "pending";
 export interface IEthBlock {
-    number?: string;
-    hash?: string;
+    number: string | null;
+    hash: string | null;
     parentHash: string;
     nonce: string;
     sha3Uncles: string;
@@ -34,9 +34,9 @@ export interface IEthBlockVerbose extends IEthBlock {
 export interface IEthTx {
     hash: string;
     nonce: string;
-    blockHash?: string;
-    blockNumber?: string;
-    transactionIndex?: string;
+    blockHash: string | null;
+    blockNumber: string | null;
+    transactionIndex: string | null;
     from: string;
     to?: string;
     value: string;
