@@ -1,7 +1,7 @@
 ## Install
 
 ```shell
-# pre-required: Node.js 8.9.x LTS && NPM 5.6+
+# Recommend: Node.js 10 LTS
 npm install wallet-rpc --save
 ```
 
@@ -14,7 +14,7 @@ npm install wallet-rpc --save
 
 [EthereumUtil](./types/ethereum/util.d.ts) includes some useful methods like `getABI`, `toWei`, `toETH`, `isAddress` and so on.
 
-for v3 users,v4 has been remove `sha3` and `isChecksumAddress`,you can import [those](./example/sha3.ts) by self.
+for v3 users,v4 has been remove `sha3` and `isChecksumAddress`,you can import [those](./example/sha3.ts) by yourself.
 
 ### EOS Actions
 
@@ -42,7 +42,6 @@ npx wallet-rpc
 > let tmp = eth.getBlockCount().then(log, log);
 ```
 
-Run with `npx -n --experimental-repl-await wallet-rpc` to enable top-level await if you are in the node.js v10 or above.
+Run with `npx -n --experimental-repl-await wallet-rpc` to enable top-level await if you are in the node.js v10 LTS.
 
 for development feature with `npx islishude/wallet-rpc@dev`
-
