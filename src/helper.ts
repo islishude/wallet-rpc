@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { format, isUndefined } from "util";
 import { IRpcRequest } from "./client";
+import { IEosError } from "./eos/mtd";
 
 /**
  *
@@ -21,6 +22,6 @@ export const ErrorResolver = (
   }
   // Catch non-200 error
   const status = response.status;
-  const data = format("%O", response.data);
+  const data = format("%O", response.data as IEosError);
   return `JSONRPC Response ${status} Error.\nReason: ${message}\nReqData: ${req}\nRespData: ${data}`;
 };

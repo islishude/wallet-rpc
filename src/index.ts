@@ -14,7 +14,9 @@ export {
   IEosAuthority,
   IEosBlockInfo,
   IEosChainInfo,
-  IEosTrx
+  IEosTrx,
+  IEosAbi,
+  IEosError
 } from "./eos/mtd";
 
 export {

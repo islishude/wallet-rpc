@@ -238,3 +238,18 @@ export interface IEosAbi {
         types: string[];
     }>;
 }
+export interface IEosError {
+    code: number;
+    message: string;
+    error: {
+        code: number;
+        name: string;
+        what: string;
+        detail: Array<{
+            message: string;
+            file: string;
+            method: string;
+            line: number;
+        }>;
+    };
+}
