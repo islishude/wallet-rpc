@@ -96,7 +96,7 @@ export class DKKTClient extends RPCClient {
     const user = conf.user || "";
     const pass = conf.pass || "";
     const port = conf.port || "28880";
-    super(user, pass, ip, port);
+    super(user, pass, ip, port, "dkktoken");
   }
 
   public getInfo() {

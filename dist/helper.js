@@ -6,9 +6,10 @@ const util_1 = require("util");
  * @param {string} request path
  * @param {IRpcRequest} request data
  */
-exports.RpcErrorCatch = (err, url, data) => {
+exports.RpcErrorCatch = (err, url, data, coinName) => {
     const { response, message } = err;
     const request = {
+        coinName,
         data,
         url
     };

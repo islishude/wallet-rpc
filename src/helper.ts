@@ -1,14 +1,14 @@
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 import { isUndefined } from "util";
-import { IRpcResponse } from "./client";
 
 interface IWalletRpcError {
   message: string;
   request: {
+    coinName: string;
     url: string;
     data: any;
   };
-  response?: AxiosResponse<IRpcResponse>;
+  response?: any;
   status?: number;
 }
 
@@ -20,11 +20,13 @@ interface IWalletRpcError {
 export const RpcErrorCatch = (
   err: AxiosError,
   url: string,
-  data: any
+  data: any,
+  coinName: string
 ): IWalletRpcError => {
   const { response, message } = err;
 
   const request = {
+    coinName,
     data,
     url
   };

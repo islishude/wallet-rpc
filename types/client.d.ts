@@ -26,10 +26,11 @@ export default abstract class RPCClient {
     pass: string;
     ip: string;
     port: string;
+    coinName: string;
     protected URL: string;
     protected BulkData: IRpcRequest[];
     protected reqConfig: AxiosRequestConfig;
-    constructor(user: string, pass: string, ip: string, port: string);
+    constructor(user: string, pass: string, ip: string, port: string, coinName: string);
     /**
      * JSON-RPC call func
      * @param method RPC Request Method

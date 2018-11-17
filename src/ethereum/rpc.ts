@@ -227,7 +227,7 @@ export class EthereumClient extends RPCClient {
     const user = conf.user || "";
     const pass = conf.pass || "";
     const port = conf.port || "8545";
-    super(user, pass, ip, port);
+    super(user, pass, ip, port, "ethereum");
   }
 
   /**

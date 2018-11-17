@@ -169,7 +169,7 @@ export class BitcoinClient extends RPCClient {
     const user = conf.user || "";
     const pass = conf.pass || "";
     const port = conf.port || "8332";
-    super(user, pass, ip, port);
+    super(user, pass, ip, port, "bitcoin");
   }
 
   public getInfo() {

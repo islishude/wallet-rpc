@@ -35,7 +35,8 @@ export default abstract class RPCClient {
     public user: string,
     public pass: string,
     public ip: string,
-    public port: string
+    public port: string,
+    public coinName: string
   ) {
     this.BulkData = [];
     this.reqConfig = {
@@ -84,7 +85,7 @@ export default abstract class RPCClient {
       );
       return ret.data;
     } catch (err) {
-      throw RpcErrorCatch(err, this.URL, reqData);
+      throw RpcErrorCatch(err, this.URL, reqData, this.coinName);
     }
   }
 

@@ -14,7 +14,7 @@ class EthereumClient extends client_1.default {
         const user = conf.user || "";
         const pass = conf.pass || "";
         const port = conf.port || "8545";
-        super(user, pass, ip, port);
+        super(user, pass, ip, port, "ethereum");
     }
     /**
      * Returns an object with data about the sync status or false.

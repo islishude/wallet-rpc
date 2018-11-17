@@ -9,7 +9,7 @@ class BitcoinClient extends client_1.default {
         const user = conf.user || "";
         const pass = conf.pass || "";
         const port = conf.port || "8332";
-        super(user, pass, ip, port);
+        super(user, pass, ip, port, "bitcoin");
     }
     getInfo() {
         return this.RpcCall(mtd_1.BitcoinMethods.info.info);

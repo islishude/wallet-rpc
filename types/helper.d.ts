@@ -1,12 +1,12 @@
-import { AxiosError, AxiosResponse } from "axios";
-import { IRpcResponse } from "./client";
+import { AxiosError } from "axios";
 interface IWalletRpcError {
     message: string;
     request: {
+        coinName: string;
         url: string;
         data: any;
     };
-    response?: AxiosResponse<IRpcResponse>;
+    response?: any;
     status?: number;
 }
 /**
@@ -14,5 +14,5 @@ interface IWalletRpcError {
  * @param {string} request path
  * @param {IRpcRequest} request data
  */
-export declare const RpcErrorCatch: (err: AxiosError, url: string, data: any) => IWalletRpcError;
+export declare const RpcErrorCatch: (err: AxiosError, url: string, data: any, coinName: string) => IWalletRpcError;
 export {};

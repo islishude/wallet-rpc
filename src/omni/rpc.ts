@@ -76,6 +76,7 @@ export interface IOmniPropertyInfo {
 export class OmniLayerClient extends BitcoinClient {
   constructor(conf: IRpcConfig = {}) {
     super(conf);
+    this.coinName = "OmniLayer";
   }
 
   public getOmniInfo() {

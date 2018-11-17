@@ -3,11 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
 const helper_1 = require("./helper");
 class RPCClient {
-    constructor(user, pass, ip, port) {
+    constructor(user, pass, ip, port, coinName) {
         this.user = user;
         this.pass = pass;
         this.ip = ip;
         this.port = port;
+        this.coinName = coinName;
         this.BulkData = [];
         this.reqConfig = {
             auth: {
@@ -45,7 +46,7 @@ class RPCClient {
             return ret.data;
         }
         catch (err) {
-            throw helper_1.RpcErrorCatch(err, this.URL, reqData);
+            throw helper_1.RpcErrorCatch(err, this.URL, reqData, this.coinName);
         }
     }
     /**

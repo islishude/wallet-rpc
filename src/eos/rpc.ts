@@ -51,7 +51,7 @@ export class EOSClient {
       const result = await Axios.post<T>(url, body, { timeout: 60000 });
       return result.data;
     } catch (err) {
-      throw RpcErrorCatch(err, url, body);
+      throw RpcErrorCatch(err, url, body, "EOS");
     }
   }
 

@@ -27,7 +27,7 @@ class EOSClient {
             return result.data;
         }
         catch (err) {
-            throw helper_1.RpcErrorCatch(err, url, body);
+            throw helper_1.RpcErrorCatch(err, url, body, "EOS");
         }
     }
     /**

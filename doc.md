@@ -27,6 +27,28 @@ for v3 users,v4 has been remove `sha3` and `isChecksumAddress`,you can import [t
 - [Ethereum](./src/ethereum/mtd.ts)
 - [OmniLayer](./src/omni/mtd.ts)
 
+## ErrorType
+
+if request call has any error,or response non-200 status will throw this error data.
+
+```typescript
+interface IWalletRpcError {
+  message: string; // `Error.message`
+  request: {
+    // coin name
+    coinName: string;
+    // request url
+    url: string;
+    // request data
+    data: any;
+  };
+  // response body
+  response?: any;
+  // http status code
+  status?: number;
+}
+```
+
 ## Example
 
 - [Bitcoin](./example/bitcoin.ts)

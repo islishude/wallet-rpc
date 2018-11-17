@@ -9,7 +9,7 @@ class DKKTClient extends client_1.default {
         const user = conf.user || "";
         const pass = conf.pass || "";
         const port = conf.port || "28880";
-        super(user, pass, ip, port);
+        super(user, pass, ip, port, "dkktoken");
     }
     getInfo() {
         return this.RpcCall(mtd_1.DKKTokenMethods.info);

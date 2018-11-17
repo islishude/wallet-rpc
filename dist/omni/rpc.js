@@ -6,6 +6,7 @@ const mtd_2 = require("./mtd");
 class OmniLayerClient extends rpc_1.BitcoinClient {
     constructor(conf = {}) {
         super(conf);
+        this.coinName = "OmniLayer";
     }
     getOmniInfo() {
         return this.RpcCall(mtd_2.OmniLayerMethods.info.client);
