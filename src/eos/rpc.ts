@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { ErrorResolver } from "../helper";
+import { RpcErrorCatch } from "../helper";
 import {
   EOSMethods as methods,
   EOSModules as modules,
@@ -50,8 +50,8 @@ export class EOSClient {
     try {
       const result = await Axios.post<T>(url, body, { timeout: 60000 });
       return result.data;
-    } catch (e) {
-      throw new Error(ErrorResolver(e, url));
+    } catch (err) {
+      throw RpcErrorCatch(err, url, body);
     }
   }
 

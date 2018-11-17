@@ -44,8 +44,8 @@ class RPCClient {
             const ret = await axios_1.default.post(this.URL, reqData, this.reqConfig);
             return ret.data;
         }
-        catch (e) {
-            throw new Error(helper_1.ErrorResolver(e, this.URL, reqData));
+        catch (err) {
+            throw helper_1.RpcErrorCatch(err, this.URL, reqData);
         }
     }
     /**

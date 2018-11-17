@@ -51,7 +51,7 @@ export class EthereumUtil {
   /**
    * address(0)
    */
-  public static readonly addressNull =
+  public static readonly addressNull: string =
     "0x0000000000000000000000000000000000000000";
 
   public static hexToNumber(hex: string): number {

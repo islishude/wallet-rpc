@@ -1,9 +1,18 @@
-import { AxiosError } from "axios";
-import { IRpcRequest } from "./client";
+import { AxiosError, AxiosResponse } from "axios";
+import { IRpcResponse } from "./client";
+interface IWalletRpcError {
+    message: string;
+    request: {
+        url: string;
+        data: any;
+    };
+    response?: AxiosResponse<IRpcResponse>;
+    status?: number;
+}
 /**
- *
- * @param e AxiosError instance https://github.com/axios/axios#handling-errors
- * @param url request path
- * @param reqData request data
+ * @param {AxiosError} for https://github.com/axios/axios#handling-errors
+ * @param {string} request path
+ * @param {IRpcRequest} request data
  */
-export declare const ErrorResolver: (e: AxiosError, url: string, reqData?: IRpcRequest | undefined) => string;
+export declare const RpcErrorCatch: (err: AxiosError, url: string, data: any) => IWalletRpcError;
+export {};

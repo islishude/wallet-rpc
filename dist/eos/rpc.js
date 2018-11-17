@@ -26,8 +26,8 @@ class EOSClient {
             const result = await axios_1.default.post(url, body, { timeout: 60000 });
             return result.data;
         }
-        catch (e) {
-            throw new Error(helper_1.ErrorResolver(e, url));
+        catch (err) {
+            throw helper_1.RpcErrorCatch(err, url, body);
         }
     }
     /**

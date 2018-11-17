@@ -1,6 +1,6 @@
 {
   "name": "wallet-rpc",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "JSON RPC client and command-line interface of crypto coins by TypeScript",
   "main": "dist/index.js",
   "scripts": {
@@ -38,11 +38,11 @@
   },
   "types": "types/index.d.ts",
   "devDependencies": {
-    "@types/node": "^10.9.4",
+    "@types/node": "^10.12.9",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
-    "typescript": "^3.0.3"
+    "typescript": "^3.1.6"
   },
   "engines": {
     "node": ">=8.9.0"

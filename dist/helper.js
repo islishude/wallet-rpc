@@ -2,19 +2,27 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = require("util");
 /**
- *
- * @param e AxiosError instance https://github.com/axios/axios#handling-errors
- * @param url request path
- * @param reqData request data
+ * @param {AxiosError} for https://github.com/axios/axios#handling-errors
+ * @param {string} request path
+ * @param {IRpcRequest} request data
  */
-exports.ErrorResolver = (e, url, reqData) => {
-    const { response, message } = e;
-    const req = util_1.format("%s => %O", url, reqData);
+exports.RpcErrorCatch = (err, url, data) => {
+    const { response, message } = err;
+    const request = {
+        data,
+        url
+    };
     if (util_1.isUndefined(response)) {
-        return `JSONRPC Request Error: \nReason:${message}\nReqData: ${req}`;
+        return {
+            message,
+            request
+        };
     }
     // Catch non-200 error
-    const status = response.status;
-    const data = util_1.format("%O", response.data);
-    return `JSONRPC Response ${status} Error.\nReason: ${message}\nReqData: ${req}\nRespData: ${data}`;
+    return {
+        message,
+        request,
+        response: response.data,
+        status: response.status
+    };
 };
