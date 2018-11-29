@@ -177,6 +177,22 @@ class EthereumClient extends client_1.default {
     traceTxByParity(txid) {
         return this.RpcCall(mtd_1.EthereumMethods.tx.parity.trace, [txid]);
     }
+    // The content inspection property can be queried to list the exact details of all the transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
+    // The result is an object with two fields pending and queued. Each of these fields are associative arrays, in which each entry maps an origin-address to a batch of scheduled transactions. These batches themselves are maps associating nonces with actual transactions.
+    // Please note, there may be multiple transactions associated with the same account and nonce. This can happen if the user broadcast multiple ones with varying gas allowances (or even completely different transactions).
+    txpoolContent() {
+        return this.RpcCall(mtd_1.EthereumMethods.txpool.content);
+    }
+    // The inspect inspection property can be queried to list a textual summary of all the transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only. This is a method specifically tailored to developers to quickly see the transactions in the pool and find any potential issues.
+    // The result is an object with two fields pending and queued. Each of these fields are associative arrays, in which each entry maps an origin-address to a batch of scheduled transactions. These batches themselves are maps associating nonces with transactions summary strings.
+    txpoolInspect() {
+        return this.RpcCall(mtd_1.EthereumMethods.txpool.inspect);
+    }
+    // The status inspection property can be queried for the number of transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
+    // The result is an object with two fields pending and queued, each of which is a counter representing the number of transactions in that particular state.
+    txpoolStatus() {
+        return this.RpcCall(mtd_1.EthereumMethods.txpool.status);
+    }
     async ERC20Balance(token, address, isPending = true) {
         const status = isPending ? "pending" : "latest";
         const param = {

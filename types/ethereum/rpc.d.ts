@@ -38,7 +38,7 @@ export interface IEthTx {
     blockNumber: string | null;
     transactionIndex: string | null;
     from: string;
-    to?: string;
+    to: string | null;
     value: string;
     gas: string;
     gasPrice: string;
@@ -172,6 +172,34 @@ export interface IEthAbiOutputStruct extends IEthAbiCommonStruct {
 export interface IEthAbiInputStruct extends IEthAbiCommonStruct {
     indexed?: boolean;
 }
+export interface IEthTxPoolContent {
+    pending: {
+        [address: string]: {
+            [nonce: string]: IEthTx[];
+        };
+    };
+    queued: {
+        [address: string]: {
+            [nonce: string]: IEthTx[];
+        };
+    };
+}
+export interface IEthTxPoolInspect {
+    pending: {
+        [address: string]: {
+            [nonce: string]: string[];
+        };
+    };
+    queued: {
+        [address: string]: {
+            [nonce: string]: string[];
+        };
+    };
+}
+export interface IEthTxPoolStatus {
+    pending: number;
+    queued: number;
+}
 export declare class EthereumClient extends RPCClient {
     constructor(conf?: IRpcConfig);
     /**
@@ -288,6 +316,9 @@ export declare class EthereumClient extends RPCClient {
         timeout?: string;
     }): Promise<IRpcResponse<IEthTraceTxReturn>>;
     traceTxByParity(txid: string): Promise<IRpcResponse<IParityTxTrace[] | null>>;
+    txpoolContent(): Promise<IRpcResponse<IEthTxPoolContent>>;
+    txpoolInspect(): Promise<IRpcResponse<IEthTxPoolInspect>>;
+    txpoolStatus(): Promise<IRpcResponse<IEthTxPoolStatus>>;
     ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
     ERC20Decimals(token: string): Promise<undefined | number>;
     ERC20TotalSupply(token: string): Promise<string | undefined>;

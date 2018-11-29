@@ -42,6 +42,7 @@ export {
   IEthSyncing,
   IEthTraceTxReturn,
   IEthTx,
+  IEthTxPoolContent,
   IEthTxReceipt,
   IParityCallAction,
   IParityCallResult,

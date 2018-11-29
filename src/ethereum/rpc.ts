@@ -59,7 +59,7 @@ export interface IEthTx {
   transactionIndex: string | null;
   from: string;
   // null when its a contract creation transaction.
-  to?: string;
+  to: string | null;
   value: string;
   gas: string;
   gasPrice: string;
@@ -220,6 +220,36 @@ export interface IEthAbiInputStruct extends IEthAbiCommonStruct {
   indexed?: boolean;
 }
 
+export interface IEthTxPoolContent {
+  pending: {
+    [address: string]: {
+      [nonce: string]: IEthTx[];
+    };
+  };
+  queued: {
+    [address: string]: {
+      [nonce: string]: IEthTx[];
+    };
+  };
+}
+
+export interface IEthTxPoolInspect {
+  pending: {
+    [address: string]: {
+      [nonce: string]: string[];
+    };
+  };
+  queued: {
+    [address: string]: {
+      [nonce: string]: string[];
+    };
+  };
+}
+
+export interface IEthTxPoolStatus {
+  pending: number;
+  queued: number;
+}
 export class EthereumClient extends RPCClient {
   // go-ethereum client RPC settings has no user and password for rpc
   constructor(conf: IRpcConfig = {}) {
@@ -424,6 +454,25 @@ export class EthereumClient extends RPCClient {
 
   public traceTxByParity(txid: string) {
     return this.RpcCall<IParityTxTrace[] | null>(mtd.tx.parity.trace, [txid]);
+  }
+
+  // The content inspection property can be queried to list the exact details of all the transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
+  // The result is an object with two fields pending and queued. Each of these fields are associative arrays, in which each entry maps an origin-address to a batch of scheduled transactions. These batches themselves are maps associating nonces with actual transactions.
+  // Please note, there may be multiple transactions associated with the same account and nonce. This can happen if the user broadcast multiple ones with varying gas allowances (or even completely different transactions).
+  public txpoolContent() {
+    return this.RpcCall<IEthTxPoolContent>(mtd.txpool.content);
+  }
+
+  // The inspect inspection property can be queried to list a textual summary of all the transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only. This is a method specifically tailored to developers to quickly see the transactions in the pool and find any potential issues.
+  // The result is an object with two fields pending and queued. Each of these fields are associative arrays, in which each entry maps an origin-address to a batch of scheduled transactions. These batches themselves are maps associating nonces with transactions summary strings.
+  public txpoolInspect() {
+    return this.RpcCall<IEthTxPoolInspect>(mtd.txpool.inspect);
+  }
+
+  // The status inspection property can be queried for the number of transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
+  // The result is an object with two fields pending and queued, each of which is a counter representing the number of transactions in that particular state.
+  public txpoolStatus() {
+    return this.RpcCall<IEthTxPoolStatus>(mtd.txpool.status);
   }
 
   public async ERC20Balance(

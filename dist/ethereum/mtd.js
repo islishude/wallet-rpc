@@ -44,6 +44,7 @@ exports.EthereumMethods = {
     },
     txpool: {
         content: "txpool_content",
+        inspect: "txpool_inspect",
         status: "txpool_status"
     },
     uncle: {

@@ -42,6 +42,7 @@ export declare const EthereumMethods: {
     };
     txpool: {
         content: string;
+        inspect: string;
         status: string;
     };
     uncle: {
