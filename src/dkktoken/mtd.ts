@@ -9,7 +9,7 @@ export const DKKTokenMethods = {
   mempool: "getrawmempool",
   tx: {
     decode: "decoderawtransaction",
-    detail: "gettransaction",
+    detail: "getrawtransaction",
     raw: "getrawtransaction",
     sendRaw: "sendrawtransaction"
   }

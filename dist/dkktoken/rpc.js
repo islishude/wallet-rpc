@@ -24,7 +24,7 @@ class DKKTClient extends client_1.default {
         return this.RpcCall(mtd_1.DKKTokenMethods.block.detail, [id]);
     }
     getTxInfo(id) {
-        const param = [id];
+        const param = [id, 1];
         return this.RpcCall(mtd_1.DKKTokenMethods.tx.detail, param);
     }
     sendRawTx(raw) {

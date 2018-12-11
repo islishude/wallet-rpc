@@ -116,7 +116,7 @@ export class DKKTClient extends RPCClient {
   }
 
   public getTxInfo(id: string) {
-    const param: [string] = [id];
+    const param: [string, number] = [id, 1];
     return this.RpcCall<IDkktTxInfo>(mtd.tx.detail, param);
   }
 
