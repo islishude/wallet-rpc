@@ -25,13 +25,13 @@ Wallet RPC CLI by isLishude <${
   color._
   }https://github.com/islishude/wallet-rpc${color.clear}>
 
-The available global variable are
+The available global variables are
 
 ${color.yellow}
 - log(alias "console.log")
-- Bitcoin 
-- Ethereum 
-- EOS
+- EthereumClient 
+- EthereumClient 
+- EOSClient
 - ...
 ${color.clear} 
 
