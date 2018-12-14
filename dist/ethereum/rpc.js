@@ -172,10 +172,10 @@ class EthereumClient extends client_1.default {
      * @see https://github.com/ethereum/go-ethereum/wiki/Management-APIs#debug_tracetransaction
      */
     traceTx(txid, opt) {
-        return this.RpcCall(mtd_1.EthereumMethods.debug.traceTx, [txid, opt]);
+        return this.RpcCall(mtd_1.EthereumMethods.trace.trx, [txid, opt]);
     }
     traceTxByParity(txid) {
-        return this.RpcCall(mtd_1.EthereumMethods.tx.parity.trace, [txid]);
+        return this.RpcCall(mtd_1.EthereumMethods.trace.trx, [txid]);
     }
     // The content inspection property can be queried to list the exact details of all the transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
     // The result is an object with two fields pending and queued. Each of these fields are associative arrays, in which each entry maps an origin-address to a batch of scheduled transactions. These batches themselves are maps associating nonces with actual transactions.
@@ -192,6 +192,12 @@ class EthereumClient extends client_1.default {
     // The result is an object with two fields pending and queued, each of which is a counter representing the number of transactions in that particular state.
     txpoolStatus() {
         return this.RpcCall(mtd_1.EthereumMethods.txpool.status);
+    }
+    ParityPendingTrx() {
+        return this.RpcCall(mtd_1.EthereumMethods.tx.parity.pending);
+    }
+    ParityRemoveTrx(hash) {
+        return this.RpcCall(mtd_1.EthereumMethods.tx.parity.remove, [hash]);
     }
     async ERC20Balance(token, address, isPending = true) {
         const status = isPending ? "pending" : "latest";

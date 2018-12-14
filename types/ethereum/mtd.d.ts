@@ -28,11 +28,16 @@ export declare const EthereumMethods: {
     tool: {
         sign: string;
     };
+    trace: {
+        trx: string;
+    };
     tx: {
         byHash: string;
         byHeight: string;
         call: string;
         parity: {
+            pending: string;
+            remove: string;
             trace: string;
         };
         rawByHash: string;

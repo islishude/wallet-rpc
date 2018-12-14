@@ -449,11 +449,11 @@ export class EthereumClient extends RPCClient {
       timeout?: string;
     }
   ) {
-    return this.RpcCall<IEthTraceTxReturn>(mtd.debug.traceTx, [txid, opt]);
+    return this.RpcCall<IEthTraceTxReturn>(mtd.trace.trx, [txid, opt]);
   }
 
   public traceTxByParity(txid: string) {
-    return this.RpcCall<IParityTxTrace[] | null>(mtd.tx.parity.trace, [txid]);
+    return this.RpcCall<IParityTxTrace[] | null>(mtd.trace.trx, [txid]);
   }
 
   // The content inspection property can be queried to list the exact details of all the transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
@@ -473,6 +473,14 @@ export class EthereumClient extends RPCClient {
   // The result is an object with two fields pending and queued, each of which is a counter representing the number of transactions in that particular state.
   public txpoolStatus() {
     return this.RpcCall<IEthTxPoolStatus>(mtd.txpool.status);
+  }
+
+  public ParityPendingTrx() {
+    return this.RpcCall<IEthTx[]>(mtd.tx.parity.pending)
+  }
+
+  public ParityRemoveTrx(hash: string) {
+    return this.RpcCall<IEthTx | null>(mtd.tx.parity.remove, [hash])
   }
 
   public async ERC20Balance(

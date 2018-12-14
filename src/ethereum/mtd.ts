@@ -28,12 +28,17 @@ export const EthereumMethods = {
   tool: {
     sign: "eth_sign"
   },
+  trace: {
+    trx: "trace_transaction",
+  },
   tx: {
     byHash: "eth_getTransactionByHash",
     byHeight: "eth_getTransactionByBlockHashAndIndex",
     call: "eth_call",
     parity: {
-      trace: "trace_transaction"
+      pending: "parity_pendingTransactions",
+      remove: "remove_transaction",
+      trace: "trace_transaction",
     },
     rawByHash: "eth_getRawTransactionByHash",
     receipt: "eth_getTransactionReceipt",
@@ -45,6 +50,7 @@ export const EthereumMethods = {
     inspect: "txpool_inspect",
     status: "txpool_status"
   },
+
   uncle: {
     byHash: "eth_getUncleByBlockHashAndIndex",
     byHeight: "eth_getUncleByBlockHashAndIndex"
