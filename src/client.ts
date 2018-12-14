@@ -44,6 +44,11 @@ export default abstract class RPCClient {
         password: this.pass,
         username: this.user
       },
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "User-Agent": "wallet-rpc",
+      },
       timeout: 60000
     };
 
