@@ -1,13 +1,10 @@
-JSON RPC client of crypto coins by TypeScript
+JSONRPC 2.0 client with CLI of crypto-currency by TypeScript for Node.js
 
 ## Supports
 
-- Bitcoin(core 0.16+)
-- BitcoinCash(same with Bitcoin)
-- Litecoin(same with Bitcoin)
-- Ethereum(geth 1.8.0+ || parity 1.0.0+) and ERC20
-- Ethereum Classic
-- OmniLayer(includes USDT)
+- BitcoinSeries(Core 0.16+)
+- OmniLayer(includes Tether USDT)
+- EthereumSeries(Geth 1.8.0+ || Parity 1.0.0+)
 - EOS(v1.3.0 stable)
 
 ## Doc

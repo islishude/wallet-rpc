@@ -1,7 +1,7 @@
 {
   "name": "wallet-rpc",
   "version": "4.5.4",
-  "description": "JSON RPC client and command-line interface of crypto coins by TypeScript",
+  "description": "JSONRPC client and command-line interface of crypto-currency by TypeScript",
   "main": "dist/index.js",
   "scripts": {
     "build": "tslint -p tsconfig.json && rm -rf dist types && tsc",
