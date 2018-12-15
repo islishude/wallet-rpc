@@ -50,7 +50,7 @@ export {
   IParityCreateResult,
   IParitySuicideAction,
   IParityTxTrace
-} from "./ethereum/rpc";
+} from "./ethereum/type";
 
 export { IOmniClientInfo, IOmniTxInfo } from "./omni/rpc";
 

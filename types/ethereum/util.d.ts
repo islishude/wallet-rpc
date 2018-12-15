@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js";
-import { IEthAbiStruct } from "./rpc";
+import { IEthAbiStruct } from "./type";
 export declare class EthereumUtil {
     static readonly gWei: BigNumber;
     static readonly ERC20FuncSig: {

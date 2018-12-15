@@ -1,7 +1,7 @@
 import Axios from "axios";
 import BigNumber from "bignumber.js";
 import { IRpcResponse } from "../client";
-import { IEthAbiStruct, IEtherScanAbiResponse } from "./rpc";
+import { IEthAbiStruct, IEtherScanAbiResponse } from "./type";
 
 const hexPrefixReg = /0x/;
 const zeroPadding = "0".repeat(24);
