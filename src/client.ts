@@ -92,7 +92,7 @@ export default abstract class RPCClient {
 
       // Catch has error in response but status code is 200
       if (!isNullOrUndefined(ret.data.error)) {
-        throw { request: reqData, response: ret.data };
+        throw { response: ret.data };
       }
       return ret.data;
     } catch (err) {

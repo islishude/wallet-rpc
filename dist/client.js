@@ -51,7 +51,7 @@ class RPCClient {
             const ret = await axios_1.default.post(this.URL, reqData, this.reqConfig);
             // Catch has error in response but status code is 200
             if (!util_1.isNullOrUndefined(ret.data.error)) {
-                throw { request: reqData, response: ret.data };
+                throw { response: ret.data };
             }
             return ret.data;
         }
