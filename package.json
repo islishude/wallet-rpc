@@ -34,15 +34,15 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
-    "bignumber.js": "^7.2.1"
+    "bignumber.js": "^8.0.1"
   },
   "types": "types/index.d.ts",
   "devDependencies": {
-    "@types/node": "^10.12.9",
+    "@types/node": "^10.12.15",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "tslint-config-prettier": "^1.15.0",
-    "typescript": "^3.1.6"
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.2"
   },
   "engines": {
     "node": ">=8.9.0"
