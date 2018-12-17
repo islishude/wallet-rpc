@@ -44,7 +44,7 @@ class OmniLayerClient extends rpc_1.BitcoinClient {
      * @param address the address
      * @param propertyId the property identifier
      */
-    getPropertyBalance(address, propertyId) {
+    getPropertyBalance(address, propertyId = 31) {
         return this.RpcCall(mtd_2.OmniLayerMethods.address.balance, [address, propertyId]);
     }
     getAllPropertyBalance(address) {

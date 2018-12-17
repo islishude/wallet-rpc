@@ -73,7 +73,7 @@ export declare class OmniLayerClient extends BitcoinClient {
      * @param address the address
      * @param propertyId the property identifier
      */
-    getPropertyBalance(address: string, propertyId: number): Promise<import("../client").IRpcResponse<{
+    getPropertyBalance(address: string, propertyId?: number): Promise<import("../client").IRpcResponse<{
         balance: string;
         reserved: string;
         frozen: string;
