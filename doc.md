@@ -70,5 +70,3 @@ npx wallet-rpc
 ```
 
 Run with `npx -n --experimental-repl-await wallet-rpc` to enable top-level await if you are in the node.js v10 LTS.
-
-for development feature with `npx islishude/wallet-rpc@dev`
