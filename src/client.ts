@@ -1,4 +1,5 @@
 import Axios, { AxiosRequestConfig } from "axios";
+import { isNullOrUndefined } from "util";
 import { RpcErrorCatch } from "./helper";
 
 export interface IRpcResponse<T = any> {
@@ -45,9 +46,9 @@ export default abstract class RPCClient {
         username: this.user
       },
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Content-Type": "application/json",
-        "User-Agent": "wallet-rpc",
+        "User-Agent": "wallet-rpc"
       },
       timeout: 60000
     };
@@ -88,6 +89,11 @@ export default abstract class RPCClient {
         reqData,
         this.reqConfig
       );
+
+      // Catch has error in response but status code is 200
+      if (!isNullOrUndefined(ret.data.error)) {
+        throw { request: reqData, response: ret.data };
+      }
       return ret.data;
     } catch (err) {
       throw RpcErrorCatch(err, this.URL, reqData, this.coinName);

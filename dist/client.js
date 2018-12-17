@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const axios_1 = require("axios");
+const util_1 = require("util");
 const helper_1 = require("./helper");
 class RPCClient {
     constructor(user, pass, ip, port, coinName) {
@@ -16,9 +17,9 @@ class RPCClient {
                 username: this.user
             },
             headers: {
-                "Accept": "application/json",
+                Accept: "application/json",
                 "Content-Type": "application/json",
-                "User-Agent": "wallet-rpc",
+                "User-Agent": "wallet-rpc"
             },
             timeout: 60000
         };
@@ -48,6 +49,10 @@ class RPCClient {
         };
         try {
             const ret = await axios_1.default.post(this.URL, reqData, this.reqConfig);
+            // Catch has error in response but status code is 200
+            if (!util_1.isNullOrUndefined(ret.data.error)) {
+                throw { request: reqData, response: ret.data };
+            }
             return ret.data;
         }
         catch (err) {
