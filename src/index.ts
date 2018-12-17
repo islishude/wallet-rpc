@@ -52,7 +52,7 @@ export {
   IParityTxTrace
 } from "./ethereum/type";
 
-export { IOmniClientInfo, IOmniTxInfo } from "./omni/rpc";
+export { IOmniClientInfo, IOmniTxInfo } from "./omni/type";
 
 export {
   IDkktBlockInfo,
@@ -60,7 +60,7 @@ export {
   IDkktWalletInfo,
   IDkktTxVin,
   IDkktTxVout
-} from "./dkktoken/rpc";
+} from "./dkktoken/type";
 
 export {
   IBtcBlockchainInfo,
@@ -73,4 +73,4 @@ export {
   IBtcWalletInfo,
   IBtcTxVin,
   IBtcTxVout
-} from "./bitcoin/rpc";
+} from "./bitcoin/type";

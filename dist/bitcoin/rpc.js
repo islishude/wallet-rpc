@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("../client");
 const mtd_1 = require("./mtd");
-/** spell-checker: enable */
 class BitcoinClient extends client_1.default {
     constructor(conf = {}) {
         const ip = conf.ip || "http://127.0.0.1";
@@ -77,6 +76,21 @@ class BitcoinClient extends client_1.default {
     // get information about memory usage.
     getMemoryInfo() {
         return this.RpcCall(mtd_1.BitcoinMethods.info.memory);
+    }
+    /**
+     * Returns the hash of the best (tip) block in the longest blockchain.
+     */
+    getBestBlockHash() {
+        return this.RpcCall(mtd_1.BitcoinMethods.block.tipHash);
+    }
+    /**
+     * Returns details about an unspent transaction output.
+     */
+    getTxOut(txid, n, includeMempool = false) {
+        return this.RpcCall(mtd_1.BitcoinMethods.tx.utxo, [txid, n, includeMempool]);
+    }
+    getMemPoolInfo() {
+        return this.RpcCall(mtd_1.BitcoinMethods.mempool.info);
     }
 }
 exports.BitcoinClient = BitcoinClient;

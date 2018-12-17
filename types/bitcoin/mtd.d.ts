@@ -3,6 +3,7 @@ export declare const BitcoinMethods: {
         count: string;
         detail: string;
         hash: string;
+        tipHash: string;
     };
     fee: string;
     info: {
@@ -14,11 +15,13 @@ export declare const BitcoinMethods: {
     };
     mempool: {
         detail: string;
+        info: string;
     };
     tx: {
         decode: string;
         detail: string;
         raw: string;
         sendRaw: string;
+        utxo: string;
     };
 };

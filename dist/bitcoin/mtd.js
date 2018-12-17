@@ -5,7 +5,8 @@ exports.BitcoinMethods = {
     block: {
         count: "getblockcount",
         detail: "getblock",
-        hash: "getblockhash"
+        hash: "getblockhash",
+        tipHash: "getbestblockhash"
     },
     fee: "estimatesmartfee",
     info: {
@@ -16,12 +17,14 @@ exports.BitcoinMethods = {
         wallet: "getwalletinfo"
     },
     mempool: {
-        detail: "getrawmempool"
+        detail: "getrawmempool",
+        info: "getmempoolinfo"
     },
     tx: {
         decode: "decoderawtransaction",
         detail: "gettransaction",
         raw: "getrawtransaction",
-        sendRaw: "sendrawtransaction"
+        sendRaw: "sendrawtransaction",
+        utxo: "gettxout"
     }
 };

@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("../client");
 const mtd_1 = require("./mtd");
-/** spell-checker: enable */
 class DKKTClient extends client_1.default {
     constructor(conf = {}) {
         const ip = conf.ip || "http://127.0.0.1";

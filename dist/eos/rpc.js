@@ -189,7 +189,7 @@ class EOSClient {
         // convert microseconds to milliseconds
         const cpuAvailable = cpu_limit.max / 1000;
         if (cpuAvailable === 0 || netAvailable === 0) {
-            throw new Error("[EOS::GetNetAndCpuPrice] Please check your refAccount and then call this.");
+            throw new Error("[EOS::GetNetAndCpuPrice] Available CPU or NET is zero! Please check your refAccount and then call this.");
         }
         return {
             cpuPrice: (cpuStaked / cpuAvailable).toFixed(4),
