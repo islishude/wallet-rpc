@@ -1,47 +1,50 @@
 import { AxiosError } from "axios";
-import { isUndefined } from "util";
+import { inspect, isUndefined } from "util";
 
 interface IWalletRpcError {
   message: string;
+  reason: string;
   request: {
     coinName: string;
     url: string;
     data: any;
   };
   response?: any;
-  status?: number;
+  statusCode?: number;
 }
 
-/**
- * @param {AxiosError} for https://github.com/axios/axios#handling-errors
- * @param {string} request path
- * @param {IRpcRequest} request data
- */
+function stringify(obj: any): string {
+  return inspect(obj, { depth: null, colors: true });
+}
+
 export const RpcErrorCatch = (
-  err: AxiosError,
-  url: string,
-  data: any,
+  respErr: AxiosError,
+  reqUrl: string,
+  reqData: any,
   coinName: string
 ): IWalletRpcError => {
-  const { response, message } = err;
-
-  const request = {
+  const requestData = {
     coinName,
-    data,
-    url
+    data: reqData,
+    url: reqUrl
   };
 
-  if (isUndefined(response)) {
-    return {
-      message,
-      request
+  if (isUndefined(respErr.response)) {
+    const res: any = {
+      reason: respErr.message,
+      request: requestData
     };
+    res.message = stringify(res);
+    return res as IWalletRpcError;
   }
-  // Catch non-200 error
-  return {
-    message,
-    request,
-    response: response.data,
-    status: response.status
+
+  // Catch Non-200 response error
+  const result: any = {
+    reason: respErr.message,
+    request: requestData,
+    response: respErr.response.data,
+    statusCode: respErr.response.status
   };
+  result.message = stringify(result);
+  return result as IWalletRpcError;
 };

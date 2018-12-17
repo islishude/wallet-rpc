@@ -5,11 +5,12 @@ const helper_1 = require("../helper");
 const mtd_1 = require("./mtd");
 class EOSClient {
     /**
-     * EOS RPC isn't JSONRPC,so here is diff with bitcoin.
+     * EOS Client constructor
      * @param url schema+ip+url e.g. http://127.0.0.1:8888
      * @param ver API Version Now only supports `v1`
      */
     constructor(url = "http://127.0.0.1:8888", ver = "v1") {
+        this.coinName = "EOS";
         this.URL = `${url}/${ver}`;
     }
     getCallURL(module, api) {
@@ -27,7 +28,7 @@ class EOSClient {
             return result.data;
         }
         catch (err) {
-            throw helper_1.RpcErrorCatch(err, url, body, "EOS");
+            throw helper_1.RpcErrorCatch(err, url, body, this.coinName);
         }
     }
     /**

@@ -1,29 +1,30 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = require("util");
-/**
- * @param {AxiosError} for https://github.com/axios/axios#handling-errors
- * @param {string} request path
- * @param {IRpcRequest} request data
- */
-exports.RpcErrorCatch = (err, url, data, coinName) => {
-    const { response, message } = err;
-    const request = {
+function stringify(obj) {
+    return util_1.inspect(obj, { depth: null, colors: true });
+}
+exports.RpcErrorCatch = (respErr, reqUrl, reqData, coinName) => {
+    const requestData = {
         coinName,
-        data,
-        url
+        data: reqData,
+        url: reqUrl
     };
-    if (util_1.isUndefined(response)) {
-        return {
-            message,
-            request
+    if (util_1.isUndefined(respErr.response)) {
+        const res = {
+            reason: respErr.message,
+            request: requestData
         };
+        res.message = stringify(res);
+        return res;
     }
-    // Catch non-200 error
-    return {
-        message,
-        request,
-        response: response.data,
-        status: response.status
+    // Catch Non-200 response error
+    const result = {
+        reason: respErr.message,
+        request: requestData,
+        response: respErr.response.data,
+        statusCode: respErr.response.status
     };
+    result.message = stringify(result);
+    return result;
 };

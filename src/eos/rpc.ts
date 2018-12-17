@@ -20,8 +20,9 @@ export class EOSClient {
     table: "rammarket"
   };
   public URL: string;
+  public coinName: string = "EOS";
   /**
-   * EOS RPC isn't JSONRPC,so here is diff with bitcoin.
+   * EOS Client constructor
    * @param url schema+ip+url e.g. http://127.0.0.1:8888
    * @param ver API Version Now only supports `v1`
    */
@@ -51,7 +52,7 @@ export class EOSClient {
       const result = await Axios.post<T>(url, body, { timeout: 60000 });
       return result.data;
     } catch (err) {
-      throw RpcErrorCatch(err, url, body, "EOS");
+      throw RpcErrorCatch(err, url, body, this.coinName);
     }
   }
 

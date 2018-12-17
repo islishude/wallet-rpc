@@ -8,8 +8,9 @@ export declare class EOSClient {
         table: string;
     };
     URL: string;
+    coinName: string;
     /**
-     * EOS RPC isn't JSONRPC,so here is diff with bitcoin.
+     * EOS Client constructor
      * @param url schema+ip+url e.g. http://127.0.0.1:8888
      * @param ver API Version Now only supports `v1`
      */

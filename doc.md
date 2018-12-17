@@ -33,7 +33,12 @@ if request call has any error,or response non-200 status will throw this error d
 
 ```typescript
 interface IWalletRpcError {
-  message: string; // `Error.message`
+  // error reason
+  reason: string;
+  // you can print `message` to debug log
+  // it is result that parses `request` and `response` field to string
+  message: string;
+  // your request data with coinName and request url
   request: {
     // coin name
     coinName: string;
@@ -42,10 +47,10 @@ interface IWalletRpcError {
     // request data
     data: any;
   };
-  // response body
+  // rpc response body
   response?: any;
   // http status code
-  status?: number;
+  statusCode?: number;
 }
 ```
 
