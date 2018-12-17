@@ -14,7 +14,7 @@ interface IWalletRpcError {
 }
 
 function stringify(obj: any): string {
-  return inspect(obj, { depth: null, colors: true });
+  return inspect(obj, { depth: null });
 }
 
 export const RpcErrorCatch = (

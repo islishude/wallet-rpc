@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const util_1 = require("util");
 function stringify(obj) {
-    return util_1.inspect(obj, { depth: null, colors: true });
+    return util_1.inspect(obj, { depth: null });
 }
 exports.RpcErrorCatch = (respErr, reqUrl, reqData, coinName) => {
     const requestData = {
