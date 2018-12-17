@@ -17,7 +17,7 @@ export {
   IEosTrx,
   IEosAbi,
   IEosError
-} from "./eos/mtd";
+} from "./eos/type";
 
 export {
   IRpcRequest,

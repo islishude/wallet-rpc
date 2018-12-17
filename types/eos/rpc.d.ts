@@ -1,12 +1,5 @@
-import { IEosAbi, IEosAccount, IEosBlockInfo, IEosChainInfo, IEosTrx } from "./mtd";
-declare type EOSVersion = "v1";
+import { EOSVersion, IEosAbi, IEosAccount, IEosBlockInfo, IEosChainInfo, IEosProdsTable, IEosTrx } from "./type";
 export declare class EOSClient {
-    static RAMFeeRequestData: {
-        code: string;
-        json: boolean;
-        scope: string;
-        table: string;
-    };
     URL: string;
     coinName: string;
     /**
@@ -142,17 +135,7 @@ export declare class EOSClient {
         netPrice: string;
     }>;
     getProducerList(limit?: number): Promise<{
-        rows: {
-            owner: string;
-            total_votes: string;
-            producer_key: string;
-            is_active: number;
-            url: string;
-            unpaid_blocks: number;
-            last_claim_time: number;
-            location: number;
-        }[];
+        rows: IEosProdsTable[];
         more: boolean;
     }>;
 }
-export {};

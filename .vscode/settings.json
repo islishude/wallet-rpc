@@ -1,16 +1,17 @@
 {
   "cSpell.words": [
     "binargs",
-    "heztanrqgene",
     "getabi",
+    "heztanrqgene",
     "litecoin",
+    "mroot",
     "nonpayable",
+    "proxied",
     "rammarket",
     "ricardian",
     "rpcapi",
     "structs",
     "subtraces",
-    "txpool",
-    "u"
+    "txpool"
   ]
 }

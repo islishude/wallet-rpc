@@ -1,24 +1,28 @@
 import Axios from "axios";
 import { RpcErrorCatch } from "../helper";
+import { EOSMethods as methods, EOSModules as modules } from "./mtd";
 import {
-  EOSMethods as methods,
-  EOSModules as modules,
+  EOSVersion,
   IEosAbi,
   IEosAccount,
   IEosBlockInfo,
   IEosChainInfo,
+  IEosProdsTable,
+  IEosRamTable,
   IEosTrx
-} from "./mtd";
+} from "./type";
 
-type EOSVersion = "v1";
+const RAMFeeRequestData = {
+  code: "eosio",
+  json: true,
+  scope: "eosio",
+  table: "rammarket"
+};
+
+const errInvalidRefAccount =
+  "[EOS::GetNetAndCpuPrice] Available CPU or NET is zero! Please check your refAccount and then call this.";
 
 export class EOSClient {
-  public static RAMFeeRequestData = {
-    code: "eosio",
-    json: true,
-    scope: "eosio",
-    table: "rammarket"
-  };
   public URL: string;
   public coinName: string = "EOS";
   /**
@@ -255,12 +259,7 @@ export class EOSClient {
   }
 
   public async getRAMPrice() {
-    const { rows } = await this.getTableRows<{
-      supply: string;
-      base: { balance: string; weight: string };
-      quote: { balance: string; weight: string };
-    }>(EOSClient.RAMFeeRequestData);
-
+    const { rows } = await this.getTableRows<IEosRamTable>(RAMFeeRequestData);
     const { base, quote } = rows[0];
     // RAM PRICE = (n * quote.balance) / (n + base.balance / 1024)
     const quoteBalance = Number(quote.balance.split(/\s/)[0]);
@@ -272,7 +271,7 @@ export class EOSClient {
    * Get NET And CPU price
    *
    * get these value should compute from a referer account,
-   * so you can pass a EOS exchange platform account
+   * so best suggestion is that gives a EOS exchange platform account
    */
   public async getNetAndCpuPrice(refAccount: string = "heztanrqgene") {
     const {
@@ -290,9 +289,7 @@ export class EOSClient {
     const cpuAvailable = cpu_limit.max / 1000;
 
     if (cpuAvailable === 0 || netAvailable === 0) {
-      throw new Error(
-        "[EOS::GetNetAndCpuPrice] Available CPU or NET is zero! Please check your refAccount and then call this."
-      );
+      throw new Error(errInvalidRefAccount);
     }
 
     return {
@@ -304,16 +301,7 @@ export class EOSClient {
   // get bp list
   // TODO: sorting and skip params
   public async getProducerList(limit: number = 1000) {
-    return this.getTableRows<{
-      owner: string;
-      total_votes: string;
-      producer_key: string;
-      is_active: number;
-      url: string;
-      unpaid_blocks: number;
-      last_claim_time: number;
-      location: number;
-    }>({
+    return this.getTableRows<IEosProdsTable>({
       code: "eosio",
       json: true,
       limit,
