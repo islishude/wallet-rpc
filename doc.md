@@ -27,29 +27,20 @@ for v3 users,v4 has been remove `sha3` and `isChecksumAddress`,you can import [t
 - [Ethereum](./src/ethereum/mtd.ts)
 - [OmniLayer](./src/omni/mtd.ts)
 
-## ErrorType
+## Error Type
 
-if request call has any error,or response non-200 status will throw this error data.
+If request call has any errors or response status code is not 200, will throw flow error.The `message` field is a string which merges `request` and `response` field.
 
 ```typescript
 interface IWalletRpcError {
-  // error reason
   reason: string;
-  // you can print `message` to debug log
-  // it is result that parses `request` and `response` field to string
   message: string;
-  // your request data with coinName and request url
   request: {
-    // coin name
     coinName: string;
-    // request url
     url: string;
-    // request data
     data: any;
   };
-  // rpc response body
   response?: any;
-  // http status code
   statusCode?: number;
 }
 ```
@@ -59,14 +50,3 @@ interface IWalletRpcError {
 - [Bitcoin](./example/bitcoin.ts)
 - [Ethereum](./example/ethereum.ts)
 - [OmniLayer](./example/omni.ts)
-
-## CLI
-
-```
-npx wallet-rpc
-
-> let eth = new EthereumClient({ ip: "https://mainnet.infura.io", port: "443" });
-> let tmp = eth.getBlockCount().then(log, log);
-```
-
-Run with `npx -n --experimental-repl-await wallet-rpc` to enable top-level await if you are in the node.js v10 LTS.
