@@ -11,6 +11,12 @@ JSONRPC 2.0 client with CLI of crypto-currency by TypeScript for Node.js
 
 [See here](./doc.md)
 
+## Docker
+
+```sh
+docker run -it --rm islishude/wallet-rpc
+```
+
 ## Feedback
 
 [Issue here](https://github.com/isLishude/wallet-rpc/issues/new)

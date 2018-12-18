@@ -1,0 +1,10 @@
+.vscode
+example
+node_module
+test
+types
+.gitignore
+.npmignore
+.npmrc
+doc.md
+Dockerfile

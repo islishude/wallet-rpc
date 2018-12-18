@@ -8,4 +8,7 @@ example
 doc.md
 type.js
 types/bin
-
+package-lock.json
+Dockerfile
+.dockerignore
+.gitignore

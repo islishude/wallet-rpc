@@ -1,12 +1,15 @@
 {
   "name": "wallet-rpc",
-  "version": "4.6.2",
+  "version": "4.6.3",
   "description": "JSONRPC client and command-line interface of crypto-currency by TypeScript",
   "main": "dist/index.js",
   "scripts": {
     "build": "tslint -p tsconfig.json && rm -rf dist types && tsc",
     "test": "ts-node test/*.ts",
-    "pub": "git push --all && git push --tags && npm publish"
+    "pub": "git push --all && git push --tags && npm publish",
+    "docker-version": "docker build -t islishude/$npm_package_name:latest .",
+    "docker-latest": "docker build -t islishude/$npm_package_name:$npm_package_version .",
+    "docker": "npm run docker-version && npm run docker-latest"
   },
   "repository": {
     "type": "git",
