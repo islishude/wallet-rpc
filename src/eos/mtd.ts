@@ -13,11 +13,12 @@ export const EOSMethods = {
     btoa: "abi_bin_to_json",
     code: "get_code",
     info: "get_info",
+    producer: "get_producers",
     rawCodeAndABI: "get_raw_code_and_abi",
     sendTx: "push_transaction",
     sendTxList: "push_transactions",
     stats: "get_currency_stats",
-    tableRows: "get_table_rows"
+    tableRows: "get_table_rows",
   },
   history: {
     actions: "get_actions",

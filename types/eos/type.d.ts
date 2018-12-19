@@ -235,3 +235,8 @@ export interface IEosProdsTable {
     last_claim_time: number;
     location: number;
 }
+export interface IEosProds {
+    rows: IEosProdsTable[];
+    total_producer_vote_weight: string;
+    more: string;
+}

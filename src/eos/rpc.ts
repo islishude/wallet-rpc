@@ -7,6 +7,7 @@ import {
   IEosAccount,
   IEosBlockInfo,
   IEosChainInfo,
+  IEosProds,
   IEosProdsTable,
   IEosRamTable,
   IEosTrx
@@ -152,8 +153,8 @@ export class EOSClient {
     code: string;
     table: string;
     json: boolean;
-    lower_bound?: number;
-    upper_bound?: number;
+    lower_bound?: string | number;
+    upper_bound?: string | number;
     limit?: number;
     key_type?: string;
     index_position?: number;
@@ -298,17 +299,38 @@ export class EOSClient {
     };
   }
 
-  // get bp list
-  // TODO: sorting and skip params
-  public async getProducerList(limit: number = 1000) {
+  /**
+   * Get producer list,available 1.4 or above,call `getProducerTable` if you run in lower version
+   * @param limit count you wanna
+   * @param lowBound a-z 1-5
+   */
+  public async getProducerList(limit: number, lowBound: string) {
+    return this.CALL<IEosProds>(modules.chain, methods.chain.producer, {
+      json: true,
+      limit,
+      lower_bound: lowBound
+    });
+  }
+
+  /**
+   * Get producer list,available 1.0 version or above
+   * @param limit count you wanna
+   * @param lowBound a-z 1-5
+   * @param upperBound a-z 1-5
+   */
+  public async getProducerTable(
+    lowBound: string,
+    upperBound: string,
+    limit: number = 1000
+  ) {
     return this.getTableRows<IEosProdsTable>({
       code: "eosio",
       json: true,
       limit,
-      lower_bound: 0,
+      lower_bound: lowBound,
       scope: "eosio",
       table: "producers",
-      upper_bound: -1
+      upper_bound: upperBound
     });
   }
 }

@@ -13,6 +13,7 @@ export declare const EOSMethods: {
         btoa: string;
         code: string;
         info: string;
+        producer: string;
         rawCodeAndABI: string;
         sendTx: string;
         sendTxList: string;

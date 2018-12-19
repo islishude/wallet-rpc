@@ -1,4 +1,4 @@
-import { EOSVersion, IEosAbi, IEosAccount, IEosBlockInfo, IEosChainInfo, IEosProdsTable, IEosTrx } from "./type";
+import { EOSVersion, IEosAbi, IEosAccount, IEosBlockInfo, IEosChainInfo, IEosProds, IEosProdsTable, IEosTrx } from "./type";
 export declare class EOSClient {
     URL: string;
     coinName: string;
@@ -66,8 +66,8 @@ export declare class EOSClient {
         code: string;
         table: string;
         json: boolean;
-        lower_bound?: number;
-        upper_bound?: number;
+        lower_bound?: string | number;
+        upper_bound?: string | number;
         limit?: number;
         key_type?: string;
         index_position?: number;
@@ -134,7 +134,19 @@ export declare class EOSClient {
         cpuPrice: string;
         netPrice: string;
     }>;
-    getProducerList(limit?: number): Promise<{
+    /**
+     * Get producer list,available 1.4 or above,call `getProducerTable` if you run in lower version
+     * @param limit count you wanna
+     * @param lowBound a-z 1-5
+     */
+    getProducerList(limit: number, lowBound: string): Promise<IEosProds>;
+    /**
+     * Get producer list,available 1.0 version or above
+     * @param limit count you wanna
+     * @param lowBound a-z 1-5
+     * @param upperBound a-z 1-5
+     */
+    getProducerTable(lowBound: string, upperBound: string, limit?: number): Promise<{
         rows: IEosProdsTable[];
         more: boolean;
     }>;
