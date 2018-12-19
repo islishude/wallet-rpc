@@ -27,5 +27,5 @@ Supports top-level-await by default.
 
 ## More
 
-[Document](https://github.com/isLishude/wallet-rpc/blob/dev/doc.md)  
-[Feedback](https://github.com/isLishude/wallet-rpc/issues/new)
+[:books:Document](https://github.com/isLishude/wallet-rpc/blob/dev/doc.md)  
+[:bug:Feedback](https://github.com/isLishude/wallet-rpc/issues/new)
