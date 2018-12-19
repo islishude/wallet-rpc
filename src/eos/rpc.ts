@@ -317,6 +317,8 @@ export class EOSClient {
    * @param limit count you wanna
    * @param lowBound a-z 1-5
    * @param upperBound a-z 1-5
+   * @example find producer list which name start with `a`.
+   * getProducerTable({ lowBound: "a", upperBound: "b", limit: 1000 })
    */
   public async getProducerTable(
     lowBound: string,
