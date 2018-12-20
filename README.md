@@ -7,6 +7,12 @@ JSONRPC2.0 client with CLI of crypto-currency by TypeScript for Node.js
 - EthereumSeries(Geth 1.8.0+ or Parity 1.0.0+)
 - EOS(v1.3.0+)
 
+## Install
+
+```shell
+npm install wallet-rpc --save
+```
+
 ## CLI
 
 **NPX**
@@ -27,5 +33,5 @@ Supports top-level-await by default.
 
 ## More
 
-[:books:Document](https://github.com/isLishude/wallet-rpc/blob/dev/doc.md)  
-[:bug:Feedback](https://github.com/isLishude/wallet-rpc/issues/new)
+[:books: Document](https://github.com/isLishude/wallet-rpc/blob/dev/doc.md)  
+[:bug: Feedback](https://github.com/isLishude/wallet-rpc/issues/new)

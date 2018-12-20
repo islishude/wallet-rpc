@@ -1,10 +1,3 @@
-## Install
-
-```shell
-# Recommend: Node.js 10 LTS
-npm install wallet-rpc --save
-```
-
 ## API
 
 - [Bitcoin](./types/bitcoin/rpc.d.ts)
