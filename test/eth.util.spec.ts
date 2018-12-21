@@ -1,14 +1,28 @@
-import { ok } from "assert";
+import { strictEqual } from "assert";
 import { EthereumUtil } from "../src/ethereum/util";
 
-const { hexToDecimalString } = EthereumUtil;
+/** spell-checker: disable */
 {
-  // hexToDecimalString testing
-  const test1 = hexToDecimalString("0x") === "0";
-  const test2 = hexToDecimalString("f") === "15";
-  const test3 = hexToDecimalString("0xf") === "15";
+  const testFunc = EthereumUtil.decodeABIString;
+  {
+    // BNB
+    const raw =
+      "0x000000000000000000000000000000000000000000000000000000000000002" +
+      "00000000000000000000000000000000000000000000000000000000000000003" +
+      "424e420000000000000000000000000000000000000000000000000000000000";
+    const actual = testFunc(raw);
+    const expect = "BNB";
+    strictEqual(actual, expect, "BNB failed");
+  }
 
-  ok(test1, "0x");
-  ok(test2, "f");
-  ok(test3, "0xf");
+  {
+    // EGCC
+    const raw =
+      "0x000000000000000000000000000000000000000000000000000000000000002" +
+      "0000000000000000000000000000000000000000000000000000000000000000c" +
+      "456e67696e6520546f6b656e0000000000000000000000000000000000000000";
+    const actual = testFunc(raw);
+    const expect = "Engine Token";
+    strictEqual(actual, expect, "EGCC faild");
+  }
 }

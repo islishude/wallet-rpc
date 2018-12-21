@@ -1,32 +1,7 @@
 import Axios, { AxiosRequestConfig } from "axios";
 import { isNullOrUndefined } from "util";
 import { RpcErrorCatch } from "./helper";
-
-export interface IRpcResponse<T = any> {
-  jsonrpc: string;
-  id: number | string;
-  result: T;
-  error?: IRpcErrorStruct;
-}
-
-export interface IRpcErrorStruct {
-  code: number;
-  message: string;
-}
-
-export interface IRpcRequest {
-  jsonrpc: "2.0" | "1.0";
-  id: number | string;
-  method: string;
-  params: any[];
-}
-
-export interface IRpcConfig {
-  ip?: string;
-  port?: string;
-  user?: string;
-  pass?: string;
-}
+import { IRpcRequest, IRpcResponse } from "./type";
 
 export default abstract class RPCClient {
   protected URL: string;
@@ -98,35 +73,6 @@ export default abstract class RPCClient {
     } catch (err) {
       throw RpcErrorCatch(err, this.URL, reqData, this.coinName);
     }
-  }
-
-  /**
-   * Bulk rpc call addition
-   * @param method
-   * @param param
-   * @param id
-   */
-  public BulkAdd(data: IRpcRequest): void {
-    this.BulkData.push(data);
-  }
-
-  /**
-   * Bulk RPC Call func
-   * recommendation using it from same request bulk
-   */
-  public async BulkRpcCall<T = any>() {
-    if (this.BulkData.length === 0) {
-      return [];
-    }
-    const reqData: IRpcRequest[] = this.BulkData;
-    // clear data
-    this.BulkData = [];
-    const res = await Axios.post<Array<IRpcResponse<T>>>(
-      this.URL,
-      reqData,
-      this.reqConfig
-    );
-    return res.data;
   }
 
   /**

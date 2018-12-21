@@ -1,4 +1,5 @@
-import RPCClient, { IRpcConfig, IRpcResponse } from "../client";
+import RPCClient from "../client";
+import { IRpcConfig, IRpcResponse } from "../type";
 import { IBtcBlockchainInfo, IBtcBlockInfo, IBtcFee, IBtcMemoryInfo, IBtcMemPoolInfo, IBtcTrxOut, IBtcTxInfo, IBtcVerboseMemPool, IBtcWalletInfo } from "./type";
 export declare class BitcoinClient extends RPCClient {
     constructor(conf?: IRpcConfig);

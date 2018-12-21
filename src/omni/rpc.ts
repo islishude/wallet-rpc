@@ -1,6 +1,6 @@
 import { BitcoinMethods } from "../bitcoin/mtd";
 import { BitcoinClient } from "../bitcoin/rpc";
-import { IRpcConfig } from "../client";
+import { IRpcConfig } from "../type";
 import { OmniLayerMethods as mtd } from "./mtd";
 import { IOmniClientInfo, IOmniPropertyInfo, IOmniTxInfo } from "./type";
 

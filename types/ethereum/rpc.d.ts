@@ -1,5 +1,6 @@
 /// <reference types="node" />
-import RPCClient, { IRpcConfig, IRpcResponse } from "../client";
+import RPCClient from "../client";
+import { IRpcConfig, IRpcResponse } from "../type";
 import { IEthBlock, IEthBlockSimple, IEthBlockVerbose, IEthCallFuncParam, IEthSentTxStruct, IEthStatus, IEthSyncing, IEthTraceTxReturn, IEthTx, IEthTxPoolContent, IEthTxPoolInspect, IEthTxPoolStatus, IEthTxReceipt, IParityTxTrace } from "./type";
 export declare class EthereumClient extends RPCClient {
     constructor(conf?: IRpcConfig);
@@ -13,6 +14,7 @@ export declare class EthereumClient extends RPCClient {
     syncProgress(): Promise<IRpcResponse<boolean | IEthSyncing>>;
     getBalance(address: string, status?: IEthStatus): Promise<IRpcResponse<string>>;
     getBlockCount(): Promise<IRpcResponse<string>>;
+    getHeight(): Promise<IRpcResponse<string>>;
     getBlockByHash(hash: string, getFullTx?: boolean): Promise<IRpcResponse<IEthBlock>>;
     /**
      * Get information about a block by block number.
@@ -123,15 +125,8 @@ export declare class EthereumClient extends RPCClient {
     ParityPendingTrx(): Promise<IRpcResponse<IEthTx[]>>;
     ParityRemoveTrx(hash: string): Promise<IRpcResponse<IEthTx | null>>;
     ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
-    ERC20Decimals(token: string): Promise<undefined | number>;
+    ERC20Decimals(token: string): Promise<undefined | string>;
     ERC20TotalSupply(token: string): Promise<string | undefined>;
     ERC20Name(token: string): Promise<undefined | string>;
     ERC20Symbol(token: string): Promise<undefined | string>;
-    ERC20TokenInfo(token: string): Promise<{
-        address: string;
-        decimals: number | undefined;
-        name: string | undefined;
-        symbol: string | undefined;
-        totalSupply: string | undefined;
-    }>;
 }

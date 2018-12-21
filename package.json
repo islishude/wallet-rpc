@@ -1,6 +1,6 @@
 {
   "name": "wallet-rpc",
-  "version": "4.6.4",
+  "version": "5.0.0",
   "description": "JSONRPC2.0 client with CLI of crypto-currency by TypeScript",
   "main": "dist/index.js",
   "scripts": {
@@ -37,8 +37,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
-    "bignumber.js": "^8.0.1"
+    "axios": "^0.18.0"
   },
   "types": "types/index.d.ts",
   "devDependencies": {

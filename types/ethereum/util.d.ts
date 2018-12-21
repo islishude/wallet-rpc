@@ -1,7 +1,5 @@
-import BigNumber from "bignumber.js";
 import { IEthAbiStruct } from "./type";
 export declare class EthereumUtil {
-    static readonly gWei: BigNumber;
     static readonly ERC20FuncSig: {
         allowance: string;
         approve: string;
@@ -34,12 +32,6 @@ export declare class EthereumUtil {
      * address(0)
      */
     static readonly addressNull: string;
-    static hexToNumber(hex: string): number;
-    /**
-     * Get recommend gas price by `eth_gasPrice` RPC call from EtherScan.io
-     * @param apiKey you EtherScan API key
-     */
-    static getRecommendGasPrice(apiKey?: string): Promise<string>;
     /**
      * Pad ethereum address to 64 bits hex string without 0x
      * Can be use for ERC20 transfer call and ERC20 balance call
@@ -48,9 +40,10 @@ export declare class EthereumUtil {
     static padAddress(address: string): string;
     /**
      * transform Hex string to UTF8-encoding and trim string
-     * @param hex hex string that can be prefix with `0x`
+     * @param raw hex string that can be prefix with `0x`
      */
-    static toUtf8(hex: string): string;
+    static toUtf8(raw: string): string;
+    static decodeABIString(raw: string): string;
     /**
      * validate eth address
      * @param address a checked eth address or not
@@ -71,8 +64,4 @@ export declare class EthereumUtil {
      * defined/eth.d.ts  Ethereum.IAbiStruct
      */
     static getABI(token: string, apiKey?: string): Promise<IEthAbiStruct[] | null>;
-    static hexToDecimalString(hex: string): string;
-    static toWei(eth: number): string;
-    static toEth(wei: string): string;
-    static numberToHex(int: number): string;
 }

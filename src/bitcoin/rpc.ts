@@ -1,4 +1,5 @@
-import RPCClient, { IRpcConfig, IRpcResponse } from "../client";
+import RPCClient from "../client";
+import { IRpcConfig, IRpcResponse } from "../type";
 import { BitcoinMethods as mtd } from "./mtd";
 import {
   IBtcBlockchainInfo,

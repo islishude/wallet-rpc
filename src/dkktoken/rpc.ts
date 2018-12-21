@@ -1,4 +1,5 @@
-import RPCClient, { IRpcConfig, IRpcResponse } from "../client";
+import RPCClient from "../client";
+import { IRpcConfig, IRpcResponse } from "../type";
 import { DKKTokenMethods as mtd } from "./mtd";
 import { IDkktBlockInfo, IDkktTxInfo, IDkktWalletInfo } from "./type";
 export class DKKTClient extends RPCClient {

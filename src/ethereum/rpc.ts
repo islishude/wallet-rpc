@@ -1,7 +1,7 @@
 import { ok } from "assert";
-import BN from "bignumber.js";
-import { isNullOrUndefined, isString, isUndefined } from "util";
-import RPCClient, { IRpcConfig, IRpcResponse } from "../client";
+import { isNullOrUndefined, isString } from "util";
+import RPCClient from "../client";
+import { IRpcConfig, IRpcResponse } from "../type";
 import { EthereumMethods as mtd } from "./mtd";
 import {
   IEthBlock,
@@ -17,19 +17,11 @@ import {
   IEthTxPoolInspect,
   IEthTxPoolStatus,
   IEthTxReceipt,
-  IParityTxTrace,
+  IParityTxTrace
 } from "./type";
 import { EthereumUtil } from "./util";
 
-const {
-  ERC20FuncSig,
-  ERC20FuncSigUpper,
-  hexToDecimalString,
-  hexToNumber,
-  isAddress,
-  padAddress,
-  toUtf8
-} = EthereumUtil;
+const { ERC20FuncSig, ERC20FuncSigUpper, isAddress, padAddress } = EthereumUtil;
 
 export class EthereumClient extends RPCClient {
   // go-ethereum client RPC settings has no user and password for rpc
@@ -63,6 +55,10 @@ export class EthereumClient extends RPCClient {
   // return hex number
   public getBlockCount() {
     return this.RpcCall<string>(mtd.block.count);
+  }
+
+  public getHeight() {
+    return this.getBlockCount();
   }
 
   public getBlockByHash(hash: string, getFullTx: boolean = false) {
@@ -257,11 +253,11 @@ export class EthereumClient extends RPCClient {
   }
 
   public ParityPendingTrx() {
-    return this.RpcCall<IEthTx[]>(mtd.tx.parity.pending)
+    return this.RpcCall<IEthTx[]>(mtd.tx.parity.pending);
   }
 
   public ParityRemoveTrx(hash: string) {
-    return this.RpcCall<IEthTx | null>(mtd.tx.parity.remove, [hash])
+    return this.RpcCall<IEthTx | null>(mtd.tx.parity.remove, [hash]);
   }
 
   public async ERC20Balance(
@@ -283,7 +279,7 @@ export class EthereumClient extends RPCClient {
     return result;
   }
 
-  public async ERC20Decimals(token: string): Promise<undefined | number> {
+  public async ERC20Decimals(token: string): Promise<undefined | string> {
     const param: IEthCallFuncParam = {
       data: ERC20FuncSig.decimals,
       to: token
@@ -309,7 +305,7 @@ export class EthereumClient extends RPCClient {
     if (!tmp) {
       return;
     }
-    return hexToNumber(tmp);
+    return tmp;
   }
 
   public async ERC20TotalSupply(token: string): Promise<string | undefined> {
@@ -321,7 +317,7 @@ export class EthereumClient extends RPCClient {
     if (totalSupply === "0x" || isNullOrUndefined(totalSupply)) {
       return;
     }
-    return hexToDecimalString(totalSupply);
+    return totalSupply;
   }
 
   public async ERC20Name(token: string): Promise<undefined | string> {
@@ -352,7 +348,7 @@ export class EthereumClient extends RPCClient {
       return;
     }
 
-    return toUtf8(tmp);
+    return EthereumUtil.decodeABIString(tmp);
   }
 
   public async ERC20Symbol(token: string): Promise<undefined | string> {
@@ -382,36 +378,6 @@ export class EthereumClient extends RPCClient {
     if (!isString(tmp)) {
       return;
     }
-    return toUtf8(tmp);
-  }
-
-  public async ERC20TokenInfo(
-    token: string
-  ): Promise<{
-    address: string;
-    decimals: number | undefined;
-    name: string | undefined;
-    symbol: string | undefined;
-    totalSupply: string | undefined;
-  }> {
-    const [name, symbol, decimals, totalSupply] = await Promise.all([
-      this.ERC20Name(token),
-      this.ERC20Symbol(token),
-      this.ERC20Decimals(token),
-      this.ERC20TotalSupply(token)
-    ]);
-
-    return {
-      address: token,
-      decimals,
-      // if name === "" set it equal with symbol
-      // eg. EOS token has no name
-      name: name || symbol,
-      symbol: symbol || name,
-      // For ERC721 it's not fixed
-      totalSupply: isUndefined(totalSupply)
-        ? undefined
-        : new BN(totalSupply).div(new BN(10).pow(decimals || 0)).toString(10)
-    };
+    return EthereumUtil.decodeABIString(tmp);
   }
 }

@@ -9,7 +9,7 @@ export { OmniLayerMethods } from "./omni/mtd";
 export { OmniLayerClient } from "./omni/rpc";
 export { EOSClient } from "./eos/rpc";
 export { IEosAccount, IEosAuthority, IEosBlockInfo, IEosChainInfo, IEosTrx, IEosAbi, IEosError } from "./eos/type";
-export { IRpcRequest, IRpcErrorStruct, IRpcResponse, IRpcConfig } from "./client";
+export { IRpcRequest, IRpcErrorStruct, IRpcResponse, IRpcConfig } from "./type";
 export { IEthAbiCommonStruct, IEthAbiInputStruct, IEthAbiOutputStruct, IEthAbiStruct, IEthBlock, IEthBlockSimple, IEthBlockVerbose, IEthCallFuncParam, IEtherScanAbiResponse, IEthReceiptLogs, IEthSentTxStruct, IEthStatus, IEthSyncing, IEthTraceTxReturn, IEthTx, IEthTxPoolContent, IEthTxReceipt, IParityCallAction, IParityCallResult, IParityCreateAction, IParityCreateResult, IParitySuicideAction, IParityTxTrace } from "./ethereum/type";
 export { IOmniClientInfo, IOmniTxInfo } from "./omni/type";
 export { IDkktBlockInfo, IDkktTxInfo, IDkktWalletInfo, IDkktTxVin, IDkktTxVout } from "./dkktoken/type";

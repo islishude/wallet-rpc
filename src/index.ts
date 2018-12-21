@@ -24,7 +24,7 @@ export {
   IRpcErrorStruct,
   IRpcResponse,
   IRpcConfig
-} from "./client";
+} from "./type";
 
 export {
   IEthAbiCommonStruct,

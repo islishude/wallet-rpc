@@ -1,16 +1,10 @@
 import Axios from "axios";
-import BigNumber from "bignumber.js";
-import { IRpcResponse } from "../client";
 import { IEthAbiStruct, IEtherScanAbiResponse } from "./type";
 
-const hexPrefixReg = /0x/;
 const zeroPadding = "0".repeat(24);
 const isAddrReg = /^(0x)?[0-9a-fA-F]{40}$/;
-const nonPrintCharReg = /[\u0000-\u001f]/g;
 
 export class EthereumUtil {
-  public static readonly gWei = new BigNumber(10).pow(9);
-
   public static readonly ERC20FuncSig = {
     allowance: "0xdd62ed3e",
     approve: "0x095ea7b3",
@@ -54,39 +48,6 @@ export class EthereumUtil {
   public static readonly addressNull: string =
     "0x0000000000000000000000000000000000000000";
 
-  public static hexToNumber(hex: string): number {
-    if (hex === "0x") {
-      return 0;
-    }
-    return new BigNumber(hex, 16).toNumber();
-  }
-
-  /**
-   * Get recommend gas price by `eth_gasPrice` RPC call from EtherScan.io
-   * @param apiKey you EtherScan API key
-   */
-  public static async getRecommendGasPrice(apiKey: string = "YourApiKeyToken") {
-    const api: string = "https://api.etherscan.io/api";
-    const { data } = await Axios.get<IRpcResponse<string>>(api, {
-      params: {
-        action: "eth_gasPrice",
-        apiKey,
-        module: "proxy"
-      }
-    });
-    const tmp = new BigNumber(data.result).div(EthereumUtil.gWei);
-    if (tmp.lt(5)) {
-      return "5";
-    }
-    if (tmp.lt(10)) {
-      return "10";
-    }
-    if (tmp.lt(20)) {
-      return "20";
-    }
-    return tmp.times(1.2).toFixed(0);
-  }
-
   /**
    * Pad ethereum address to 64 bits hex string without 0x
    * Can be use for ERC20 transfer call and ERC20 balance call
@@ -101,13 +62,24 @@ export class EthereumUtil {
 
   /**
    * transform Hex string to UTF8-encoding and trim string
-   * @param hex hex string that can be prefix with `0x`
+   * @param raw hex string that can be prefix with `0x`
    */
-  public static toUtf8(hex: string): string {
-    return Buffer.from(hex.replace(hexPrefixReg, ""), "hex")
+  public static toUtf8(raw: string): string {
+    if (raw.length > 2 && (raw.startsWith("0x") || raw.startsWith("0X"))) {
+      raw = raw.slice(2, -1);
+    }
+    return Buffer.from(raw, "hex")
       .toString()
-      .replace(nonPrintCharReg, "")
+      .replace(/[\u0000-\u001f]/g, "")
       .trim();
+  }
+
+  public static decodeABIString(raw: string): string {
+    if (raw.length > 2 && (raw.startsWith("0x") || raw.startsWith("0X"))) {
+      raw = raw.slice(2, -1);
+    }
+    const data = raw.substr(128, Number.parseInt(raw.substr(64, 64), 16) * 2);
+    return Buffer.from(data, "hex").toString();
   }
 
   /**
@@ -128,6 +100,7 @@ export class EthereumUtil {
     }
     return hex;
   }
+
   /**
    * Get Eth Token ABI from EtherScan.io
    * @param token tokenAddress
@@ -162,28 +135,5 @@ export class EthereumUtil {
       throw new Error(e.message);
     }
   }
-
-  public static hexToDecimalString(hex: string): string {
-    if (hex === "0x") {
-      return "0";
-    }
-    if (!hex.startsWith("0x")) {
-      hex = "0x" + hex;
-    }
-    return new BigNumber(hex).toString(10);
-  }
-
-  public static toWei(eth: number): string {
-    const tmp = new BigNumber(10).pow(18);
-    return new BigNumber(eth).times(tmp).toString(10);
-  }
-
-  public static toEth(wei: string): string {
-    const tmp = new BigNumber(10).pow(18);
-    return new BigNumber(wei).div(tmp).toString(10);
-  }
-
-  public static numberToHex(int: number): string {
-    return "0x" + new BigNumber(int).toString(16);
-  }
 }
+ 
