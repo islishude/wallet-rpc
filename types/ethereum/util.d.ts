@@ -33,9 +33,8 @@ export declare class EthereumUtil {
      */
     static readonly addressNull: string;
     /**
-     * Pad ethereum address to 64 bits hex string without 0x
+     * Pad ethereum address to 64 bits hex string without 0x prefix
      * Can be use for ERC20 transfer call and ERC20 balance call
-     * @param address
      */
     static padAddress(address: string): string;
     /**
@@ -45,19 +44,16 @@ export declare class EthereumUtil {
     static toUtf8(raw: string): string;
     static decodeABIString(raw: string): string;
     /**
-     * validate eth address
-     * @param address a checked eth address or not
+     * check eth address is valid or not
      */
     static isAddress(address: string): boolean;
     /**
-     * add `0x` to hex string
+     * add `0x` prefix to hex string
      * if param starts with `0x` would return origin
      */
-    static addHexPad(hex: string): string;
+    static addHexPrefix(hex: string): string;
     /**
      * Get Eth Token ABI from EtherScan.io
-     * @param token tokenAddress
-     * @returns { status: string, message: string, result: string}
      * if status isn't "1" then the request is failed
      * the result is ABI JSON string,you should use JSON.parse()
      * type defined of ABI struct can be found in

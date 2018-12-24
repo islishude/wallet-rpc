@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { IEthAbiStruct, IEtherScanAbiResponse } from "./type";
 
-const zeroPadding = "0".repeat(24);
+const addrPadding = "000000000000000000000000";
 const isAddrReg = /^(0x)?[0-9a-fA-F]{40}$/;
 
 export class EthereumUtil {
@@ -49,15 +49,17 @@ export class EthereumUtil {
     "0x0000000000000000000000000000000000000000";
 
   /**
-   * Pad ethereum address to 64 bits hex string without 0x
+   * Pad ethereum address to 64 bits hex string without 0x prefix
    * Can be use for ERC20 transfer call and ERC20 balance call
-   * @param address
    */
   public static padAddress(address: string): string {
     if (!EthereumUtil.isAddress(address)) {
       throw new Error("Not a valid address");
     }
-    return zeroPadding + address.replace("0x", "");
+    if (address.startsWith("0x") || address.startsWith("0X")) {
+      address = address.slice(2);
+    }
+    return addrPadding + address;
   }
 
   /**
@@ -66,7 +68,7 @@ export class EthereumUtil {
    */
   public static toUtf8(raw: string): string {
     if (raw.length > 2 && (raw.startsWith("0x") || raw.startsWith("0X"))) {
-      raw = raw.slice(2, -1);
+      raw = raw.slice(2);
     }
     return Buffer.from(raw, "hex")
       .toString()
@@ -76,25 +78,24 @@ export class EthereumUtil {
 
   public static decodeABIString(raw: string): string {
     if (raw.length > 2 && (raw.startsWith("0x") || raw.startsWith("0X"))) {
-      raw = raw.slice(2, -1);
+      raw = raw.slice(2);
     }
     const data = raw.substr(128, Number.parseInt(raw.substr(64, 64), 16) * 2);
     return Buffer.from(data, "hex").toString();
   }
 
   /**
-   * validate eth address
-   * @param address a checked eth address or not
+   * check eth address is valid or not
    */
   public static isAddress(address: string): boolean {
     return isAddrReg.test(address.toLowerCase());
   }
 
   /**
-   * add `0x` to hex string
+   * add `0x` prefix to hex string
    * if param starts with `0x` would return origin
    */
-  public static addHexPad(hex: string): string {
+  public static addHexPrefix(hex: string): string {
     if (!hex.startsWith("0x")) {
       hex = "0x" + hex;
     }
@@ -103,8 +104,6 @@ export class EthereumUtil {
 
   /**
    * Get Eth Token ABI from EtherScan.io
-   * @param token tokenAddress
-   * @returns { status: string, message: string, result: string}
    * if status isn't "1" then the request is failed
    * the result is ABI JSON string,you should use JSON.parse()
    * type defined of ABI struct can be found in
@@ -136,4 +135,3 @@ export class EthereumUtil {
     }
   }
 }
- 
