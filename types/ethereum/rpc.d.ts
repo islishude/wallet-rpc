@@ -125,8 +125,14 @@ export declare class EthereumClient extends RPCClient {
     ParityPendingTrx(): Promise<IRpcResponse<IEthTx[]>>;
     ParityRemoveTrx(hash: string): Promise<IRpcResponse<IEthTx | null>>;
     ERC20Balance(token: string, address: string, isPending?: boolean): Promise<string>;
-    ERC20Decimals(token: string): Promise<undefined | string>;
+    ERC20Decimals(token: string): Promise<undefined | number>;
     ERC20TotalSupply(token: string): Promise<string | undefined>;
     ERC20Name(token: string): Promise<undefined | string>;
     ERC20Symbol(token: string): Promise<undefined | string>;
+    ERC20TokenInfo(token: string): Promise<{
+        decimals: number | undefined;
+        name: string | undefined;
+        symbol: string | undefined;
+        totalSupply: string | undefined;
+    }>;
 }

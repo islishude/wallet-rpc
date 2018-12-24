@@ -28,24 +28,11 @@ export default abstract class RPCClient {
       timeout: 60000
     };
 
-    // if (/^https.+$/.test(this.ip)) {
-    //   this.reqConfig.httpsAgent = new httpsAgent({ keepAlive: true });
-    // } else {
-    //   this.reqConfig.httpAgent = new httpAgent({ keepAlive: true });
-    // }
     this.URL = /^http.+$/.test(this.ip)
       ? `${this.ip}:${this.port}`
       : `http://${this.ip}:${this.port}`;
   }
 
-  /**
-   * JSON-RPC call func
-   * @param method RPC Request Method
-   * @param params RPC Request Params
-   * @param id RPC Request id
-   * @returns RPCResponse<T>
-   * @throws Response non-2xx response or request error
-   */
   public async RpcCall<T = any>(
     method: string,
     params?: any[],
@@ -65,9 +52,9 @@ export default abstract class RPCClient {
         this.reqConfig
       );
 
-      // Catch has error in response but status code is 200
+      // Catch has error in response but maybe status code is 200
       if (!isNullOrUndefined(ret.data.error)) {
-        throw { response: ret.data };
+        throw { response: { data: ret.data, status: ret.status } };
       }
       return ret.data;
     } catch (err) {

@@ -3,26 +3,35 @@ import { EthereumUtil } from "../src/ethereum/util";
 
 /** spell-checker: disable */
 {
+  // test decodeABIString
   const testFunc = EthereumUtil.decodeABIString;
-  {
-    // BNB
-    const raw =
-      "0x000000000000000000000000000000000000000000000000000000000000002" +
-      "00000000000000000000000000000000000000000000000000000000000000003" +
-      "424e420000000000000000000000000000000000000000000000000000000000";
-    const actual = testFunc(raw);
-    const expect = "BNB";
-    strictEqual(actual, expect, "BNB failed");
-  }
+  const testData = [
+    {
+      expect: "BNB",
+      name: "BNB",
+      param:
+        "0x" +
+        "0000000000000000000000000000000000000000000000000000000000000020" +
+        "0000000000000000000000000000000000000000000000000000000000000003" +
+        "424e420000000000000000000000000000000000000000000000000000000000"
+    },
+    {
+      expect: "Engine Token",
+      name: "EGCC",
+      param:
+        "0x" +
+        "0000000000000000000000000000000000000000000000000000000000000020" +
+        "000000000000000000000000000000000000000000000000000000000000000c" +
+        "456e67696e6520546f6b656e0000000000000000000000000000000000000000"
+    }
+  ];
 
-  {
-    // EGCC
-    const raw =
-      "0x000000000000000000000000000000000000000000000000000000000000002" +
-      "0000000000000000000000000000000000000000000000000000000000000000c" +
-      "456e67696e6520546f6b656e0000000000000000000000000000000000000000";
-    const actual = testFunc(raw);
-    const expect = "Engine Token";
-    strictEqual(actual, expect, "EGCC faild");
+  for (const { param, expect, name } of testData) {
+    const actual = testFunc(param);
+    strictEqual(
+      actual,
+      expect,
+      `${name} test failed want ${expect} but got ${actual}`
+    );
   }
 }

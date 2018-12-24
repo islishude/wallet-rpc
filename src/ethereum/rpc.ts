@@ -279,7 +279,7 @@ export class EthereumClient extends RPCClient {
     return result;
   }
 
-  public async ERC20Decimals(token: string): Promise<undefined | string> {
+  public async ERC20Decimals(token: string): Promise<undefined | number> {
     const param: IEthCallFuncParam = {
       data: ERC20FuncSig.decimals,
       to: token
@@ -305,7 +305,7 @@ export class EthereumClient extends RPCClient {
     if (!tmp) {
       return;
     }
-    return tmp;
+    return Number.parseInt(tmp, 16);
   }
 
   public async ERC20TotalSupply(token: string): Promise<string | undefined> {
@@ -379,5 +379,21 @@ export class EthereumClient extends RPCClient {
       return;
     }
     return EthereumUtil.decodeABIString(tmp);
+  }
+
+  public async ERC20TokenInfo(token: string) {
+    const [decimals, name, symbol, totalSupply] = await Promise.all([
+      this.ERC20Decimals(token),
+      this.ERC20Name(token),
+      this.ERC20Symbol(token),
+      this.ERC20TotalSupply(token)
+    ]);
+
+    return {
+      decimals,
+      name,
+      symbol,
+      totalSupply
+    };
   }
 }
