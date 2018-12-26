@@ -1,9 +1,12 @@
+git:
+  depth: 1
 language: node_js
 node_js:
   - "8"
   - "10"
   - "11"
 install:
-  - "npm install"
+  - "npm ci"
+cache: npm
 script:
   - "npm test"
