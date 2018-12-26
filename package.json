@@ -6,11 +6,8 @@
   "scripts": {
     "build": "tslint -p tsconfig.json && rm -rf dist types && tsc",
     "test": "ts-node test/*.ts",
-    "prepublish": "npm run build",
-    "pub": "git push --all && git push --tags && npm publish",
-    "docker-version": "docker build -t islishude/$npm_package_name:latest .",
-    "docker-latest": "docker build -t islishude/$npm_package_name:$npm_package_version .",
-    "docker": "npm run docker-version && npm run docker-latest"
+    "prerelease": "npm run build",
+    "release": "git push --all && git push --tags && npm publish"
   },
   "repository": {
     "type": "git",
