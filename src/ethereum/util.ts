@@ -77,11 +77,13 @@ export class EthereumUtil {
   }
 
   public static decodeABIString(raw: string): string {
-    if (raw.length > 2 && (raw.startsWith("0x") || raw.startsWith("0X"))) {
-      raw = raw.slice(2);
-    }
+    raw = EthereumUtil.rmHexPrefix(raw);
     const data = raw.substr(128, Number.parseInt(raw.substr(64, 64), 16) * 2);
     return Buffer.from(data, "hex").toString();
+  }
+
+  public static decodeABINumber(raw: string): number {
+    return Number.parseInt(raw, 16);
   }
 
   /**
@@ -133,5 +135,12 @@ export class EthereumUtil {
     } catch (e) {
       throw new Error(e.message);
     }
+  }
+
+  public static rmHexPrefix(raw: string): string {
+    if (raw.length >= 2 && (raw.startsWith("0x") || raw.startsWith("0X"))) {
+      raw = raw.slice(2);
+    }
+    return raw;
   }
 }

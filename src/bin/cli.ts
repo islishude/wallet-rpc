@@ -17,7 +17,6 @@ const color = {
   _: "\x1b[4m",
   clear: "\x1b[0m",
   yellow: "\x1b[33m"
-  // green: "\x1b[32m",
 };
 
 log(`
@@ -37,7 +36,7 @@ ${color.clear}
 
 See the README to learn more API and RPC supports list.
 
-Run with \`npx -n --experimental-repl-await wallet-rpc\` to enable top-level await if you are in the node.js v10 or above.
+Run \`npx -n --experimental-repl-await wallet-rpc\` to enable top-level-await with node.js v10 LTS.
 
 e.g.
 ${color.yellow}

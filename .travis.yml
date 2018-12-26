@@ -10,6 +10,7 @@ install:
 cache: npm
 script:
   - "npm test"
+  - "npm run build"
 notifications:
   email:
     on_success: "change"
