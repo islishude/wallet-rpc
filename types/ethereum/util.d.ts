@@ -43,6 +43,7 @@ export declare class EthereumUtil {
      */
     static toUtf8(raw: string): string;
     static decodeABIString(raw: string): string;
+    static decodeABINumber(raw: string): number;
     /**
      * check eth address is valid or not
      */
@@ -60,4 +61,5 @@ export declare class EthereumUtil {
      * defined/eth.d.ts  Ethereum.IAbiStruct
      */
     static getABI(token: string, apiKey?: string): Promise<IEthAbiStruct[] | null>;
+    static rmHexPrefix(raw: string): string;
 }

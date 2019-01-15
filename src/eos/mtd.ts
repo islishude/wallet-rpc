@@ -18,7 +18,8 @@ export const EOSMethods = {
     sendTx: "push_transaction",
     sendTxList: "push_transactions",
     stats: "get_currency_stats",
-    tableRows: "get_table_rows",
+    tableByScope: "get_table_by_scope",
+    tableRows: "get_table_rows"
   },
   history: {
     actions: "get_actions",

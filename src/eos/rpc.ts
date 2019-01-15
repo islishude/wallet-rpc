@@ -148,21 +148,39 @@ export class EOSClient {
     });
   }
 
+  /**
+   * Returns an object containing rows from the specified table.
+   */
   public getTableRows<T = any>(data: {
-    scope: string;
-    code: string;
-    table: string;
-    json: boolean;
-    lower_bound?: string | number;
-    upper_bound?: string | number;
-    limit?: number;
-    key_type?: string;
-    index_position?: number;
+    scope: string | number; // The account name where the scope of the data resides
+    code: string | number; // The name of the smart contract that controls the provided table
+    table: string; // The name of the table to query
+    json: boolean; // Return json object or return formatted response
+    table_key?: string;
+    lower_bound?: string | number; // Filters results to return the first element that is not lesser than provided value in set
+    upper_bound?: string | number; // Filters results to return the first element that is greater than provided value in set
+    limit?: number; // Limit results returned in response
+    key_type?: string | number; // Type of key specified by index_position (for example: uint64_t or name)
+    index_position?: number; // 1 for primary index;2 for secondary index,etc
     encode_type?: "dec" | "hex";
   }) {
     return this.CALL<{ rows: T[]; more: boolean }>(
       modules.chain,
       methods.chain.tableRows,
+      data
+    );
+  }
+
+  public getTableByScope<T = any>(data: {
+    code: string;
+    table: string;
+    lower_bound?: string | number; // Filters results to return the first element that is not lesser than provided value in set
+    upper_bound?: string | number; // Filters results to return the first element that is greater than provided value in set
+    limit?: number; // Limit results returned in response
+  }) {
+    return this.CALL<{ rows: T[]; more: boolean }>(
+      modules.chain,
+      methods.chain.tableByScope,
       data
     );
   }

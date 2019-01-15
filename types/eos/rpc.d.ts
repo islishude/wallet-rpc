@@ -61,17 +61,31 @@ export declare class EOSClient {
         wasm: string;
         abi: string;
     }>;
+    /**
+     * Returns an object containing rows from the specified table.
+     */
     getTableRows<T = any>(data: {
-        scope: string;
-        code: string;
+        scope: string | number;
+        code: string | number;
         table: string;
         json: boolean;
+        table_key?: string;
         lower_bound?: string | number;
         upper_bound?: string | number;
         limit?: number;
-        key_type?: string;
+        key_type?: string | number;
         index_position?: number;
         encode_type?: "dec" | "hex";
+    }): Promise<{
+        rows: T[];
+        more: boolean;
+    }>;
+    getTableByScope<T = any>(data: {
+        code: string;
+        table: string;
+        lower_bound?: string | number;
+        upper_bound?: string | number;
+        limit?: number;
     }): Promise<{
         rows: T[];
         more: boolean;
