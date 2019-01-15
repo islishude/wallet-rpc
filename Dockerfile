@@ -1,6 +1,6 @@
-ARG NODE_VERSION=10.14.2
+ARG NODE_VERSION=10.15.0
 
-FROM node:10.14.2-alpine
+FROM node:${NODE_VERSION}}
 RUN apk add --no-cache ca-certificates
 WORKDIR /app
 COPY ./package.json ./package-lock.json ./
