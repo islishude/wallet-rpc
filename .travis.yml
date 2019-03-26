@@ -9,8 +9,8 @@ install:
   - "npm ci"
 cache: npm
 script:
-  - "npm test"
   - "npm run build"
+  - "npm test"
 notifications:
   email:
     on_success: "change"
