@@ -1,12 +1,17 @@
 {
   "name": "wallet-rpc",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "JSONRPC2.0 client with CLI of crypto-currency by TypeScript",
-  "main": "dist/index.js",
+  "main": "dist",
+  "types": "dist",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tslint -p tsconfig.json && rm -rf dist types && tsc",
+    "postinstall": "npm install -D @types/node",
+    "build": "tslint -p tsconfig.json && del-cli dist && tsc",
     "test": "ts-node test/*.ts",
-    "prerelease": "npm run build",
+    "prerelease": "npm run build && npm test",
     "release": "git push --all && git push --tags && npm publish"
   },
   "repository": {
@@ -19,14 +24,11 @@
   },
   "keywords": [
     "Bitcoin",
-    "DKKToken",
     "Ethereum",
-    "BitcoinCash",
-    "Litecoin",
     "USDT",
     "OmniLayer",
-    "JSONRPC",
-    "EOS"
+    "EOS",
+    "JSONRPC"
   ],
   "author": {
     "email": "lishude@foxmail.com",
@@ -36,9 +38,9 @@
   "dependencies": {
     "axios": "^0.18.0"
   },
-  "types": "types/index.d.ts",
   "devDependencies": {
     "@types/node": "^10.12.15",
+    "del-cli": "^1.1.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.17.0",

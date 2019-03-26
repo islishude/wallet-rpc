@@ -1,6 +1,6 @@
-import Axios, { AxiosRequestConfig } from "axios";
+import Axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { isNullOrUndefined } from "util";
-import { RpcErrorCatch } from "./helper";
+import { IWalletRpcError } from "./helper";
 import { IRpcRequest, IRpcResponse } from "./type";
 
 export default abstract class RPCClient {
@@ -25,7 +25,8 @@ export default abstract class RPCClient {
         "Content-Type": "application/json",
         "User-Agent": "wallet-rpc"
       },
-      timeout: 60000
+      timeout: 60000,
+      validateStatus: () => false
     };
 
     this.URL = /^http.+$/.test(this.ip)
@@ -45,21 +46,44 @@ export default abstract class RPCClient {
       params: params || []
     };
 
+    let ret: AxiosResponse<IRpcResponse<T>>;
     try {
-      const ret = await Axios.post<IRpcResponse<T>>(
+      ret = await Axios.post<IRpcResponse<T>>(
         this.URL,
         reqData,
         this.reqConfig
       );
-
-      // Catch has error in response but maybe status code is 200
-      if (!isNullOrUndefined(ret.data.error)) {
-        throw { response: { data: ret.data, status: ret.status } };
-      }
-      return ret.data;
     } catch (err) {
-      throw RpcErrorCatch(err, this.URL, reqData, this.coinName);
+      const e: IWalletRpcError = {
+        message: err.message,
+        reason: "reqeust error",
+        request: {
+          coinName: this.coinName,
+          data: reqData,
+          url: this.URL
+        },
+        response: null,
+        statusCode: 400
+      };
+      throw e;
     }
+
+    // Catch response error
+    if (!isNullOrUndefined(ret.data.error)) {
+      const err: IWalletRpcError = {
+        message: ret.data.error.message || "Response error",
+        reason: "Response error",
+        request: {
+          coinName: this.coinName,
+          data: reqData,
+          url: this.URL
+        },
+        response: ret.data,
+        statusCode: ret.status
+      };
+      throw err;
+    }
+    return ret.data;
   }
 
   /**

@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { inspect, isUndefined } from "util";
 
-interface IWalletRpcError {
+export interface IWalletRpcError {
   message: string;
   reason: string;
   request: {

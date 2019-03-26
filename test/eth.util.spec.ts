@@ -1,4 +1,4 @@
-import { EthereumUtil } from "../src/ethereum/util";
+import { EthereumUtil } from "..";
 import { Testing } from "./testing";
 /** spell-checker: disable */
 
