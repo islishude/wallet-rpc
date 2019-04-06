@@ -8,6 +8,6 @@ RUN [ "npm", "prune", "--production"]
 
 FROM node:10.15.3-alpine
 WORKDIR /app
-COPY --from=BUILDER /app/dist/ /app/dist/
-COPY --from=BUILDER /app/node_modules /app/node_modules
-CMD [ "node", "--experimental-repl-await", "/app/dist/bin/cli.js" ]
+COPY --from=BUILDER /app/dist/ dist/
+COPY --from=BUILDER /app/node_modules/ node_modules/
+CMD [ "node", "--experimental-repl-await", "dist/bin/cli.js" ]
