@@ -26,7 +26,7 @@ export default abstract class RPCClient {
         "User-Agent": "wallet-rpc"
       },
       timeout: 60000,
-      validateStatus: () => false
+      validateStatus: () => true
     };
 
     this.URL = /^http.+$/.test(this.ip)
