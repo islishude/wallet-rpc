@@ -4,29 +4,29 @@ export const EthereumMethods = {
     code: "eth_getCode",
     nonce: "eth_getTransactionCount",
     parity: {
-      pendingNonce: "parity_nextNonce"
-    }
+      pendingNonce: "parity_nextNonce",
+    },
   },
   block: {
     byHash: "eth_getBlockByHash",
     byHeight: "eth_getBlockByNumber",
     count: "eth_blockNumber",
     txCountByHash: "eth_getBlockTransactionCountByHash",
-    txCountByHeight: "eth_getBlockTransactionCountByNumber"
+    txCountByHeight: "eth_getBlockTransactionCountByNumber",
   },
   debug: {
     traceBlock: "debug_traceBlock",
-    traceTx: "debug_traceTransaction"
+    traceTx: "debug_traceTransaction",
   },
   gas: {
     estimate: "eth_estimateGas",
-    price: "eth_gasPrice"
+    price: "eth_gasPrice",
   },
   info: {
-    syncing: "eth_syncing"
+    syncing: "eth_syncing",
   },
   tool: {
-    sign: "eth_sign"
+    sign: "eth_sign",
   },
   trace: {
     trx: "trace_transaction",
@@ -43,16 +43,16 @@ export const EthereumMethods = {
     rawByHash: "eth_getRawTransactionByHash",
     receipt: "eth_getTransactionReceipt",
     send: "eth_sendTransaction",
-    sendRaw: "eth_sendRawTransaction"
+    sendRaw: "eth_sendRawTransaction",
   },
   txpool: {
     content: "txpool_content",
     inspect: "txpool_inspect",
-    status: "txpool_status"
+    status: "txpool_status",
   },
 
   uncle: {
     byHash: "eth_getUncleByBlockHashAndIndex",
-    byHeight: "eth_getUncleByBlockHashAndIndex"
-  }
+    byHeight: "eth_getUncleByBlockHashAndIndex",
+  },
 };

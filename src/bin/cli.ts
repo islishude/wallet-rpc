@@ -16,23 +16,23 @@ import { OmniLayerClient } from "../omni/rpc";
 const color = {
   _: "\x1b[4m",
   clear: "\x1b[0m",
-  yellow: "\x1b[33m"
+  yellow: "\x1b[33m",
 };
 
 log(`
-Wallet RPC CLI by isLishude <${
-  color._
-  }https://github.com/islishude/wallet-rpc${color.clear}>
+Wallet RPC CLI by isLishude <${color._}https://github.com/islishude/wallet-rpc${
+  color.clear
+}>
 
 The available global variables are
 
 ${color.yellow}
 - log(alias "console.log")
-- EthereumClient 
-- EthereumClient 
+- EthereumClient
+- EthereumClient
 - EOSClient
 - ...
-${color.clear} 
+${color.clear}
 
 See the README to learn more API and RPC supports list.
 
@@ -51,11 +51,17 @@ const terminal = start({
   output: process.stdout,
   prompt: "> ",
   terminal: process.stdout.isTTY,
-  useGlobal: true
+  useGlobal: true,
 });
 
-terminal.context.log = log;
+const MyConsole = new console.Console({
+  // @ts-ignore
+  inspectOptions: { depth: null, color: true },
+  stderr: process.stderr,
+  stdout: process.stdout,
+});
 
+terminal.context.log = MyConsole.log.bind(MyConsole);
 terminal.context.BitcoinClient = BitcoinClient;
 terminal.context.BitcoinMethods = BitcoinMethods;
 
