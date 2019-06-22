@@ -1,32 +1,27 @@
-import { log } from "console";
-import { isNull } from "util";
-import { OmniLayerClient } from "wallet-rpc";
-import { DefaultBtcRpcConf } from "./bitcoin";
+import { DefaultClient, IClientConfig, USDTClient } from "wallet-rpc";
 
-const OmniClient = new OmniLayerClient(DefaultBtcRpcConf);
+export const DefaultBtcRpcConf: IClientConfig = {
+  host: "http://127.0.0.1:8832",
+  keepAlive: false,
+  password: "your-rpc-passwword",
+  timeout: 10 * 1000,
+  username: "your-rpc-username",
+};
+
+const client = new DefaultClient(DefaultBtcRpcConf);
+const usdt = new USDTClient(client);
 
 export const getTxInfo = async () => {
   const txid =
     "0e3e2357e806b6cdb1f70b54c3a3a17b6714ee1f0e68bebb44a74b1efd512098";
 
-  const txInfo = await OmniClient.getOmniTxInfo(txid);
-
-  if (isNull(txInfo)) {
-    throw new Error("Tx not found");
-  }
-
-  return txInfo;
+  await usdt.getTrxInfo(txid);
 };
 
 export const getBalance = async () => {
   const address = "";
   const propertyId = 31; // USDT
 
-  const info = await OmniClient.getPropertyBalance(address, propertyId);
-
-  if (isNull(info)) {
-    throw new Error("Address not found");
-  }
-
-  return info.result.balance;
+  await usdt.getBalance(address, propertyId);
+  await usdt.sendRawTx("");
 };

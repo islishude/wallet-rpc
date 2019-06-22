@@ -23,3 +23,11 @@ export interface IMessage<T> {
   headers: http.IncomingHttpHeaders;
   body: IJsonRpcResponse<T>;
 }
+
+export interface IClientConfig {
+  timeout: number;
+  keepAlive: boolean;
+  host: string;
+  username?: string;
+  password?: string;
+}

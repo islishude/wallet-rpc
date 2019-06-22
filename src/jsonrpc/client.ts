@@ -2,15 +2,7 @@ import http = require("http");
 import https = require("https");
 import { version as PkgVer } from "../version";
 import { IJsonRpcClient } from "./ijsonrpc";
-import { IMessage } from "./imsg";
-
-export interface IClientConfig {
-  timeout: number;
-  keepAlive: boolean;
-  host: string;
-  username?: string;
-  password?: string;
-}
+import { IClientConfig, IMessage } from "./imsg";
 
 export default class Client implements IJsonRpcClient {
   public host: string;
