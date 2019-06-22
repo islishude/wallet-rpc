@@ -3,8 +3,6 @@ import { log } from "console";
 import { start } from "repl";
 import { BitcoinMethods } from "../bitcoin/mtd";
 import { BitcoinClient } from "../bitcoin/rpc";
-import { DKKTokenMethods } from "../dkktoken/mtd";
-import { DKKTClient } from "../dkktoken/rpc";
 import { EOSMethods } from "../eos/mtd";
 import { EOSClient } from "../eos/rpc";
 import { EthereumMethods } from "../ethereum/mtd";
@@ -68,9 +66,6 @@ terminal.context.BitcoinMethods = BitcoinMethods;
 terminal.context.EthereumClient = EthereumClient;
 terminal.context.EthereumMethods = EthereumMethods;
 terminal.context.EthereumUtil = EthereumUtil;
-
-terminal.context.DKKTClient = DKKTClient;
-terminal.context.DKKTokenMethods = DKKTokenMethods;
 
 terminal.context.OmniLayerClient = OmniLayerClient;
 terminal.context.OmniLayerMethods = OmniLayerMethods;
