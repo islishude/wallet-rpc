@@ -1,14 +1,15 @@
 {
   "name": "wallet-rpc",
   "version": "5.0.3",
-  "description": "JSONRPC2.0 client with CLI of crypto-currency by TypeScript",
+  "description": "jsonrpc 2.0 client for crypto-currencies by TypeScript",
   "main": "dist",
   "types": "dist",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tslint -p tsconfig.json && del-cli dist && tsc",
+    "lint:fix": "tslint -p tsconfig.json --fix",
+    "build": "npm run lint:fix && del-cli dist && tsc",
     "test": "ts-node test/*.ts",
     "prerelease": "npm run build && npm test",
     "release": "git push --all && git push --tags && npm publish"
@@ -27,7 +28,7 @@
     "USDT",
     "OmniLayer",
     "EOS",
-    "JSONRPC"
+    "jsonrpc"
   ],
   "author": {
     "email": "lishude@foxmail.com",
@@ -45,6 +46,6 @@
     "typescript": "^3.5.2"
   },
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=12.0.0"
   }
 }

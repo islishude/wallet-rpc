@@ -1,7 +1,5 @@
 export { BitcoinMethods } from "./bitcoin/mtd";
 export { BitcoinClient } from "./bitcoin/rpc";
-export { DKKTokenMethods } from "./dkktoken/mtd";
-export { DKKTClient } from "./dkktoken/rpc";
 export { EthereumMethods } from "./ethereum/mtd";
 export { EthereumClient } from "./ethereum/rpc";
 export { EthereumUtil } from "./ethereum/util";
@@ -19,12 +17,7 @@ export {
   IEosError,
 } from "./eos/type";
 
-export {
-  IRpcRequest,
-  IRpcErrorStruct,
-  IRpcResponse,
-  IRpcConfig,
-} from "./type";
+export { IRpcRequest, IRpcErrorStruct, IRpcResponse, IRpcConfig } from "./type";
 
 export {
   IEthAbiCommonStruct,
@@ -53,14 +46,6 @@ export {
 } from "./ethereum/type";
 
 export { IOmniClientInfo, IOmniTxInfo } from "./omni/type";
-
-export {
-  IDkktBlockInfo,
-  IDkktTxInfo,
-  IDkktWalletInfo,
-  IDkktTxVin,
-  IDkktTxVout,
-} from "./dkktoken/type";
 
 export {
   IBtcBlockchainInfo,

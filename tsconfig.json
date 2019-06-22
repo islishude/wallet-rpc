@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "es2018",
     "module": "commonjs",
-    "lib": ["es2018"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["esnext"],
     "outDir": "dist",
     "declaration": true,
     "alwaysStrict": true,

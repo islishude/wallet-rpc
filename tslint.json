@@ -3,7 +3,8 @@
   "extends": ["tslint:latest"],
   "jsRules": {},
   "rules": {
-    "no-console": false
+    "no-console": false,
+    "no-var-requires": false
   },
   "rulesDirectory": []
 }
