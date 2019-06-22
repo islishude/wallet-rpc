@@ -175,7 +175,8 @@ export interface IBtcTrxOut {
 export interface IBtcMemPoolInfo {
   // Current tx count
   size: number;
-  // Sum of all virtual transaction sizes as defined in BIP 141. Differs from actual serialized size because witness data is discounted
+  // Sum of all virtual transaction sizes as defined in BIP 141.
+  // Differs from actual serialized size because witness data is discounted
   bytes: number;
   // Total memory usage for the mempool
   usage: number;

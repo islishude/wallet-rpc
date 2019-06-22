@@ -21,18 +21,18 @@ export const RpcErrorCatch = (
   respErr: AxiosError,
   reqUrl: string,
   reqData: any,
-  coinName: string
+  coinName: string,
 ): IWalletRpcError => {
   const requestData = {
     coinName,
     data: reqData,
-    url: reqUrl
+    url: reqUrl,
   };
 
   if (isUndefined(respErr.response)) {
     const res: any = {
       reason: respErr.message,
-      request: requestData
+      request: requestData,
     };
     res.message = stringify(res);
     return res as IWalletRpcError;
@@ -43,7 +43,7 @@ export const RpcErrorCatch = (
     reason: respErr.message,
     request: requestData,
     response: respErr.response.data,
-    statusCode: respErr.response.status
+    statusCode: respErr.response.status,
   };
   result.message = stringify(result);
   return result as IWalletRpcError;

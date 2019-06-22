@@ -10,7 +10,7 @@ import {
   IBtcTrxOut,
   IBtcTxInfo,
   IBtcVerboseMemPool,
-  IBtcWalletInfo
+  IBtcWalletInfo,
 } from "./type";
 
 export class BitcoinClient extends RPCClient {
@@ -90,7 +90,7 @@ export class BitcoinClient extends RPCClient {
    */
   public getEstimateFee(
     target: number = 6,
-    mode: "ECONOMICAL" | "CONSERVATIVE" = "CONSERVATIVE"
+    mode: "ECONOMICAL" | "CONSERVATIVE" = "CONSERVATIVE",
   ) {
     const params: [number, string] = [target, mode];
     return this.RpcCall<IBtcFee>(mtd.fee, params);

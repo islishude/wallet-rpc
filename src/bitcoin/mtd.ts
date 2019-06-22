@@ -4,7 +4,7 @@ export const BitcoinMethods = {
     count: "getblockcount",
     detail: "getblock",
     hash: "getblockhash",
-    tipHash: "getbestblockhash"
+    tipHash: "getbestblockhash",
   },
   fee: "estimatesmartfee",
   info: {
@@ -12,17 +12,17 @@ export const BitcoinMethods = {
     difficulty: "getdifficulty",
     info: "getinfo",
     memory: "getmemoryinfo",
-    wallet: "getwalletinfo"
+    wallet: "getwalletinfo",
   },
   mempool: {
     detail: "getrawmempool",
-    info: "getmempoolinfo"
+    info: "getmempoolinfo",
   },
   tx: {
     decode: "decoderawtransaction",
     detail: "gettransaction",
     raw: "getrawtransaction",
     sendRaw: "sendrawtransaction",
-    utxo: "gettxout"
-  }
+    utxo: "gettxout",
+  },
 };

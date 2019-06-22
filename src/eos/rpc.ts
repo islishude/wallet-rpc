@@ -10,14 +10,14 @@ import {
   IEosProds,
   IEosProdsTable,
   IEosRamTable,
-  IEosTrx
+  IEosTrx,
 } from "./type";
 
 const RAMFeeRequestData = {
   code: "eosio",
   json: true,
   scope: "eosio",
-  table: "rammarket"
+  table: "rammarket",
 };
 
 const errInvalidRefAccount =
@@ -33,7 +33,7 @@ export class EOSClient {
    */
   public constructor(
     url: string = "http://127.0.0.1:8888",
-    ver: EOSVersion = "v1"
+    ver: EOSVersion = "v1",
   ) {
     this.URL = `${url}/${ver}`;
   }
@@ -50,7 +50,7 @@ export class EOSClient {
   public async CALL<T = any>(
     module: string,
     method: string,
-    body?: object
+    body?: object,
   ): Promise<T> {
     const url: string = this.getCallURL(module, method);
     try {
@@ -74,7 +74,7 @@ export class EOSClient {
    */
   public getBlock(id: string | number) {
     return this.CALL<IEosBlockInfo>(modules.chain, methods.chain.block, {
-      block_num_or_id: id
+      block_num_or_id: id,
     });
   }
 
@@ -83,7 +83,7 @@ export class EOSClient {
    */
   public getAccountInfo(account: string) {
     return this.CALL<IEosAccount>(modules.chain, methods.chain.account, {
-      account_name: account
+      account_name: account,
     });
   }
 
@@ -97,8 +97,8 @@ export class EOSClient {
       modules.history,
       methods.history.keyAccounts,
       {
-        public_key: pubKey
-      }
+        public_key: pubKey,
+      },
     );
   }
 
@@ -108,8 +108,8 @@ export class EOSClient {
       methods.chain.stats,
       {
         code,
-        symbol
-      }
+        symbol,
+      },
     );
   }
 
@@ -122,7 +122,7 @@ export class EOSClient {
       account_name: string;
       abi: IEosAbi;
     }>(modules.chain, methods.chain.abi, {
-      account_name: account
+      account_name: account,
     });
   }
 
@@ -134,7 +134,7 @@ export class EOSClient {
       wasm: string;
       abi: IEosAbi;
     }>(modules.chain, methods.chain.code, {
-      account_name: account
+      account_name: account,
     });
   }
 
@@ -144,7 +144,7 @@ export class EOSClient {
       wasm: string;
       abi: string;
     }>(modules.chain, methods.chain.rawCodeAndABI, {
-      account_name: account
+      account_name: account,
     });
   }
 
@@ -152,36 +152,48 @@ export class EOSClient {
    * Returns an object containing rows from the specified table.
    */
   public getTableRows<T = any>(data: {
-    scope: string | number; // The account name where the scope of the data resides
-    code: string | number; // The name of the smart contract that controls the provided table
-    table: string; // The name of the table to query
-    json: boolean; // Return json object or return formatted response
+    // The account name where the scope of the data resides
+    scope: string | number;
+    // The name of the smart contract that controls the provided table
+    code: string | number;
+    // The name of the table to query
+    table: string;
+    // Return json object or return formatted response
+    json: boolean;
     table_key?: string;
-    lower_bound?: string | number; // Filters results to return the first element that is not lesser than provided value in set
-    upper_bound?: string | number; // Filters results to return the first element that is greater than provided value in set
-    limit?: number; // Limit results returned in response
-    key_type?: string | number; // Type of key specified by index_position (for example: uint64_t or name)
-    index_position?: number; // 1 for primary index;2 for secondary index,etc
+    // Filters results to return the first element that is not lesser than provided value in set
+    lower_bound?: string | number;
+    // Filters results to return the first element that is greater than provided value in set
+    upper_bound?: string | number;
+    // Limit results returned in response
+    limit?: number;
+    // Type of key specified by index_position (for example: uint64_t or name)
+    key_type?: string | number;
+    // 1 for primary index;2 for secondary index,etc
+    index_position?: number;
     encode_type?: "dec" | "hex";
   }) {
     return this.CALL<{ rows: T[]; more: boolean }>(
       modules.chain,
       methods.chain.tableRows,
-      data
+      data,
     );
   }
 
   public getTableByScope<T = any>(data: {
     code: string;
     table: string;
-    lower_bound?: string | number; // Filters results to return the first element that is not lesser than provided value in set
-    upper_bound?: string | number; // Filters results to return the first element that is greater than provided value in set
-    limit?: number; // Limit results returned in response
+    // Filters results to return the first element that is not lesser than provided value in set
+    lower_bound?: string | number;
+    // Filters results to return the first element that is greater than provided value in set
+    upper_bound?: string | number;
+    // Limit results returned in response
+    limit?: number;
   }) {
     return this.CALL<{ rows: T[]; more: boolean }>(
       modules.chain,
       methods.chain.tableByScope,
-      data
+      data,
     );
   }
 
@@ -191,7 +203,7 @@ export class EOSClient {
    */
   public getBlockHeaderState(id: string) {
     return this.CALL<any>(modules.chain, methods.chain.blockHeaderState, {
-      block_num_or_id: id
+      block_num_or_id: id,
     });
   }
 
@@ -206,7 +218,7 @@ export class EOSClient {
     return this.CALL<string[]>(modules.chain, methods.chain.balance, {
       account,
       code,
-      symbol
+      symbol,
     });
   }
 
@@ -221,7 +233,7 @@ export class EOSClient {
     signatures: string[],
     compression: "true" | "false",
     packedCtxFreeData: string,
-    packedTrx: string
+    packedTrx: string,
   ) {
     return this.CALL<{
       transaction_id: string;
@@ -229,7 +241,7 @@ export class EOSClient {
       compression,
       packed_context_free_data: packedCtxFreeData,
       packed_tx: packedTrx,
-      signatures
+      signatures,
     });
   }
 
@@ -245,7 +257,7 @@ export class EOSClient {
     return this.CALL<{ binargs: string }>(modules.chain, methods.chain.atob, {
       action,
       args,
-      code
+      code,
     });
   }
 
@@ -259,7 +271,7 @@ export class EOSClient {
     return this.CALL<{ args: any }>(modules.chain, methods.chain.btoa, {
       action,
       binargs,
-      code
+      code,
     });
   }
 
@@ -272,8 +284,8 @@ export class EOSClient {
       modules.history,
       methods.history.ctrlAccounts,
       {
-        controlling_account: account
-      }
+        controlling_account: account,
+      },
     );
   }
 
@@ -297,7 +309,7 @@ export class EOSClient {
       net_limit,
       cpu_limit,
       net_weight,
-      cpu_weight
+      cpu_weight,
     } = await this.getAccountInfo(refAccount);
     const netStaked = net_weight / 10000;
     // convert bytes to kilobytes
@@ -313,7 +325,7 @@ export class EOSClient {
 
     return {
       cpuPrice: (cpuStaked / cpuAvailable).toFixed(4),
-      netPrice: (netStaked / netAvailable).toFixed(4)
+      netPrice: (netStaked / netAvailable).toFixed(4),
     };
   }
 
@@ -326,7 +338,7 @@ export class EOSClient {
     return this.CALL<IEosProds>(modules.chain, methods.chain.producer, {
       json: true,
       limit,
-      lower_bound: lowBound
+      lower_bound: lowBound,
     });
   }
 
@@ -341,7 +353,7 @@ export class EOSClient {
   public async getProducerTable(
     lowBound: string,
     upperBound: string,
-    limit: number = 1000
+    limit: number = 1000,
   ) {
     return this.getTableRows<IEosProdsTable>({
       code: "eosio",
@@ -350,7 +362,7 @@ export class EOSClient {
       lower_bound: lowBound,
       scope: "eosio",
       table: "producers",
-      upper_bound: upperBound
+      upper_bound: upperBound,
     });
   }
 }

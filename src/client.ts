@@ -12,21 +12,21 @@ export default abstract class RPCClient {
     public pass: string,
     public ip: string,
     public port: string,
-    public coinName: string
+    public coinName: string,
   ) {
     this.BulkData = [];
     this.reqConfig = {
       auth: {
         password: this.pass,
-        username: this.user
+        username: this.user,
       },
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Content-Type": "application/json",
-        "User-Agent": "wallet-rpc"
+        "User-Agent": "wallet-rpc",
       },
       timeout: 60000,
-      validateStatus: () => true
+      validateStatus: () => true,
     };
 
     this.URL = /^http.+$/.test(this.ip)
@@ -37,13 +37,13 @@ export default abstract class RPCClient {
   public async RpcCall<T = any>(
     method: string,
     params?: any[],
-    id?: number | string
+    id?: number | string,
   ) {
     const reqData: IRpcRequest = {
       id: id || Date.now(),
       jsonrpc: "2.0",
       method,
-      params: params || []
+      params: params || [],
     };
 
     let ret: AxiosResponse<IRpcResponse<T>>;
@@ -51,7 +51,7 @@ export default abstract class RPCClient {
       ret = await Axios.post<IRpcResponse<T>>(
         this.URL,
         reqData,
-        this.reqConfig
+        this.reqConfig,
       );
     } catch (err) {
       const e: IWalletRpcError = {
@@ -60,10 +60,10 @@ export default abstract class RPCClient {
         request: {
           coinName: this.coinName,
           data: reqData,
-          url: this.URL
+          url: this.URL,
         },
         response: null,
-        statusCode: 400
+        statusCode: 400,
       };
       throw e;
     }
@@ -76,10 +76,10 @@ export default abstract class RPCClient {
         request: {
           coinName: this.coinName,
           data: reqData,
-          url: this.URL
+          url: this.URL,
         },
         response: ret.data,
-        statusCode: ret.status
+        statusCode: ret.status,
       };
       throw err;
     }
@@ -94,7 +94,7 @@ export default abstract class RPCClient {
     const res = await Axios.post<Array<IRpcResponse<T>>>(
       this.URL,
       data,
-      this.reqConfig
+      this.reqConfig,
     );
     return res.data;
   }

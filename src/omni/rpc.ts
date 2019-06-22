@@ -32,7 +32,7 @@ export class OmniLayerClient extends BitcoinClient {
     rawTransaction: string,
     referenceAddress?: string,
     redeemAddress?: string,
-    referenceAmount?: string
+    referenceAmount?: string,
   ) {
     /**
      * if last three params is undefined,the request data will change it to null
@@ -45,7 +45,7 @@ export class OmniLayerClient extends BitcoinClient {
       rawTransaction,
       referenceAddress,
       redeemAddress,
-      referenceAmount
+      referenceAmount,
     ];
     return this.RpcCall<string>(mtd.tx.sendRaw, params);
   }
@@ -58,7 +58,7 @@ export class OmniLayerClient extends BitcoinClient {
   public getPropertyBalance(address: string, propertyId: number = 31) {
     return this.RpcCall<{ balance: string; reserved: string; frozen: string }>(
       mtd.address.balance,
-      [address, propertyId]
+      [address, propertyId],
     );
   }
 
@@ -113,7 +113,7 @@ export class OmniLayerClient extends BitcoinClient {
     count = 10,
     skip = 0,
     startBlock = 0,
-    endBlock = 999999
+    endBlock = 999999,
   ) {
     const params: any[] = [txid, count, skip, startBlock, endBlock];
     return this.RpcCall<IOmniTxInfo[]>(mtd.tx.wallet, params);

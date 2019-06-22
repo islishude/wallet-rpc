@@ -14,20 +14,20 @@ export class EthereumUtil {
     symbol: "0x95d89b41",
     totalSupply: "0x18160ddd",
     transfer: "0xa9059cbb",
-    transferFrom: "0x23b872dd"
+    transferFrom: "0x23b872dd",
   };
 
   public static readonly ERC20FuncSigUpper = {
     DECIMALS: "0x2e0f2625",
     NAME: "0xa3f4df7e",
-    SYMBOL: "0xf76f8d78"
+    SYMBOL: "0xf76f8d78",
   };
 
   public static readonly ERC20EventSig = {
     Approve:
       "0xdf586a81df66595b89d3dbd58e5b14ee6c0fb16da8977f97ea7d24c654994ac7",
     Transfer:
-      "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+      "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
   };
 
   public static readonly ERC721FunSig = {
@@ -39,7 +39,7 @@ export class EthereumUtil {
     symbol: "0x95d89b41",
     totalSupply: "0x18160ddd",
     // transferFrom(address,address,uint256)
-    transferFrom: "0x23b872dd"
+    transferFrom: "0x23b872dd",
   };
 
   /**
@@ -113,7 +113,7 @@ export class EthereumUtil {
    */
   public static async getABI(
     token: string,
-    apiKey: string = "YourApiKeyToken"
+    apiKey: string = "YourApiKeyToken",
   ): Promise<IEthAbiStruct[] | null> {
     const api: string = "https://api.etherscan.io/api";
 
@@ -123,8 +123,8 @@ export class EthereumUtil {
           action: "getabi",
           address: token,
           apiKey,
-          module: "contract"
-        }
+          module: "contract",
+        },
       });
 
       if (data.status === "0") {

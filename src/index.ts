@@ -16,14 +16,14 @@ export {
   IEosChainInfo,
   IEosTrx,
   IEosAbi,
-  IEosError
+  IEosError,
 } from "./eos/type";
 
 export {
   IRpcRequest,
   IRpcErrorStruct,
   IRpcResponse,
-  IRpcConfig
+  IRpcConfig,
 } from "./type";
 
 export {
@@ -49,7 +49,7 @@ export {
   IParityCreateAction,
   IParityCreateResult,
   IParitySuicideAction,
-  IParityTxTrace
+  IParityTxTrace,
 } from "./ethereum/type";
 
 export { IOmniClientInfo, IOmniTxInfo } from "./omni/type";
@@ -59,7 +59,7 @@ export {
   IDkktTxInfo,
   IDkktWalletInfo,
   IDkktTxVin,
-  IDkktTxVout
+  IDkktTxVout,
 } from "./dkktoken/type";
 
 export {
@@ -72,5 +72,5 @@ export {
   IBtcVerboseMemPool,
   IBtcWalletInfo,
   IBtcTxVin,
-  IBtcTxVout
+  IBtcTxVout,
 } from "./bitcoin/type";

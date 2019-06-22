@@ -2,14 +2,14 @@
 export const OmniLayerMethods = {
   address: {
     allBalance: "omni_getallbalancesforaddress",
-    balance: "omni_getbalance"
+    balance: "omni_getbalance",
   },
   info: {
-    client: "omni_getinfo"
+    client: "omni_getinfo",
   },
   property: {
     info: "omni_getproperty",
-    list: "omni_listproperties"
+    list: "omni_listproperties",
   },
   tx: {
     detail: "omni_gettransaction",
@@ -17,6 +17,6 @@ export const OmniLayerMethods = {
     payload: "omni_getpayload",
     pending: "omni_listpendingtransactions",
     sendRaw: "omni_sendrawtx",
-    wallet: "omni_listtransactions"
-  }
+    wallet: "omni_listtransactions",
+  },
 };

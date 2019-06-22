@@ -17,7 +17,7 @@ import {
   IEthTxPoolInspect,
   IEthTxPoolStatus,
   IEthTxReceipt,
-  IParityTxTrace
+  IParityTxTrace,
 } from "./type";
 import { EthereumUtil } from "./util";
 
@@ -36,7 +36,8 @@ export class EthereumClient extends RPCClient {
   /**
    * Returns an object with data about the sync status or false.
    * returns value
-   * startingBlock: QUANTITY - The block at which the import started (will only be reset, after the sync reached his head)
+   * startingBlock: QUANTITY - The block at which the import started
+   * (will only be reset, after the sync reached his head)
    * currentBlock: QUANTITY - The current block, same as eth_blockNumber
    * highestBlock: QUANTITY - The estimated highest block
    */
@@ -46,7 +47,7 @@ export class EthereumClient extends RPCClient {
 
   public getBalance(
     address: string,
-    status: IEthStatus = "latest"
+    status: IEthStatus = "latest",
   ): Promise<IRpcResponse<string>> {
     return this.RpcCall<string>(mtd.address.balance, [address, status]);
   }
@@ -68,7 +69,7 @@ export class EthereumClient extends RPCClient {
 
   /**
    * Get information about a block by block number.
-   * @param symbol QUANTITY|TAG - integer of a block number, or the string "earliest", "latest" or "pending", as in the default block parameter.
+   * @param symbol QUANTITY|TAG - integer of a block number, or the string "earliest", "latest" or "pending"
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_getblockbynumber
    */
   public getBlock(symbol: string) {
@@ -111,13 +112,6 @@ export class EthereumClient extends RPCClient {
 
   /**
    * Creates new message call transaction or a contract creation, if the data field contains code.
-   * from: DATA, 20 Bytes - The address the transaction is send from.
-   * to: DATA, 20 Bytes - (optional when creating new contract) The address the transaction is directed to.
-   * gas: QUANTITY - (optional, default: 90000) Integer of the gas provided for the transaction execution. It will return unused gas.
-   * gasPrice: QUANTITY - (optional, default: To-Be-Determined) Integer of the gasPrice used for each paid gas
-   * value: QUANTITY - (optional) Integer of the value sent with this transaction
-   * data: DATA - The compiled code of a contract OR the hash of the invoked method signature and encoded parameters. For details see Ethereum Contract ABI
-   * nonce: QUANTITY - (optional) Integer of a nonce. This allows to overwrite your own pending transactions that use the same nonce.
    * @see https://github.com/ethereum/wiki/wiki/Ethereum-Contract-ABI
    * @see https://github.com/ethereum/wiki/wiki/JSON-RPC#eth_sendtransaction
    */
@@ -224,7 +218,7 @@ export class EthereumClient extends RPCClient {
       disableStack?: boolean;
       trace?: string;
       timeout?: string;
-    }
+    },
   ) {
     return this.RpcCall<IEthTraceTxReturn>(mtd.trace.trx, [txid, opt]);
   }
@@ -233,21 +227,14 @@ export class EthereumClient extends RPCClient {
     return this.RpcCall<IParityTxTrace[] | null>(mtd.trace.trx, [txid]);
   }
 
-  // The content inspection property can be queried to list the exact details of all the transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
-  // The result is an object with two fields pending and queued. Each of these fields are associative arrays, in which each entry maps an origin-address to a batch of scheduled transactions. These batches themselves are maps associating nonces with actual transactions.
-  // Please note, there may be multiple transactions associated with the same account and nonce. This can happen if the user broadcast multiple ones with varying gas allowances (or even completely different transactions).
   public txpoolContent() {
     return this.RpcCall<IEthTxPoolContent>(mtd.txpool.content);
   }
 
-  // The inspect inspection property can be queried to list a textual summary of all the transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only. This is a method specifically tailored to developers to quickly see the transactions in the pool and find any potential issues.
-  // The result is an object with two fields pending and queued. Each of these fields are associative arrays, in which each entry maps an origin-address to a batch of scheduled transactions. These batches themselves are maps associating nonces with transactions summary strings.
   public txpoolInspect() {
     return this.RpcCall<IEthTxPoolInspect>(mtd.txpool.inspect);
   }
 
-  // The status inspection property can be queried for the number of transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
-  // The result is an object with two fields pending and queued, each of which is a counter representing the number of transactions in that particular state.
   public txpoolStatus() {
     return this.RpcCall<IEthTxPoolStatus>(mtd.txpool.status);
   }
@@ -263,12 +250,12 @@ export class EthereumClient extends RPCClient {
   public async ERC20Balance(
     token: string,
     address: string,
-    isPending: boolean = true
+    isPending: boolean = true,
   ) {
     const status = isPending ? "pending" : "latest";
     const param: IEthCallFuncParam = {
       data: ERC20FuncSig.balanceOf + padAddress(address),
-      to: token
+      to: token,
     };
     const { result, error } = await this.callFunc(param, status);
 
@@ -282,16 +269,16 @@ export class EthereumClient extends RPCClient {
   public async ERC20Decimals(token: string): Promise<undefined | number> {
     const param: IEthCallFuncParam = {
       data: ERC20FuncSig.decimals,
-      to: token
+      to: token,
     };
 
     const PARAM: IEthCallFuncParam = {
       data: ERC20FuncSigUpper.DECIMALS,
-      to: token
+      to: token,
     };
     const [{ result: decimals }, { result: DECIMALS }] = await Promise.all([
       this.callFunc(param),
-      this.callFunc(PARAM)
+      this.callFunc(PARAM),
     ]);
     if (decimals === "0x" && DECIMALS === "0x") {
       return;
@@ -311,7 +298,7 @@ export class EthereumClient extends RPCClient {
   public async ERC20TotalSupply(token: string): Promise<string | undefined> {
     const param: IEthCallFuncParam = {
       data: ERC20FuncSig.totalSupply,
-      to: token
+      to: token,
     };
     const { result: totalSupply } = await this.callFunc(param);
     if (totalSupply === "0x" || isNullOrUndefined(totalSupply)) {
@@ -323,15 +310,15 @@ export class EthereumClient extends RPCClient {
   public async ERC20Name(token: string): Promise<undefined | string> {
     const param: IEthCallFuncParam = {
       data: ERC20FuncSig.name,
-      to: token
+      to: token,
     };
     const PARAM: IEthCallFuncParam = {
       data: ERC20FuncSigUpper.NAME,
-      to: token
+      to: token,
     };
     const [{ result: name }, { result: NAME }] = await Promise.all([
       this.callFunc(param),
-      this.callFunc(PARAM)
+      this.callFunc(PARAM),
     ]);
 
     if (!isString(name) && !isString(NAME)) {
@@ -354,15 +341,15 @@ export class EthereumClient extends RPCClient {
   public async ERC20Symbol(token: string): Promise<undefined | string> {
     const param: IEthCallFuncParam = {
       data: ERC20FuncSig.symbol,
-      to: token
+      to: token,
     };
     const PARAM: IEthCallFuncParam = {
       data: ERC20FuncSigUpper.SYMBOL,
-      to: token
+      to: token,
     };
     const [{ result: symbol }, { result: SYMBOL }] = await Promise.all([
       this.callFunc(param),
-      this.callFunc(PARAM)
+      this.callFunc(PARAM),
     ]);
 
     if (!isString(symbol) && !isString(SYMBOL)) {
@@ -386,14 +373,14 @@ export class EthereumClient extends RPCClient {
       this.ERC20Decimals(token),
       this.ERC20Name(token),
       this.ERC20Symbol(token),
-      this.ERC20TotalSupply(token)
+      this.ERC20TotalSupply(token),
     ]);
 
     return {
       decimals,
       name,
       symbol,
-      totalSupply
+      totalSupply,
     };
   }
 }

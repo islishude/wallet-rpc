@@ -1,7 +1,7 @@
 /** spell-checker: disable */
 export const EOSMethods = {
   DBSize: {
-    get: "get"
+    get: "get",
   },
   chain: {
     abi: "get_abi",
@@ -19,25 +19,25 @@ export const EOSMethods = {
     sendTxList: "push_transactions",
     stats: "get_currency_stats",
     tableByScope: "get_table_by_scope",
-    tableRows: "get_table_rows"
+    tableRows: "get_table_rows",
   },
   history: {
     actions: "get_actions",
     ctrlAccounts: "get_controlled_accounts",
     keyAccounts: "get_key_accounts",
-    tx: "get_transaction"
+    tx: "get_transaction",
   },
   net: {
     connect: "connect",
     connections: "connections",
     disconnect: "disconnect",
-    status: "status"
-  }
+    status: "status",
+  },
 };
 
 export const EOSModules = {
   DBSize: "DBSize",
   chain: "chain",
   history: "history",
-  net: "net"
+  net: "net",
 };
