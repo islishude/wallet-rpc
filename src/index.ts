@@ -1,61 +1,60 @@
-export { BitcoinMethods } from "./bitcoin/mtd";
-export { BitcoinClient } from "./bitcoin/rpc";
-export { EthereumMethods } from "./ethereum/mtd";
-export { EthereumClient } from "./ethereum/rpc";
-export { EthereumUtil } from "./ethereum/util";
-export { OmniLayerMethods } from "./omni/mtd";
-export { OmniLayerClient } from "./omni/rpc";
-export { EOSClient } from "./eos/rpc";
-
+export { decodeAbiNumber, decodeAbiString, ERC20Client } from "./eth/erc20";
+export { GethClient } from "./eth/geth";
+export { ParityClient } from "./eth/parity";
 export {
-  IEosAccount,
-  IEosAuthority,
-  IEosBlockInfo,
-  IEosChainInfo,
-  IEosTrx,
-  IEosAbi,
-  IEosError,
-} from "./eos/type";
-
-export { IRpcRequest, IRpcErrorStruct, IRpcResponse, IRpcConfig } from "./type";
-
-export {
-  IEthAbiCommonStruct,
-  IEthAbiInputStruct,
-  IEthAbiOutputStruct,
-  IEthAbiStruct,
   IEthBlock,
   IEthBlockSimple,
   IEthBlockVerbose,
   IEthCallFuncParam,
-  IEtherScanAbiResponse,
-  IEthReceiptLogs,
-  IEthSentTxStruct,
-  IEthStatus,
-  IEthSyncing,
-  IEthTraceTxReturn,
-  IEthTx,
+  IEthTrx,
+  IEthTrxReceipt,
+  IEthTrxReceiptLog,
   IEthTxPoolContent,
-  IEthTxReceipt,
+  IEthTxPoolInspect,
+  IEthTxPoolStatus,
   IParityCallAction,
   IParityCallResult,
   IParityCreateAction,
   IParityCreateResult,
   IParitySuicideAction,
-  IParityTxTrace,
-} from "./ethereum/type";
+  IParityTrxTrace,
+  ISyncingStatus,
+} from "./eth/types";
 
-export { IOmniClientInfo, IOmniTxInfo } from "./omni/type";
-
+export { BitcoinClient } from "./btc/client";
 export {
-  IBtcBlockchainInfo,
   IBtcBlockInfo,
+  IBtcBlockchainInfo,
   IBtcFee,
+  IBtcMemPoolInfo,
   IBtcMemoryInfo,
   IBtcNetworkInfo,
+  IBtcTrxOut,
   IBtcTxInfo,
-  IBtcVerboseMemPool,
-  IBtcWalletInfo,
   IBtcTxVin,
   IBtcTxVout,
-} from "./bitcoin/type";
+  IBtcVerboseMemPool,
+  IBtcWalletInfo,
+} from "./btc/type";
+
+export {
+  IOmniClientInfo,
+  IOmniPropertyBalance,
+  IOmniPropertyInfo,
+  IOmniTxInfo,
+} from "./usdt/type";
+export { USDTClient } from "./usdt/client";
+
+export { EOSClient } from "./eos/client";
+export {
+  IEosAbi,
+  IEosAccount,
+  IEosAuthority,
+  IEosBlockInfo,
+  IEosChainInfo,
+  IEosError,
+  IEosProds,
+  IEosProdsTable,
+  IEosRamTable,
+  IEosTrx,
+} from "./eos/type";

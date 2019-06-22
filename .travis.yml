@@ -2,9 +2,6 @@ git:
   depth: 1
 language: "node_js"
 node_js:
-  - "8"
-  - "10"
-  - "11"
   - "12"
 install:
   - "npm ci"
@@ -12,7 +9,3 @@ cache: npm
 script:
   - "npm run build"
   - "npm test"
-notifications:
-  email:
-    on_success: "change"
-    on_failure: "always"

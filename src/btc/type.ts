@@ -1,4 +1,3 @@
-/** spell-checker: disable */
 export interface IBtcWalletInfo {
   version: number;
   protocolversion: number;

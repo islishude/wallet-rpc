@@ -3,7 +3,6 @@ import https = require("https");
 import { version as PkgVer } from "../version";
 import { IJsonRpcClient } from "./ijsonrpc";
 import { IMessage } from "./imsg";
-import ReqData from "./reqdata";
 
 export interface IClientConfig {
   timeout: number;
@@ -14,9 +13,9 @@ export interface IClientConfig {
 }
 
 export default class Client implements IJsonRpcClient {
-  protected options: http.RequestOptions;
-  protected host: string;
-  protected httpAgent: http.Agent;
+  public host: string;
+  public options: http.RequestOptions;
+  private httpAgent: http.Agent | https.Agent;
   private httpClient: typeof http | typeof https;
 
   constructor(config: IClientConfig) {
@@ -42,9 +41,8 @@ export default class Client implements IJsonRpcClient {
     };
   }
 
-  public Call<T>(reqData: ReqData) {
+  public Call<T>(data: Buffer) {
     return new Promise<IMessage<T>>((resolve, reject) => {
-      const data = reqData.getData();
       const client = this.httpClient.request(
         this.host,
         this.options,

@@ -1,15 +1,10 @@
 #!/usr/bin/env node
-import { log } from "console";
 import { start } from "repl";
-import { BitcoinMethods } from "../bitcoin/mtd";
-import { BitcoinClient } from "../bitcoin/rpc";
-import { EOSMethods } from "../eos/mtd";
+import { BitcoinClient } from "../btc/client";
 import { EOSClient } from "../eos/rpc";
-import { EthereumMethods } from "../ethereum/mtd";
-import { EthereumClient } from "../ethereum/rpc";
-import { EthereumUtil } from "../ethereum/util";
-import { OmniLayerMethods } from "../omni/mtd";
-import { OmniLayerClient } from "../omni/rpc";
+import { ERC20Client } from "../eth/erc20";
+import { GethClient } from "../eth/geth";
+import { ParityClient } from "../eth/parity";
 
 const color = {
   _: "\x1b[4m",
@@ -17,7 +12,7 @@ const color = {
   yellow: "\x1b[33m",
 };
 
-log(`
+console.log(`
 Wallet RPC CLI by isLishude <${color._}https://github.com/islishude/wallet-rpc${
   color.clear
 }>
@@ -61,14 +56,7 @@ const MyConsole = new console.Console({
 
 terminal.context.log = MyConsole.log.bind(MyConsole);
 terminal.context.BitcoinClient = BitcoinClient;
-terminal.context.BitcoinMethods = BitcoinMethods;
-
-terminal.context.EthereumClient = EthereumClient;
-terminal.context.EthereumMethods = EthereumMethods;
-terminal.context.EthereumUtil = EthereumUtil;
-
-terminal.context.OmniLayerClient = OmniLayerClient;
-terminal.context.OmniLayerMethods = OmniLayerMethods;
-
+terminal.context.GethClient = GethClient;
+terminal.context.ParityClient = ParityClient;
+terminal.context.ERC20Client = ERC20Client;
 terminal.context.EOSClient = EOSClient;
-terminal.context.EOSMethods = EOSMethods;

@@ -20,7 +20,7 @@ function hex(status: BlockParam): string {
   return status;
 }
 
-export default class EthereumClient {
+export class GethClient {
   public client: IJsonRpcClient;
   public NODE_VERSION: string;
 
@@ -31,79 +31,79 @@ export default class EthereumClient {
 
   public getBalance(address: string, status: BlockParam = "latest") {
     const reqData = new ReqData("", "eth_getBalance", address, hex(status));
-    return this.client.Call<string>(reqData);
+    return this.client.Call<string>(reqData.getData());
   }
 
   public getTrxCount(address: string, status: BlockParam = "latest") {
     const method = "eth_getTransactionCount";
     const reqData = new ReqData("", method, address, hex(status));
-    return this.client.Call<string>(reqData);
+    return this.client.Call<string>(reqData.getData());
   }
 
   public getBlockNumber() {
     const reqData = new ReqData("", "eth_blockNumber");
-    return this.client.Call<string>(reqData);
+    return this.client.Call<string>(reqData.getData());
   }
 
   public getBlock<T extends boolean>(height: number, verbose: T) {
     const num = "0x" + height.toString(16);
     const reqData = new ReqData("", "eth_getBlockByNumber", num, verbose);
     type R = T extends true ? IEthBlockVerbose : IEthBlock;
-    return this.client.Call<R>(reqData);
+    return this.client.Call<R>(reqData.getData());
   }
 
   public getTrx(hash: string) {
     const reqData = new ReqData("", "eth_getTransactionByHash", hash);
-    return this.client.Call<IEthTrx>(reqData);
+    return this.client.Call<IEthTrx>(reqData.getData());
   }
 
   public getTrxReceipt(hash: string) {
     const reqData = new ReqData("", "eth_getTransactionReceipt", hash);
-    return this.client.Call<IEthTrxReceipt>(reqData);
+    return this.client.Call<IEthTrxReceipt>(reqData.getData());
   }
 
   public getCode(address: string, status: BlockParam = "latest") {
     const reqData = new ReqData("", "eth_getCode", address, hex(status));
-    return this.client.Call<string>(reqData);
+    return this.client.Call<string>(reqData.getData());
   }
 
   public sendRawTrx(data: string) {
     const reqData = new ReqData("", "eth_sendRawTransaction", data);
-    return this.client.Call<string>(reqData);
+    return this.client.Call<string>(reqData.getData());
   }
 
   public callContract(data: IEthCallFuncParam, status: BlockParam = "latest") {
     const reqData = new ReqData("", "eth_call", data, hex(status));
-    return this.client.Call<string>(reqData);
+    return this.client.Call<string>(reqData.getData());
   }
 
   public estimateGas(data: IEthCallFuncParam, status: BlockParam = "latest") {
     const reqData = new ReqData("", "eth_estimateGas", data, hex(status));
-    return this.client.Call<string>(reqData);
+    return this.client.Call<string>(reqData.getData());
   }
 
   public syncingStatus() {
     const reqData = new ReqData("", "eth_syncing");
-    return this.client.Call<ISyncingStatus | boolean>(reqData);
+    return this.client.Call<ISyncingStatus | boolean>(reqData.getData());
   }
 
   public gasPrice() {
     const reqData = new ReqData("", "eth_gasPrice");
-    return this.client.Call<string>(reqData);
+    return this.client.Call<string>(reqData.getData());
   }
 
   public txpoolContent() {
     const reqData = new ReqData("", "txpool_content");
-    return this.client.Call<IEthTxPoolContent>(reqData);
+    return this.client.Call<IEthTxPoolContent>(reqData.getData());
   }
 
   public txpoolInspect() {
     const reqData = new ReqData("", "txpool_inspect");
-    return this.client.Call<IEthTxPoolInspect>(reqData);
+    return this.client.Call<IEthTxPoolInspect>(reqData.getData());
   }
 
   public txpoolStatus() {
     const reqData = new ReqData("", "txpool_status");
-    return this.client.Call<IEthTxPoolStatus>(reqData);
+    return this.client.Call<IEthTxPoolStatus>(reqData.getData());
   }
 }

@@ -1,5 +1,5 @@
 import { IJsonRpcResponse } from "../jsonrpc/imsg";
-import Geth from "./geth";
+import { GethClient } from "./geth";
 import { BlockParam, IEthCallFuncParam } from "./types";
 
 const ERC20FuncSig = {
@@ -36,11 +36,11 @@ export function decodeAbiNumber(raw: string): number {
   return Number.parseInt(raw, 16);
 }
 
-export default class ERC20 {
+export class ERC20Client {
   public static readonly FuncSig = ERC20FuncSig;
   public static readonly EventSig = ERC20EventSig;
 
-  constructor(private rpc: Geth) {}
+  constructor(private rpc: GethClient) {}
 
   public async balanceOf(
     token: string,

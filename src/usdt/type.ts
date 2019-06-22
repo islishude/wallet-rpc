@@ -67,3 +67,9 @@ export interface IOmniPropertyInfo {
   freezingenabled: boolean; // (boolean) whether freezing is enabled for the property (managed properties only)
   totaltokens: string; // (string) the total number of tokens in existence
 }
+
+export interface IOmniPropertyBalance {
+  balance: string;
+  reserved: string;
+  frozen: string;
+}

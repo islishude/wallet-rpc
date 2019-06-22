@@ -1,9 +1,9 @@
 import { IJsonRpcClient } from "../jsonrpc/ijsonrpc";
 import ReqData from "../jsonrpc/reqdata";
-import Geth from "./geth";
+import { GethClient } from "./geth";
 import { IEthTrx, IParityTrxTrace } from "./types";
 
-export default class Parity extends Geth {
+export class ParityClient extends GethClient {
   constructor(client: IJsonRpcClient) {
     super(client);
     this.NODE_VERSION = "parity";
@@ -11,16 +11,16 @@ export default class Parity extends Geth {
 
   public traceTrx(hash: string) {
     const reqData = new ReqData("", "trace_transaction", hash);
-    return this.client.Call<IParityTrxTrace>(reqData);
+    return this.client.Call<IParityTrxTrace>(reqData.getData());
   }
 
   public nextNonce(address: string) {
     const reqData = new ReqData("", "parity_nextNonce", address);
-    return this.client.Call<string>(reqData);
+    return this.client.Call<string>(reqData.getData());
   }
 
   public removeTrx(txid: string) {
     const reqData = new ReqData("", "parity_removeTransaction", txid);
-    return this.client.Call<IEthTrx | null>(reqData);
+    return this.client.Call<IEthTrx | null>(reqData.getData());
   }
 }

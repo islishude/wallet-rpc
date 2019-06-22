@@ -10,7 +10,7 @@
   "scripts": {
     "lint:fix": "tslint -p tsconfig.json --fix",
     "build": "npm run lint:fix && del-cli dist && tsc",
-    "test": "ts-node test/*.ts",
+    "test": "echo TODO",
     "prerelease": "npm run build && npm test",
     "release": "git push --all && git push --tags && npm publish"
   },
@@ -23,23 +23,21 @@
     "wallet-rpc": "dist/bin/cli.js"
   },
   "keywords": [
-    "Bitcoin",
-    "Ethereum",
-    "USDT",
-    "OmniLayer",
-    "EOS",
-    "jsonrpc"
+    "jsonrpc",
+    "bitcoin",
+    "ethereum",
+    "usdt",
+    "eos"
   ],
   "author": {
     "email": "lishude@foxmail.com",
     "name": "lishude"
   },
   "license": "MIT",
-  "dependencies": {
-    "axios": "^0.19.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^10.12.15",
+    "ava": "^2.1.0",
     "del-cli": "^1.1.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
