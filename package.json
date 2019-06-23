@@ -1,6 +1,6 @@
 {
   "name": "wallet-rpc",
-  "version": "5.0.3",
+  "version": "6.0.0",
   "description": "jsonrpc 2.0 client for crypto-currencies by TypeScript",
   "main": "dist",
   "types": "dist",
@@ -8,9 +8,13 @@
     "dist"
   ],
   "scripts": {
+    "clean": "ts-node scripts/clean.ts",
     "lint:fix": "tslint -p tsconfig.json --fix",
-    "build": "npm run lint:fix && del-cli dist && tsc",
-    "test": "echo TODO",
+    "lint:only": "tslint -p tsconfig.json",
+    "prebuild": "npm run lint:only && npm run clean",
+    "build": "tsc -p tsconfig.json",
+    "pretest": "npm run build",
+    "test": "ava",
     "prerelease": "npm run build && npm test",
     "release": "git push --all && git push --tags && npm publish"
   },
@@ -21,6 +25,18 @@
   "homepage": "https://github.com/islishude/wallet-rpc#readme",
   "bin": {
     "wallet-rpc": "dist/bin/cli.js"
+  },
+  "ava": {
+    "compileEnhancements": false,
+    "files": [
+      "test/**/*"
+    ],
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "keywords": [
     "jsonrpc",
@@ -38,7 +54,6 @@
   "devDependencies": {
     "@types/node": "^10.12.15",
     "ava": "^2.1.0",
-    "del-cli": "^1.1.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "typescript": "^3.5.2"
