@@ -3,6 +3,7 @@
   "extends": ["tslint:latest"],
   "jsRules": {},
   "rules": {
+    "object-literal-sort-keys": false,
     "no-console": false,
     "no-var-requires": false,
     "no-implicit-dependencies": false

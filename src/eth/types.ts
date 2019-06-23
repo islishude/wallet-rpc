@@ -65,6 +65,8 @@ export interface IEthBlock {
   transactionsRoot: string;
   stateRoot: string;
   miner: string;
+  mixHash: string;
+  receiptsRoot: string;
   difficulty: string;
   totalDifficulty: string;
   extraData: string;

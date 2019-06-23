@@ -13,8 +13,10 @@
     "lint:only": "tslint -p tsconfig.json",
     "prebuild": "npm run lint:only && npm run clean",
     "build": "tsc -p tsconfig.json",
+    "build:only": "tsc -p tsconfig.json",
     "pretest": "npm run build",
     "test": "ava",
+    "test:only": "ava",
     "prerelease": "npm run build && npm test",
     "release": "git push --all && git push --tags && npm publish"
   },
