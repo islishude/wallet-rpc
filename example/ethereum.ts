@@ -1,17 +1,12 @@
-import {
-  DefaultClient,
-  ERC20Client,
-  GethClient,
-  IClientConfig,
-} from "wallet-rpc";
+import { ERC20Client, GethClient, HttpClient, IClientConfig } from "wallet-rpc";
 
 const DefaultEthRpcConf: IClientConfig = {
-  host: "http://127.0.0.1:8545",
+  baseUrl: "http://127.0.0.1:8545",
   keepAlive: true,
   timeout: 10 * 1000,
 };
 
-const client = new DefaultClient(DefaultEthRpcConf);
+const client = new HttpClient(DefaultEthRpcConf);
 const EthClient = new GethClient(client);
 
 export const example0 = async () => {

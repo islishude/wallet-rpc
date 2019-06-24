@@ -1,15 +1,15 @@
 import { log } from "console";
-import { BitcoinClient, DefaultClient, IClientConfig } from "wallet-rpc";
+import { BitcoinClient, HttpClient, IClientConfig } from "wallet-rpc";
 
 export const DefaultBtcRpcConf: IClientConfig = {
-  host: "http://127.0.0.1:8832",
+  baseUrl: "http://127.0.0.1:8832",
   keepAlive: false,
   password: "your-rpc-passwword",
   timeout: 10 * 1000,
   username: "your-rpc-username",
 };
 
-const client = new DefaultClient(DefaultBtcRpcConf);
+const client = new HttpClient(DefaultBtcRpcConf);
 const BtcClient = new BitcoinClient(client);
 
 // Simple Example

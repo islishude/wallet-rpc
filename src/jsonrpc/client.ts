@@ -1,23 +1,25 @@
 import http = require("http");
 import https = require("https");
+import url = require("url");
 import { IJsonRpcClient } from "./ijsonrpc";
 import { IClientConfig, IMessage } from "./imsg";
 import { version as PkgVer } from "./version";
 
 export class HttpClient implements IJsonRpcClient {
-  public host: string;
+  public baseUrl: string;
   public options: http.RequestOptions;
   private httpAgent: http.Agent | https.Agent;
   private httpClient: typeof http | typeof https;
 
   constructor(config: IClientConfig) {
-    const { host, username, password, keepAlive, timeout } = config;
-    this.host = host;
+    const { baseUrl: host, username, password, keepAlive, timeout } = config;
+    this.baseUrl = host;
     this.httpClient = /^https:.+$/g.test(host) ? https : http;
     this.httpAgent = new this.httpClient.Agent({
       keepAlive: keepAlive || false,
-      timeout: timeout || 60000,
     });
+
+    const urlPath = url.parse(this.baseUrl);
 
     this.options = {
       agent: this.httpAgent,
@@ -31,7 +33,12 @@ export class HttpClient implements IJsonRpcClient {
         "Agent": `wallet-rpc/${PkgVer}`,
         "Content-Type": "application/json",
       },
+      host: urlPath.host,
+      hostname: urlPath.hostname,
+      port: urlPath.port,
       method: "POST",
+      path: urlPath.path,
+      timeout: timeout || 60000,
     };
   }
 
@@ -41,7 +48,7 @@ export class HttpClient implements IJsonRpcClient {
 
   public Call<T>(data: Buffer) {
     return new Promise<IMessage<T>>((resolve, reject) => {
-      const client = this.httpClient.request(this.host, this.options, (res) => {
+      const client = this.httpClient.request(this.options, (res) => {
         res.on("error", reject);
 
         const chunk: Buffer[] = [];
