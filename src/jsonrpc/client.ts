@@ -41,32 +41,28 @@ export class HttpClient implements IJsonRpcClient {
 
   public Call<T>(data: Buffer) {
     return new Promise<IMessage<T>>((resolve, reject) => {
-      const client = this.httpClient.request(
-        this.host,
-        this.options,
-        async (res) => {
-          res.setEncoding("utf8");
-          res.on("error", reject);
+      const client = this.httpClient.request(this.host, this.options, (res) => {
+        res.on("error", reject);
 
-          const chunk: Buffer[] = [];
-          res.on("data", (tmp) => {
-            chunk.push(tmp);
-          });
+        const chunk: Buffer[] = [];
+        res.on("data", (tmp) => {
+          chunk.push(tmp);
+        });
 
-          res.on("end", () => {
-            const returns: IMessage<T> = {
-              body: JSON.parse(Buffer.concat(chunk).toString()),
-              headers: res.headers,
-              statusCode: res.statusCode as number,
-            };
-            resolve(returns);
-          });
-        },
-      );
+        res.on("end", () => {
+          const returns: IMessage<T> = {
+            body: JSON.parse(Buffer.concat(chunk).toString()),
+            headers: res.headers,
+            statusCode: res.statusCode as number,
+          };
+          resolve(returns);
+        });
+      });
 
       client.setHeader("Content-Length", Buffer.byteLength(data));
       client.write(data);
 
+      client.on("error", reject);
       client.on("timeout", () => reject(new Error("timeout")));
     });
   }

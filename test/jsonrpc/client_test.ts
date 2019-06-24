@@ -18,7 +18,11 @@ test("test http client", async (t) => {
 
     if (data.id === "timeout") {
       setTimeout(() => {
-        res.end("");
+        const ret = JSON.stringify({
+          id: 100,
+          error: { message: "timeout", code: 400 },
+        });
+        res.end(ret);
       }, 200);
       return;
     }

@@ -39,8 +39,7 @@ export class EOSClient implements IHTTPClient {
       http.get(
         this.baseUrl + url,
         { agent: this.httpAgent, headers: this.headers },
-        async (res) => {
-          res.setEncoding("utf8");
+        (res) => {
           res.on("error", reject);
 
           const chunk: Buffer[] = [];
@@ -69,8 +68,7 @@ export class EOSClient implements IHTTPClient {
           agent: this.httpAgent,
           headers: this.headers,
         },
-        async (res) => {
-          res.setEncoding("utf8");
+        (res) => {
           res.on("error", reject);
 
           const chunk: Buffer[] = [];
