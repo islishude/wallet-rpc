@@ -29,7 +29,7 @@ npm install wallet-rpc --save
 npx wallet-rpc
 ```
 
-Run `npx -n --experimental-repl-await wallet-rpc` to enable top-level-await with node.js v10 LTS.
+Run `npx -n --experimental-repl-await wallet-rpc` to enable top-level-await.
 
 **Docker**
 

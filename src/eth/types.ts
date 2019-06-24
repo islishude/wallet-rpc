@@ -20,6 +20,13 @@ export interface IParitySuicideAction {
   balance: string;
 }
 
+export interface IParityRewardAction {
+  author: string;
+  value: string;
+  rewardType: "block" | "uncle";
+  // Not production rewardType "emptyStep" | "external"
+}
+
 export interface IParityCreateResult {
   address: string;
   code: string;
@@ -32,10 +39,14 @@ export interface IParityCallResult {
 }
 
 export interface IParityTrxTrace {
-  action: IParityCallAction | IParityCreateAction | IParitySuicideAction;
+  action:
+    | IParityCallAction
+    | IParityCreateAction
+    | IParitySuicideAction
+    | IParityRewardAction;
   blockHash: string;
   blockNumber: number;
-  // if `suicide` result will be null
+  // if `suicide` or `reward` result will be null
   // if error found then result will be undefined
   result?: IParityCallResult | IParityCreateResult | null;
   subtraces: number;
@@ -44,7 +55,7 @@ export interface IParityTrxTrace {
   transactionHash: string;
   transactionPosition: number;
   // for block trace has `reward` type
-  type: "create" | "call" | "suicide";
+  type: "create" | "call" | "suicide" | "reward";
 }
 
 export interface ISyncingStatus {

@@ -1,10 +1,10 @@
 import http = require("http");
 import https = require("https");
-import { version as PkgVer } from "../version";
 import { IJsonRpcClient } from "./ijsonrpc";
 import { IClientConfig, IMessage } from "./imsg";
+import { version as PkgVer } from "./version";
 
-export default class Client implements IJsonRpcClient {
+export class HttpClient implements IJsonRpcClient {
   public host: string;
   public options: http.RequestOptions;
   private httpAgent: http.Agent | https.Agent;
@@ -14,7 +14,10 @@ export default class Client implements IJsonRpcClient {
     const { host, username, password, keepAlive, timeout } = config;
     this.host = host;
     this.httpClient = /^https:.+$/g.test(host) ? https : http;
-    this.httpAgent = new this.httpClient.Agent({ keepAlive, timeout });
+    this.httpAgent = new this.httpClient.Agent({
+      keepAlive: keepAlive || false,
+      timeout: timeout || 60000,
+    });
 
     this.options = {
       agent: this.httpAgent,
@@ -29,8 +32,11 @@ export default class Client implements IJsonRpcClient {
         "Content-Type": "application/json",
       },
       method: "POST",
-      timeout,
     };
+  }
+
+  public setAuth(username: string, password: string) {
+    this.options.auth = `${username}@${password}`;
   }
 
   public Call<T>(data: Buffer) {

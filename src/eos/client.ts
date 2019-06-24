@@ -1,6 +1,6 @@
 import http = require("http");
 import https = require("https");
-import { version as PkgVer } from "../version";
+import { version as PkgVer } from "../jsonrpc/version";
 
 export interface IMessage<T> {
   statusCode: number;

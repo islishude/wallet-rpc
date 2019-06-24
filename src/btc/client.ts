@@ -1,5 +1,5 @@
 import { IJsonRpcClient } from "../jsonrpc/ijsonrpc";
-import ReqData from "../jsonrpc/reqdata";
+import { ReqData } from "../jsonrpc/reqdata";
 import {
   IBtcBlockchainInfo,
   IBtcBlockInfo,

@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { start } from "repl";
 import util = require("util");
+import { HttpClient } from "..";
 import { BitcoinClient } from "../btc/client";
 import { EOSClient } from "../eos/rpc";
 import { ERC20Client } from "../eth/erc20";
@@ -28,16 +29,18 @@ Wallet RPC CLI by isLishude <${color._}https://github.com/islishude/wallet-rpc${
 The available global variables are
 
 ${color.yellow}
-- log(alias "console.log")
-- EthereumClient
-- EthereumClient
+- HttpClient(default jsonrpc client)
+- BitcoinClient
+- USDTClient(entends from BitcoinClient)
+- GethClient
+- ParityClient(extends from GethClient)
+- ERC20Client(injects GethClient or ParityClient)
 - EOSClient
-- ...
 ${color.clear}
 
 See the README to learn more API and RPC supports list.
 
-Run \`npx -n --experimental-repl-await wallet-rpc\` to enable top-level-await with node.js v10 LTS.
+Run \`npx -n --experimental-repl-await wallet-rpc\` to enable top-level-await.
 
 e.g.
 ${color.yellow}
@@ -53,8 +56,23 @@ const terminal = start({
   prompt: "> ",
   terminal: process.stdout.isTTY,
   useGlobal: true,
+  writer(value) {
+    return util.inspect(value, {
+      showHidden: false,
+      depth: null,
+      customInspect: true,
+      colors: true,
+      maxArrayLength: null,
+      breakLength: 80,
+      compact: false,
+      sorted: false,
+      // @ts-ignore
+      getters: false,
+    });
+  },
 });
 
+terminal.context.HttpClient = HttpClient;
 terminal.context.BitcoinClient = BitcoinClient;
 terminal.context.USDTClient = USDTClient;
 terminal.context.GethClient = GethClient;

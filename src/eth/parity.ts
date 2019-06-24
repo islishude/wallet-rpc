@@ -1,5 +1,5 @@
 import { IJsonRpcClient } from "../jsonrpc/ijsonrpc";
-import ReqData from "../jsonrpc/reqdata";
+import { ReqData } from "../jsonrpc/reqdata";
 import { GethClient } from "./geth";
 import { IEthTrx, IParityTrxTrace } from "./types";
 
@@ -12,6 +12,11 @@ export class ParityClient extends GethClient {
   public traceTrx(hash: string) {
     const reqData = new ReqData("", "trace_transaction", hash);
     return this.client.Call<IParityTrxTrace>(reqData.getData());
+  }
+
+  public traceBlock(hash: string) {
+    const reqdata = new ReqData("", "trace_block", hash);
+    return this.client.Call<IParityTrxTrace[]>(reqdata.getData());
   }
 
   public nextNonce(address: string) {

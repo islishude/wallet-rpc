@@ -1,5 +1,5 @@
 import { IJsonRpcClient } from "../jsonrpc/ijsonrpc";
-import ReqData from "../jsonrpc/reqdata";
+import { ReqData } from "../jsonrpc/reqdata";
 import {
   BlockParam,
   IEthBlock,
@@ -13,14 +13,13 @@ import {
   ISyncingStatus,
 } from "./types";
 
-function hex(status: BlockParam): string {
-  if (typeof status === "number") {
-    return "0x" + status.toString(16);
-  }
-  return status;
-}
-
 export class GethClient {
+  public static Hexify(status: BlockParam): string {
+    if (typeof status === "number") {
+      return "0x" + status.toString(16);
+    }
+    return status;
+  }
   public client: IJsonRpcClient;
   public NODE_VERSION: string;
 
@@ -29,14 +28,21 @@ export class GethClient {
     this.NODE_VERSION = "geth";
   }
 
+  public getChainId() {
+    const reqData = new ReqData("", "eth_chainId");
+    return this.client.Call<string>(reqData.getData());
+  }
+
   public getBalance(address: string, status: BlockParam = "latest") {
-    const reqData = new ReqData("", "eth_getBalance", address, hex(status));
+    const block = GethClient.Hexify(status);
+    const reqData = new ReqData("", "eth_getBalance", address, block);
     return this.client.Call<string>(reqData.getData());
   }
 
   public getTrxCount(address: string, status: BlockParam = "latest") {
     const method = "eth_getTransactionCount";
-    const reqData = new ReqData("", method, address, hex(status));
+    const block = GethClient.Hexify(status);
+    const reqData = new ReqData("", method, address, block);
     return this.client.Call<string>(reqData.getData());
   }
 
@@ -63,7 +69,8 @@ export class GethClient {
   }
 
   public getCode(address: string, status: BlockParam = "latest") {
-    const reqData = new ReqData("", "eth_getCode", address, hex(status));
+    const block = GethClient.Hexify(status);
+    const reqData = new ReqData("", "eth_getCode", address, block);
     return this.client.Call<string>(reqData.getData());
   }
 
@@ -73,12 +80,14 @@ export class GethClient {
   }
 
   public callContract(data: IEthCallFuncParam, status: BlockParam = "latest") {
-    const reqData = new ReqData("", "eth_call", data, hex(status));
+    const block = GethClient.Hexify(status);
+    const reqData = new ReqData("", "eth_call", data, block);
     return this.client.Call<string>(reqData.getData());
   }
 
   public estimateGas(data: IEthCallFuncParam, status: BlockParam = "latest") {
-    const reqData = new ReqData("", "eth_estimateGas", data, hex(status));
+    const block = GethClient.Hexify(status);
+    const reqData = new ReqData("", "eth_estimateGas", data, block);
     return this.client.Call<string>(reqData.getData());
   }
 

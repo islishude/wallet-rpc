@@ -1,6 +1,6 @@
 import test from "ava";
 import http = require("http");
-import { DefaultClient, ReqData } from "../..";
+import { HttpClient, ReqData } from "../..";
 
 test("test http client", async (t) => {
   const server = http.createServer(async (req, res) => {
@@ -39,7 +39,7 @@ test("test http client", async (t) => {
   });
 
   {
-    const client = new DefaultClient({
+    const client = new HttpClient({
       host,
       keepAlive: false,
       timeout: 3000,
@@ -64,7 +64,7 @@ test("test http client", async (t) => {
   {
     const password = "test";
     const username = "test";
-    const client = new DefaultClient({
+    const client = new HttpClient({
       host,
       keepAlive: false,
       password,
@@ -79,7 +79,7 @@ test("test http client", async (t) => {
   }
 
   {
-    const client = new DefaultClient({
+    const client = new HttpClient({
       host,
       keepAlive: false,
       timeout: 20,

@@ -59,13 +59,12 @@ export {
   IEosTrx,
 } from "./eos/type";
 
-import DefaultClient from "./jsonrpc/client";
+export { HttpClient } from "./jsonrpc/client";
 export {
   IJsonRpcRequst,
   IJsonRpcResponse,
   IMessage,
   IClientConfig,
 } from "./jsonrpc/imsg";
-import ReqData from "./jsonrpc/reqdata";
-export { DefaultClient, ReqData };
+export { ReqData } from "./jsonrpc/reqdata";
 export { IJsonRpcClient } from "./jsonrpc/ijsonrpc";

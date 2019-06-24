@@ -113,3 +113,10 @@ test("eth get trx count", async (t) => {
   commonClient.getTrxCount("0x0", "pending");
   commonClient.getTrxCount("0x0", "pending");
 });
+
+test("test hexify", (t) => {
+  t.deepEqual(GethClient.Hexify("latest"), "latest");
+  t.deepEqual(GethClient.Hexify("pending"), "pending");
+  t.deepEqual(GethClient.Hexify("earliest"), "earliest");
+  t.deepEqual(GethClient.Hexify(10), "0xa");
+});

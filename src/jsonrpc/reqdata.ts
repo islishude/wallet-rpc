@@ -1,6 +1,6 @@
 import { IJsonRpcRequst } from "./imsg";
 
-export default class ReqData {
+export class ReqData {
   public id: string;
   public method: string;
   public params: any[];

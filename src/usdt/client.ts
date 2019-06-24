@@ -1,6 +1,6 @@
 import { BitcoinClient } from "../btc/client";
 import { IJsonRpcClient } from "../jsonrpc/ijsonrpc";
-import ReqData from "../jsonrpc/reqdata";
+import { ReqData } from "../jsonrpc/reqdata";
 import {
   IOmniClientInfo,
   IOmniPropertyBalance,
