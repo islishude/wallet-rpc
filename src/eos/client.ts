@@ -40,20 +40,22 @@ export class EOSClient implements IHTTPClient {
         this.baseUrl + url,
         { agent: this.httpAgent, headers: this.headers },
         async (res) => {
-          try {
-            const chunk: Buffer[] = [];
-            for await (const tmp of res) {
-              chunk.push(tmp);
-            }
+          res.setEncoding("utf8");
+          res.on("error", reject);
+
+          const chunk: Buffer[] = [];
+          res.on("data", (tmp) => {
+            chunk.push(tmp);
+          });
+
+          res.on("end", () => {
             const returns: IMessage<T> = {
               body: JSON.parse(Buffer.concat(chunk).toString()),
               headers: res.headers,
               statusCode: res.statusCode as number,
             };
             resolve(returns);
-          } catch (e) {
-            reject(e);
-          }
+          });
         },
       );
     });
@@ -68,20 +70,22 @@ export class EOSClient implements IHTTPClient {
           headers: this.headers,
         },
         async (res) => {
-          try {
-            const chunk: Buffer[] = [];
-            for await (const tmp of res) {
-              chunk.push(tmp);
-            }
+          res.setEncoding("utf8");
+          res.on("error", reject);
+
+          const chunk: Buffer[] = [];
+          res.on("data", (tmp) => {
+            chunk.push(tmp);
+          });
+
+          res.on("end", () => {
             const returns: IMessage<T> = {
               body: JSON.parse(Buffer.concat(chunk).toString()),
               headers: res.headers,
               statusCode: res.statusCode as number,
             };
             resolve(returns);
-          } catch (e) {
-            reject(e);
-          }
+          });
         },
       );
 

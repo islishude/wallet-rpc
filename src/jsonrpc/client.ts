@@ -45,20 +45,22 @@ export class HttpClient implements IJsonRpcClient {
         this.host,
         this.options,
         async (res) => {
-          try {
-            const chunk: Buffer[] = [];
-            for await (const tmp of res) {
-              chunk.push(tmp);
-            }
+          res.setEncoding("utf8");
+          res.on("error", reject);
+
+          const chunk: Buffer[] = [];
+          res.on("data", (tmp) => {
+            chunk.push(tmp);
+          });
+
+          res.on("end", () => {
             const returns: IMessage<T> = {
               body: JSON.parse(Buffer.concat(chunk).toString()),
               headers: res.headers,
               statusCode: res.statusCode as number,
             };
             resolve(returns);
-          } catch (e) {
-            reject(e);
-          }
+          });
         },
       );
 
