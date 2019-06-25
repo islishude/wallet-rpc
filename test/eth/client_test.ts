@@ -6,10 +6,12 @@ import {
   IJsonRpcResponse,
   IMessage,
 } from "../..";
+import { EthBlockSimple, EthTrx, EthTrxReceipt } from "./types";
 
 class EthMockClient implements IJsonRpcClient {
+  public NodeType: string;
   public constructor() {
-    //
+    this.NodeType = "testing mock client";
   }
 
   public Call<T>(data: Buffer): Promise<IMessage<T>> {
@@ -29,40 +31,31 @@ class EthMockClient implements IJsonRpcClient {
           returns.result = "0x00";
           break;
         case "eth_blockNumber":
-          returns.result = "0x00";
+          returns.result = "0x01";
           break;
         case "eth_getBlockByNumber":
-          returns.result = "0x00";
+          returns.result = EthBlockSimple;
           break;
         case "eth_getTransactionByHash":
-          returns.result = "0x1";
+          returns.result = EthTrx;
           break;
         case "eth_getTransactionReceipt":
-          returns.result = "0x1";
+          returns.result = EthTrxReceipt;
           break;
         case "eth_sendRawTransaction":
-          returns.result = "";
+          returns.result = "0x00";
           break;
         case "eth_call":
-          returns.result = "";
+          returns.result = "0x5208";
           break;
         case "eth_estimateGas":
-          returns.result = "";
+          returns.result = "0x20";
           break;
         case "eth_syncing":
-          returns.result = "";
+          returns.result = false;
           break;
         case "eth_gasPrice":
-          returns.result = "";
-          break;
-        case "txpool_content":
-          returns.result = "";
-          break;
-        case "txpool_inspect":
-          returns.result = "";
-          break;
-        case "txpool_status":
-          returns.result = "";
+          returns.result = "0x20";
           break;
         default:
           returns.error = {
@@ -86,7 +79,6 @@ class EthMockClient implements IJsonRpcClient {
 const httpClient = new EthMockClient();
 const commonClient = new GethClient(httpClient);
 const address = "";
-// const token = "";
 
 test("eth get get balance", async (t) => {
   const lastest = await commonClient.getBalance(address);

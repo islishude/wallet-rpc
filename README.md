@@ -13,7 +13,7 @@ jsonrpc2.0 client for crypto-currencies by TypeScript
 
 ### Enviorment
 
-Node.js ^8.0.0 only.
+Node.js only, v12 is recommend.
 
 ## Install
 

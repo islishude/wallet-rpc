@@ -60,7 +60,7 @@ export interface IBtcBlockInfo {
   size: number;
   height: number;
   version: number;
-  versionHex: number;
+  versionHex: string;
   merkleroot: string;
   time: number;
   mediantime: number;
@@ -79,24 +79,23 @@ export interface IBtcBlockchainInfo {
   chain: string;
   blocks: number;
   headers: number;
-  blockhash: string;
   difficulty: number;
   mediantime: number;
   verificationprogress: number;
   initialblockdownload: boolean;
+  bestblockhash: string;
   chainwork: string;
   warnings: string;
   pruned: boolean;
   size_on_disk: number;
-  softforks: IBlockchainInfoSoftfork[];
-}
-
-interface IBlockchainInfoSoftfork {
-  id: string;
-  version: number;
-  reject: {
-    status: boolean;
-  };
+  softforks: Array<{
+    id: string;
+    version: number;
+    reject: {
+      status: boolean;
+    };
+  }>;
+  bip9_softforks: any;
 }
 
 export interface IBtcNetworkInfo {
@@ -111,16 +110,18 @@ export interface IBtcNetworkInfo {
   relayfee: number;
   incrementalfee: number;
   warnings: string;
-  localaddresses: string[];
-  networks: INetworksInfo[];
-}
-
-interface INetworksInfo {
-  name: string;
-  limited: boolean;
-  reachable: boolean;
-  proxy: string;
-  proxy_randomize_credentials: boolean;
+  networks: Array<{
+    name: string;
+    limited: boolean;
+    reachable: boolean;
+    proxy: string;
+    proxy_randomize_credentials: boolean;
+  }>;
+  localaddresses: Array<{
+    address: string;
+    port: number;
+    score: number;
+  }>;
 }
 
 export interface IBtcVerboseMemPool {

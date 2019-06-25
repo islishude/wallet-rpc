@@ -13,7 +13,7 @@ export interface IHTTPClient {
 }
 
 export class EOSClient implements IHTTPClient {
-  public baseUrl: string;
+  public url: string;
   private httpAgent: http.Agent | https.Agent;
   private httpModule: typeof http | typeof https;
 
@@ -25,19 +25,19 @@ export class EOSClient implements IHTTPClient {
   };
 
   public constructor(
-    baseUrl: string,
+    url: string,
     keepAlive: boolean = false,
     timeout: number = 10 * 1000,
   ) {
-    this.httpModule = /^https:.+$/g.test(baseUrl) ? https : http;
+    this.httpModule = /^https:.+$/g.test(url) ? https : http;
     this.httpAgent = new this.httpModule.Agent({ keepAlive, timeout });
-    this.baseUrl = baseUrl;
+    this.url = url;
   }
 
   public Get<T>(url: string): Promise<IMessage<T>> {
     return new Promise<IMessage<T>>((resolve, reject) => {
-      http.get(
-        this.baseUrl + url,
+      const client = http.get(
+        this.url + url,
         { agent: this.httpAgent, headers: this.headers },
         (res) => {
           res.on("error", reject);
@@ -57,13 +57,15 @@ export class EOSClient implements IHTTPClient {
           });
         },
       );
+
+      client.on("error", reject);
     });
   }
 
   public Post<T>(url: string, data: object): Promise<IMessage<T>> {
     return new Promise<IMessage<T>>((resolve, reject) => {
       const client = this.httpModule.request(
-        this.baseUrl + url,
+        this.url + url,
         {
           agent: this.httpAgent,
           headers: this.headers,
