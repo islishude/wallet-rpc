@@ -1,25 +1,25 @@
 import http = require("http");
 import https = require("https");
-import url = require("url");
+import urllib = require("url");
 import { IJsonRpcClient } from "./ijsonrpc";
 import { IClientConfig, IMessage } from "./imsg";
 import { version as PkgVer } from "./version";
 
 export class HttpClient implements IJsonRpcClient {
-  public baseUrl: string;
+  public url: string;
   public options: http.RequestOptions;
   private httpAgent: http.Agent | https.Agent;
   private httpClient: typeof http | typeof https;
 
   constructor(config: IClientConfig) {
-    const { baseUrl: host, username, password, keepAlive, timeout } = config;
-    this.baseUrl = host;
-    this.httpClient = /^https:.+$/g.test(host) ? https : http;
+    const { url, username, password, keepAlive, timeout } = config;
+    this.url = url;
+    this.httpClient = /^https:.+$/g.test(url) ? https : http;
     this.httpAgent = new this.httpClient.Agent({
       keepAlive: keepAlive || false,
     });
 
-    const urlPath = url.parse(this.baseUrl);
+    const urlPath = urllib.parse(this.url);
 
     this.options = {
       agent: this.httpAgent,
@@ -44,6 +44,14 @@ export class HttpClient implements IJsonRpcClient {
 
   public setAuth(username: string, password: string) {
     this.options.auth = `${username}@${password}`;
+  }
+
+  public setUrl(url: string) {
+    const urlPath = urllib.parse(url);
+    this.options.host = urlPath.host;
+    this.options.hostname = urlPath.hostname;
+    this.options.port = urlPath.hostname;
+    this.httpClient = /^https:.+$/g.test(url) ? https : http;
   }
 
   public Call<T>(data: Buffer) {

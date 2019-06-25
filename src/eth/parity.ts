@@ -1,7 +1,7 @@
 import { IJsonRpcClient } from "../jsonrpc/ijsonrpc";
 import { ReqData } from "../jsonrpc/reqdata";
 import { GethClient } from "./geth";
-import { IEthTrx, IParityTrxTrace } from "./types";
+import { BlockParam, IEthTrx, IParityTrxTrace } from "./types";
 
 export class ParityClient extends GethClient {
   constructor(client: IJsonRpcClient) {
@@ -14,8 +14,9 @@ export class ParityClient extends GethClient {
     return this.client.Call<IParityTrxTrace>(reqData.getData());
   }
 
-  public traceBlock(hash: string) {
-    const reqdata = new ReqData("", "trace_block", hash);
+  public traceBlock(height: BlockParam) {
+    const param = GethClient.Hexify(height);
+    const reqdata = new ReqData("", "trace_block", param);
     return this.client.Call<IParityTrxTrace[]>(reqdata.getData());
   }
 

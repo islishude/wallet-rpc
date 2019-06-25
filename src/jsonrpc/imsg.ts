@@ -25,7 +25,7 @@ export interface IMessage<T> {
 }
 
 export interface IClientConfig {
-  baseUrl: string;
+  url: string;
   keepAlive?: boolean;
   timeout?: number;
   username?: string;

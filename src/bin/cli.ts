@@ -15,12 +15,6 @@ const color = {
   yellow: "\x1b[33m",
 };
 
-// inspect large objects
-// @ts-ignore
-util.inspect.replDefaults.maxArrayLength = Infinity;
-// @ts-ignore
-util.inspect.replDefaults.depth = Infinity;
-
 console.log(`
 Wallet RPC CLI by isLishude <${color._}https://github.com/islishude/wallet-rpc${
   color.clear
@@ -44,8 +38,9 @@ Run \`npx -n --experimental-repl-await wallet-rpc\` to enable top-level-await.
 
 e.g.
 ${color.yellow}
+  let client = new HttpClient({ url: 'http://localhost:8545' })
   let eth = new EthereumClient();
-  await eth.getBlockCount();
+  await eth.getBlockCount(client);
 ${color.clear}
 `);
 
