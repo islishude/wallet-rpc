@@ -9,7 +9,10 @@ jsonrpc2.0 client for crypto-currencies by TypeScript
 - Bitcoin(^BitcoinCore 0.16+)
 - TetherUSDT(^OmniLayer0.3.0+)
 - Ethereum(^Geth1.8.0 or ^Parity1.0.0)
-- EOS(^1.3.0+)
+
+#### EOS(^1.3.0+)
+
+wallet-rpc v6 has been splited it to [islishude/eosrpc](https://github.com/islishude/eosrpc)
 
 ### Enviorment
 

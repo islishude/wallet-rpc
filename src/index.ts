@@ -42,22 +42,8 @@ export {
   IOmniPropertyBalance,
   IOmniPropertyInfo,
   IOmniTxInfo,
-} from "./usdt/type";
-export { USDTClient } from "./usdt/client";
-
-export { EOSClient } from "./eos/client";
-export {
-  IEosAbi,
-  IEosAccount,
-  IEosAuthority,
-  IEosBlockInfo,
-  IEosChainInfo,
-  IEosError,
-  IEosProds,
-  IEosProdsTable,
-  IEosRamTable,
-  IEosTrx,
-} from "./eos/type";
+} from "./omni/type";
+export { OmniClient } from "./omni/client";
 
 export { HttpClient } from "./jsonrpc/client";
 export {

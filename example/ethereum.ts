@@ -1,7 +1,7 @@
 import { ERC20Client, GethClient, HttpClient, IClientConfig } from "wallet-rpc";
 
 const DefaultEthRpcConf: IClientConfig = {
-  baseUrl: "http://127.0.0.1:8545",
+  url: "http://127.0.0.1:8545",
   keepAlive: true,
   timeout: 10 * 1000,
 };

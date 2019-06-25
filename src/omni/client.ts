@@ -8,7 +8,7 @@ import {
   IOmniTxInfo,
 } from "./type";
 
-export class USDTClient extends BitcoinClient {
+export class OmniClient extends BitcoinClient {
   constructor(client: IJsonRpcClient) {
     super(client);
   }

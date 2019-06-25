@@ -2,7 +2,7 @@ import { log } from "console";
 import { BitcoinClient, HttpClient, IClientConfig } from "wallet-rpc";
 
 export const DefaultBtcRpcConf: IClientConfig = {
-  baseUrl: "http://127.0.0.1:8832",
+  url: "http://127.0.0.1:8832",
   keepAlive: false,
   password: "your-rpc-passwword",
   timeout: 10 * 1000,

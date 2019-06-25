@@ -3,11 +3,10 @@ import { start } from "repl";
 import util = require("util");
 import { HttpClient } from "..";
 import { BitcoinClient } from "../btc/client";
-import { EOSClient } from "../eos/rpc";
 import { ERC20Client } from "../eth/erc20";
 import { GethClient } from "../eth/geth";
 import { ParityClient } from "../eth/parity";
-import { USDTClient } from "../usdt/client";
+import { OmniClient } from "../omni/client";
 
 const color = {
   _: "\x1b[4m",
@@ -39,8 +38,8 @@ Run \`npx -n --experimental-repl-await wallet-rpc\` to enable top-level-await.
 e.g.
 ${color.yellow}
   let client = new HttpClient({ url: 'http://localhost:8545' })
-  let eth = new EthereumClient();
-  await eth.getBlockCount(client);
+  let eth = new EthereumClient(client);
+  await eth.getBlockCount();
 ${color.clear}
 `);
 
@@ -69,8 +68,7 @@ const terminal = start({
 
 terminal.context.HttpClient = HttpClient;
 terminal.context.BitcoinClient = BitcoinClient;
-terminal.context.USDTClient = USDTClient;
+terminal.context.OmniClient = OmniClient;
 terminal.context.GethClient = GethClient;
 terminal.context.ParityClient = ParityClient;
 terminal.context.ERC20Client = ERC20Client;
-terminal.context.EOSClient = EOSClient;

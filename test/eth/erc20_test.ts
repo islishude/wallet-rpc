@@ -75,7 +75,7 @@ test("decodeAbiNumber", (t) => {
   }
 });
 
-test.serial("ERC20 name", async (t) => {
+test("ERC20 name", async (t) => {
   const { result } = await erc20.name(bnb, true);
   const expect =
     "0x" +
@@ -85,7 +85,7 @@ test.serial("ERC20 name", async (t) => {
   t.deepEqual(expect, result);
 });
 
-test.serial("ERC20 balanceOf", async (t) => {
+test("ERC20 balanceOf", async (t) => {
   const address = "0x0000000000000000000000000000000000000000";
   const { result } = await erc20.balanceOf(bnb, address);
 
@@ -94,7 +94,7 @@ test.serial("ERC20 balanceOf", async (t) => {
   t.deepEqual(expect, result);
 });
 
-test.serial("ERC20 symbol", async (t) => {
+test("ERC20 symbol", async (t) => {
   const { result } = await erc20.symbol(bnb);
   const expect =
     "0x00000000000000000000000000000000000000000000000000000000000000" +
@@ -111,7 +111,7 @@ test("ERC20 decimals", async (t) => {
   t.deepEqual(expect, result);
 });
 
-test.serial("ERC20 totalSupply", async (t) => {
+test("ERC20 totalSupply", async (t) => {
   const { result } = await erc20.totalSupply(tron);
   const expect =
     "0x000000000000000000000000000000000000000000000000016345785d8a0000";

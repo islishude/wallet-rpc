@@ -9,13 +9,13 @@ export class HttpClient implements IJsonRpcClient {
   public url: string;
   public options: http.RequestOptions;
   private httpAgent: http.Agent | https.Agent;
-  private httpClient: typeof http | typeof https;
+  private httpModule: typeof http | typeof https;
 
   constructor(config: IClientConfig) {
     const { url, username, password, keepAlive, timeout } = config;
     this.url = url;
-    this.httpClient = /^https:.+$/g.test(url) ? https : http;
-    this.httpAgent = new this.httpClient.Agent({
+    this.httpModule = /^https:.+$/g.test(url) ? https : http;
+    this.httpAgent = new this.httpModule.Agent({
       keepAlive: keepAlive || false,
     });
 
@@ -51,12 +51,12 @@ export class HttpClient implements IJsonRpcClient {
     this.options.host = urlPath.host;
     this.options.hostname = urlPath.hostname;
     this.options.port = urlPath.hostname;
-    this.httpClient = /^https:.+$/g.test(url) ? https : http;
+    this.httpModule = /^https:.+$/g.test(url) ? https : http;
   }
 
   public Call<T>(data: Buffer) {
     return new Promise<IMessage<T>>((resolve, reject) => {
-      const client = this.httpClient.request(this.options, (res) => {
+      const client = this.httpModule.request(this.options, (res) => {
         res.on("error", reject);
 
         const chunk: Buffer[] = [];

@@ -1,15 +1,11 @@
-import { HttpClient, IClientConfig, USDTClient } from "wallet-rpc";
+import { HttpClient, OmniClient } from "wallet-rpc";
 
-export const DefaultBtcRpcConf: IClientConfig = {
-  baseUrl: "http://127.0.0.1:8832",
-  keepAlive: false,
+const httpClient = new HttpClient({
+  url: "http://127.0.0.1:8832",
   password: "your-rpc-passwword",
-  timeout: 10 * 1000,
   username: "your-rpc-username",
-};
-
-const client = new HttpClient(DefaultBtcRpcConf);
-const usdt = new USDTClient(client);
+});
+const usdt = new OmniClient(httpClient);
 
 export const getTxInfo = async () => {
   const txid =
