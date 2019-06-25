@@ -1,4 +1,4 @@
-wallet-rpc [![Build Status](https://travis-ci.org/islishude/wallet-rpc.svg?branch=dev)](https://travis-ci.org/islishude/wallet-rpc)
+# wallet-rpc [![Build Status](https://travis-ci.org/islishude/wallet-rpc.svg?branch=dev)](https://travis-ci.org/islishude/wallet-rpc)
 
 jsonrpc2.0 client for crypto-currencies by TypeScript
 
@@ -44,5 +44,4 @@ Supports top-level-await by default.
 
 ## Documents
 
-[:books: Document](https://github.com/isLishude/wallet-rpc/blob/dev/doc.md)  
-[:bug: Feedback](https://github.com/isLishude/wallet-rpc/issues/new)
+[:books: Document](https://github.com/isLishude/wallet-rpc/blob/dev/doc.md)
