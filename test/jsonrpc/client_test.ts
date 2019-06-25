@@ -50,11 +50,11 @@ test.before((t) => {
 
 test.after((t) => {
   server.close(() => {
-    t.log("server close errro");
+    t.log("server close error");
   });
 });
 
-test("test respone and no error", async (t) => {
+test("test response and no error", async (t) => {
   const client = new HttpClient({
     url: baseUrl,
     keepAlive: false,
@@ -67,7 +67,7 @@ test("test respone and no error", async (t) => {
   t.deepEqual(undefined, body.error);
 });
 
-test("test respone and no error2", async (t) => {
+test("test another response and no error", async (t) => {
   const client = new HttpClient({
     url: baseUrl,
     keepAlive: false,
@@ -105,8 +105,7 @@ test("test http client config", async (t) => {
   t.deepEqual(method["Accept-Encoding"], "identity");
 });
 
-test("test client config2", async (t) => {
-  // test default client config
+test("test default client config", async (t) => {
   const client = new HttpClient({
     url: baseUrl,
   });

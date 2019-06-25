@@ -19,7 +19,7 @@ export interface IOmniClientInfo {
 
 export interface IOmniTxInfo {
   txid: string;
-  fee: number;
+  fee: string;
   // from
   sendingaddress: string;
   // to
@@ -42,6 +42,8 @@ export interface IOmniTxInfo {
   blockhash: string;
   blocktime: number;
   positioninblock: number;
+
+  [key: string]: any;
 
   // CrowSale Purchase
   // purchasedpropertyid?: number;
