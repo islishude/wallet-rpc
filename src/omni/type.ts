@@ -19,7 +19,7 @@ export interface IOmniClientInfo {
 
 export interface IOmniTxInfo {
   txid: string;
-  fee: number;
+  fee: string;
   // from
   sendingaddress: string;
   // to
@@ -42,6 +42,8 @@ export interface IOmniTxInfo {
   blockhash: string;
   blocktime: number;
   positioninblock: number;
+
+  [key: string]: any;
 
   // CrowSale Purchase
   // purchasedpropertyid?: number;
@@ -66,4 +68,10 @@ export interface IOmniPropertyInfo {
   managedissuance: boolean; // (boolean) whether the token supply is managed by the issuer
   freezingenabled: boolean; // (boolean) whether freezing is enabled for the property (managed properties only)
   totaltokens: string; // (string) the total number of tokens in existence
+}
+
+export interface IOmniPropertyBalance {
+  balance: string;
+  reserved: string;
+  frozen: string;
 }

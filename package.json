@@ -1,15 +1,22 @@
 {
   "name": "wallet-rpc",
-  "version": "5.0.3",
-  "description": "JSONRPC2.0 client with CLI of crypto-currency by TypeScript",
+  "version": "6.0.0",
+  "description": "jsonrpc 2.0 client for crypto-currencies by TypeScript",
   "main": "dist",
   "types": "dist",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tslint -p tsconfig.json && del-cli dist && tsc",
-    "test": "ts-node test/*.ts",
+    "clean": "ts-node scripts/clean.ts",
+    "lint:fix": "tslint -p tsconfig.json --fix",
+    "lint:only": "tslint -p tsconfig.json",
+    "prebuild": "npm run lint:only && npm run clean",
+    "build": "tsc -p tsconfig.json",
+    "build:only": "tsc -p tsconfig.json",
+    "pretest": "npm run build",
+    "test": "ava",
+    "test:only": "ava",
     "prerelease": "npm run build && npm test",
     "release": "git push --all && git push --tags && npm publish"
   },
@@ -21,25 +28,30 @@
   "bin": {
     "wallet-rpc": "dist/bin/cli.js"
   },
+  "ava": {
+    "compileEnhancements": false,
+    "files": [
+      "test/**/*"
+    ],
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
   "keywords": [
-    "Bitcoin",
-    "Ethereum",
-    "USDT",
-    "OmniLayer",
-    "EOS",
-    "JSONRPC"
+    "jsonrpc",
+    "bitcoin",
+    "ethereum",
+    "usdt"
   ],
-  "author": {
-    "email": "lishude@foxmail.com",
-    "name": "lishude"
-  },
+  "author": "islishude",
   "license": "MIT",
-  "dependencies": {
-    "axios": "^0.19.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/node": "^10.12.15",
-    "del-cli": "^1.1.0",
+    "ava": "^2.1.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "typescript": "^3.5.2"

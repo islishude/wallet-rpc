@@ -1,76 +1,56 @@
-export { BitcoinMethods } from "./bitcoin/mtd";
-export { BitcoinClient } from "./bitcoin/rpc";
-export { DKKTokenMethods } from "./dkktoken/mtd";
-export { DKKTClient } from "./dkktoken/rpc";
-export { EthereumMethods } from "./ethereum/mtd";
-export { EthereumClient } from "./ethereum/rpc";
-export { EthereumUtil } from "./ethereum/util";
-export { OmniLayerMethods } from "./omni/mtd";
-export { OmniLayerClient } from "./omni/rpc";
-export { EOSClient } from "./eos/rpc";
-
+export { decodeAbiNumber, decodeAbiString, ERC20Client } from "./eth/erc20";
+export { GethClient } from "./eth/geth";
+export { ParityClient } from "./eth/parity";
 export {
-  IEosAccount,
-  IEosAuthority,
-  IEosBlockInfo,
-  IEosChainInfo,
-  IEosTrx,
-  IEosAbi,
-  IEosError,
-} from "./eos/type";
-
-export {
-  IRpcRequest,
-  IRpcErrorStruct,
-  IRpcResponse,
-  IRpcConfig,
-} from "./type";
-
-export {
-  IEthAbiCommonStruct,
-  IEthAbiInputStruct,
-  IEthAbiOutputStruct,
-  IEthAbiStruct,
   IEthBlock,
   IEthBlockSimple,
   IEthBlockVerbose,
   IEthCallFuncParam,
-  IEtherScanAbiResponse,
-  IEthReceiptLogs,
-  IEthSentTxStruct,
-  IEthStatus,
-  IEthSyncing,
-  IEthTraceTxReturn,
-  IEthTx,
+  IEthTrx,
+  IEthTrxReceipt,
+  IEthTrxReceiptLog,
   IEthTxPoolContent,
-  IEthTxReceipt,
+  IEthTxPoolInspect,
+  IEthTxPoolStatus,
   IParityCallAction,
   IParityCallResult,
   IParityCreateAction,
   IParityCreateResult,
   IParitySuicideAction,
-  IParityTxTrace,
-} from "./ethereum/type";
+  IParityTrxTrace,
+  ISyncingStatus,
+} from "./eth/types";
 
-export { IOmniClientInfo, IOmniTxInfo } from "./omni/type";
-
+export { BitcoinClient } from "./btc/client";
 export {
-  IDkktBlockInfo,
-  IDkktTxInfo,
-  IDkktWalletInfo,
-  IDkktTxVin,
-  IDkktTxVout,
-} from "./dkktoken/type";
-
-export {
-  IBtcBlockchainInfo,
   IBtcBlockInfo,
+  IBtcBlockchainInfo,
   IBtcFee,
+  IBtcMemPoolInfo,
   IBtcMemoryInfo,
   IBtcNetworkInfo,
+  IBtcTrxOut,
   IBtcTxInfo,
-  IBtcVerboseMemPool,
-  IBtcWalletInfo,
   IBtcTxVin,
   IBtcTxVout,
-} from "./bitcoin/type";
+  IBtcVerboseMemPool,
+  IBtcWalletInfo,
+} from "./btc/type";
+
+export {
+  IOmniClientInfo,
+  IOmniPropertyBalance,
+  IOmniPropertyInfo,
+  IOmniTxInfo,
+} from "./omni/type";
+export { OmniClient } from "./omni/client";
+
+export { HttpClient } from "./jsonrpc/client";
+export {
+  IJsonRpcRequst,
+  IJsonRpcResponse,
+  IMessage,
+  IClientConfig,
+} from "./jsonrpc/imsg";
+export { ReqData } from "./jsonrpc/reqdata";
+export { IJsonRpcClient } from "./jsonrpc/ijsonrpc";
