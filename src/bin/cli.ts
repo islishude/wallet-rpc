@@ -15,20 +15,19 @@ const color = {
 };
 
 console.log(`
-Wallet RPC CLI by isLishude <${color._}https://github.com/islishude/wallet-rpc${
-  color.clear
-}>
+wallet-rpc repl by isLishude <${
+  color._
+}https://github.com/islishude/wallet-rpc${color.clear}>
 
 The available global variables are
 
 ${color.yellow}
 - HttpClient(default jsonrpc client)
 - BitcoinClient
-- USDTClient(entends from BitcoinClient)
+- OmniClient(extends from BitcoinClient)
 - GethClient
 - ParityClient(extends from GethClient)
 - ERC20Client(injects GethClient or ParityClient)
-- EOSClient
 ${color.clear}
 
 See the README to learn more API and RPC supports list.
