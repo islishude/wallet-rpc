@@ -4,7 +4,7 @@ import { GethClient } from "./geth";
 import { BlockParam, IEthTrx, IParityTrxTrace } from "./types";
 
 export class ParityClient extends GethClient {
-  constructor(client: IJsonRpcClient) {
+  constructor(client?: IJsonRpcClient) {
     super(client);
     this.NODE_VERSION = "parity";
   }

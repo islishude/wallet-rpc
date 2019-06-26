@@ -1,5 +1,6 @@
 import test from "ava";
 import http = require("http");
+import https = require("https");
 import { HttpClient, IJsonRpcRequst, ReqData } from "../..";
 
 let server: http.Server;
@@ -96,6 +97,8 @@ test("test http client config", async (t) => {
   t.deepEqual(client.options.timeout, 3000);
   t.deepEqual(client.options.method, "POST");
 
+  t.assert(client.httpModule.globalAgent === http.globalAgent);
+
   const method = client.options.headers;
   // @ts-ignore
   t.deepEqual(method.Accept, "application/json");
@@ -113,6 +116,69 @@ test("test default client config", async (t) => {
   t.deepEqual(client.options.auth, undefined);
   t.deepEqual(client.options.timeout, 60000);
   t.deepEqual(client.options.method, "POST");
+});
+
+test("test set auth", (t) => {
+  const testData = [
+    {
+      args: {
+        username: "",
+        password: "",
+      },
+      want: undefined,
+    },
+    {
+      args: {
+        username: "username",
+        password: "",
+      },
+      want: undefined,
+    },
+    {
+      args: {
+        username: "",
+        password: "password",
+      },
+      want: undefined,
+    },
+    {
+      args: {
+        username: "username",
+        password: "password",
+      },
+      want: "username@password",
+    },
+  ];
+
+  const client = new HttpClient({ url: "" });
+
+  for (const {
+    args: { username, password },
+    want,
+  } of testData) {
+    client.setAuth(username, password);
+    t.deepEqual(client.options.auth, want);
+  }
+});
+
+test("test set url", (t) => {
+  const github = "https://github.com";
+  const client = new HttpClient({ url: github });
+  t.assert(client.httpModule.globalAgent === https.globalAgent);
+  t.deepEqual(client.url, github);
+  t.deepEqual(client.options.port, undefined);
+
+  const unsafe = "http://unsafe.com";
+  client.setUrl(unsafe);
+  t.deepEqual(client.url, unsafe);
+  t.deepEqual(client.options.port, undefined);
+  t.assert(client.httpModule.globalAgent === http.globalAgent);
+
+  const geth = "http://127.0.0.1:8545";
+  client.setUrl(geth);
+  t.deepEqual(client.url, geth);
+  t.deepEqual(client.options.port, 8545);
+  t.assert(client.httpModule.globalAgent === http.globalAgent);
 });
 
 test("test timeout", async (t) => {

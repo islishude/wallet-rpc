@@ -6,20 +6,18 @@ import { IClientConfig, IMessage } from "./imsg";
 import { version as PkgVer } from "./version";
 
 export class HttpClient implements IJsonRpcClient {
+  // @ts-ignore
   public url: string;
   public options: http.RequestOptions;
-  private httpAgent: http.Agent | https.Agent;
-  private httpModule: typeof http | typeof https;
+  public httpAgent: http.Agent | https.Agent;
+  public httpModule: typeof http | typeof https;
 
   constructor(config: IClientConfig) {
     const { url, username, password, keepAlive, timeout } = config;
-    this.url = url;
     this.httpModule = /^https:.+$/g.test(url) ? https : http;
     this.httpAgent = new this.httpModule.Agent({
       keepAlive: keepAlive || false,
     });
-
-    const urlPath = urllib.parse(this.url);
 
     this.options = {
       agent: this.httpAgent,
@@ -33,25 +31,28 @@ export class HttpClient implements IJsonRpcClient {
         "Agent": `wallet-rpc/${PkgVer}`,
         "Content-Type": "application/json",
       },
-      host: urlPath.host,
-      hostname: urlPath.hostname,
-      port: urlPath.port,
       method: "POST",
-      path: urlPath.path,
       timeout: timeout || 60000,
     };
+    this.setUrl(url);
   }
 
   public setAuth(username: string, password: string) {
+    if (username === "" || password === "") {
+      return;
+    }
     this.options.auth = `${username}@${password}`;
   }
 
   public setUrl(url: string) {
-    const urlPath = urllib.parse(url);
-    this.options.host = urlPath.host;
-    this.options.hostname = urlPath.hostname;
-    this.options.port = urlPath.hostname;
+    const { host, hostname, port } = urllib.parse(url);
+    this.options.host = host;
+    this.options.hostname = hostname;
+    if (port) {
+      this.options.port = Number.parseInt(port, 10);
+    }
     this.httpModule = /^https:.+$/g.test(url) ? https : http;
+    this.url = url;
   }
 
   public Call<T>(data: Buffer) {

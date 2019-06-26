@@ -40,7 +40,10 @@ export class ERC20Client {
   public static readonly FuncSig = ERC20FuncSig;
   public static readonly EventSig = ERC20EventSig;
 
-  constructor(private rpc: GethClient) {}
+  private rpc: GethClient;
+  constructor(rpc: GethClient) {
+    this.rpc = rpc || new GethClient();
+  }
 
   public async balanceOf(
     token: string,
