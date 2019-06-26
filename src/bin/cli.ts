@@ -36,9 +36,9 @@ Run \`npx -n --experimental-repl-await wallet-rpc\` to enable top-level-await.
 
 e.g.
 ${color.yellow}
-  let client = new HttpClient({ url: 'http://localhost:8545' })
-  let eth = new EthereumClient(client);
-  await eth.getBlockCount();
+  const HttpProvider = new HttpClient({ url: "http://127.0.0.1:8545" });
+  const EthClient = new GethClient(HttpProvider);
+  await EthClient.getChainId();
 ${color.clear}
 `);
 

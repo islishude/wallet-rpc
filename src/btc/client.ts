@@ -1,3 +1,4 @@
+import { HttpClient } from "../jsonrpc/client";
 import { IJsonRpcClient } from "../jsonrpc/ijsonrpc";
 import { ReqData } from "../jsonrpc/reqdata";
 import {
@@ -14,8 +15,8 @@ import {
 export class BitcoinClient {
   public client: IJsonRpcClient;
 
-  constructor(client: IJsonRpcClient) {
-    this.client = client;
+  constructor(client?: IJsonRpcClient) {
+    this.client = client || new HttpClient({ url: "http://127.0.0.1:8332" });
   }
 
   public getBlockchainInfo() {

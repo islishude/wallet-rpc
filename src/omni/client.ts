@@ -10,7 +10,7 @@ import {
 } from "./type";
 
 export class OmniClient extends BitcoinClient {
-  constructor(client: IJsonRpcClient) {
+  constructor(client?: IJsonRpcClient) {
     super(client);
   }
 

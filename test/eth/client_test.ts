@@ -71,6 +71,14 @@ class EthMockClient implements IJsonRpcClient {
     });
   }
 
+  public setAuth(username: string, password: string) {
+    console.log(username, password);
+  }
+
+  public setUrl(url: string) {
+    console.log(url);
+  }
+
   public Close() {
     return;
   }

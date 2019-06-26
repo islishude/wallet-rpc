@@ -1,3 +1,4 @@
+import { HttpClient } from "../jsonrpc/client";
 import { IJsonRpcClient } from "../jsonrpc/ijsonrpc";
 import { ReqData } from "../jsonrpc/reqdata";
 import {
@@ -23,8 +24,8 @@ export class GethClient {
   public client: IJsonRpcClient;
   public NODE_VERSION: string;
 
-  constructor(client: IJsonRpcClient) {
-    this.client = client;
+  constructor(client?: IJsonRpcClient) {
+    this.client = client || new HttpClient({ url: "http://127.0.0.1:8545" });
     this.NODE_VERSION = "geth";
   }
 
