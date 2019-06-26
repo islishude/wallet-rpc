@@ -1,4 +1,5 @@
 import { BitcoinClient } from "../btc/client";
+import { IBtcTxInfo } from "../btc/type";
 import { IJsonRpcClient } from "../jsonrpc/ijsonrpc";
 import { ReqData } from "../jsonrpc/reqdata";
 import {
@@ -33,7 +34,7 @@ export class OmniClient extends BitcoinClient {
     return this.client.Call<IOmniPropertyInfo>(reqData.getData());
   }
 
-  public getTrxInfo(txid: string) {
+  public getOmniTrx(txid: string) {
     const reqData = new ReqData("", "omni_gettransaction", txid);
     return this.client.Call<IOmniTxInfo>(reqData.getData());
   }
@@ -51,5 +52,12 @@ export class OmniClient extends BitcoinClient {
   public sendRawTx(rawTrx: string) {
     const reqData = new ReqData("", "sendrawtransaction", rawTrx);
     return this.client.Call<string>(reqData.getData());
+  }
+
+  public getRawTrx<T extends boolean>(txid: string, verbose: T) {
+    // verbose should be 1 or 0 for OmniLayer
+    const reqData = new ReqData("", "getrawtransaction", txid, Number(verbose));
+    type R = T extends true ? IBtcTxInfo : string;
+    return this.client.Call<R>(reqData.getData());
   }
 }

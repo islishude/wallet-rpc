@@ -1,6 +1,6 @@
 {
   "name": "wallet-rpc",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "description": "jsonrpc 2.0 client for crypto-currencies by TypeScript",
   "main": "dist",
   "types": "dist",
@@ -17,7 +17,7 @@
     "pretest": "npm run build",
     "test": "ava",
     "test:only": "ava",
-    "prerelease": "npm run build && npm test",
+    "prerelease": "npm test",
     "release": "git push --all && git push --tags && npm publish"
   },
   "repository": {
