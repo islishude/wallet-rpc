@@ -1,6 +1,6 @@
 # wallet-rpc [![Build Status](https://travis-ci.org/islishude/wallet-rpc.svg?branch=dev)](https://travis-ci.org/islishude/wallet-rpc)
 
-jsonrpc2.0 client for crypto-currencies by TypeScript
+Type-Safed jsonrpc client for Bitcoin and Ethereum.
 
 ## Supports
 
@@ -8,9 +8,10 @@ jsonrpc2.0 client for crypto-currencies by TypeScript
 
 - Bitcoin(^BitcoinCore 0.16+)
 - TetherUSDT(^OmniLayer0.3.0+)
-- Ethereum(^Geth1.8.0 or ^Parity1.0.0)
+- Geth(^1.8.0)
+- Parity(^1.0.0)
 
-wallet-rpc v6 has been splited eosrpc to [islishude/eosrpc](https://github.com/islishude/eosrpc)
+eosrpc has been splited to [islishude/eosrpc](https://github.com/islishude/eosrpc)
 
 ### Enviorment
 
@@ -42,4 +43,16 @@ Supports top-level-await by default.
 
 ## Documents
 
-[:books: Document](https://github.com/isLishude/wallet-rpc/blob/dev/doc.md)
+### API
+
+- [Bitcoin](./src/btc/client.ts)
+- [Geth](./src/eth/geth.ts)
+- [ERC20](./src/eth/erc20.ts)
+- [Parity](./src/eth/parity.ts)
+- [OmniLayer](./src/usdt/client.ts)
+
+### Example
+
+- [Bitcoin](./example/bitcoin.ts)
+- [Ethereum](./example/ethereum.ts)
+- [OmniLayer](./example/omni.ts)
