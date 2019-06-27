@@ -185,7 +185,7 @@ test("test timeout", async (t) => {
   const client = new HttpClient({
     url: baseUrl,
     keepAlive: false,
-    timeout: 20,
+    timeout: 1,
   });
 
   let hasError = false;
@@ -193,6 +193,7 @@ test("test timeout", async (t) => {
     const reqData = new ReqData("timeout", "method", 1, true);
     await client.Call(reqData.getData());
   } catch (e) {
+    t.deepEqual(e.message, "timeout");
     hasError = true;
   }
   t.deepEqual(hasError, true);

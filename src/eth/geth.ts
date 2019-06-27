@@ -52,9 +52,9 @@ export class GethClient {
     return this.client.Call<string>(reqData.getData());
   }
 
-  public getBlock<T extends boolean>(height: number, verbose: T) {
+  public getBlock<T extends boolean>(height: number, verbose?: T) {
     const num = "0x" + height.toString(16);
-    const reqData = new ReqData("", "eth_getBlockByNumber", num, verbose);
+    const reqData = new ReqData("", "eth_getBlockByNumber", num, !!verbose);
     type R = T extends true ? IEthBlockVerbose : IEthBlock;
     return this.client.Call<R>(reqData.getData());
   }
