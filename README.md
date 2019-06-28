@@ -1,6 +1,6 @@
 # wallet-rpc [![Build Status](https://travis-ci.org/islishude/wallet-rpc.svg?branch=dev)](https://travis-ci.org/islishude/wallet-rpc)
 
-Type-Safed jsonrpc client for Bitcoin and Ethereum.
+Type-safe jsonrpc client for Bitcoin and Ethereum.
 
 ## Supports
 

@@ -1,7 +1,7 @@
 {
   "name": "wallet-rpc",
   "version": "6.0.2",
-  "description": "Type-Safed jsonrpc client for Bitcoin and Ethereum",
+  "description": "Type-safe jsonrpc client for Bitcoin and Ethereum",
   "main": "dist",
   "types": "dist",
   "files": [
