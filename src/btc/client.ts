@@ -54,8 +54,9 @@ export class BitcoinClient {
     return this.client.Call<IBtcBlockInfo>(reqData.getData());
   }
 
-  public getRawTrx<T extends boolean>(txid: string, verbose: T) {
-    const reqData = new ReqData("", "getrawtransaction", txid, verbose);
+  public getRawTrx<T extends boolean>(txid: string, verbose?: T) {
+    const getVerbose = Boolean(verbose);
+    const reqData = new ReqData("", "getrawtransaction", txid, getVerbose);
     type R = T extends true ? IBtcTxInfo : string;
     return this.client.Call<R>(reqData.getData());
   }

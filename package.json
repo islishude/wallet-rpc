@@ -1,7 +1,7 @@
 {
   "name": "wallet-rpc",
-  "version": "6.0.2",
-  "description": "Type-safe jsonrpc client for Bitcoin and Ethereum",
+  "version": "6.0.3",
+  "description": "type-safe jsonrpc client for Bitcoin and Ethereum",
   "main": "dist",
   "types": "dist",
   "files": [
@@ -14,6 +14,7 @@
     "prebuild": "npm run lint:only && npm run clean",
     "build": "tsc -p tsconfig.json",
     "build:only": "tsc -p tsconfig.json",
+    "build:docker": "tsc -p tsconfig.json --declaration false",
     "pretest": "npm run build",
     "test": "ava",
     "test:only": "ava",
@@ -57,6 +58,6 @@
     "typescript": "^3.5.2"
   },
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=10.4.0"
   }
 }

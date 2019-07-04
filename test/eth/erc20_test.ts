@@ -12,7 +12,6 @@ const jsonrpc = new HttpClient({
 });
 
 const geth = new GethClient(jsonrpc);
-
 const erc20 = new ERC20Client(geth);
 const bnb = "0xB8c77482e45F1F44dE1745F52C74426C631bDD52";
 const tron = "0xf230b790e05390fc8295f4d3f60332c93bed42e2";
@@ -48,24 +47,22 @@ test("decodeAbiString", (t) => {
 test("decodeAbiNumber", (t) => {
   const testData = [
     {
-      expect: 0,
+      // @ts-ignore
+      expect: 0n,
       name: "case 0",
       param: "0x0",
     },
     {
-      expect: 2,
+      // @ts-ignore
+      expect: 2n,
       name: "case 2",
       param: "0x2",
     },
     {
-      expect: 10,
+      // @ts-ignore
+      expect: 10n,
       name: "case 10",
       param: "0xa",
-    },
-    {
-      expect: NaN,
-      name: "case NaN",
-      param: "0xxyz",
     },
   ];
 
@@ -76,44 +73,36 @@ test("decodeAbiNumber", (t) => {
 });
 
 test("ERC20 name", async (t) => {
-  const { result } = await erc20.name(bnb, true);
-  const expect =
-    "0x" +
-    "0000000000000000000000000000000000000000000000000000000000000020" +
-    "0000000000000000000000000000000000000000000000000000000000000003" +
-    "424e420000000000000000000000000000000000000000000000000000000000";
+  const result = await erc20.name(bnb, true);
+  const expect = "BNB";
   t.deepEqual(expect, result);
 });
 
 test("ERC20 balanceOf", async (t) => {
   const address = "0x9639C636F1ECDA62c6c3d6eb8c1C4A630E184ff7";
-  const { result } = await erc20.balanceOf(bnb, address);
+  const result = await erc20.balanceOf(bnb, address);
 
-  const expect =
-    "0x0000000000000000000000000000000000000000000000000000000000000000";
+  // @ts-ignore
+  const expect = 0n;
   t.deepEqual(expect, result);
 });
 
 test("ERC20 symbol", async (t) => {
-  const { result } = await erc20.symbol(bnb);
-  const expect =
-    "0x00000000000000000000000000000000000000000000000000000000000000" +
-    "20000000000000000000000000000000000000000000000000000000000000000" +
-    "3424e420000000000000000000000000000000000000000000000000000000000";
-
+  const result = await erc20.symbol(bnb);
+  const expect = "BNB";
   t.deepEqual(result, expect);
 });
 
 test("ERC20 decimals", async (t) => {
-  const { result } = await erc20.decimals(tron);
-  const expect =
-    "0x0000000000000000000000000000000000000000000000000000000000000006";
+  const result = await erc20.decimals(tron);
+  // @ts-ignore
+  const expect = 6n;
   t.deepEqual(expect, result);
 });
 
 test("ERC20 totalSupply", async (t) => {
-  const { result } = await erc20.totalSupply(tron);
-  const expect =
-    "0x000000000000000000000000000000000000000000000000016345785d8a0000";
+  const result = await erc20.totalSupply(tron);
+  // @ts-ignore
+  const expect = 100000000000000000n;
   t.deepEqual(expect, result);
 });

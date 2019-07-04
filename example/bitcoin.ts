@@ -4,6 +4,7 @@ import { BitcoinClient, HttpClient, IClientConfig } from "wallet-rpc";
   // Use default client: new HttpClient({ url: 'http://127.0.0.1:8332' })
   const BtcClient = new BitcoinClient();
   BtcClient.client.setAuth("username", "password");
+  BtcClient.client.setUrl("http://192.168.0.100:108332");
 
   (async () => {
     await BtcClient.getBlockCount();
@@ -13,6 +14,7 @@ import { BitcoinClient, HttpClient, IClientConfig } from "wallet-rpc";
 }
 
 {
+  // self defined http client
   const DefaultBtcRpcConf: IClientConfig = {
     url: "http://127.0.0.1:8832",
     keepAlive: false,

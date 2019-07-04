@@ -32,8 +32,8 @@ export function decodeAbiString(raw: string): string {
   return Buffer.from(data, "hex").toString();
 }
 
-export function decodeAbiNumber(raw: string): number {
-  return Number.parseInt(raw, 16);
+export function decodeAbiNumber(raw: string): bigint {
+  return BigInt(raw);
 }
 
 export class ERC20Client {
@@ -41,7 +41,7 @@ export class ERC20Client {
   public static readonly EventSig = ERC20EventSig;
 
   private rpc: GethClient;
-  constructor(rpc: GethClient) {
+  constructor(rpc?: GethClient) {
     this.rpc = rpc || new GethClient();
   }
 
@@ -61,20 +61,19 @@ export class ERC20Client {
     };
 
     const { body } = await this.rpc.callContract(data, status);
-    return body;
+    const reuslt = this.getResult(body);
+    return decodeAbiNumber(reuslt);
   }
 
-  public async name(
-    token: string,
-    isStandard: boolean = true,
-  ): Promise<IJsonRpcResponse<string>> {
+  public async name(token: string, isStandard: boolean = true) {
     const data: IEthCallFuncParam = {
       data: isStandard ? ERC20FuncSig.name : ERC20FuncSig.NAME,
       to: token,
     };
 
     const { body } = await this.rpc.callContract(data);
-    return body;
+    const reuslt = this.getResult(body);
+    return decodeAbiString(reuslt);
   }
 
   public async symbol(token: string, isStandard: boolean = true) {
@@ -84,7 +83,8 @@ export class ERC20Client {
     };
 
     const { body } = await this.rpc.callContract(data);
-    return body;
+    const reuslt = this.getResult(body);
+    return decodeAbiString(reuslt);
   }
 
   public async decimals(token: string, isStandard: boolean = true) {
@@ -93,7 +93,8 @@ export class ERC20Client {
       to: token,
     };
     const { body } = await this.rpc.callContract(data);
-    return body;
+    const reuslt = this.getResult(body);
+    return decodeAbiNumber(reuslt);
   }
 
   public async totalSupply(token: string) {
@@ -103,6 +104,18 @@ export class ERC20Client {
     };
 
     const { body } = await this.rpc.callContract(data);
-    return body;
+    const reuslt = this.getResult(body);
+    return decodeAbiNumber(reuslt);
+  }
+
+  protected getResult<T>(body: IJsonRpcResponse<T>): T {
+    const { result, error } = body;
+    if (error) {
+      throw error;
+    }
+    if (!result) {
+      throw new Error(`No available content`);
+    }
+    return result as T;
   }
 }

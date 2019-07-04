@@ -3,7 +3,7 @@ import { IJsonRpcClient } from "../jsonrpc/ijsonrpc";
 import { ReqData } from "../jsonrpc/reqdata";
 import {
   BlockParam,
-  IEthBlock,
+  IEthBlockSimple,
   IEthBlockVerbose,
   IEthCallFuncParam,
   IEthTrx,
@@ -55,7 +55,7 @@ export class GethClient {
   public getBlock<T extends boolean>(height: number, verbose?: T) {
     const num = "0x" + height.toString(16);
     const reqData = new ReqData("", "eth_getBlockByNumber", num, !!verbose);
-    type R = T extends true ? IEthBlockVerbose : IEthBlock;
+    type R = T extends true ? IEthBlockVerbose : IEthBlockSimple;
     return this.client.Call<R>(reqData.getData());
   }
 

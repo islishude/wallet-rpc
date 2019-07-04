@@ -15,7 +15,7 @@ eosrpc has been splited to [islishude/eosrpc](https://github.com/islishude/eosrp
 
 ### Enviorment
 
-Node.js only, v12 is recommend.
+Node.js only, requie >=10.4.0 and v12 is recommend.
 
 ## Install
 

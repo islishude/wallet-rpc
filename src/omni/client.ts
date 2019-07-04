@@ -54,9 +54,10 @@ export class OmniClient extends BitcoinClient {
     return this.client.Call<string>(reqData.getData());
   }
 
-  public getRawTrx<T extends boolean>(txid: string, verbose: T) {
+  public getRawTrx<T extends boolean>(txid: string, verbose?: T) {
     // verbose should be 1 or 0 for OmniLayer
-    const reqData = new ReqData("", "getrawtransaction", txid, Number(verbose));
+    const getVerbose = verbose ? 1 : 0;
+    const reqData = new ReqData("", "getrawtransaction", txid, getVerbose);
     type R = T extends true ? IBtcTxInfo : string;
     return this.client.Call<R>(reqData.getData());
   }

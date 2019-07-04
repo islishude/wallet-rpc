@@ -1,11 +1,19 @@
-import { ERC20Client, GethClient, HttpClient, IClientConfig } from "wallet-rpc";
+import {
+  decodeAbiNumber,
+  decodeAbiString,
+  ERC20Client,
+  GethClient,
+  HttpClient,
+  IClientConfig,
+  IEthBlockSimple,
+  IEthBlockVerbose,
+  IMessage,
+} from "wallet-rpc";
 
 {
   // use default client: new HttpClient({ url: 'http://127.0.0.1:8545' })
   const EthClient = new GethClient();
-
   EthClient.client.setUrl("https://etherscan.io");
-
   EthClient.getChainId();
 }
 
@@ -26,6 +34,18 @@ import { ERC20Client, GethClient, HttpClient, IClientConfig } from "wallet-rpc";
     // In production you should use Promise.all
     await EthClient.getTrx(txid);
     await EthClient.getTrxReceipt(txid);
+
+    // include all transaction detail
+    const blockVerbose: IMessage<IEthBlockVerbose> = await EthClient.getBlock(
+      100,
+      true,
+    );
+    // default and only txid returns
+    const blockSimple: IMessage<IEthBlockSimple> = await EthClient.getBlock(
+      1,
+      false,
+    );
+    console.log(blockVerbose, blockSimple);
   })();
 
   (async () => {
@@ -43,10 +63,43 @@ import { ERC20Client, GethClient, HttpClient, IClientConfig } from "wallet-rpc";
   })();
 
   (async () => {
-    const erc20Client = new ERC20Client(EthClient);
+    const erc20 = new ERC20Client(EthClient);
     const address = "0x0";
     const token = "0x1";
-    await erc20Client.balanceOf(token, address, 1);
-    await erc20Client.balanceOf(token, address, "pending");
+
+    {
+      // get latest balanceOf ERC20 token
+      // Maybe throw
+      const balance: bigint = await erc20.balanceOf(token, address);
+      // or get pending
+      // await erc20.balanceOf(token, address, "pending");
+      console.log(balance);
+    }
+
+    // get name
+    {
+      const name: string = await erc20.name(token).catch(() => "Maybe throw");
+      console.log(name);
+    }
+
+    {
+      const symbol: string = await erc20
+        .symbol(token)
+        .catch(() => "Maybe throw");
+      console.log(symbol);
+    }
+
+    // get decimals
+    {
+      const decimals: bigint = await erc20.decimals(token);
+      console.log(decimals);
+    }
+
+    // get totalSupply
+    {
+      // Maybe throw
+      const totalSupply: bigint = await erc20.totalSupply(token);
+      console.log(totalSupply);
+    }
   })();
 }
