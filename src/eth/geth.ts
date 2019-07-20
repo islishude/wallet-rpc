@@ -21,6 +21,7 @@ export class GethClient {
     }
     return status;
   }
+
   public client: IJsonRpcClient;
   public NODE_VERSION: string;
 
@@ -29,8 +30,33 @@ export class GethClient {
     this.NODE_VERSION = "geth";
   }
 
+  public getNodeVersion() {
+    const reqData = new ReqData("", "web3_clientVersion");
+    return this.client.Call<string>(reqData.getData());
+  }
+
+  public getNetworkVersion() {
+    // "1": Ethereum Mainnet
+    // "2": Morden Testnet (deprecated)
+    // "3": Ropsten Testnet
+    // "4": Rinkeby Testnet
+    // "42": Kovan Testnet
+    const reqData = new ReqData("", "net_version");
+    return this.client.Call<string>(reqData.getData());
+  }
+
+  public getPeerCount() {
+    const reqData = new ReqData("", "net_peerCount");
+    return this.client.Call<string>(reqData.getData());
+  }
+
   public getChainId() {
     const reqData = new ReqData("", "eth_chainId");
+    return this.client.Call<string>(reqData.getData());
+  }
+
+  public getProtocalVersion() {
+    const reqData = new ReqData("", "eth_protocolVersion");
     return this.client.Call<string>(reqData.getData());
   }
 
