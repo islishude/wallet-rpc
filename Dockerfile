@@ -1,11 +1,13 @@
-FROM node:12.5.0 as BUILDER
+ARG NODEJS_VERSION=1.11
+
+FROM node:${NODEJS_VERSION} as BUILDER
 WORKDIR /app
 COPY ./ ./
 RUN [ "npm", "ci" ]
 RUN [ "npm", "run", "build:docker"]
 RUN [ "npm", "prune", "--production"]
 
-FROM node:12.5.0-alpine
+FROM node:${NODEJS_VERSION}-alpine
 WORKDIR /app
 COPY --from=BUILDER /app/dist/ dist/
 COPY --from=BUILDER /app/node_modules/ node_modules/
