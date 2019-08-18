@@ -66,16 +66,13 @@ export class BitcoinClient {
     return this.client.Call<string>(reqData.getData());
   }
 
-  public getMemPool<T>(verbose: T) {
+  public getMemPool<T>(verbose?: T) {
     const reqData = new ReqData("", "getrawmempool", verbose);
     type R = T extends true ? IBtcVerboseMemPool[] : string[];
     return this.client.Call<R>(reqData.getData());
   }
 
-  public estimateFee(
-    target: number = 6,
-    mode: "ECONOMICAL" | "CONSERVATIVE" = "CONSERVATIVE",
-  ) {
+  public estimateFee(target: number = 6, mode?: "ECONOMICAL" | "CONSERVATIVE") {
     const reqData = new ReqData("", "estimatesmartfee", target, mode);
     return this.client.Call<IBtcFee>(reqData.getData());
   }

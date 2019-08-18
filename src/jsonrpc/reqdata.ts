@@ -7,7 +7,12 @@ export class ReqData {
   constructor(id: string, method: string, ...params: any[]) {
     this.id = id;
     this.method = method;
-    this.params = params === undefined ? [] : params;
+    this.params = [];
+    for (const item of params) {
+      if (item !== undefined) {
+        this.params.push(item);
+      }
+    }
   }
 
   public getData(): Buffer {

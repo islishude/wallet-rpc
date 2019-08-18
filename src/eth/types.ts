@@ -180,3 +180,14 @@ export interface IEthTxPoolInspect {
     };
   };
 }
+
+// see https://geth.ethereum.org/rpc/eth_call
+export interface IEthCallStateOverride {
+  [address: string]: {
+    balance?: string;
+    nonce?: string;
+    code?: string;
+    state?: any;
+    stateDiff?: any;
+  };
+}

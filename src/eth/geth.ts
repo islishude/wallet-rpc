@@ -6,6 +6,7 @@ import {
   IEthBlockSimple,
   IEthBlockVerbose,
   IEthCallFuncParam,
+  IEthCallStateOverride,
   IEthTrx,
   IEthTrxReceipt,
   IEthTxPoolContent,
@@ -106,9 +107,13 @@ export class GethClient {
     return this.client.Call<string>(reqData.getData());
   }
 
-  public callContract(data: IEthCallFuncParam, status: BlockParam = "latest") {
+  public callContract(
+    data: IEthCallFuncParam,
+    status: BlockParam = "latest",
+    state?: IEthCallStateOverride,
+  ) {
     const block = GethClient.Hexify(status);
-    const reqData = new ReqData("", "eth_call", data, block);
+    const reqData = new ReqData("", "eth_call", data, block, state);
     return this.client.Call<string>(reqData.getData());
   }
 
