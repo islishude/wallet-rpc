@@ -8,6 +8,7 @@ import {
   IEthBlockSimple,
   IEthBlockVerbose,
   IMessage,
+  ParityClient,
 } from "wallet-rpc";
 
 {
@@ -26,8 +27,12 @@ import {
 
   const client = new HttpClient(DefaultEthRpcConf);
   const EthClient = new GethClient(client);
+  const Parity = new ParityClient(client);
+  const erc20 = new ERC20Client(EthClient);
+  const token = "0x1";
+  const address = "0x0";
 
-  (async () => {
+  async function exmaple() {
     const txid =
       "0xc4f1806717dd22e89d158ae1466f9ebc0124d2169843a7bcc65975c8a8327854";
 
@@ -46,10 +51,6 @@ import {
       false,
     );
     console.log(blockVerbose, blockSimple);
-  })();
-
-  (async () => {
-    const address = "0x0";
 
     await EthClient.getBalance(address, "latest");
     await EthClient.getBalance(address, "pending");
@@ -60,12 +61,6 @@ import {
       EthClient.getBalance(address, "latest"),
       EthClient.getBalance(address, "pending"),
     ]);
-  })();
-
-  (async () => {
-    const erc20 = new ERC20Client(EthClient);
-    const address = "0x0";
-    const token = "0x1";
 
     {
       // get latest balanceOf ERC20 token
@@ -101,5 +96,11 @@ import {
       const totalSupply: bigint = await erc20.totalSupply(token);
       console.log(totalSupply);
     }
-  })();
+
+    // parity trace transaction
+    Parity.traceTrx(txid);
+    Parity.traceBlock(100);
+  }
+
+  exmaple();
 }
