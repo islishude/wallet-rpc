@@ -51,7 +51,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "^10.14.15",
+    "@types/node": "^12.7.3",
     "ava": "^2.3.0",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
