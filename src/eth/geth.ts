@@ -147,4 +147,11 @@ export class GethClient {
     const reqData = new ReqData("", "txpool_status");
     return this.client.Call<IEthTxPoolStatus>(reqData.getData());
   }
+
+  public fillTrx(rawTrx: IEthCallFuncParam) {
+    const reqData = new ReqData("", "eth_fillTransaction", rawTrx);
+    return this.client.Call<{ raw: string; tx: IEthCallFuncParam }>(
+      reqData.getData(),
+    );
+  }
 }
