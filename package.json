@@ -52,7 +52,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^13.1.0",
-    "ava": "^2.3.0",
+    "ava": "^3.3.0",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "typescript": "^3.5.3"
