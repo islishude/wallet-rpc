@@ -27,7 +27,7 @@ export class HttpClient implements IJsonRpcClient {
       headers: {
         "Accept": "application/json",
         "Accept-Encoding": "identity",
-        "Agent": "islishude/walletrpc",
+        "User-Agent": "islishude/walletrpc",
         "Content-Type": "application/json",
       },
       method: "POST",
