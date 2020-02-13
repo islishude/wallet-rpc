@@ -30,7 +30,6 @@
     "wallet-rpc": "dist/bin/cli.js"
   },
   "ava": {
-    "compileEnhancements": false,
     "files": [
       "test/**/*"
     ],
@@ -52,10 +51,10 @@
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^13.1.0",
-    "ava": "^2.3.0",
-    "ts-node": "^8.3.0",
-    "tslint": "^5.18.0",
-    "typescript": "^3.5.3"
+    "ava": "^3.3.0",
+    "ts-node": "^8.6.2",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.5"
   },
   "engines": {
     "node": ">=10.4.0"

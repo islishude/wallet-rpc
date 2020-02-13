@@ -2,7 +2,6 @@
   "name": "wallet-rpc-example",
   "version": "0.0.1",
   "description": "wallet-rpc-example",
-  "main": "index.js",
   "private": true,
   "scripts": {
     "postinstall": "echo install successful"

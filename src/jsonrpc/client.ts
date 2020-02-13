@@ -3,7 +3,6 @@ import https = require("https");
 import urllib = require("url");
 import { IJsonRpcClient } from "./ijsonrpc";
 import { IClientConfig, IMessage } from "./imsg";
-import { version as PkgVer } from "./version";
 
 export class HttpClient implements IJsonRpcClient {
   // @ts-ignore
@@ -22,13 +21,13 @@ export class HttpClient implements IJsonRpcClient {
     this.options = {
       agent: this.httpAgent,
       auth:
-        config.username && config.password
-          ? `${username}@${password}`
+        config.username || config.password
+          ? `${username || ""}@${password || ""}`
           : undefined,
       headers: {
         "Accept": "application/json",
         "Accept-Encoding": "identity",
-        "Agent": `wallet-rpc/${PkgVer}`,
+        "Agent": "islishude/walletrpc",
         "Content-Type": "application/json",
       },
       method: "POST",
@@ -38,7 +37,7 @@ export class HttpClient implements IJsonRpcClient {
   }
 
   public setAuth(username: string, password: string) {
-    if (username === "" || password === "") {
+    if (username === "" && password === "") {
       return;
     }
     this.options.auth = `${username}@${password}`;

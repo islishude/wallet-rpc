@@ -132,14 +132,14 @@ test("test set auth", (t) => {
         username: "username",
         password: "",
       },
-      want: undefined,
+      want: "username@",
     },
     {
       args: {
         username: "",
         password: "password",
       },
-      want: undefined,
+      want: "@password",
     },
     {
       args: {
