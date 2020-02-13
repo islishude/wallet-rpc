@@ -17,7 +17,7 @@ export class ParityClient extends GethClient {
   public traceBlock(height: BlockParam) {
     const param = GethClient.Hexify(height);
     const reqdata = new ReqData("", "trace_block", param);
-    return this.client.Call<IParityTrxTrace[][]>(reqdata.getData());
+    return this.client.Call<IParityTrxTrace[]>(reqdata.getData());
   }
 
   public nextNonce(address: string) {
